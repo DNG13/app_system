@@ -71,12 +71,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //store in database
         $user = new User();
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
         $user->fb = null;
         $user->save();
+
         $user_id = $user->id;
         $profile = new Profile();
         $profile->user_id = $user_id;
@@ -91,10 +91,7 @@ class RegisterController extends Controller
         $profile->social_links = json_encode($data['social_links']);
         $profile->info = $data['info'];
         $profile->save();
+
         return $user;
-//        return User::create([
-//            'email' => $data['email'],
-//            'password' => bcrypt($data['password']),
-//        ]);
     }
 }
