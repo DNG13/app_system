@@ -23,4 +23,4 @@ Route::get('/profile', 'ProfileController@index')->name('profile')->middleware('
 
 Route::get('/profile/edit', 'ProfileController@edit')->name('edit')->middleware('auth');
 
-Route::post('/profile{profile}', 'ProfileController@update')->middleware('auth');
+Route::post('/profile', 'ProfileController@update')->middleware('auth');

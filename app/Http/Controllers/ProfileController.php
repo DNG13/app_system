@@ -24,7 +24,6 @@ class ProfileController extends Controller
     public function update(Request $data){
 
         $this->validate(request(),[
-            'email' => 'required|string|email|max:255|unique:users',
             'surname' => 'required|string|max:64',
             'first_name' => 'required|string|max:64',
             'middle_name' => 'required|string|max:64',
@@ -35,9 +34,8 @@ class ProfileController extends Controller
             'social_links' => '',
             'info' => '',
         ]);
-
         $profile = Profile::where('user_id', Auth::user()->id)->first();
-        $profile->avatar_id= '1';
+        $profile->avatar_id = '1';
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
         $profile->middle_name = $data['middle_name'];
