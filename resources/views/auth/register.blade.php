@@ -205,7 +205,7 @@
                             <label for="info" class="col-md-4 control-label">Дополнительные данные</label>
 
                             <div class="col-md-6">
-                                <textarea rows="5" class="form-control" name="info" value="{{ old('info') }}"  autofocus></textarea>
+                                <textarea id="info" rows="5" class="form-control" name="info" value="{{ old('info') }}"  autofocus></textarea>
 
                                 @if ($errors->has('info'))
                                     <span class="help-block">

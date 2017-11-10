@@ -11,6 +11,7 @@
     <title>Khanifest</title>
 
     <!-- Styles -->
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -36,7 +37,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;@if (Auth::user())
+                            <li class={{ Request::is('app_cosplay')? "active" : ''}}><a href="/app_cosplay">Мои заявки</a></li>
+                            <li class={{ Request::is('app_cosplay/create')? "active" : ''}}><a href="/app_cosplay/create"><strong>Подать заявку</strong></a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

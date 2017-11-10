@@ -31,8 +31,8 @@ class CreateAppCosplaysTable extends Migration
             $table->text('description');
             $table->string('city', 100);
             $table->string('status', 100);
-            $table->text('comment');
-            $table->text('prev_part');
+            $table->text('comment')->nullable();
+            $table->text('prev_part')->nullable();
         });
     }
 

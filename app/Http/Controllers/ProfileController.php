@@ -12,13 +12,13 @@ class ProfileController extends Controller
     {
         $profile = Profile::where('user_id', Auth::user()->id)->first();
         $social_links =  json_decode($profile->social_links);
-        return view('pages.profile', compact('profile', 'social_links'));
+        return view('pages.profile.index', compact('profile', 'social_links'));
     }
 
     public function edit(){
         $profile = Profile::where('user_id', Auth::user()->id)->first();
         $social_links =  json_decode($profile->social_links);
-        return view('pages.edit_profile', compact('profile', 'social_links'));
+        return view('pages.profile.edit', compact('profile', 'social_links'));
     }
 
     public function update(Request $data){
