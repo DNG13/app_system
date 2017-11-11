@@ -69,14 +69,14 @@
                             <div class="form-group">
                                 <label for="comment" class="col-md-4 control-label">Коментарий</label>
                                 <div class="col-md-6">
-                                    <textarea  id="comment" class="form-control" name="comment" value="{{ $app_cosplay->comment }}"></textarea>
+                                    <textarea  id="comment" class="form-control" name="comment">{{ $app_cosplay->comment }}</textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" class="form-control" name="description" value="{{ $app_cosplay->description }}"></textarea>
+                                    <textarea  id="description" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
                                 </div>
                             </div>
 

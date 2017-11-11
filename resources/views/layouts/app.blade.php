@@ -81,16 +81,9 @@
         @yield('content')
     </div>
 
-    <!-- textarea autoresize -->
-    <script type="text/javascript">
-        jQuery(function()
-        {
-            jQuery('textarea').autoResize();
-        });
-    </script>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/autoresize.jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+
 </body>
 </html>

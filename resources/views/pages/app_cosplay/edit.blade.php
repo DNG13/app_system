@@ -74,25 +74,11 @@
                                 <label for="nickname" class="col-md-4 control-label">Никнейм</label>
 
                                 <div class="col-md-6">
-                                    <input id="nickname" type="text" class="form-control" name="nickname" value="{{ $app_cosplay->nickname }}" autofocus>
+                                    <input id="nickname" type="text" class="form-control" name="nickname" value="{{ $app_cosplay->user_id }}" autofocus>
 
                                     @if ($errors->has('nickname'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('nickname') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
-
-                                <div class="col-md-6">
-                                    <input id="birthday" type="date" class="form-control" name="birthday" value="{{ $app_cosplay->birthday }}" required autofocus>
-
-                                    @if ($errors->has('birthday'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('birthday') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -127,7 +113,7 @@
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                 <label for="comment" class="col-md-4 control-label">Коментарий</label>
                                 <div class="col-md-6">
-                                    <textarea  id="comment" rows="5" class="form-control" name="comment" value="{{ $app_cosplay->comment }}"  autofocus></textarea>
+                                    <textarea  id="comment" rows="5" class="form-control" name="comment" autofocus>{{ $app_cosplay->comment }}</textarea>
 
                                     @if ($errors->has('comment'))
                                         <span class="help-block">
@@ -140,7 +126,7 @@
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" rows="5" class="form-control" name="description" value="{{ $app_cosplay->description }}"  autofocus></textarea>
+                                    <textarea  id="description" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
 
                                     @if ($errors->has('description'))
                                         <span class="help-block">

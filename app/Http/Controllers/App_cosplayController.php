@@ -26,10 +26,11 @@ class App_cosplayController extends Controller
             if($app_cosplay->user_id == Auth::user()->id){
                 $app_cosplay->user_id = $user;
             }
-            foreach($app_types as $id =>$app_type)
-                if($app_cosplay->type_id == $id){
+            foreach($app_types as $id =>$app_type) {
+                if ($app_cosplay->type_id == $id) {
                     $app_cosplay->type_id = $app_type;
                 }
+            }
         }
         return view('pages.app_cosplay.index', compact('app_cosplays'));
     }
@@ -95,6 +96,12 @@ class App_cosplayController extends Controller
         $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $app_cosplay = App_cosplay::where('id', $id)->first();
         $app_cosplay->user_id = $user;
+        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        foreach($app_types as $id =>$app_type) {
+            if ($app_cosplay->type_id == $id) {
+                $app_cosplay->type_id = $app_type;
+            }
+        }
         return view('pages.app_cosplay.show', compact('app_cosplay'));
     }
 
@@ -106,8 +113,11 @@ class App_cosplayController extends Controller
      */
     public function edit($id)
     {
-        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $app_cosplay = App_cosplay::where('id', $id)->first();
+        $app_cosplay->user_id = $user;
+        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+
         return view('pages.app_cosplay.edit', compact('app_types', 'app_cosplay'));
     }
 

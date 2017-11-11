@@ -120,7 +120,12 @@
                                     @endif
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="surname" class="col-md-4 control-label"></label>
+                                <div class="col-md-6">
+                                    <div><strong>Участники</strong></div>
+                                </div>
+                            </div>
                             <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
                                 <label for="surname" class="col-md-4 control-label">Фамилия</label>
                                 <div class="col-md-6">
