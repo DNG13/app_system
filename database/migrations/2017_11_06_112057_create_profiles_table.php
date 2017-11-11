@@ -22,7 +22,7 @@ class CreateProfilesTable extends Migration
             $table->string('first_name', 64);
             $table->string('surname', 64);
             $table->string('middle_name', 64);
-            $table->string('nickname', 100)->nullable();
+            $table->string('nickname', 100);
             $table->date('birthday');
             $table->string('city', 100);
             $table->string('phone', 64);

@@ -31,23 +31,20 @@
                                 </div>
                             </div>
 
-                            @if(! $profile->middle_name==null)
-                                <div class="form-group">
+                            <div class="form-group">
                                 <label for="middle_name" class="col-md-4 control-label">Отчество</label>
                                 <div class="col-md-6">
                                     <p id="middle_name" class="form-control" name="middle_name"> {{ $profile->middle_name }}</p>
                                 </div>
                             </div>
-                            @endif
 
-                            @if(!($profile->nickname)==null)
-                                <div class="form-group">
-                                    <label for="nickname" class="col-md-4 control-label">Никнейм</label>
-                                    <div class="col-md-6">
-                                        <p id="nickname" class="form-control" name="nickname"> {{ $profile->nickname }}</p>
-                                    </div>
+
+                            <div class="form-group">
+                                <label for="nickname" class="col-md-4 control-label">Никнейм</label>
+                                <div class="col-md-6">
+                                    <p id="nickname" class="form-control" name="nickname"> {{ $profile->nickname }}</p>
                                 </div>
-                            @endif
+                            </div>
 
                             <div class="form-group">
                                 <label for="birthday" class="col-md-4 control-label">Дата рождения</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\App_type;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\App_cosplay;
@@ -16,9 +17,20 @@ class App_cosplayController extends Controller
      */
     public function index()
     {
+        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
+        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $app_cosplays = App_cosplay::orderby('id', 'desc')
             ->where('user_id', Auth::user()->id)
             ->paginate(5);
+        foreach($app_cosplays as &$app_cosplay){
+            if($app_cosplay->user_id == Auth::user()->id){
+                $app_cosplay->user_id = $user;
+            }
+            foreach($app_types as $id =>$app_type)
+                if($app_cosplay->type_id == $id){
+                    $app_cosplay->type_id = $app_type;
+                }
+        }
         return view('pages.app_cosplay.index', compact('app_cosplays'));
     }
 
@@ -29,7 +41,8 @@ class App_cosplayController extends Controller
      */
     public function create()
     {
-        return view('pages.app_cosplay.create');
+        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        return view('pages.app_cosplay.create', compact('app_types'));
     }
 
     /**
@@ -79,7 +92,9 @@ class App_cosplayController extends Controller
      */
     public function show($id)
     {
+        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $app_cosplay = App_cosplay::where('id', $id)->first();
+        $app_cosplay->user_id = $user;
         return view('pages.app_cosplay.show', compact('app_cosplay'));
     }
 
@@ -91,20 +106,20 @@ class App_cosplayController extends Controller
      */
     public function edit($id)
     {
+        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $app_cosplay = App_cosplay::where('id', $id)->first();
-        return view('pages.app_cosplay.edit', compact('app_cosplay'));
+        return view('pages.app_cosplay.edit', compact('app_types', 'app_cosplay'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param    $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        dd($id);
         //validate the data
         $this->validate($request,[
             'type_id' => 'required',
@@ -115,11 +130,9 @@ class App_cosplayController extends Controller
             'description' => 'required|string',
             'prev_part' => '',
             'comment' => '',
-
-
         ]);
         //store in database
-        $app_cosplays = App_cosplay::where('id', $id);
+        $app_cosplays = App_cosplay::where('id', $id)->first();
         $app_cosplays->type_id = $request->get('type_id');
         $app_cosplays->title = $request->get('title');
         $app_cosplays->fandom = $request->get('fandom');

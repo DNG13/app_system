@@ -15,7 +15,11 @@
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
                                 <div class="col-md-6">
-                                    <input id="type_idl" type="number" class="form-control" name="type_id" value="{{ old('type_id') }}" required>
+                                    <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
+                                        @foreach($app_types as $key=>$app_type)
+                                            <option value="{{$key}}">{{$app_type}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('type_id'))
                                         <span class="help-block">
@@ -60,34 +64,6 @@
                                     @if ($errors->has('length'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('length') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
-                                <label for="nickname" class="col-md-4 control-label">Никнейм</label>
-
-                                <div class="col-md-6">
-                                    <input id="nickname" type="text" class="form-control" name="nickname" value="{{ old('nickname') }}" autofocus>
-
-                                    @if ($errors->has('nickname'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('nickname') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
-
-                                <div class="col-md-6">
-                                    <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
-
-                                    @if ($errors->has('birthday'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('birthday') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -140,6 +116,59 @@
                                     @if ($errors->has('description'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
+                                <label for="surname" class="col-md-4 control-label">Фамилия</label>
+                                <div class="col-md-6">
+                                    <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}" required autofocus>
+
+                                    @if ($errors->has('surname'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('surname') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                                <label for="first_name" class="col-md-4 control-label">Имя</label>
+
+                                <div class="col-md-6">
+                                    <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
+
+                                    @if ($errors->has('first_name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
+                                <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
+                                <div class="col-md-6">
+                                    <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
+
+                                    @if ($errors->has('birthday'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('birthday') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
+                                <label for="nickname" class="col-md-4 control-label">Никнейм</label>
+                                <div class="col-md-6">
+                                    <input id="nickname" type="text" class="form-control" name="nickname" value="{{ old('nickname') }}" autofocus>
+
+                                    @if ($errors->has('nickname'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('nickname') }}</strong>
                                     </span>
                                     @endif
                                 </div>

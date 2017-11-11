@@ -84,6 +84,9 @@ class RegisterController extends Controller
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
         $profile->middle_name = $data['middle_name'];
+        if($data['nickname']==null){
+            $data['nickname'] = $data['surname'] .' '. $data['first_name'];
+        }
         $profile->nickname = $data['nickname'];
         $profile->birthday = $data['birthday'];
         $profile->phone = $data['phone'];

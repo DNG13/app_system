@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label for="nickname" class="col-md-4 control-label">Никнейм</label>
                                 <div class="col-md-6">
-                                    <p id="nickname"  class="form-control" name="nickname">{{ $app_cosplay->nickname }}</p>
+                                    <p id="nickname"  class="form-control" name="nickname">{{ $app_cosplay->user_id }}</p>
                                 </div>
                             </div>
 

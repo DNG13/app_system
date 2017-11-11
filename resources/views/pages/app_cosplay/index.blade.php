@@ -27,14 +27,14 @@
                     <tbody>
                     @foreach($app_cosplays as $app_cosplay)
                         <tr class="odd">
-                            <td>{{  $app_cosplay->id }}</td>
-                            <td><strong><h3> user</h3></strong></td>
-                            <td><strong><h3>type</h3></strong></td>
-                            <td>{{  $app_cosplay->title }}</td>
-                            <td>{{  $app_cosplay->fandom }}</td>
-                            <td>{{  $app_cosplay->length }}</td>
-                            <td>{{  $app_cosplay->city }}</td>
-                            <td>{{  $app_cosplay->status }}</td>
+                            <td>{{ $app_cosplay->id }}</td>
+                            <td>{{ $app_cosplay->user_id }}</td>
+                            <td>{{ $app_cosplay->type_id }}</td>
+                            <td>{{ $app_cosplay->title }}</td>
+                            <td>{{ $app_cosplay->fandom }}</td>
+                            <td>{{ $app_cosplay->length }}</td>
+                            <td>{{ $app_cosplay->city }}</td>
+                            <td>{{ $app_cosplay->status }}</td>
                             <td>{{ date('j F, Y H:i', strtotime($app_cosplay->created_at )) }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="app_cosplay/{{$app_cosplay->id }}" title="Подробнее" >

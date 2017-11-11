@@ -21,8 +21,7 @@ class CreateAppCosplaysTable extends Migration
                 ->onDelete('cascade');
             $table->integer('type_id');
             $table->foreign('type_id')
-                ->references('id')->on('app_types')
-                ->onDelete('cascade');
+                ->references('id')->on('app_types');
             $table->timestamps();
             $table->json('members');
             $table->string('title', 100);

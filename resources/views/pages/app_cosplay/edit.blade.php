@@ -8,14 +8,19 @@
                     <div class="panel-heading">Редактирование  заявки</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('app_cosplay.edit', $app_cosplay->id) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('app_cosplay.update', $app_cosplay->id) }}">
                             {{ csrf_field() }}
+                            {{ method_field('PUT') }}
 
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
                                 <div class="col-md-6">
-                                    <input id="type_idl" type="number" class="form-control" name="type_id" value="{{ $app_cosplay->type_id }}" required>
+                                    <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
+                                        @foreach($app_types as $key=>$app_type)
+                                            <option value="{{$key}}">{{$app_type}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('type_id'))
                                         <span class="help-block">

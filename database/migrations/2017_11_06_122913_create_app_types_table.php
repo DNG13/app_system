@@ -16,11 +16,10 @@ class CreateAppTypesTable extends Migration
         Schema::create('app_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 100);
-            $table->integer('app_type');
-            $table->integer('user_id');
+            $table->string('app_type', 64);
+            $table->integer('user_id')->nullable();
             $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+                ->references('id')->on('users');
             $table->timestamp('created_at');
         });
     }
