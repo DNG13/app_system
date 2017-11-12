@@ -13,7 +13,7 @@
                             <div class="form-group">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
                                 <div class="col-md-6">
-                                    <p id="type_idl"  class="form-control" name="type_id">{{ $app_cosplay->type_id }}</p>
+                                    <p id="type_id"  class="form-control" name="type_id">{{ $app_cosplay->type_id }}</p>
                                 </div>
                             </div>
 
@@ -35,20 +35,6 @@
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
                                 <div class="col-md-6">
                                     <p id="length"  class="form-control" name="length">{{ $app_cosplay->length }}</p>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="nickname" class="col-md-4 control-label">Никнейм</label>
-                                <div class="col-md-6">
-                                    <p id="nickname"  class="form-control" name="nickname">{{ $app_cosplay->user_id }}</p>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
-                                <div class="col-md-6">
-                                    <p id="birthday"  class="form-control" name="birthday">{{ $app_cosplay->birthday }}</p>
                                 </div>
                             </div>
 
@@ -79,6 +65,30 @@
                                     <textarea  id="description" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
                                 </div>
                             </div>
+
+                            <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dynamic_field">
+                                    <tr><td>Участник: №1</td><td></td>
+                                    <tr>
+                                        <td><strong>Фамилия</strong></td>
+                                        <td><input type="text" name="members[0][surname]" class="form-control name_list" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Имя</strong></td>
+                                        <td><input type="text" name="members[0][first_name]" class="form-control name_list" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Дата рождения</strong></td>
+                                        <td><input type="date" name="members[0][birthday]" class="form-control name_list" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Никнейм</strong></td>
+                                        <td><input type="text" name="members[0][nickname]" class="form-control name_list" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+
 
                         </div>
                     </div>

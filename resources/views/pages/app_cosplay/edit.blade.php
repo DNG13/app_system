@@ -16,9 +16,13 @@
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
                                 <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
+                                    <select id="type_id" class="form-control" name="type_id">
                                         @foreach($app_types as $key=>$app_type)
-                                            <option value="{{$key}}">{{$app_type}}</option>
+                                            @if($key == $app_cosplay->type_id)
+                                                <option value="{{$key}}" selected>{{$app_type}}</option>
+                                            @else
+                                                <option value="{{$key}}">{{$app_type}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
 
@@ -126,7 +130,7 @@
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
+                                    <textarea  id="description" rows="5" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
 
                                     @if ($errors->has('description'))
                                         <span class="help-block">

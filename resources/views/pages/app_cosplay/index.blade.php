@@ -19,6 +19,7 @@
                         <th>Источник (фендом)</th>
                         <th>Продолжи- тельность</th>
                         <th>Город</th>
+                        <th>Количество участников</th>
                         <th>Статус</th>
                         <th>Дата подачи</th>
                         <th>Действие</th>
@@ -34,6 +35,7 @@
                             <td>{{ $app_cosplay->fandom }}</td>
                             <td>{{ $app_cosplay->length }}</td>
                             <td>{{ $app_cosplay->city }}</td>
+                            <td>{{ $app_cosplay->members_count }}</td>
                             <td>{{ $app_cosplay->status }}</td>
                             <td>{{ date('j F, Y H:i', strtotime($app_cosplay->created_at )) }}</td>
                             <td><div class="btn-group">

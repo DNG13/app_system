@@ -7,6 +7,7 @@ use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\App_cosplay;
 use Illuminate\Http\Request;
+use Validator;
 
 class App_cosplayController extends Controller
 {
@@ -64,8 +65,6 @@ class App_cosplayController extends Controller
             'description' => 'required|string',
             'prev_part' => '',
             'comment' => '',
-
-
         ]);
         //store in database
         $app_cosplays = new App_cosplay();
@@ -80,7 +79,13 @@ class App_cosplayController extends Controller
         $app_cosplays->user_id = Auth::user()->id;
 
         $app_cosplays->status = 'В обработке';
-        $app_cosplays->members = json_encode('');
+
+        $members = [];
+        foreach($request->input('members') as  $key => $value) {
+            $members["member{$key}"] = $value;
+        }
+        $app_cosplays->members_count = count($members);
+        $app_cosplays->members = json_encode($members);
         $app_cosplays->save();
         return redirect('app_cosplay');
     }

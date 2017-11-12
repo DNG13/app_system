@@ -98,7 +98,7 @@
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                 <label for="comment" class="col-md-4 control-label">Коментарий</label>
                                 <div class="col-md-6">
-                                    <textarea  id="comment" rows="5" class="form-control" name="comment" value="{{ old('comment') }}"  autofocus></textarea>
+                                    <textarea  id="comment" rows="5" class="form-control" name="comment"  autofocus>{{ old('comment') }}</textarea>
 
                                     @if ($errors->has('comment'))
                                         <span class="help-block">
@@ -111,7 +111,7 @@
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" rows="5" class="form-control" name="description" value="{{ old('description') }}"  autofocus></textarea>
+                                    <textarea  id="description" rows="5" class="form-control" name="description"  autofocus required>{{ old('description') }}</textarea>
 
                                     @if ($errors->has('description'))
                                         <span class="help-block">
@@ -120,63 +120,29 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="surname" class="col-md-4 control-label"></label>
-                                <div class="col-md-6">
-                                    <div><strong>Участники</strong></div>
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
-                                <label for="surname" class="col-md-4 control-label">Фамилия</label>
-                                <div class="col-md-6">
-                                    <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}" required autofocus>
 
-                                    @if ($errors->has('surname'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                <label for="first_name" class="col-md-4 control-label">Имя</label>
-
-                                <div class="col-md-6">
-                                    <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
-
-                                    @if ($errors->has('first_name'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
-                                <div class="col-md-6">
-                                    <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
-
-                                    @if ($errors->has('birthday'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('birthday') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
-                                <label for="nickname" class="col-md-4 control-label">Никнейм</label>
-                                <div class="col-md-6">
-                                    <input id="nickname" type="text" class="form-control" name="nickname" value="{{ old('nickname') }}" autofocus>
-
-                                    @if ($errors->has('nickname'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('nickname') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
+                            <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dynamic_field">
+                                    <tr><td>Участник: №1</td><td></td>
+                                    <tr>
+                                        <td><strong>Фамилия</strong></td>
+                                        <td><input type="text" name="members[0][surname]" class="form-control name_list" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Имя</strong></td>
+                                        <td><input type="text" name="members[0][first_name]" class="form-control name_list" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Дата рождения</strong></td>
+                                        <td><input type="date" name="members[0][birthday]" class="form-control name_list" required/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Никнейм</strong></td>
+                                        <td><input type="text" name="members[0][nickname]" class="form-control name_list" /></td>
+                                    </tr>
+                                </table>
+                                <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
                             </div>
 
                             <div class="form-group">
@@ -187,6 +153,57 @@
                                 </div>
                             </div>
                         </form>
+
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                var postURL = "<?php echo url('app_cosplay/create'); ?>";
+                                var i=1;
+
+                                $('#add').click(function(){
+                                    $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added">' +
+                                        '<tr><td>Участник: № ' +(i+1)+ '</td></tr><tr><td><strong>Фамилия</strong></td> ' +
+                                            '<td><input type="text" name="members['+i+'][surname]" class="form-control name_list" required/></td> </tr> ' +
+                                        '<tr> <td><strong>Имя</strong></td>' +
+                                            ' <td><input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/></td> </tr>' +
+                                        ' <tr> <td><strong>Дата рождения</strong></td>' +
+                                            ' <td><input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/></td> </tr>' +
+                                        ' <tr> <td><strong>Никнейм</strong></td> ' +
+                                            '<td><input type="text" name="members['+i+'][nickname]" class="form-control name_list" /></td> </tr>' +
+                                        ' <tr>');
+                                    i++;
+                                });
+
+                                $(document).on('click', '.btn_remove', function(){
+                                    var button_id = $(this).attr("id");
+                                    $('#row'+button_id+'').remove();
+                                });
+
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+
+                                $('#submit').click(function(){
+                                    $.ajax({
+                                        url:postURL,
+                                        method:"POST",
+                                        data:$('#add_name').serialize(),
+                                        type:'json',
+                                        success:function(data)
+                                        {
+                                            if(data.error){
+                                                printErrorMsg(data.error);
+                                            }else{
+                                                i=1;
+                                                $('.dynamic-added').remove();
+                                                $('#add_name')[0].reset();
+                                            }
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
