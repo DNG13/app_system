@@ -10,9 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/my_app', function () {
+    return view('pages/my_app');
+});
+Route::get('/main', function () {
+    return view('pages/main');
 });
 
 Auth::routes();
@@ -22,4 +24,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile/edit', 'ProfileController@edit')->name('edit');
     Route::post('/profile', 'ProfileController@update');
     Route::resource('app_cosplay', 'App_cosplayController');
+    Route::resource('app_press', 'App_pressController');
+    Route::resource('app_fair', 'App_fairController');
+    Route::resource('app_volunteer', 'App_volunteerController');
 });

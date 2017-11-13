@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Все заявки</strong></h4>
+            <h4><strong>Заявка косплей-шоу</strong></h4>
                 <a class="btn btn-info btn" href="/app_cosplay/create">Подать заявку</a>
             <hr>
             @if(!count($app_cosplays)==0)
