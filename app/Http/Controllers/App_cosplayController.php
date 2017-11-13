@@ -77,7 +77,6 @@ class App_cosplayController extends Controller
         $app_cosplays->prev_part = $request->get('prev_part');
         $app_cosplays->comment = $request->get('comment');
         $app_cosplays->user_id = Auth::user()->id;
-
         $app_cosplays->status = 'В обработке';
 
         $members = [];
@@ -107,7 +106,9 @@ class App_cosplayController extends Controller
                 $app_cosplay->type_id = $app_type;
             }
         }
-        return view('pages.app_cosplay.show', compact('app_cosplay'));
+        $members =  json_decode($app_cosplay->members);
+        $count = 0;
+        return view('pages.app_cosplay.show', compact('app_cosplay', 'members', 'count'));
     }
 
     /**
@@ -122,8 +123,9 @@ class App_cosplayController extends Controller
         $app_cosplay = App_cosplay::where('id', $id)->first();
         $app_cosplay->user_id = $user;
         $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
-
-        return view('pages.app_cosplay.edit', compact('app_types', 'app_cosplay'));
+        $members =  json_decode($app_cosplay->members);
+        $count = 0;
+        return view('pages.app_cosplay.edit', compact('app_types', 'app_cosplay', 'members', 'count'));
     }
 
     /**
@@ -157,9 +159,14 @@ class App_cosplayController extends Controller
         $app_cosplays->prev_part = $request->get('prev_part');
         $app_cosplays->comment = $request->get('comment');
         $app_cosplays->user_id = Auth::user()->id;
-
         $app_cosplays->status = 'В обработке';
-        $app_cosplays->members = json_encode('');
+
+        $members = [];
+        foreach($request->input('members') as  $key => $value) {
+            $members["member{$key}"] = $value;
+        }
+        $app_cosplays->members_count = count($members);
+        $app_cosplays->members = json_encode($members);
         $app_cosplays->save();
         return redirect('app_cosplay');
     }

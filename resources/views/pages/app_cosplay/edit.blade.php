@@ -74,20 +74,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
-                                <label for="nickname" class="col-md-4 control-label">Никнейм</label>
-
-                                <div class="col-md-6">
-                                    <input id="nickname" type="text" class="form-control" name="nickname" value="{{ $app_cosplay->user_id }}" autofocus>
-
-                                    @if ($errors->has('nickname'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('nickname') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-4 control-label">Город</label>
                                 <div class="col-md-6">
@@ -140,6 +126,34 @@
                                 </div>
                             </div>
 
+                            <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dynamic_field">
+                                    @foreach($members as $member=>$attributes)
+                                        <tr><td>Участник: {{++$count}}</td><td></td>
+                                        @foreach($attributes as $attribute=>$data)
+                                            @if($attribute=='surname')
+                                                <tr>
+                                                    <td><strong>Фамилия</strong></td>
+                                                    <td><input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/></td>
+                                                </tr>
+                                            @elseif($attribute=='first_name')
+                                                <tr>
+                                                    <td><strong>Имя</strong></td>
+                                                    <td><input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/></td>
+                                                </tr>
+                                            @elseif($attribute=='birthday')
+                                                <tr>
+                                                    <td><strong>Дата рождения</strong></td>
+                                                    <td><input type="date" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </table>
+                                <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -148,6 +162,40 @@
                                 </div>
                             </div>
                         </form>
+
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                var postURL = "<?php echo url('app_cosplay/create'); ?>";
+                                var i="<?php echo $app_cosplay->members_count?>";
+                                i++;
+                                $('#add').click(function(){
+                                    $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added">' +
+                                        '<tr><td>Участник: № ' +(i)+ '</td></tr><tr><td><strong>Фамилия</strong></td> ' +
+                                        '<td><input type="text" name="members['+i+'][surname]" class="form-control name_list" required/></td> </tr> ' +
+                                        '<tr> <td><strong>Имя</strong></td>' +
+                                        ' <td><input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/></td> </tr>' +
+                                        ' <tr> <td><strong>Дата рождения</strong></td>' +
+                                        '<td><input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/></td> </tr>' +
+                                        ' <tr>');
+                                    i++;
+                                });
+
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+
+                                $('#submit').click(function(){
+                                    $.ajax({
+                                        url:postURL,
+                                        method:"POST",
+                                        data:$('#add_name').serialize(),
+                                        type:'json',
+                                    });
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>

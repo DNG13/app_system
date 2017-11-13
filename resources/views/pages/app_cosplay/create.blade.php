@@ -137,10 +137,6 @@
                                         <td><strong>Дата рождения</strong></td>
                                         <td><input type="date" name="members[0][birthday]" class="form-control name_list" required/></td>
                                     </tr>
-                                    <tr>
-                                        <td><strong>Никнейм</strong></td>
-                                        <td><input type="text" name="members[0][nickname]" class="form-control name_list" /></td>
-                                    </tr>
                                 </table>
                                 <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
                             </div>
@@ -166,16 +162,9 @@
                                         '<tr> <td><strong>Имя</strong></td>' +
                                             ' <td><input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/></td> </tr>' +
                                         ' <tr> <td><strong>Дата рождения</strong></td>' +
-                                            ' <td><input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/></td> </tr>' +
-                                        ' <tr> <td><strong>Никнейм</strong></td> ' +
-                                            '<td><input type="text" name="members['+i+'][nickname]" class="form-control name_list" /></td> </tr>' +
+                                            '<td><input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/></td> </tr>' +
                                         ' <tr>');
                                     i++;
-                                });
-
-                                $(document).on('click', '.btn_remove', function(){
-                                    var button_id = $(this).attr("id");
-                                    $('#row'+button_id+'').remove();
                                 });
 
                                 $.ajaxSetup({
@@ -190,16 +179,6 @@
                                         method:"POST",
                                         data:$('#add_name').serialize(),
                                         type:'json',
-                                        success:function(data)
-                                        {
-                                            if(data.error){
-                                                printErrorMsg(data.error);
-                                            }else{
-                                                i=1;
-                                                $('.dynamic-added').remove();
-                                                $('#add_name')[0].reset();
-                                            }
-                                        }
                                     });
                                 });
                             });

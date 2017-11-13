@@ -45,51 +45,62 @@
                                 </div>
                             </div>
 
+                            @if(!$app_cosplay->comment==null)
                             <div class="form-group">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <p id="prev_part"  class="form-control" name="prev_part">{{ $app_cosplay->prev_part }}</p>
+                                    <p id="prev_part"  class="form-control" name="prev_part">{{ $app_cosplay->comment }}</p>
                                 </div>
                             </div>
+                            @endif
 
+                            @if(!$app_cosplay->comment==null)
                             <div class="form-group">
                                 <label for="comment" class="col-md-4 control-label">Коментарий</label>
                                 <div class="col-md-6">
                                     <textarea  id="comment" class="form-control" name="comment">{{ $app_cosplay->comment }}</textarea>
                                 </div>
                             </div>
+                            @endif
 
                             <div class="form-group">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
+                                    <textarea  id="description" class="form-control" name="description" required>{{ $app_cosplay->description }}</textarea>
                                 </div>
                             </div>
 
                             <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dynamic_field">
-                                    <tr><td>Участник: №1</td><td></td>
-                                    <tr>
-                                        <td><strong>Фамилия</strong></td>
-                                        <td><input type="text" name="members[0][surname]" class="form-control name_list" required/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Имя</strong></td>
-                                        <td><input type="text" name="members[0][first_name]" class="form-control name_list" required/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Дата рождения</strong></td>
-                                        <td><input type="date" name="members[0][birthday]" class="form-control name_list" required/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Никнейм</strong></td>
-                                        <td><input type="text" name="members[0][nickname]" class="form-control name_list" /></td>
-                                    </tr>
+                                    @foreach($members as $member=>$attributes)
+                                        <tr><td>Участник: {{++$count}}</td><td></td>
+                                        @foreach($attributes as $attribute=>$data)
+                                        @if($attribute=='surname')
+                                        <tr>
+                                            <td><strong>Фамилия</strong></td>
+                                            <td><p type="text" name="members[{{$count}}][surname]" class="form-control name_list" required>{{ $data }}</p></td>
+                                        </tr>
+                                        @elseif($attribute=='first_name')
+                                        <tr>
+                                            <td><strong>Имя</strong></td>
+                                            <td><p type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required>{{ $data }}</p></td>
+                                        </tr>
+                                        @elseif($attribute=='birthday')
+                                        <tr>
+                                            <td><strong>Дата рождения</strong></td>
+                                            <td><p type="date" name="members[{{$count}}][birthday]" class="form-control name_list" required>{{ date('j F, Y ', strtotime($data)) }}</p></td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
+                                    @endforeach
                                 </table>
                             </div>
-
-
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <a href="/app_cosplay/{{ $app_cosplay->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
