@@ -13,12 +13,12 @@
 Route::get('/my_app', function () {
     return view('pages/my_app');
 });
-Route::get('/main', function () {
+Route::get('/', function () {
     return view('pages/main');
 });
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'ProfileController@edit')->name('edit');
@@ -27,4 +27,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('app_press', 'App_pressController');
     Route::resource('app_fair', 'App_fairController');
     Route::resource('app_volunteer', 'App_volunteerController');
+    Route::get('/my_app', function () {
+        return view('pages/my_app');
+    });
 });

@@ -24,6 +24,7 @@ class CreateAppFairsTable extends Migration
                 ->references('id')->on('app_types')
                 ->onDelete('cascade');
             $table->timestamps();
+            $table->string('group_nick', 100);
             $table->string('contact_name', 255);
             $table->integer('members_count');
             $table->string('phone', 64);

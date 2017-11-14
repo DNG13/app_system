@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\App_type;
 
-class App_types_cosplayTableSeeder extends Seeder
+class App_types_pressTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,19 +13,13 @@ class App_types_cosplayTableSeeder extends Seeder
     public function run()
     {
         $titles = [
-            'Сценическая Постановка',
-            'Дефиле',
-            'Групповое Дефиле',
-            'Караоке',
-            'Танец',
-            'K-Pop',
-            'Светошоу',
-            'Прочее',
-            'Внеконкурсa'
+            'Фото',
+            'Видео',
+            'Прочее'
         ];
         for ($i=0, $count=count($titles); $i < $count; $i++) {
             App_type::create([
-                'app_type' => 'cosplay',
+                'app_type' => 'press',
                 'title' => $titles[$i],
                 'created_at' => Carbon\Carbon::now(),
             ]);

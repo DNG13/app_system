@@ -31,7 +31,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/main') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                        Khanifest
                     </a>
                 </div>
@@ -40,7 +40,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;@if (Auth::user())
-                            <li class={{ Request::is('main')? "active" : ''}}><a href="/main">Главная</a></li>
+                            <li class={{ Request::is('main')? "active" : ''}}><a href="/">Главная</a></li>
                             <li class={{ Request::is('my_app')? "active" : ''}}><a href="/my_app">Мои заявки</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="/home"><strong>Подать заявку</strong></a></li>
                         @endif

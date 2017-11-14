@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Косплей-шоу</div>
+                    <div class="panel-heading">Пресса</div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('app_cosplay.index') }}">
@@ -59,7 +59,7 @@
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
                                 <div class="col-md-6">
-                                    <input id="length" type="number" min="1" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
+                                    <input id="length" type="number" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
 
                                     @if ($errors->has('length'))
                                         <span class="help-block">
@@ -85,9 +85,7 @@
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <textarea id="prev_part" rows="4" type="text" class="form-control"
-                                           placeholder="Участие костюма/постановки в других фестивалях(с указанием на каких именно со ссылками на фото/видео. Получали ли призовые места)"
-                                           name="prev_part" autofocus>{{ old('prev_part') }}</textarea>
+                                    <input id="prev_part" type="text" class="form-control" name="prev_part" value="{{ old('prev_part') }}" autofocus>
 
                                     @if ($errors->has('prev_part'))
                                         <span class="help-block">
