@@ -33,7 +33,7 @@ class App_cosplayController extends Controller
                 }
             }
         }
-        return view('pages.app_cosplay.index', compact('app_cosplays'));
+        return view('pages.cosplay.index', compact('app_cosplays'));
     }
 
     /**
@@ -44,7 +44,7 @@ class App_cosplayController extends Controller
     public function create()
     {
         $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
-        return view('pages.app_cosplay.create', compact('app_types'));
+        return view('pages.cosplay.create', compact('app_types'));
     }
 
     /**
@@ -86,7 +86,7 @@ class App_cosplayController extends Controller
         $app_cosplays->members_count = count($members);
         $app_cosplays->members = json_encode($members);
         $app_cosplays->save();
-        return redirect('app_cosplay');
+        return redirect('cosplay');
     }
 
     /**
@@ -108,7 +108,7 @@ class App_cosplayController extends Controller
         }
         $members =  json_decode($app_cosplay->members);
         $count = 0;
-        return view('pages.app_cosplay.show', compact('app_cosplay', 'members', 'count'));
+        return view('pages.cosplay.show', compact('app_cosplay', 'members', 'count'));
     }
 
     /**
@@ -125,7 +125,7 @@ class App_cosplayController extends Controller
         $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $members =  json_decode($app_cosplay->members);
         $count = 0;
-        return view('pages.app_cosplay.edit', compact('app_types', 'app_cosplay', 'members', 'count'));
+        return view('pages.cosplay.edit', compact('app_types', 'app_cosplay', 'members', 'count'));
     }
 
     /**
@@ -168,7 +168,7 @@ class App_cosplayController extends Controller
         $app_cosplays->members_count = count($members);
         $app_cosplays->members = json_encode($members);
         $app_cosplays->save();
-        return redirect('app_cosplay');
+        return redirect('cosplay');
     }
 
     /**

@@ -20,6 +20,7 @@ class CreateAppVolunteersTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->timestamps();
+            $table->string('status', 100);
             $table->text('experience');
             $table->text('skills');
             $table->text('difficulties');

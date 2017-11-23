@@ -14,16 +14,16 @@
                         </div>
                     @endif
                             <h4><strong>Заявка косплей-шоу</strong></h4>
-                            <a class="btn btn-info btn" href="/app_cosplay/create">Подать заявку</a>
+                            <a class="btn btn-info btn" href="/cosplay/create">Подать заявку</a>
 
                             <h4><strong>Заявка ярмарка</strong></h4>
-                            <a class="btn btn-info btn" href="/app_fair/create">Подать заявку</a>
+                            <a class="btn btn-info btn" href="/fair/create">Подать заявку</a>
 
                             <h4><strong>Заявка пресса</strong></h4>
-                            <a class="btn btn-info btn" href="/app_press/create">Подать заявку</a>
+                            <a class="btn btn-info btn" href="/press/create">Подать заявку</a>
 
                             <h4><strong>Заявка волонтер</strong></h4>
-                            <a class="btn btn-info btn" href="/app_volunteer/create">Подать заявку</a>
+                            <a class="btn btn-info btn" href="/volunteer/create">Подать заявку</a>
                 </div>
             </div>
         </div>

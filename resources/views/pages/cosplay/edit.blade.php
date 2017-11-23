@@ -8,7 +8,7 @@
                     <div class="panel-heading">Редактирование  заявки косплей-шоу</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('app_cosplay.update', $app_cosplay->id) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('cosplay.update', $app_cosplay->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
@@ -180,20 +180,15 @@
                                         '<td></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">Удалить участника</button></td></tr>');
                                     i++;
                                 });
-                                $(document).on("click", ".remove_field", function(e) { //user click on remove text
-                                    e.preventDefault();
-                                    $(this).parent().remove();
-                                    x--;
-                                })
 
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    }
-                                });
+
 
                                 $(document).on('click', '.btn_remove', function(){
-                                    $(this).parent('#dynamic_field').remove();
+                                    var j;
+                                    for (j = 0; j < 5; j++) {
+                                        $('tr:last').remove();
+                                    }
+                                    i--;
                                 });
 
                                 $('#submit').click(function(){

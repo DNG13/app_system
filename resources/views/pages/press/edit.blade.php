@@ -8,7 +8,7 @@
                     <div class="panel-heading">Редактирование  заявки</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('app_cosplay.update', $app_cosplay->id) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('press.update', $press->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
@@ -18,7 +18,7 @@
                                 <div class="col-md-6">
                                     <select id="type_id" class="form-control" name="type_id">
                                         @foreach($app_types as $key=>$app_type)
-                                            @if($key == $app_cosplay->type_id)
+                                            @if($key == $press->type_id)
                                                 <option value="{{$key}}" selected>{{$app_type}}</option>
                                             @else
                                                 <option value="{{$key}}">{{$app_type}}</option>
@@ -34,41 +34,28 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label for="title" class="col-md-4 control-label">Название постановки</label>
+                            <div class="form-group{{ $errors->has('media_name') ? ' has-error' : '' }}">
+                                <label for="media_name" class="col-md-4 control-label">Наименование СМИ/никнейм</label>
 
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ $app_cosplay->title }}" required autofocus>
+                                    <input id="media_name" type="text" class="form-control" name="media_name" value="{{ $press->media_name }}" required autofocus>
 
-                                    @if ($errors->has('title'))
+                                    @if ($errors->has('media_name'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
+                                        <strong>{{ $errors->first('media_name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('fandom') ? ' has-error' : '' }}">
-                                <label for="fandom" class="col-md-4 control-label">Источник (фендом)</label>
+                            <div class="form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
+                                <label for="contact_name" class="col-md-4 control-label">Контактное лицо</label>
                                 <div class="col-md-6">
-                                    <input id="fandom" type="text" class="form-control" name="fandom" value="{{ $app_cosplay->fandom }}" required autofocus>
+                                    <input id="contact_name" type="text" class="form-control" name="contact_name" value="{{ $press->contact_name }}" required autofocus>
 
-                                    @if ($errors->has('fandom'))
+                                    @if ($errors->has('contact_name'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('fandom') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
-                                <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
-                                <div class="col-md-6">
-                                    <input id="length" type="number" class="form-control" name="length" value="{{ $app_cosplay->length}}" required autofocus>
-
-                                    @if ($errors->has('length'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('length') }}</strong>
+                                        <strong>{{ $errors->first('contact_name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -77,7 +64,7 @@
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-4 control-label">Город</label>
                                 <div class="col-md-6">
-                                    <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ $app_cosplay->city }}" required autofocus>
+                                    <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ $press->city }}" required autofocus>
 
                                     @if ($errors->has('city'))
                                         <span class="help-block">
@@ -87,115 +74,137 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
-                                <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
-                                <div class="col-md-6">
-                                    <input id="prev_part" type="text" class="form-control" name="prev_part" value="{{ $app_cosplay->prev_part }}" autofocus>
+                            <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                <label for="phone" class="col-md-4 control-label">Телефон</label>
 
-                                    @if ($errors->has('prev_part'))
+                                <div class="col-md-6">
+                                    <input id="phone" pattern='[\+]\d{3}[\(]\d{2}[\)]\d{7}'  placeholder="+380(00)0000000" type="tel" class="form-control" name="phone" value="{{ $press->phone }}" required autofocus>
+
+                                    @if ($errors->has('phone'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('prev_part') }}</strong>
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                <label for="comment" class="col-md-4 control-label">Коментарий</label>
-                                <div class="col-md-6">
-                                    <textarea  id="comment" rows="5" class="form-control" name="comment" autofocus>{{ $app_cosplay->comment }}</textarea>
+                            <div class="form-group{{ $errors->has('portfolio_link') ? ' has-error' : '' }}">
+                                <label for="portfolio_link" class="col-md-4 control-label">Ссылка на портфолио</label>
 
-                                    @if ($errors->has('comment'))
+                                <div class="col-md-6">
+                                    <input id="portfolio_link" type="url" class="form-control" name="portfolio_link" value="{{ $press->portfolio_link }}"required autofocus>
+
+                                    @if ($errors->has('portfolio_link'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('comment') }}</strong>
+                                        <strong>{{ $errors->first('portfolio_link') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                <label for="description" class="col-md-4 control-label">Описание</label>
+                            <div class="form-group{{ $errors->has('camera') ? ' has-error' : '' }}">
+                                <label for="camera" class="col-md-4 control-label">Модель камеры</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" rows="5" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
+                                    <input id="camera" type="text" class="form-control" name="camera" value="{{ $press->camera }}" autofocus>
 
-                                    @if ($errors->has('description'))
+                                    @if ($errors->has('camera'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
+                                        <strong>{{ $errors->first('camera') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dynamic_field">
-                                    @foreach($members as $member=>$attributes)
-                                        <tr><td>Участник: {{++$count}}</td><td></td>
-                                        @foreach($attributes as $attribute=>$data)
-                                            @if($attribute=='surname')
-                                                <tr>
-                                                    <td><strong>Фамилия</strong></td>
-                                                    <td><input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/></td>
-                                                </tr>
-                                            @elseif($attribute=='first_name')
-                                                <tr>
-                                                    <td><strong>Имя</strong></td>
-                                                    <td><input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/></td>
-                                                </tr>
-                                            @elseif($attribute=='birthday')
-                                                <tr>
-                                                    <td><strong>Дата рождения</strong></td>
-                                                    <td><input type="date" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/></td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                </table>
-                                <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
+                            <div class="form-group{{ $errors->has('members_count') ? ' has-error' : '' }}">
+                                <label for="members_count" class="col-md-4 control-label">Количество представителей</label>
+                                <div class="col-md-6">
+                                    <input id="members_count" type="number" min="1" class="form-control" name="members_count" value="{{ $press->members_count }}" required autofocus>
+
+                                    @if ($errors->has('members_count'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('members_count') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('equipment') ? ' has-error' : '' }}">
+                                <label for="equipment" class="col-md-4 control-label">Доп. техника</label>
+                                <div class="col-md-6">
+                                    <textarea  id="equipment" rows="5" class="form-control" name="equipment"  autofocus required>{{ $press->equipment }}</textarea>
+
+                                    @if ($errors->has('equipment'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('equipment') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('social_links->vk') ? ' has-error' : '' }}">
+                                <label for="social_links[vk]" class="col-md-4 control-label">Cоцсети: VK</label>
+
+                                <div class="col-md-6">
+                                    <input id="social_links[vk]" type="url" class="form-control" name="social_links[vk]" value="{{ $social_links->vk }}" autofocus>
+
+                                    @if ($errors->has('social_links->vk'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('social_links->vk') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('social_links->fb') ? ' has-error' : '' }}">
+                                <label for="social_links[fb]" class="col-md-4 control-label">Facebook</label>
+
+                                <div class="col-md-6">
+                                    <input id="social_links[fb]" type="url" class="form-control" name="social_links[fb]" value="{{ $social_links->fb }}"  autofocus>
+
+                                    @if ($errors->has('social_links->fb'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('social_links->fb') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('social_links->sk') ? ' has-error' : '' }}">
+                                <label for="social_links[sk]" class="col-md-4 control-label">Skype</label>
+
+                                <div class="col-md-6">
+                                    <input id="social_links[sk]" type="url" class="form-control" name="social_links[sk]" value="{{ $social_links->sk }}" autofocus>
+
+                                    @if ($errors->has('social_links->sk'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('social_links->sk') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('social_links->tg') ? ' has-error' : '' }}">
+                                <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
+
+                                <div class="col-md-6">
+                                    <input id="social_links[tg]" type="url" class="form-control" name="social_links[tg]" value="{{ $social_links->tg }}" autofocus>
+
+                                    @if ($errors->has('social_links->tg'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('social_links->tg') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Отправить
+                                        Сохранить
                                     </button>
                                 </div>
                             </div>
                         </form>
-
-                        <script type="text/javascript">
-                            $(document).ready(function(){
-                                var postURL = "<?php echo url('app_cosplay/create'); ?>";
-                                var i="<?php echo $app_cosplay->members_count?>";
-                                i++;
-                                $('#add').click(function(){
-                                    $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added">' +
-                                        '<tr><td>Участник: № ' +(i)+ '</td></tr><tr><td><strong>Фамилия</strong></td> ' +
-                                        '<td><input type="text" name="members['+i+'][surname]" class="form-control name_list" required/></td> </tr> ' +
-                                        '<tr> <td><strong>Имя</strong></td>' +
-                                        ' <td><input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/></td> </tr>' +
-                                        ' <tr> <td><strong>Дата рождения</strong></td>' +
-                                        '<td><input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/></td> </tr>' +
-                                        ' <tr>');
-                                    i++;
-                                });
-
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    }
-                                });
-
-                                $('#submit').click(function(){
-                                    $.ajax({
-                                        url:postURL,
-                                        method:"POST",
-                                        data:$('#add_name').serialize(),
-                                        type:'json',
-                                    });
-                                });
-                            });
-                        </script>
                     </div>
                 </div>
             </div>

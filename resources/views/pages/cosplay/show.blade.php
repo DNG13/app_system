@@ -98,7 +98,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="/app_cosplay/{{ $app_cosplay->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
+                                    <a href="/cosplay/{{ $app_cosplay->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
                                 </div>
                             </div>
                         </div>

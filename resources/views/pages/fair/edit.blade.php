@@ -8,7 +8,7 @@
                     <div class="panel-heading">Редактирование  заявки ярмарка</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('app_fair.update', $fair->id) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('fair.update', $fair->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 

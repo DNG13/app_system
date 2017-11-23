@@ -80,6 +80,7 @@ class App_fairController extends Controller
         $fair->payment_type= $request->get('payment_type');
         $fair->description= $request->get('description');
         $fair->user_id = Auth::user()->id;
+        $fair->status = 'В обработке';
 
         $equipment = [];
         foreach($request->input('equipment') as  $key => $value) {
@@ -88,7 +89,7 @@ class App_fairController extends Controller
         $fair->equipment = json_encode($equipment);
         $fair->save();
 
-        return redirect('app_fair');
+        return redirect('fair');
     }
 
     /**
@@ -171,7 +172,7 @@ class App_fairController extends Controller
         }
         $fair->equipment = json_encode($equipment);
         $fair->save();
-        return redirect('app_fair');
+        return redirect('fair');
     }
 
     /**

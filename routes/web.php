@@ -23,10 +23,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'ProfileController@edit')->name('edit');
     Route::post('/profile', 'ProfileController@update');
-    Route::resource('app_cosplay', 'App_cosplayController');
-    Route::resource('app_press', 'App_pressController');
-    Route::resource('app_fair', 'App_fairController');
-    Route::resource('app_volunteer', 'App_volunteerController');
+    Route::resource('cosplay', 'App_cosplayController');
+    Route::resource('press', 'App_pressController');
+    Route::resource('fair', 'App_fairController');
+    Route::resource('volunteer', 'App_volunteerController');
     Route::get('/my_app', function () {
         return view('pages/my_app');
     });

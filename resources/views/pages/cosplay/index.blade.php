@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка косплей-шоу</strong></h4>
-                <a class="btn btn-info btn" href="/app_cosplay/create">Подать заявку</a>
+                <a class="btn btn-info btn" href="/cosplay/create">Подать заявку</a>
             <hr>
             @if(!count($app_cosplays)==0)
                 <h5>Page {{ $app_cosplays->currentPage() }} of {{ $app_cosplays->lastPage() }}</h5>
@@ -39,10 +39,10 @@
                             <td>{{ $app_cosplay->status }}</td>
                             <td>{{ date('j F, Y H:i', strtotime($app_cosplay->created_at )) }}</td>
                             <td><div class="btn-group">
-                                    <a class="btn btn-info btn-sm" href="/app_cosplay/{{$app_cosplay->id }}" title="Подробнее" >
+                                    <a class="btn btn-info btn-sm" href="/cosplay/{{$app_cosplay->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/app_cosplay/{{$app_cosplay->id }}/edit" title="Редактировать">
+                                    <a class="btn btn-info btn-sm" href="/cosplay/{{$app_cosplay->id }}/edit" title="Редактировать">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                 </div></td>

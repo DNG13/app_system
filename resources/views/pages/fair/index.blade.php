@@ -39,10 +39,10 @@
                             <td>{{ $fair->description }}</td>
                             <td>{{ date('j F, Y H:i', strtotime($fair->created_at )) }}</td>
                             <td><div class="btn-group">
-                                    <a class="btn btn-info btn-sm" href="/app_fair/{{$fair->id }}" title="Подробнее" >
+                                    <a class="btn btn-info btn-sm" href="/fair/{{$fair->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/app_fair/{{$fair->id }}/edit" title="Редактировать">
+                                    <a class="btn btn-info btn-sm" href="/fair/{{$fair->id }}/edit" title="Редактировать">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                 </div></td>

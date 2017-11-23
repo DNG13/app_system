@@ -8,7 +8,7 @@
                     <div class="panel-heading">Ярмарка</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('app_fair.index') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('fair.index') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">

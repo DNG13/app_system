@@ -8,7 +8,7 @@
                     <div class="panel-heading">Ярмарка. Подробнее</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('app_fair.index') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('fair.index') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group">
@@ -120,7 +120,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="/app_fair/{{ $fair->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
+                                    <a href="/fair/{{ $fair->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
                                 </div>
                             </div>
                         </form>
