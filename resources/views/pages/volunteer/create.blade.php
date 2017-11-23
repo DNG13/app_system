@@ -8,137 +8,49 @@
                     <div class="panel-heading">Волонтер</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('app_cosplay.index') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('volunteer.index') }}">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
-                                <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
+
+                            <div class="form-group{{ $errors->has('skills') ? ' has-error' : '' }}">
+                                <label for="skills" class="col-md-4 control-label">Навыки</label>
 
                                 <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
-                                        @foreach($app_types as $key=>$app_type)
-                                            <option value="{{$key}}">{{$app_type}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input id="skills" type="text" class="form-control" name="skills" value="{{ old('skills') }}" required autofocus>
 
-                                    @if ($errors->has('type_id'))
+                                    @if ($errors->has('skills'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('type_id') }}</strong>
+                                        <strong>{{ $errors->first('skills') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label for="title" class="col-md-4 control-label">Название постановки</label>
 
+                            <div class="form-group{{ $errors->has('experience') ? ' has-error' : '' }}">
+                                <label for="experience" class="col-md-4 control-label">Опыт работы волонтером</label>
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+                                    <textarea  id="experience" rows="5" class="form-control" placeholder="Год, название фестиваля, должность" name="experience" required autofocus>{{ old('experience') }}</textarea>
 
-                                    @if ($errors->has('title'))
+                                    @if ($errors->has('experience'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
+                                        <strong>{{ $errors->first('experience') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('fandom') ? ' has-error' : '' }}">
-                                <label for="fandom" class="col-md-4 control-label">Источник (фендом)</label>
+                            <div class="form-group{{ $errors->has('difficulties') ? ' has-error' : '' }}">
+                                <label for="difficulties" class="col-md-4 control-label">Возможные затруднения</label>
                                 <div class="col-md-6">
-                                    <input id="fandom" type="text" class="form-control" name="fandom" value="{{ old('fandom') }}" required autofocus>
+                                    <textarea  id="difficulties" rows="5" class="form-control" name="difficulties"  autofocus >{{ old('difficulties') }}</textarea>
 
-                                    @if ($errors->has('fandom'))
+                                    @if ($errors->has('difficulties'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('fandom') }}</strong>
+                                        <strong>{{ $errors->first('difficulties') }}</strong>
                                     </span>
                                     @endif
                                 </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
-                                <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
-                                <div class="col-md-6">
-                                    <input id="length" type="number" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
-
-                                    @if ($errors->has('length'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('length') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-4 control-label">Город</label>
-                                <div class="col-md-6">
-                                    <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
-
-                                    @if ($errors->has('city'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
-                                <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
-                                <div class="col-md-6">
-                                    <input id="prev_part" type="text" class="form-control" name="prev_part" value="{{ old('prev_part') }}" autofocus>
-
-                                    @if ($errors->has('prev_part'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('prev_part') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                <label for="comment" class="col-md-4 control-label">Коментарий</label>
-                                <div class="col-md-6">
-                                    <textarea  id="comment" rows="5" class="form-control" name="comment"  autofocus>{{ old('comment') }}</textarea>
-
-                                    @if ($errors->has('comment'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('comment') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                <label for="description" class="col-md-4 control-label">Описание</label>
-                                <div class="col-md-6">
-                                    <textarea  id="description" rows="5" class="form-control" name="description"  autofocus required>{{ old('description') }}</textarea>
-
-                                    @if ($errors->has('description'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dynamic_field">
-                                    <tr><td>Участник: №1</td><td></td>
-                                    <tr>
-                                        <td><strong>Фамилия</strong></td>
-                                        <td><input type="text" name="members[0][surname]" class="form-control name_list" required/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Имя</strong></td>
-                                        <td><input type="text" name="members[0][first_name]" class="form-control name_list" required/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Дата рождения</strong></td>
-                                        <td><input type="date" name="members[0][birthday]" class="form-control name_list" required/></td>
-                                    </tr>
-                                </table>
-                                <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
                             </div>
 
                             <div class="form-group">
@@ -149,40 +61,6 @@
                                 </div>
                             </div>
                         </form>
-
-                        <script type="text/javascript">
-                            $(document).ready(function(){
-                                var postURL = "<?php echo url('app_cosplay/create'); ?>";
-                                var i=1;
-
-                                $('#add').click(function(){
-                                    $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added">' +
-                                        '<tr><td>Участник: № ' +(i+1)+ '</td></tr><tr><td><strong>Фамилия</strong></td> ' +
-                                            '<td><input type="text" name="members['+i+'][surname]" class="form-control name_list" required/></td> </tr> ' +
-                                        '<tr> <td><strong>Имя</strong></td>' +
-                                            ' <td><input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/></td> </tr>' +
-                                        ' <tr> <td><strong>Дата рождения</strong></td>' +
-                                            '<td><input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/></td> </tr>' +
-                                        ' <tr>');
-                                    i++;
-                                });
-
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    }
-                                });
-
-                                $('#submit').click(function(){
-                                    $.ajax({
-                                        url:postURL,
-                                        method:"POST",
-                                        data:$('#add_name').serialize(),
-                                        type:'json',
-                                    });
-                                });
-                            });
-                        </script>
                     </div>
                 </div>
             </div>
