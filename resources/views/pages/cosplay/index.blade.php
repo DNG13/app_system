@@ -15,13 +15,14 @@
                         <th>Номер заявки</th>
                         <th>Податель заявки</th>
                         <th>Тип заявки</th>
+                        <th>Статус</th>
+                        <th>Дата подачи</th>
+                        <th>Дата обновления</th>
                         <th>Название постановки</th>
                         <th>Источник (фендом)</th>
                         <th>Продолжи- тельность</th>
                         <th>Город</th>
                         <th>Количество участников</th>
-                        <th>Статус</th>
-                        <th>Дата подачи</th>
                         <th>Действие</th>
                     </tr>
                     </thead>
@@ -31,13 +32,14 @@
                             <td>{{ $app_cosplay->id }}</td>
                             <td>{{ $app_cosplay->user_id }}</td>
                             <td>{{ $app_cosplay->type_id }}</td>
+                            <td>{{ $app_cosplay->status }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($app_cosplay->created_at )) }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($app_cosplay->updated_at )) }}</td>
                             <td>{{ $app_cosplay->title }}</td>
                             <td>{{ $app_cosplay->fandom }}</td>
                             <td>{{ $app_cosplay->length }}</td>
                             <td>{{ $app_cosplay->city }}</td>
                             <td>{{ $app_cosplay->members_count }}</td>
-                            <td>{{ $app_cosplay->status }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($app_cosplay->created_at )) }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/cosplay/{{$app_cosplay->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>

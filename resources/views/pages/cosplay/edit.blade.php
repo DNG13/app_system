@@ -90,7 +90,7 @@
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <input id="prev_part" type="text" class="form-control" name="prev_part" value="{{ $app_cosplay->prev_part }}" autofocus>
+                                    <textarea id="prev_part"  class="form-control" name="prev_part" autofocus>{{ $app_cosplay->prev_part }}</textarea>
 
                                     @if ($errors->has('prev_part'))
                                         <span class="help-block">

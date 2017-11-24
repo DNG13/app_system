@@ -41,6 +41,7 @@
                     <ul class="nav navbar-nav">
                         &nbsp;@if (Auth::user())
                             <li class={{ Request::is('main')? "active" : ''}}><a href="/">Главная</a></li>
+                            <li ><a href="http://khanifest.com/?page_id=346 ">Читать правила</a></li>
                             <li class={{ Request::is('my_app')? "active" : ''}}><a href="/my_app">Мои заявки</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="/home"><strong>Подать заявку</strong></a></li>
                         @endif

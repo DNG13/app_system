@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <p id="prev_part"  class="form-control" name="prev_part">{{ $app_cosplay->comment }}</p>
+                                    <textarea id="prev_part"  class="form-control" name="prev_part">{{ $app_cosplay->comment }}</textarea>
                                 </div>
                             </div>
                             @endif

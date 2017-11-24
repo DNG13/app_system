@@ -15,13 +15,15 @@
                         <th>Номер заявки</th>
                         <th>Податель заявки</th>
                         <th>Тип заявки</th>
+                        <th>Статус</th>
+                        <th>Дата подачи</th>
+                        <th>Дата обновления</th>
                         <th>Hазвание творческой группы/ник</th>
                         <th>Контактное лицо</th>
                         <th>Телефон</th>
                         <th>Площадь(м²)</th>
                         <th>Количество представителей</th>
                         <th>Описание</th>
-                        <th>Дата подачи</th>
                         <th>Действие</th>
                     </tr>
                     </thead>
@@ -31,13 +33,15 @@
                             <td>{{ $fair->id }}</td>
                             <td>{{ $fair->user_id }}</td>
                             <td>{{ $fair->type_id }}</td>
+                            <td>{{ $fair->status }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($fair->created_at )) }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($fair->updated_at )) }}</td>
                             <td>{{ $fair->group_nick }}</td>
                             <td>{{ $fair->contact_name }}</td>
                             <td>{{ $fair->phone }}</td>
                             <td>{{ $fair->square }}</td>
                             <td>{{ $fair->members_count }}</td>
                             <td>{{ $fair->description }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($fair->created_at )) }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/fair/{{$fair->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>

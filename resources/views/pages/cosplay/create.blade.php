@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Новая заявка</div>
+                    <div class="panel-heading">Новая заявка косплей-шоу</div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('cosplay.index') }}">
@@ -85,7 +85,7 @@
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <input id="prev_part" type="text" class="form-control" name="prev_part" value="{{ old('prev_part') }}" autofocus>
+                                    <textarea id="prev_part" rows="5" class="form-control" placeholder="Участие костюма/постановки в других фестивалях(с указанием на каких именно со ссылками на фото/видео. Получали ли призовые места)" name="prev_part" autofocus> {{ old('prev_part') }}</textarea>
 
                                     @if ($errors->has('prev_part'))
                                         <span class="help-block">

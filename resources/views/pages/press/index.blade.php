@@ -15,13 +15,14 @@
                         <th>Номер заявки</th>
                         <th>Податель заявки</th>
                         <th>Тип заявки</th>
+                        <th>Статус</th>
+                        <th>Дата подачи</th>
+                        <th>Дата обновления</th>
                         <th>Наименование СМИ/никнейм</th>
                         <th>Контактное лицо</th>
                         <th>Телефон</th>
                         <th>Город</th>
                         <th>Количество участников</th>
-                        <th>Статус</th>
-                        <th>Дата подачи</th>
                         <th>Действие</th>
                     </tr>
                     </thead>
@@ -31,13 +32,14 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->user_id }}</td>
                             <td>{{ $item->type_id }}</td>
+                            <td>{{ $item->status }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($item->created_at )) }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($item->updated_at )) }}</td>
                             <td>{{ $item->media_name }}</td>
                             <td>{{ $item->contact_name}}</td>
                             <td>{{ $item->phone}}</td>
                             <td>{{ $item->city }}</td>
                             <td>{{ $item->members_count }}</td>
-                            <td>{{ $item->status }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($item->created_at )) }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/press/{{$item->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>

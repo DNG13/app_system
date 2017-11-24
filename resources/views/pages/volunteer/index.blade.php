@@ -13,11 +13,13 @@
                     <thead>
                     <tr>
                         <th>Номер заявки</th>
+                        <th>Податель заявки</th>
+                        <th>Статус</th>
+                        <th>Дата подачи</th>
+                        <th>Дата обновления</th>
                         <th>Навыки</th>
                         <th>Опыт работы волонтером</th>
                         <th>Возможные затруднения</th>
-                        <th>Статус</th>
-                        <th>Дата подачи</th>
                         <th>Действие</th>
                     </tr>
                     </thead>
@@ -25,11 +27,13 @@
                     @foreach($volunteers as $volunteer)
                         <tr class="odd">
                             <td>{{ $volunteer->id }}</td>
+                            <td>{{ $volunteer->user_id }}</td>
+                            <td>{{ $volunteer->status }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($volunteer->created_at )) }}</td>
+                            <td>{{ date('j F, Y H:i', strtotime($volunteer->updated_at )) }}</td>
                             <td>{{ $volunteer->skills }}</td>
                             <td>{{ $volunteer->experience}}</td>
                             <td>{{ $volunteer->difficulties }}</td>
-                            <td>{{ $volunteer->status }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($volunteer->created_at )) }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/volunteer/{{$volunteer->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>

@@ -17,9 +17,15 @@ class App_volunteerController extends Controller
      */
     public function index()
     {
+        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $volunteers = App_volunteer::orderby('id', 'desc')
             ->where('user_id', Auth::user()->id)
             ->paginate(5);
+        foreach( $volunteers  as &$item){
+            if($item->user_id == Auth::user()->id){
+                $item->user_id = $user;
+            }
+        }
         return view('pages.volunteer.index', compact('volunteers'));
     }
 
@@ -43,13 +49,31 @@ class App_volunteerController extends Controller
     {
         //validate the data
         $this->validate($request,[
+            'surname' => 'required|string|max:64',
+            'first_name' => 'required|string|max:64',
+            'nickname' => 'max:64',
+            'birthday' => 'required|date',
+            'phone' => 'required|string|max:64',
+            'city' => 'required|string|max:100',
+            'social_links' => '',
             'skills' => 'required|string',
-            'difficulties' => 'required|string',
-            'experience' => 'required|string',
+            'difficulties' => 'nullable|string',
+            'experience' => 'nullable|string',
         ]);
         //store in database
         $volunteer = new App_volunteer();
-        $volunteer->skills= $request->get('skills');
+        $volunteer->surname= $request->get('surname');
+        $volunteer->first_name = $request->get('first_name');
+        if($request->get('nickname')==null){
+            $volunteer->nickname = $request->get('surname') .' '. $request->get('first_name');
+        }else {
+            $volunteer->nickname = $request->get('nickname');
+        }
+        $volunteer->birthday = $request->get('birthday');
+        $volunteer->phone = $request->get('phone');
+        $volunteer->city = $request->get('city');
+        $volunteer->social_links = json_encode($request['social_links']);
+        $volunteer->skills = $request->get('skills');
         $volunteer->difficulties = $request->get('difficulties');
         $volunteer->experience = $request->get('experience');
         $volunteer->user_id = Auth::user()->id;
@@ -69,7 +93,8 @@ class App_volunteerController extends Controller
         $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $volunteer= App_volunteer::where('id', $id)->first();
         $volunteer->user_id = $user;
-        return view('pages.volunteer.show', compact('volunteer'));
+        $social_links =  json_decode( $volunteer->social_links);
+        return view('pages.volunteer.show', compact('volunteer', 'social_links'));
     }
 
     /**
@@ -83,8 +108,8 @@ class App_volunteerController extends Controller
         $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $volunteer = App_volunteer::where('id', $id)->first();
         $volunteer->user_id = $user;
-
-        return view('pages.volunteer.edit', compact('volunteer'));
+        $social_links =  json_decode($volunteer->social_links);
+        return view('pages.volunteer.edit', compact('volunteer', 'social_links'));
     }
 
     /**
@@ -99,11 +124,25 @@ class App_volunteerController extends Controller
         //validate the data
         $this->validate($request,[
             'skills' => 'required|string',
-            'difficulties' => 'required|string',
-            'experience' => 'required|string',
+            'difficulties' => 'nullable|string',
+            'experience' => 'nullable|string',
+            'surname' => 'required|string|max:64',
+            'first_name' => 'required|string|max:64',
+            'nickname' => 'max:64',
+            'birthday' => 'required|date',
+            'phone' => 'required|string|max:64',
+            'city' => 'required|string|max:100',
+            'social_links' => '',
         ]);
         //store in database
         $volunteer = App_volunteer::where('id', $id)->first();
+        $volunteer->surname= $request->get('surname');
+        $volunteer->first_name = $request->get('first_name');
+        $volunteer->nickname = $request->get('nickname');
+        $volunteer->birthday = $request->get('birthday');
+        $volunteer->phone = $request->get('phone');
+        $volunteer->city = $request->get('city');
+        $volunteer->social_links = json_encode($request['social_links']);
         $volunteer->skills= $request->get('skills');
         $volunteer->difficulties = $request->get('difficulties');
         $volunteer->experience = $request->get('experience');
