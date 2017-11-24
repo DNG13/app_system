@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label for="avatar" class="col-md-4 control-label">Аватар</label>
                                 <div class="col-md-6">
-                                    <img src="{{ $avatar }}" id="avatar" name="avatar"/>
+                                    <img src="/{{ $avatar }}" id="avatar" name="avatar"/>
                                 </div>
                             </div>
 

@@ -11,6 +11,13 @@
                         <div class="form-horizontal">
 
                             <div class="form-group">
+                                <label for="photo" class="col-md-4 control-label">Фото</label>
+                                <div class="col-md-6">
+                                    <img src="/{{ $volunteer->photo }}" id="photo" name="avatar"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="surname" class="col-md-4 control-label">Фамилия</label>
                                 <div class="col-md-6">
                                     <p id="surname" class="form-control" name="surname"> {{ $volunteer->surname}}</p>

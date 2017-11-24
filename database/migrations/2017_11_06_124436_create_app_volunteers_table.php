@@ -26,6 +26,7 @@ class CreateAppVolunteersTable extends Migration
             $table->date('birthday');
             $table->string('city', 100);
             $table->string('phone', 64);
+            $table->string('photo');
             $table->json('social_links')->nullable();
             $table->string('status', 100);
             $table->text('experience')->nullable();

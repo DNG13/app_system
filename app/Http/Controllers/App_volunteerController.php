@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Profile;
-use Illuminate\Support\Facades\Auth;
 use App\Models\App_volunteer;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class App_volunteerController extends Controller
 {
@@ -49,6 +49,7 @@ class App_volunteerController extends Controller
     {
         //validate the data
         $this->validate($request,[
+            'photo'=>'required|image|mimes:jpeg,jpg,png|max:4096',
             'surname' => 'required|string|max:64',
             'first_name' => 'required|string|max:64',
             'nickname' => 'max:64',
@@ -68,6 +69,21 @@ class App_volunteerController extends Controller
             $volunteer->nickname = $request->get('surname') .' '. $request->get('first_name');
         }else {
             $volunteer->nickname = $request->get('nickname');
+        }
+        if($request['photo']) {
+            $imageFile = $request['photo'];
+            $extension = $imageFile->extension();
+            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
+            $imageFile->move(public_path('uploads/volunteers'), $imageName);
+            $imagePath = 'uploads/volunteers/'.$imageName;
+
+            // create Image from file
+            $img = Image::make($imagePath);
+            $img->resize(null, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+            $volunteer->photo= $imagePath;
         }
         $volunteer->birthday = $request->get('birthday');
         $volunteer->phone = $request->get('phone');
@@ -123,6 +139,7 @@ class App_volunteerController extends Controller
     {
         //validate the data
         $this->validate($request,[
+            'photo'=>'nullable|image|mimes:jpeg,jpg,png|max:4096',
             'skills' => 'required|string',
             'difficulties' => 'nullable|string',
             'experience' => 'nullable|string',
@@ -136,6 +153,21 @@ class App_volunteerController extends Controller
         ]);
         //store in database
         $volunteer = App_volunteer::where('id', $id)->first();
+        if($request['photo']) {
+            $imageFile = $request['photo'];
+            $extension = $imageFile->extension();
+            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
+            $imageFile->move(public_path('uploads/volunteers'), $imageName);
+            $imagePath = 'uploads/volunteers/'.$imageName;
+
+            // create Image from file
+            $img = Image::make($imagePath);
+            $img->resize(null, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+            $volunteer->photo= $imagePath;
+        }
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
         $volunteer->nickname = $request->get('nickname');

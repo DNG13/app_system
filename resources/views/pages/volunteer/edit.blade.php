@@ -8,9 +8,31 @@
                     <div class="panel-heading">Редактирование  заявки волонтер</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('volunteer.update', $volunteer->id) }}">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('volunteer.update', $volunteer->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
+
+                            <div class="form-group">
+                                <label for="photo" class="col-md-4 control-label">Фото</label>
+                                <div class="col-md-6">
+                                    <img src="/{{  $volunteer->photo }}" id="photo"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+
+                                <label for="image_uploads" class="col-md-4 control-label"></label>
+
+                                <div class="col-md-6">Выберите файл для изменения фото (PNG,JPG,JPEG)
+                                    <input name="photo" type="file"  accept=".jpeg, .jpg, .png" />
+
+                                    @if ($errors->has('photo'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
                                 <label for="surname" class="col-md-4 control-label">Фамилия</label>

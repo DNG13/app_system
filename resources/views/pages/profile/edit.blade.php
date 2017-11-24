@@ -22,7 +22,7 @@
 
                                 <label for="image_uploads" class="col-md-4 control-label"></label>
 
-                                <div class="col-md-6">Выберите файл для изменеия автара (PNG,JPG,JPEG)
+                                <div class="col-md-6">Выберите файл для изменения автара (PNG,JPG,JPEG)
                                     <input name="avatar" type="file"  accept=".jpeg, .jpg, .png" />
 
                                     @if ($errors->has('avatar'))

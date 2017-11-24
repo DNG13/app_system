@@ -8,8 +8,23 @@
                     <div class="panel-heading">Новая заявка волонтер</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('volunteer.index') }}">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('volunteer.index') }}">
                             {{ csrf_field() }}
+
+                            <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+
+                                <label for="image_uploads" class="col-md-4 control-label">Фото</label>
+
+                                <div class="col-md-6">Выберите файл для загрузки(PNG, JPG, JPEG)
+                                    <input name="photo" type="file"  accept=".jpeg, .jpg, .png" required/>
+
+                                    @if ($errors->has('photo'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
                                 <label for="surname" class="col-md-4 control-label">Фамилия</label>
