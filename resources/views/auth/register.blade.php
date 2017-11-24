@@ -8,8 +8,23 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+
+                            <label for="image_uploads" class="col-md-4 control-label">Аватар</label>
+
+                            <div class="col-md-6">Выберите файл для загрузки(PNG, JPG, JPEG)
+                                <input name="avatar" type="file"  accept=".jpeg, .jpg, .png" required/>
+
+                                @if ($errors->has('avatar'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail</label>

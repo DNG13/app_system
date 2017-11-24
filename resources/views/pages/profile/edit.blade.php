@@ -8,8 +8,30 @@
                     <div class="panel-heading">Редактирование профиля</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('profile') }}">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('profile') }}">
                             {{ csrf_field() }}
+
+                            <div class="form-group">
+                                <label for="avatar" class="col-md-4 control-label">Аватар</label>
+                                <div class="col-md-6">
+                                    <img src="/{{  $avatar }}" id="avatar"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+
+                                <label for="image_uploads" class="col-md-4 control-label"></label>
+
+                                <div class="col-md-6">Выберите файл для изменеия автара (PNG,JPG,JPEG)
+                                    <input name="avatar" type="file"  accept=".jpeg, .jpg, .png" />
+
+                                    @if ($errors->has('avatar'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('avatar') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
                                 <label for="surname" class="col-md-4 control-label">Фамилия</label>

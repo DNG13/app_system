@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Models\Profile;
+use App\Models\Avatar;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -49,6 +51,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'avatar'=>'required|image|mimes:jpeg,jpg,png|max:4096',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'surname' => 'required|string|max:64',
@@ -78,9 +81,32 @@ class RegisterController extends Controller
         $user->save();
 
         $user_id = $user->id;
+
+        $avatar = new Avatar();
+        $avatar->user_id = $user_id;
+        if($data['avatar']) {
+            $imageFile = $data['avatar'];
+            $extension = $imageFile->extension();
+            $imageName = $user_id . '_'.uniqid() .'.'. $extension;
+            $imageFile->move(public_path('uploads/avatars'), $imageName);
+            $imagePath = 'uploads/avatars/'.$imageName;
+
+            // create Image from file
+            $img = Image::make($imagePath);
+            $img->resize(null, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+            $avatar->link = $imagePath;
+            $avatar->name = $imageName;
+        }
+        $avatar->save();
+
+        $avatar_id = $avatar->id;
+
         $profile = new Profile();
         $profile->user_id = $user_id;
-        $profile->avatar_id= '1';
+        $profile->avatar_id= $avatar_id;
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
         $profile->middle_name = $data['middle_name'];

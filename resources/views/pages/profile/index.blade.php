@@ -10,10 +10,11 @@
                     <div class="panel-body">
                         <div class="form-horizontal">
 
+
                             <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">E-Mail</label>
+                                <label for="avatar" class="col-md-4 control-label">Аватар</label>
                                 <div class="col-md-6">
-                                    <p id="email" class="form-control" name="email" >{{Auth::user()->email}}}</p>
+                                    <img src="{{ $avatar }}" id="avatar" name="avatar"/>
                                 </div>
                             </div>
 
@@ -64,6 +65,13 @@
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
                                 <div class="col-md-6">
                                     <p id="phone" class="form-control" name="phone" > {{ $profile->phone }}</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="col-md-4 control-label">E-Mail</label>
+                                <div class="col-md-6">
+                                    <p id="email" class="form-control" name="email" >{{Auth::user()->email}}}</p>
                                 </div>
                             </div>
 

@@ -21,6 +21,7 @@ class CreateAvatarsTable extends Migration
                 ->onDelete('cascade');
             $table->text('link');
             $table->string('name', 255);
+            $table->timestamps();
         });
     }
 
