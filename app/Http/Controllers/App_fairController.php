@@ -7,6 +7,7 @@ use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\App_fair;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class App_fairController extends Controller
 {
@@ -56,6 +57,7 @@ class App_fairController extends Controller
     {
         //validate the data
         $this->validate($request,[
+            'logo'=>'required|image|mimes:jpeg,jpg,png|max:4096',
             'type_id' => 'required',
             'group_nick'=>'required|string|max:100',
             'contact_name' => 'required|string|max:255',
@@ -71,6 +73,21 @@ class App_fairController extends Controller
         $fair = new App_fair();
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
+        if($request['logo']) {
+            $imageFile = $request['logo'];
+            $extension = $imageFile->extension();
+            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
+            $imageFile->move(public_path('uploads/logos'), $imageName);
+            $imagePath = 'uploads/logos/'.$imageName;
+
+            // create Image from file
+            $img = Image::make($imagePath);
+            $img->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+            $fair->logo = $imagePath;
+        }
         $fair->contact_name = $request->get('contact_name');
         $fair->phone = $request->get('phone');
         $fair->members_count = $request->get('members_count');
@@ -140,6 +157,7 @@ class App_fairController extends Controller
     {
         //validate the data
         $this->validate($request,[
+            'logo'=>'required|image|mimes:jpeg,jpg,png|max:4096',
             'type_id' => 'required',
             'group_nick'=>'required|string|max:100',
             'contact_name' => 'required|string|max:255',
@@ -156,6 +174,21 @@ class App_fairController extends Controller
         $fair = App_fair::where('id', $id)->first();
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
+        if($request['logo']) {
+            $imageFile = $request['logo'];
+            $extension = $imageFile->extension();
+            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
+            $imageFile->move(public_path('uploads/logos'), $imageName);
+            $imagePath = 'uploads/logos/'.$imageName;
+
+            // create Image from file
+            $img = Image::make($imagePath);
+            $img->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+            $fair->logo = $imagePath;
+        }
         $fair->contact_name = $request->get('contact_name');
         $fair->phone = $request->get('phone');
         $fair->members_count = $request->get('members_count');

@@ -8,7 +8,7 @@
                     <div class="panel-heading">Новая заявка ярмарка</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('fair.index') }}">
+                        <form class="form-horizontal" method="POST"  enctype="multipart/form-data" action="{{ route('fair.index') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
@@ -38,6 +38,21 @@
                                     @if ($errors->has('group_nick'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('group_nick') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
+
+                                <label for="image_uploads" class="col-md-4 control-label">Логотип</label>
+
+                                <div class="col-md-6">Выберите файл для загрузки(PNG, JPG, JPEG)
+                                    <input name="logo" type="file"  accept=".jpeg, .jpg, .png" required/>
+
+                                    @if ($errors->has('logo'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('logo') }}</strong>
                                     </span>
                                     @endif
                                 </div>

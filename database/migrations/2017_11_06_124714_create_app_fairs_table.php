@@ -29,6 +29,7 @@ class CreateAppFairsTable extends Migration
             $table->integer('members_count');
             $table->string('phone', 64);
             $table->string('status', 100);
+            $table->text('logo');
             $table->text('social_link');
             $table->text('group_link');
             $table->json('equipment');

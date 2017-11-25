@@ -26,6 +26,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="logo" class="col-md-4 control-label">Логотип</label>
+                                <div class="col-md-6">
+                                    <img src="/{{  $fair->logo }}" id="logo" name="logo"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="contact_name" class="col-md-4 control-label">Контактное лицо</label>
                                 <div class="col-md-6">
                                     <p id="title" class="form-control" name="contact_name">{{ $fair->contact_name }}</p>
@@ -75,15 +82,6 @@
                             </div>
 
                             <div>
-                                @if(!$equipment->table==null)
-                                <div class="form-group">
-                                    <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
-                                    <div class="col-md-6">
-                                        <p id="equipment[table]" class="form-control" name="payment_type">{{ $equipment->table }}</p>
-                                    </div>
-                                </div>
-                                @endif
-
                                 @if(!$equipment->chair==null)
                                     <div class="form-group">
                                         <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
@@ -91,6 +89,15 @@
                                             <p id="equipment[chair]" class="form-control" name="payment_type">{{ $equipment->chair }}</p>
                                         </div>
                                     </div>
+                                    @endif
+
+                                    @if(!$equipment->table==null)
+                                        <div class="form-group">
+                                            <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
+                                            <div class="col-md-6">
+                                                <p id="equipment[table]" class="form-control" name="payment_type">{{ $equipment->table }}</p>
+                                            </div>
+                                        </div>
                                     @endif
 
                                     @if(!$equipment->electricity==null)

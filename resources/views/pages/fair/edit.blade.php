@@ -8,7 +8,7 @@
                     <div class="panel-heading">Редактирование  заявки ярмарка</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('fair.update', $fair->id) }}">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('fair.update', $fair->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
@@ -44,6 +44,27 @@
                                     @if ($errors->has('group_nick'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('group_nick') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="logo" class="col-md-4 control-label">Логотип</label>
+                                <div class="col-md-6">
+                                    <img src="/{{  $fair->logo }}" id="logo"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
+
+                                <label for="image_uploads" class="col-md-4 control-label"></label>
+
+                                <div class="col-md-6">Выберите файл для изменения логотипа (PNG,JPG,JPEG)
+                                    <input name="logo" type="file"  accept=".jpeg, .jpg, .png" />
+
+                                    @if ($errors->has('logo'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('logo') }}</strong>
                                     </span>
                                     @endif
                                 </div>

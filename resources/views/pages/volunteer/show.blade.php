@@ -13,7 +13,7 @@
                             <div class="form-group">
                                 <label for="photo" class="col-md-4 control-label">Фото</label>
                                 <div class="col-md-6">
-                                    <img src="/{{ $volunteer->photo }}" id="photo" name="avatar"/>
+                                    <img src="/{{ $volunteer->photo }}" id="photo" name="photo"/>
                                 </div>
                             </div>
 
