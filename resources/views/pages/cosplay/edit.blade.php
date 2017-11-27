@@ -127,31 +127,48 @@
                             </div>
 
                             <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dynamic_field">
+                            <div id="dynamic_field">
                                     @foreach($members as $member=>$attributes)
-                                        <tr><td>Участник: {{++$count}}</td><td></td>
+                                    <div class="members" id="row{{$count}}">
                                         @foreach($attributes as $attribute=>$data)
                                             @if($attribute=='surname')
-                                                <tr>
-                                                    <td><strong>Фамилия</strong></td>
-                                                    <td><input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/></td>
-                                                </tr>
+                                                    <div class="form-group">
+                                                        <label  class="col-md-4 control-label">Участник : Фамилия</label>
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/>
+                                                        </div>
+                                                    </div>
                                             @elseif($attribute=='first_name')
-                                                <tr>
-                                                    <td><strong>Имя</strong></td>
-                                                    <td><input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/></td>
-                                                </tr>
+                                                <div class="form-group">
+                                                    <label  class="col-md-4 control-label">Имя</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/>
+                                                    </div>
+                                                </div>
                                             @elseif($attribute=='birthday')
-                                                <tr>
-                                                    <td><strong>Дата рождения</strong></td>
-                                                    <td><input type="date" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/></td>
-                                                </tr>
+                                                <div class="form-group">
+                                                    <label  class="col-md-4 control-label">Дата рождения</label>
+                                                    <div class="col-md-6">
+                                                        <input type="date" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="col-md-4 control-label"></label>
+                                                    <div class="col-md-6">
+                                                        <button type="button" name="remove" id="btn_remove" class="btn btn-danger">Удалить участника</button>
+                                                    </div>
+                                                </div>
                                             @endif
                                         @endforeach
+                                    </div>
                                     @endforeach
-                                </table>
-                                <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"></label>
+                                <div class="col-md-6">
+                                    <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -165,29 +182,48 @@
 
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                var postURL = "<?php echo url('app_cosplay/create'); ?>";
-                                var i="<?php echo $app_cosplay->members_count?>";
-                                i++;
+                                var postURL = "<?php echo url('cosplay/create'); ?>";
+                                var i=1;
+
                                 $('#add').click(function(){
-                                    $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added">' +
-                                        '<tr><td>Участник: № ' +(i)+ '</td></tr><tr><td><strong>Фамилия</strong></td> ' +
-                                        '<td><input type="text" name="members['+i+'][surname]" class="form-control name_list" required/></td> </tr> ' +
-                                        '<tr> <td><strong>Имя</strong></td>' +
-                                        ' <td><input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/></td> </tr>' +
-                                        ' <tr> <td><strong>Дата рождения</strong></td>' +
-                                        '<td><input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/></td> </tr>' +
-                                        ' <tr>' +
-                                        '<td></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">Удалить участника</button></td></tr>');
+                                    $('#dynamic_field').append(
+                                        ' <div class="members" id="row'+i+'">' +
+                                            ' <div class="form-group">'+
+                                                '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
+                                                '<div class="col-md-6"> ' +
+                                                    '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
+                                                '</div>' +
+                                            '</div>'+
+                                            '<div class="form-group"> ' +
+                                                '<label class="col-md-4 control-label">Имя</label>' +
+                                                ' <div class="col-md-6"> ' +
+                                                    '<input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/> ' +
+                                                '</div>' +
+                                            ' </div>' +
+                                            ' <div class="form-group"> ' +
+                                                '<label  class="col-md-4 control-label">Дата рождения</label>' +
+                                                ' <div class="col-md-6"> ' +
+                                                    '<input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
+                                                ' </div>' +
+                                            ' </div>' +
+                                            ' <div class="form-group"> ' +
+                                                '<label  class="col-md-4 control-label"></label>' +
+                                                ' <div class="col-md-6"> ' +
+                                                    '<button type="button" name="remove" id="btn_remove" class="btn btn-danger">Удалить участника</button> ' +
+                                                '</div> ' +
+                                            '</div>' +
+                                        ' </div>'
+                                    );
                                     i++;
                                 });
 
-
-
-                                $(document).on('click', '.btn_remove', function(){
-                                    var j;
-                                    for (j = 0; j < 5; j++) {
-                                        $('tr:last').remove();
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                     }
+                                });
+                                $(document).on('click', '#btn_remove', function(){
+                                    $(this).closest('.members').remove();;
                                     i--;
                                 });
 

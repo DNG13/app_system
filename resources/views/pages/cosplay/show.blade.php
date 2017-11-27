@@ -71,30 +71,35 @@
                             </div>
 
                             <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dynamic_field">
+                            <div id="dynamic_field">
+                                <div class="members" id="row0">
                                     @foreach($members as $member=>$attributes)
-                                        <tr><td>Участник: {{++$count}}</td><td></td>
                                         @foreach($attributes as $attribute=>$data)
                                         @if($attribute=='surname')
-                                        <tr>
-                                            <td><strong>Фамилия</strong></td>
-                                            <td><p type="text" name="members[{{$count}}][surname]" class="form-control name_list" required>{{ $data }}</p></td>
-                                        </tr>
+                                                    <div class="form-group">
+                                                        <label  class="col-md-4 control-label">Участник {{++$count}}: Фамилия</label>
+                                                        <div class="col-md-6">
+                                                            <p  name="members[{{$count}}][surname]" class="form-control name_list" required>{{ $data }}</p>
+                                                        </div>
+                                                    </div>
                                         @elseif($attribute=='first_name')
-                                        <tr>
-                                            <td><strong>Имя</strong></td>
-                                            <td><p type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required>{{ $data }}</p></td>
-                                        </tr>
+                                                    <div class="form-group">
+                                                        <label  class="col-md-4 control-label">Имя</label>
+                                                        <div class="col-md-6">
+                                                            <p  name="members[{{$count}}][first_name]" class="form-control name_list" required>{{ $data }}</p>
+                                                        </div>
+                                                    </div>
                                         @elseif($attribute=='birthday')
-                                        <tr>
-                                            <td><strong>Дата рождения</strong></td>
-                                            <td><p type="date" name="members[{{$count}}][birthday]" class="form-control name_list" required>{{ date('j F, Y ', strtotime($data)) }}</p></td>
-                                        </tr>
+                                                    <div class="form-group">
+                                                        <label  class="col-md-4 control-label">Дата рождения</label>
+                                                        <div class="col-md-6">
+                                                            <p  name="members[{{$count}}][birthday]" class="form-control name_list" required>{{ date('j F, Y ', strtotime($data)) }}</p>
+                                                        </div>
+                                                    </div>
                                         @endif
                                         @endforeach
                                     @endforeach
-                                </table>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
