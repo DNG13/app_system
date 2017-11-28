@@ -33,8 +33,8 @@
                             <td>{{ $item->user_id }}</td>
                             <td>{{ $item->type_id }}</td>
                             <td>{{ $item->status }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($item->created_at )) }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($item->updated_at )) }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($item->created_at )) }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($item->updated_at )) }}</td>
                             <td>{{ $item->media_name }}</td>
                             <td>{{ $item->contact_name}}</td>
                             <td>{{ $item->phone}}</td>

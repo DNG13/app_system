@@ -101,6 +101,20 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <div style="text-align:center"><strong><h4>Коментарии заявки</h4></strong></div>
+                            {{--@if(!count($comments)==0)--}}
+                                {{--@foreach($comments as $comment)--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="comment" class="col-md-4 control-label">--}}
+                                            {{--{{ date('j/n/Y H:i', strtotime($comment->created_at ))}} {{ $comment->user_id }}</label>--}}
+                                        {{--<div class="col-md-6">--}}
+                                            {{--<textarea  id="comment" class="form-control" name="comment" required>{{ $comment->text }}</textarea>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--@endforeach--}}
+                            {{--@else--}}
+                                {{--<div style="text-align:center"><h4>Коментариев к заявке нет.</h4></div>--}}
+                            {{--@endif--}}
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <a href="/cosplay/{{ $app_cosplay->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>

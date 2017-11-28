@@ -34,8 +34,8 @@
                             <td>{{ $fair->user_id }}</td>
                             <td>{{ $fair->type_id }}</td>
                             <td>{{ $fair->status }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($fair->created_at )) }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($fair->updated_at )) }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($fair->created_at )) }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($fair->updated_at )) }}</td>
                             <td>{{ $fair->group_nick }}</td>
                             <td>{{ $fair->contact_name }}</td>
                             <td>{{ $fair->phone }}</td>

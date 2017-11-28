@@ -183,16 +183,13 @@
                                         ' </div>' +
                                         ' <div class="form-group"> ' +
                                             '<label  class="col-md-4 control-label">Дата рождения</label>' +
-                                            ' <div class="col-md-6"> ' +
+                                            ' <div class="col-md-3"> ' +
                                                 '<input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
+                                            '</div>'+
+                                            '<div class="col-md-1">'+
+                                                '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-trash" aria-hidden="true"></i> </a>' +
                                             ' </div>' +
                                         ' </div>' +
-                                        ' <div class="form-group"> ' +
-                                            '<label  class="col-md-4 control-label"></label>' +
-                                            ' <div class="col-md-6"> ' +
-                                                '<button type="button" name="remove" id="btn_remove" class="btn btn-danger">Удалить участника</button> ' +
-                                            '</div> ' +
-                                        '</div>' +
                                     ' </div>'
                                     );
                                     i++;

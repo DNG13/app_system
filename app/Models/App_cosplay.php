@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class App_cosplay extends Model
 {
     protected $fillable = [
-        'user_id', 'type_id', 'members', 'title', 'fandom','length', 'description',
+        'user_id', 'type_id', 'members', 'title', 'fandom','length', 'description', 'members_count',
          'city', 'status', 'comment', 'prev_part',
     ];
 }

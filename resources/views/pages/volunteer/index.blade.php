@@ -29,8 +29,8 @@
                             <td>{{ $volunteer->id }}</td>
                             <td>{{ $volunteer->user_id }}</td>
                             <td>{{ $volunteer->status }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($volunteer->created_at )) }}</td>
-                            <td>{{ date('j F, Y H:i', strtotime($volunteer->updated_at )) }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($volunteer->created_at )) }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($volunteer->updated_at )) }}</td>
                             <td>{{ $volunteer->skills }}</td>
                             <td>{{ $volunteer->experience}}</td>
                             <td>{{ $volunteer->difficulties }}</td>

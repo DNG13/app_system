@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\App_type;
+use App\Models\Comment;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\App_cosplay;
@@ -16,23 +17,37 @@ class App_cosplayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->get('search');
         $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
-        $app_cosplays = App_cosplay::orderby('id', 'desc')
-            ->where('user_id', Auth::user()->id)
-            ->paginate(5);
-        foreach($app_cosplays as &$app_cosplay){
-            if($app_cosplay->user_id == Auth::user()->id){
-                $app_cosplay->user_id = $user;
+        if (!empty($keyword)) {
+            $app_cosplays = App_cosplay::where('title', 'LIKE', "%$keyword%")
+                ->orWhere('fandom', 'LIKE', "%$keyword%")
+                ->orWhere('city', 'LIKE', "%$keyword%")
+                ->paginate(5);
+        } elseif(!$request->all()==null) {
+            foreach ($request->except('_token') as $key => $value) {
+                $app_cosplays = App_cosplay::orderby($key, $value)
+                    ->where('user_id', Auth::user()->id)
+                    ->paginate(5);
             }
-            foreach($app_types as $id =>$app_type) {
-                if ($app_cosplay->type_id == $id) {
-                    $app_cosplay->type_id = $app_type;
+        }else{
+            $app_cosplays = App_cosplay::orderby('id', 'desc')
+                ->where('user_id', Auth::user()->id)
+                ->paginate(5);
+        }
+            foreach ($app_cosplays as &$app_cosplay) {
+                if ($app_cosplay->user_id == Auth::user()->id) {
+                    $app_cosplay->user_id = $user;
+                }
+                foreach ($app_types as $id => $app_type) {
+                    if ($app_cosplay->type_id == $id) {
+                        $app_cosplay->type_id = $app_type;
+                    }
                 }
             }
-        }
         return view('pages.cosplay.index', compact('app_cosplays'));
     }
 
@@ -101,6 +116,7 @@ class App_cosplayController extends Controller
         $app_cosplay = App_cosplay::where('id', $id)->first();
         $app_cosplay->user_id = $user;
         $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        //$comments= Comment::where();
         foreach($app_types as $id =>$app_type) {
             if ($app_cosplay->type_id == $id) {
                 $app_cosplay->type_id = $app_type;
