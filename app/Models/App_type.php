@@ -8,7 +8,5 @@ class App_type extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['user_id',  'title', 'app_type',
-
-    ];
+    protected $fillable = ['user_id',  'title', 'app_type'];
 }
