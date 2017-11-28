@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'ProfileController@edit')->name('edit');
     Route::post('/profile', 'ProfileController@update');
-    Route::resource('cosplay', 'App_cosplayController');
+    Route::resource('cosplay', 'AppCosplayController');
     Route::resource('press', 'App_pressController');
     Route::resource('fair', 'App_fairController');
     Route::resource('volunteer', 'App_volunteerController');

@@ -14,137 +14,45 @@
                             </span>
                         </div>
                         </form>
-            @if(!count($app_cosplays)==0)
-                <h5>Page {{ $app_cosplays->currentPage() }} of {{ $app_cosplays->lastPage() }}</h5>
+            @if(!count($applications)==0)
+                <h5>Page {{ $applications->currentPage() }} of {{ $applications->lastPage() }}</h5>
                 <form action="/cosplay" method="GET">
                 <table class="table table-striped" border="1">
                     <thead>
                     <tr>
-                        <th>
-                            <p>Номер заявки</p>
-                            <div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'id' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'id' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div >
-                        </th>
-                        <th>
-                            <p>Податель заявки</p>
-                            <div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'user_id' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'user_id' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div >
-                        </th>
-                        <th>
-                            <p>Тип заявки</p>
-                            <div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'type_id' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'type_id' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div >
-                        </th>
-                        <th>
-                            <p>Статус</p>
-                            <div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'status' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'status' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div >
-                        </th>
-                        <th>
-                            <p>Дата подачи</p>
-                            <div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'created_at' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'created_at' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div >
-                        </th>
-                        <th><p>Дата обновления</p><div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'updated_at' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'updated_at' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div ></th>
-                        <th><p>Название постановки</p><div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'title' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'title' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div ></th>
-                        <th><p>Источник (фендом)</p><div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'fandom' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'fandom' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div ></th>
-                        <th><p>Продолжи- тельность</p><div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'length' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'length' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div ></th>
-                        <th><p>Город</p><div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'city' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'city' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div ></th>
-                        <th><p>Количество участников</p><div class="btn-group-vertical">
-                                <button type="hidden" class="btn btn-info" name = 'members_count' value = "asc">
-                                    <i class="fa fa-caret-square-o-up" aria-hidden="true"></i>
-                                </button>
-                                <button type="hidden"  class="btn btn-info" name = 'members_count' value ="desc">
-                                    <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </button>
-                            </div ></th>
+                        <th><p>Номер заявки <a href="{{ $sort['id']['link'] }}"><i class="fa {{ $sort['id']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Податель заявки <a href="{{ $sort['user_id']['link'] }}"><i class="fa {{ $sort['user_id']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Тип заявки <a href="{{ $sort['type_id']['link'] }}"><i class="fa {{ $sort['type_id']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Статус <a href="{{ $sort['status']['link'] }}"><i class="fa {{ $sort['status']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Дата подачи <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Дата обновления <a href="{{ $sort['updated_at']['link'] }}"><i class="fa {{ $sort['updated_at']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Название постановки <a href="{{ $sort['title']['link'] }}"><i class="fa {{ $sort['title']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Источник (фендом) <a href="{{ $sort['fandom']['link'] }}"><i class="fa {{ $sort['fandom']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Продолжи- тельность <a href="{{ $sort['length']['link'] }}"><i class="fa {{ $sort['length']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Город <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></p></th>
+                        <th><p>Количество участников <a href="{{ $sort['members_count']['link'] }}"><i class="fa {{ $sort['members_count']['icon'] }}" aria-hidden="true"></i></a></p></th>
                         <th>Действие</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($app_cosplays as $app_cosplay)
+                    @foreach($applications as $application)
                         <tr class="odd">
-                            <td>{{ $app_cosplay->id }}</td>
-                            <td>{{ $app_cosplay->user_id }}</td>
-                            <td>{{ $app_cosplay->type_id }}</td>
-                            <td>{{ $app_cosplay->status }}</td>
-                            <td>{{ date('j/n/Y H:i', strtotime($app_cosplay->created_at )) }}</td>
-                            <td>{{ date('j/n/Y H:i', strtotime($app_cosplay->updated_at )) }}</td>
-                            <td>{{ $app_cosplay->title }}</td>
-                            <td>{{ $app_cosplay->fandom }}</td>
-                            <td>{{ $app_cosplay->length }}</td>
-                            <td>{{ $app_cosplay->city }}</td>
-                            <td>{{ $app_cosplay->members_count }}</td>
+                            <td>{{ $application->id }}</td>
+                            <td>{{ $application->profile->nickname }}</td>
+                            <td>{{ $application->type->title }}</td>
+                            <td>{{ $application->status }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>
+                            <td>{{ date('j/n/Y H:i', strtotime($application->updated_at )) }}</td>
+                            <td>{{ $application->title }}</td>
+                            <td>{{ $application->fandom }}</td>
+                            <td>{{ $application->length }}</td>
+                            <td>{{ $application->city }}</td>
+                            <td>{{ $application->members_count }}</td>
                             <td><div class="btn-group">
-                                    <a class="btn btn-info btn-sm" href="/cosplay/{{$app_cosplay->id }}" title="Подробнее" >
+                                    <a class="btn btn-info btn-sm" href="/cosplay/{{$application->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/cosplay/{{$app_cosplay->id }}/edit" title="Редактировать">
+                                    <a class="btn btn-info btn-sm" href="/cosplay/{{$application->id }}/edit" title="Редактировать">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                 </div></td>
@@ -154,7 +62,7 @@
                 </table>
             </form>
             <div class="text-center">
-                {!! $app_cosplays->links() !!}
+                {!! $applications->links() !!}
             </div>
             @else
                 <h4>У вас нет заявок.</h4>

@@ -10,8 +10,23 @@ use App\Models\App_cosplay;
 use Illuminate\Http\Request;
 use Validator;
 
-class App_cosplayController extends Controller
+class AppCosplayController extends Controller
 {
+    private $sortFields = [
+        'id',
+        'user_id',
+        'type_id',
+        'status',
+        'created_at',
+        'updated_at',
+        'title',
+        'fandom',
+        'length',
+        'city',
+        'members_count',
+    ];
+
+
     /**
      * Display a listing of the resource.
      *
@@ -20,35 +35,22 @@ class App_cosplayController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
-        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+
+        $query = App_cosplay::select('*')
+            ->where('user_id', Auth::user()->id)
+            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
+
         if (!empty($keyword)) {
-            $app_cosplays = App_cosplay::where('title', 'LIKE', "%$keyword%")
-                ->orWhere('fandom', 'LIKE', "%$keyword%")
-                ->orWhere('city', 'LIKE', "%$keyword%")
-                ->paginate(5);
-        } elseif(!$request->all()==null) {
-            foreach ($request->except('_token') as $key => $value) {
-                $app_cosplays = App_cosplay::orderby($key, $value)
-                    ->where('user_id', Auth::user()->id)
-                    ->paginate(5);
-            }
-        }else{
-            $app_cosplays = App_cosplay::orderby('id', 'desc')
-                ->where('user_id', Auth::user()->id)
-                ->paginate(5);
+            $query->where(function($q) use ($keyword) {
+                $q->where('title', 'LIKE', "%$keyword%")
+                    ->orWhere('fandom', 'LIKE', "%$keyword%")
+                    ->orWhere('city', 'LIKE', "%$keyword%");
+            });
         }
-            foreach ($app_cosplays as &$app_cosplay) {
-                if ($app_cosplay->user_id == Auth::user()->id) {
-                    $app_cosplay->user_id = $user;
-                }
-                foreach ($app_types as $id => $app_type) {
-                    if ($app_cosplay->type_id == $id) {
-                        $app_cosplay->type_id = $app_type;
-                    }
-                }
-            }
-        return view('pages.cosplay.index', compact('app_cosplays'));
+
+        $applications = $query->paginate(5);
+
+        return view('pages.cosplay.index', ['applications' => $applications, 'sort' => $this->prepareSort($request)]);
     }
 
     /**
@@ -196,5 +198,41 @@ class App_cosplayController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function prepareSort(Request $request): array
+    {
+        //icons: fa-sort , fa-sort-amount-asc, fa-sort-amount-desc
+
+        $data = $request->all();
+
+        $orderBy = $data['order_by'] ?? 'id';
+        $order = $data['order'] ?? 'asc';
+
+        $sort = [];
+
+        foreach ($this->sortFields as $field) {
+
+            $link = $request->path() . '?order_by=' . $field;
+
+            if ($field == $orderBy) {
+                if ($order == 'asc') {
+                    $sort[$field]['link'] = $link . '&order=desc';
+                    $sort[$field]['icon'] = 'fa-sort-amount-asc';
+                } else {
+                    $sort[$field]['link'] = $link . '&order=asc';
+                    $sort[$field]['icon'] = 'fa-sort-amount-desc';
+                }
+            } else {
+                $sort[$field]['link'] = $link . '&order=asc';
+                $sort[$field]['icon'] = 'fa-sort';
+            }
+        }
+
+        return $sort;
     }
 }
