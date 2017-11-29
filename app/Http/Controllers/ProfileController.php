@@ -60,7 +60,6 @@ class ProfileController extends Controller
         }
         $avatar->save();
 
-//        $avatar_id = $avatar->id;
         $profile = Profile::where('user_id', Auth::user()->id)->first();
         $profile->avatar_id = '1';
         $profile->surname = $data['surname'];

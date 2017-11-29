@@ -6,9 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class App_press extends Model
 {
-    protected $fillable = ['user_id', 'type_id', 'phone', 'contact_name', 'social_links', 'group_link', 'members_count',
-        'equipment', 'city', 'camera', 'media_name', 'portfolio_link', 'status',
+    protected $fillable = [
+        'user_id',
+        'type_id',
+        'phone',
+        'contact_name',
+        'social_links',
+        'group_link',
+        'members_count',
+        'equipment',
+        'city',
+        'camera',
+        'media_name',
+        'portfolio_link',
+        'status',
 
     ];
+
     protected $table = 'app_press';
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'user_id');
+    }
+
+    public function type()
+    {
+        return $this->hasOne(App_type::class, 'id', 'type_id');
+    }
 }

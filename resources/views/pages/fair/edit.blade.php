@@ -17,11 +17,11 @@
 
                                 <div class="col-md-6">
                                     <select id="type_id" class="form-control" name="type_id">
-                                        @foreach($app_types as $key=>$app_type)
+                                        @foreach($types as $key=>$type)
                                             @if($key == $fair->type_id)
-                                                <option value="{{$key}}" selected>{{$app_type}}</option>
+                                                <option value="{{$key}}" selected>{{$type}}</option>
                                             @else
-                                                <option value="{{$key}}">{{$app_type}}</option>
+                                                <option value="{{$key}}">{{$type}}</option>
                                             @endif
                                         @endforeach
                                     </select>
@@ -115,7 +115,7 @@
                                 <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
 
                                 <div class="col-md-6">
-                                    <input id="social_link" type="url" class="form-control" name="social_link" value="{{  $fair->social_link }}"required autofocus>
+                                    <textarea id="social_link" type="url" class="form-control" name="social_link" required autofocus>{{  $fair->social_link }}</textarea>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">
@@ -129,7 +129,7 @@
                                 <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
 
                                 <div class="col-md-6">
-                                    <input id="group_link" type="url" class="form-control" name="group_link" value="{{  $fair->group_link }}" required autofocus>
+                                     <textarea  id="group_link" type="url" class="form-control" name="group_link" required autofocus>{{  $fair->group_link }}</textarea>
 
                                     @if ($errors->has('group_link'))
                                         <span class="help-block">

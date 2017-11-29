@@ -8,7 +8,7 @@
                     <div class="panel-heading">Редактирование  заявки косплей-шоу</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('cosplay.update', $app_cosplay->id) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('cosplay.update', $cosplay->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
@@ -17,11 +17,11 @@
 
                                 <div class="col-md-6">
                                     <select id="type_id" class="form-control" name="type_id">
-                                        @foreach($app_types as $key=>$app_type)
-                                            @if($key == $app_cosplay->type_id)
-                                                <option value="{{$key}}" selected>{{$app_type}}</option>
+                                        @foreach($types as $key=>$type)
+                                            @if($key == $cosplay->type_id)
+                                                <option value="{{$key}}" selected>{{$type}}</option>
                                             @else
-                                                <option value="{{$key}}">{{$app_type}}</option>
+                                                <option value="{{$key}}">{{$type}}</option>
                                             @endif
                                         @endforeach
                                     </select>
@@ -38,7 +38,7 @@
                                 <label for="title" class="col-md-4 control-label">Название постановки</label>
 
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ $app_cosplay->title }}" required autofocus>
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ $cosplay->title }}" required autofocus>
 
                                     @if ($errors->has('title'))
                                         <span class="help-block">
@@ -51,7 +51,7 @@
                             <div class="form-group{{ $errors->has('fandom') ? ' has-error' : '' }}">
                                 <label for="fandom" class="col-md-4 control-label">Источник (фендом)</label>
                                 <div class="col-md-6">
-                                    <input id="fandom" type="text" class="form-control" name="fandom" value="{{ $app_cosplay->fandom }}" required autofocus>
+                                    <input id="fandom" type="text" class="form-control" name="fandom" value="{{ $cosplay->fandom }}" required autofocus>
 
                                     @if ($errors->has('fandom'))
                                         <span class="help-block">
@@ -64,7 +64,7 @@
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
                                 <div class="col-md-6">
-                                    <input id="length" type="number" class="form-control" name="length" value="{{ $app_cosplay->length}}" required autofocus>
+                                    <input id="length" type="number" class="form-control" name="length" value="{{ $cosplay->length}}" required autofocus>
 
                                     @if ($errors->has('length'))
                                         <span class="help-block">
@@ -77,7 +77,7 @@
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-4 control-label">Город</label>
                                 <div class="col-md-6">
-                                    <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ $app_cosplay->city }}" required autofocus>
+                                    <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ $cosplay->city }}" required autofocus>
 
                                     @if ($errors->has('city'))
                                         <span class="help-block">
@@ -90,7 +90,7 @@
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <textarea id="prev_part"  class="form-control" name="prev_part" autofocus>{{ $app_cosplay->prev_part }}</textarea>
+                                    <textarea id="prev_part"  class="form-control" name="prev_part" autofocus>{{ $cosplay->prev_part }}</textarea>
 
                                     @if ($errors->has('prev_part'))
                                         <span class="help-block">
@@ -103,7 +103,7 @@
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                 <label for="comment" class="col-md-4 control-label">Коментарий</label>
                                 <div class="col-md-6">
-                                    <textarea  id="comment" rows="5" class="form-control" name="comment" autofocus>{{ $app_cosplay->comment }}</textarea>
+                                    <textarea  id="comment" rows="5" class="form-control" name="comment" autofocus>{{ $cosplay->comment }}</textarea>
 
                                     @if ($errors->has('comment'))
                                         <span class="help-block">
@@ -116,7 +116,7 @@
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" rows="5" class="form-control" name="description">{{ $app_cosplay->description }}</textarea>
+                                    <textarea  id="description" rows="5" class="form-control" name="description">{{ $cosplay->description }}</textarea>
 
                                     @if ($errors->has('description'))
                                         <span class="help-block">
@@ -153,7 +153,7 @@
                                                      </div>
                                                     <div class="col-md-1">
                                                         <a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника">
-                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            <i class="fa fa-user-times" aria-hidden="true"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -166,7 +166,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-6">
-                                    <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
+                                    <button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
                                 </div>
                             </div>
 
@@ -205,7 +205,7 @@
                                                     '<input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
                                                 '</div>'+
                                                 '<div class="col-md-1">'+
-                                                    '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-trash" aria-hidden="true"></i> </a>' +
+                                                    '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
                                                 ' </div>' +
                                             ' </div>' +
                                         ' </div>'

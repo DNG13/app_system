@@ -40,7 +40,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;@if (Auth::user())
-                            <li class={{ Request::is('main')? "active" : ''}}><a href="/">Главная</a></li>
+                            <li class={{ Request::is('main')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"> Главная</i></a></li>
                             <li ><a href="http://khanifest.com/?page_id=346 ">Читать правила</a></li>
                             <li class={{ Request::is('my_app')? "active" : ''}}><a href="/my_app">Мои заявки</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="/home"><strong>Подать заявку</strong></a></li>
@@ -62,11 +62,12 @@
                                 <ul class="dropdown-menu">
                                     <li>
 
-                                        <a href="{{ url('/profile') }}">Профиль</a>
+                                        <a href="{{ url('/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> Профиль</a>
 
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i>
                                             Выйти
                                         </a>
 

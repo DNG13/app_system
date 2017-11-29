@@ -4,35 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\App_type;
-use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\App_press;
 
-class App_pressController extends Controller
+class AppPressController extends Controller
 {
+    private $sortFields = [
+        'id',
+        'user_id',
+        'type_id',
+        'status',
+        'created_at',
+        'updated_at',
+        'members_count',
+        'phone',
+        'city',
+        'contact_name',
+        'media_name',
+    ];
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
-        $app_types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
-        $press = App_press::orderby('id', 'desc')
+        $keyword = $request->get('search');
+
+        $query = App_press::select('*')
             ->where('user_id', Auth::user()->id)
-            ->paginate(5);
-        foreach($press  as &$item){
-            if($item->user_id == Auth::user()->id){
-                $item->user_id = $user;
-            }
-            foreach($app_types as $id =>$app_type) {
-                if ($item->type_id == $id) {
-                    $item->type_id = $app_type;
-                }
-            }
+            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
+
+        if (!empty($keyword)) {
+            $query->where(function($q) use ($keyword) {
+                $q->where('contact_name', 'LIKE', "%$keyword%")
+                    ->orWhere('media_name', 'LIKE', "%$keyword%")
+                    ->orWhere('city', 'LIKE', "%$keyword%")
+                    ->orWhere('status', 'LIKE', "%$keyword%");
+            });
         }
-        return view('pages.press.index', compact('press'));
+
+        $applications = $query->paginate(5);
+
+        return view('pages.press.index', ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**
@@ -42,8 +56,8 @@ class App_pressController extends Controller
      */
     public function create()
     {
-        $app_types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
-        return view('pages.press.create', compact('app_types'));
+        $types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
+        return view('pages.press.create', compact('types'));
     }
 
     /**
@@ -93,15 +107,7 @@ class App_pressController extends Controller
      */
     public function show($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $press = App_press::where('id', $id)->first();
-        $press->user_id = $user;
-        $app_types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
-        foreach($app_types as $id =>$app_type) {
-            if ($press->type_id == $id) {
-                $press->type_id = $app_type;
-            }
-        }
         $social_links =  json_decode($press->social_links);
         return view('pages.press.show', compact('press', 'social_links'));
     }
@@ -114,12 +120,10 @@ class App_pressController extends Controller
      */
     public function edit($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $press = App_press::where('id', $id)->first();
-        $press->user_id = $user;
-        $app_types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
+        $types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
         $social_links =  json_decode($press->social_links);
-        return view('pages.press.edit', compact('app_types', 'press', 'social_links'));
+        return view('pages.press.edit', compact('types', 'press', 'social_links'));
     }
 
     /**

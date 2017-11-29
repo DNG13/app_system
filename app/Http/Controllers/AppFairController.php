@@ -3,37 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\App_type;
-use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\App_fair;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class App_fairController extends Controller
+class AppFairController extends Controller
 {
+    private $sortFields = [
+        'id',
+        'user_id',
+        'type_id',
+        'created_at',
+        'updated_at',
+        'members_count',
+        'phone',
+        'contact_name',
+        'group_nick',
+        'square',
+        'status'
+    ];
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
-        $app_types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
-        $fairs = App_fair::orderby('id', 'desc')
+        $keyword = $request->get('search');
+
+        $query = App_fair::select('*')
             ->where('user_id', Auth::user()->id)
-            ->paginate(5);
-        foreach($fairs as &$fair){
-            if($fair->user_id == Auth::user()->id){
-                $fair->user_id = $user;
-            }
-            foreach($app_types as $id =>$app_type) {
-                if ($fair->type_id == $id) {
-                    $fair->type_id = $app_type;
-                }
-            }
+            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
+
+        if (!empty($keyword)) {
+            $query->where(function($q) use ($keyword) {
+                $q->where('contact_name', 'LIKE', "%$keyword%")
+                    ->orWhere('group_nick', 'LIKE', "%$keyword%")
+                    ->orWhere('status', 'LIKE', "%$keyword%");
+            });
         }
-        return view('pages.fair.index', compact('fairs'));
+
+        $applications = $query->paginate(5);
+
+        return view('pages.fair.index', ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**
@@ -43,8 +56,8 @@ class App_fairController extends Controller
      */
     public function create()
     {
-        $app_types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
-        return view('pages.fair.create', compact('app_types'));
+        $types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
+        return view('pages.fair.create', compact('types'));
     }
 
     /**
@@ -117,15 +130,7 @@ class App_fairController extends Controller
      */
     public function show($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $fair = App_fair::where('id', $id)->first();
-        $fair->user_id = $user;
-        $app_types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
-        foreach($app_types as $id =>$app_type) {
-            if ($fair->type_id == $id) {
-                $fair->type_id = $app_type;
-            }
-        }
         $equipment =  json_decode($fair->equipment);
         return view('pages.fair.show', compact('fair', 'equipment'));
     }
@@ -138,12 +143,10 @@ class App_fairController extends Controller
      */
     public function edit($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $fair = App_fair::where('id', $id)->first();
-        $fair->user_id = $user;
-        $app_types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
+        $types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
         $equipment =  json_decode($fair->equipment);
-        return view('pages.fair.edit', compact('app_types', 'fair', 'equipment'));
+        return view('pages.fair.edit', compact('types', 'fair', 'equipment'));
     }
 
     /**
@@ -157,7 +160,7 @@ class App_fairController extends Controller
     {
         //validate the data
         $this->validate($request,[
-            'logo'=>'required|image|mimes:jpeg,jpg,png|max:4096',
+            'logo'=>'image|mimes:jpeg,jpg,png|max:4096',
             'type_id' => 'required',
             'group_nick'=>'required|string|max:100',
             'contact_name' => 'required|string|max:255',

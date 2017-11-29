@@ -16,8 +16,8 @@
 
                                 <div class="col-md-6">
                                     <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
-                                        @foreach($app_types as $key=>$app_type)
-                                            <option value="{{$key}}">{{$app_type}}</option>
+                                        @foreach($types as $key=>$type)
+                                            <option value="{{$key}}">{{$type}}</option>
                                         @endforeach
                                     </select>
 

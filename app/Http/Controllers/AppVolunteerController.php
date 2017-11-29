@@ -8,25 +8,47 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class App_volunteerController extends Controller
+class AppVolunteerController extends Controller
 {
+    private $sortFields = [
+        'id',
+        'user_id',
+        'type_id',
+        'status',
+        'created_at',
+        'updated_at',
+        'nickname',
+        'skills',
+        'birthday',
+        'city',
+        'phone',
+    ];
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
-        $volunteers = App_volunteer::orderby('id', 'desc')
+        $keyword = $request->get('search');
+
+        $query = App_volunteer::select('*')
             ->where('user_id', Auth::user()->id)
-            ->paginate(5);
-        foreach( $volunteers  as &$item){
-            if($item->user_id == Auth::user()->id){
-                $item->user_id = $user;
-            }
+            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
+
+        if (!empty($keyword)) {
+            $query->where(function($q) use ($keyword) {
+                $q->where('contact_name', 'LIKE', "%$keyword%")
+                    ->orWhere('skills', 'LIKE', "%$keyword%")
+                    ->orWhere('nickname', 'LIKE', "%$keyword%")
+                    ->orWhere('city', 'LIKE', "%$keyword%")
+                    ->orWhere('status', 'LIKE', "%$keyword%");
+            });
         }
-        return view('pages.volunteer.index', compact('volunteers'));
+
+        $applications = $query->paginate(5);
+
+        return view('pages.volunteer.index', ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**
@@ -106,9 +128,7 @@ class App_volunteerController extends Controller
      */
     public function show($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $volunteer= App_volunteer::where('id', $id)->first();
-        $volunteer->user_id = $user;
         $social_links =  json_decode( $volunteer->social_links);
         return view('pages.volunteer.show', compact('volunteer', 'social_links'));
     }
@@ -121,9 +141,7 @@ class App_volunteerController extends Controller
      */
     public function edit($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
         $volunteer = App_volunteer::where('id', $id)->first();
-        $volunteer->user_id = $user;
         $social_links =  json_decode($volunteer->social_links);
         return view('pages.volunteer.edit', compact('volunteer', 'social_links'));
     }

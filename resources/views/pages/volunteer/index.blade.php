@@ -3,52 +3,66 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Заявка косплей-шоу</strong></h4>
-                <a class="btn btn-info btn" href="/volunteer/create">Подать заявку</a>
-            <hr>
-            @if(!count($volunteers)==0)
-                <h5>Page {{ $volunteers->currentPage() }} of {{ $volunteers->lastPage() }}</h5>
-            <div>
-                <table class="table table-striped" border="1">
-                    <thead>
-                    <tr>
-                        <th>Номер заявки</th>
-                        <th>Податель заявки</th>
-                        <th>Статус</th>
-                        <th>Дата подачи</th>
-                        <th>Дата обновления</th>
-                        <th>Навыки</th>
-                        <th>Опыт работы волонтером</th>
-                        <th>Возможные затруднения</th>
-                        <th>Действие</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($volunteers as $volunteer)
-                        <tr class="odd">
-                            <td>{{ $volunteer->id }}</td>
-                            <td>{{ $volunteer->user_id }}</td>
-                            <td>{{ $volunteer->status }}</td>
-                            <td>{{ date('j/n/Y H:i', strtotime($volunteer->created_at )) }}</td>
-                            <td>{{ date('j/n/Y H:i', strtotime($volunteer->updated_at )) }}</td>
-                            <td>{{ $volunteer->skills }}</td>
-                            <td>{{ $volunteer->experience}}</td>
-                            <td>{{ $volunteer->difficulties }}</td>
-                            <td><div class="btn-group">
-                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$volunteer->id }}" title="Подробнее" >
+            <h4><strong>Заявка ярмарка <a class="btn btn-info btn pull-right"  href="/volunteer/create">Подать заявку</a></strong></h4>
+            <hr><form action="/volunteer" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search" >
+                    <span class="input-group-addon btn btn-info">
+                        <button type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            @if(!count($applications )==0)
+                <h5>Page {{ $applications->currentPage() }} of {{ $applications->lastPage() }}</h5>
+                <form action="/volunteer" method="GET">
+                    <table class="table table-striped" border="1">
+                        <thead>
+                        <tr>
+                            <th><p>Номер заявки</p> <a href="{{ $sort['id']['link'] }}"><i class="fa {{ $sort['id']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Податель заявки</p> <a href="{{ $sort['user_id']['link'] }}"><i class="fa {{ $sort['user_id']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Статус</p> <a href="{{ $sort['status']['link'] }}"><i class="fa {{ $sort['status']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Дата подачи</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Дата обновления</p> <a href="{{ $sort['updated_at']['link'] }}"><i class="fa {{ $sort['updated_at']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Контактное лицо</p> <a href="{{ $sort['nickname']['link'] }}"><i class="fa {{ $sort['nickname']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Телефон</p> <a href="{{ $sort['phone']['link'] }}"><i class="fa {{ $sort['phone']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Дата роджения</p> <a href="{{ $sort['birthday']['link'] }}"><i class="fa {{ $sort['birthday']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Навыки</p> <a href="{{ $sort['skills']['link'] }}"><i class="fa {{ $sort['skills']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th>Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($applications as $application)
+                            <tr class="odd">
+                                <td>{{ $application->id }}</td>
+                                <td>{{ $application->profile->nickname }}</td>
+                                <td>{{ $application->status }}</td>
+                                <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>
+                                <td>{{ date('j/n/Y H:i', strtotime($application->updated_at )) }}</td>
+                                <td>{{ $application->nickname }}</td>
+                                <td>{{ $application->phone }}</td>
+                                <td>{{ $application->city }}</td>
+                                <td>{{ $application->skills }}</td>
+                                <td>{{ date('j/n/Y H:i', strtotime($application->birthday )) }}</td>
+                                <td><div class="btn-group">
+                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$application->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$volunteer->id }}/edit" title="Редактировать">
+                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$application->id }}/edit" title="Редактировать">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
-                                </div></td>
-                        </tr>
-                    </tbody>
-                    @endforeach
-                </table>
+                                </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                     @endforeach
+                    </table>
+                </form>
             </div>
             <div class="text-center">
-                {!! $volunteers->links() !!}
+                {!! $applications->links() !!}
             </div>
             @else
                 <h4>У вас нет заявок.</h4>

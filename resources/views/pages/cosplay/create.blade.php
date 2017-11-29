@@ -16,8 +16,8 @@
 
                                 <div class="col-md-6">
                                     <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
-                                        @foreach($app_types as $key=>$app_type)
-                                            <option value="{{$key}}">{{$app_type}}</option>
+                                        @foreach($types as $key=>$type)
+                                            <option value="{{$key}}">{{$type}}</option>
                                         @endforeach
                                     </select>
 
@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-6">
-                                    <button type="button" name="add" id="add" class="btn btn-success">Добавить участника</button>
+                                    <button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
                                 </div>
                             </div>
 
@@ -187,7 +187,7 @@
                                                 '<input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
                                             '</div>'+
                                             '<div class="col-md-1">'+
-                                                '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-trash" aria-hidden="true"></i> </a>' +
+                                                '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
                                             ' </div>' +
                                         ' </div>' +
                                     ' </div>'

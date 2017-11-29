@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\App_type;
 use App\Models\Comment;
-use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\App_cosplay;
 use Illuminate\Http\Request;
-use Validator;
 
 class AppCosplayController extends Controller
 {
@@ -23,14 +21,12 @@ class AppCosplayController extends Controller
         'fandom',
         'length',
         'city',
-        'members_count',
+        'members_count'
     ];
 
-
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -44,13 +40,14 @@ class AppCosplayController extends Controller
             $query->where(function($q) use ($keyword) {
                 $q->where('title', 'LIKE', "%$keyword%")
                     ->orWhere('fandom', 'LIKE', "%$keyword%")
-                    ->orWhere('city', 'LIKE', "%$keyword%");
+                    ->orWhere('city', 'LIKE', "%$keyword%")
+                    ->orWhere('status', 'LIKE', "%$keyword%");
             });
         }
 
         $applications = $query->paginate(5);
 
-        return view('pages.cosplay.index', ['applications' => $applications, 'sort' => $this->prepareSort($request)]);
+        return view('pages.cosplay.index', ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**
@@ -60,8 +57,8 @@ class AppCosplayController extends Controller
      */
     public function create()
     {
-        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
-        return view('pages.cosplay.create', compact('app_types'));
+        $types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        return view('pages.cosplay.create', ['types' => $types]);
     }
 
     /**
@@ -84,25 +81,25 @@ class AppCosplayController extends Controller
             'comment' => '',
         ]);
         //store in database
-        $app_cosplays = new App_cosplay();
-        $app_cosplays->type_id = $request->get('type_id');
-        $app_cosplays->title = $request->get('title');
-        $app_cosplays->fandom = $request->get('fandom');
-        $app_cosplays->length = $request->get('length');
-        $app_cosplays->city = $request->get('city');
-        $app_cosplays->description = $request->get('description');
-        $app_cosplays->prev_part = $request->get('prev_part');
-        $app_cosplays->comment = $request->get('comment');
-        $app_cosplays->user_id = Auth::user()->id;
-        $app_cosplays->status = 'В обработке';
+        $cosplays = new App_cosplay();
+        $cosplays->type_id = $request->get('type_id');
+        $cosplays->title = $request->get('title');
+        $cosplays->fandom = $request->get('fandom');
+        $cosplays->length = $request->get('length');
+        $cosplays->city = $request->get('city');
+        $cosplays->description = $request->get('description');
+        $cosplays->prev_part = $request->get('prev_part');
+        $cosplays->comment = $request->get('comment');
+        $cosplays->user_id = Auth::user()->id;
+        $cosplays->status = 'В обработке';
 
         $members = [];
         foreach($request->input('members') as  $key => $value) {
             $members["member{$key}"] = $value;
         }
-        $app_cosplays->members_count = count($members);
-        $app_cosplays->members = json_encode($members);
-        $app_cosplays->save();
+        $cosplays->members_count = count($members);
+        $cosplays->members = json_encode($members);
+        $cosplays->save();
         return redirect('cosplay');
     }
 
@@ -114,19 +111,11 @@ class AppCosplayController extends Controller
      */
     public function show($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
-        $app_cosplay = App_cosplay::where('id', $id)->first();
-        $app_cosplay->user_id = $user;
-        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $cosplay = App_cosplay::where('id', $id)->first();
         //$comments= Comment::where();
-        foreach($app_types as $id =>$app_type) {
-            if ($app_cosplay->type_id == $id) {
-                $app_cosplay->type_id = $app_type;
-            }
-        }
-        $members =  json_decode($app_cosplay->members);
+        $members =  json_decode($cosplay->members);
         $count = 0;
-        return view('pages.cosplay.show', compact('app_cosplay', 'members', 'count'));
+        return view('pages.cosplay.show', compact('cosplay', 'members', 'count'));
     }
 
     /**
@@ -137,13 +126,11 @@ class AppCosplayController extends Controller
      */
     public function edit($id)
     {
-        $user = Profile::where('user_id', Auth::user()->id)->pluck('nickname')->first();
-        $app_cosplay = App_cosplay::where('id', $id)->first();
-        $app_cosplay->user_id = $user;
-        $app_types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
-        $members =  json_decode($app_cosplay->members);
+        $cosplay = App_cosplay::where('id', $id)->first();
+        $types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $members =  json_decode($cosplay->members);
         $count = 0;
-        return view('pages.cosplay.edit', compact('app_types', 'app_cosplay', 'members', 'count'));
+        return view('pages.cosplay.edit', compact('types', 'cosplay', 'members', 'count'));
     }
 
     /**
@@ -167,25 +154,25 @@ class AppCosplayController extends Controller
             'comment' => '',
         ]);
         //store in database
-        $app_cosplays = App_cosplay::where('id', $id)->first();
-        $app_cosplays->type_id = $request->get('type_id');
-        $app_cosplays->title = $request->get('title');
-        $app_cosplays->fandom = $request->get('fandom');
-        $app_cosplays->length = $request->get('length');
-        $app_cosplays->city = $request->get('city');
-        $app_cosplays->description = $request->get('description');
-        $app_cosplays->prev_part = $request->get('prev_part');
-        $app_cosplays->comment = $request->get('comment');
-        $app_cosplays->user_id = Auth::user()->id;
-        $app_cosplays->status = 'В обработке';
+        $cosplays = App_cosplay::where('id', $id)->first();
+        $cosplays->type_id = $request->get('type_id');
+        $cosplays->title = $request->get('title');
+        $cosplays->fandom = $request->get('fandom');
+        $cosplays->length = $request->get('length');
+        $cosplays->city = $request->get('city');
+        $cosplays->description = $request->get('description');
+        $cosplays->prev_part = $request->get('prev_part');
+        $cosplays->comment = $request->get('comment');
+        $cosplays->user_id = Auth::user()->id;
+        $cosplays->status = 'В обработке';
 
         $members = [];
         foreach($request->input('members') as  $key => $value) {
             $members["member{$key}"] = $value;
         }
-        $app_cosplays->members_count = count($members);
-        $app_cosplays->members = json_encode($members);
-        $app_cosplays->save();
+        $cosplays->members_count = count($members);
+        $cosplays->members = json_encode($members);
+        $cosplays->save();
         return redirect('cosplay');
     }
 
@@ -198,41 +185,5 @@ class AppCosplayController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    private function prepareSort(Request $request): array
-    {
-        //icons: fa-sort , fa-sort-amount-asc, fa-sort-amount-desc
-
-        $data = $request->all();
-
-        $orderBy = $data['order_by'] ?? 'id';
-        $order = $data['order'] ?? 'asc';
-
-        $sort = [];
-
-        foreach ($this->sortFields as $field) {
-
-            $link = $request->path() . '?order_by=' . $field;
-
-            if ($field == $orderBy) {
-                if ($order == 'asc') {
-                    $sort[$field]['link'] = $link . '&order=desc';
-                    $sort[$field]['icon'] = 'fa-sort-amount-asc';
-                } else {
-                    $sort[$field]['link'] = $link . '&order=asc';
-                    $sort[$field]['icon'] = 'fa-sort-amount-desc';
-                }
-            } else {
-                $sort[$field]['link'] = $link . '&order=asc';
-                $sort[$field]['icon'] = 'fa-sort';
-            }
-        }
-
-        return $sort;
     }
 }

@@ -13,7 +13,7 @@
                             <div class="form-group">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
                                 <div class="col-md-6">
-                                    <p id="type_id"  class="form-control" name="type_id">{{ $press->type_id }}</p>
+                                    <p id="type_id"  class="form-control" name="type_id">{{ $press->type->title }}</p>
                                 </div>
                             </div>
 
@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <label for="equipment" class="col-md-4 control-label">Доп. техника</label>
                                 <div class="col-md-6">
-                                    <textarea  id="equipment" rows="5" class="form-control" name="equipment">{{ $press->equipment }}</textarea>
+                                    <p id="equipment" rows="5" class="form-control" name="equipment">{{ $press->equipment }}</p>
                                 </div>
                             </div>
 

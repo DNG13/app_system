@@ -17,11 +17,11 @@
 
                                 <div class="col-md-6">
                                     <select id="type_id" class="form-control" name="type_id">
-                                        @foreach($app_types as $key=>$app_type)
+                                        @foreach($types as $key=>$type)
                                             @if($key == $press->type_id)
-                                                <option value="{{$key}}" selected>{{$app_type}}</option>
+                                                <option value="{{$key}}" selected>{{$type}}</option>
                                             @else
-                                                <option value="{{$key}}">{{$app_type}}</option>
+                                                <option value="{{$key}}">{{$type}}</option>
                                             @endif
                                         @endforeach
                                     </select>
