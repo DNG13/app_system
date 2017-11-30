@@ -47,7 +47,8 @@ class AppCosplayController extends Controller
 
         $applications = $query->paginate(5);
 
-        return view('pages.cosplay.index', ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
+        return view('pages.cosplay.index',
+            ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**
@@ -112,10 +113,12 @@ class AppCosplayController extends Controller
     public function show($id)
     {
         $cosplay = App_cosplay::where('id', $id)->first();
-        //$comments= Comment::where();
+        $comments = Comment::orderBy('created_at','desc')
+            ->where('app_kind', 'cosplay')
+            ->where('app_id', $cosplay->id)->get();
         $members =  json_decode($cosplay->members);
         $count = 0;
-        return view('pages.cosplay.show', compact('cosplay', 'members', 'count'));
+        return view('pages.cosplay.show', compact('cosplay', 'members', 'count', 'comments'));
     }
 
     /**

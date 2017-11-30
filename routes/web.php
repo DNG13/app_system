@@ -27,7 +27,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('press', 'AppPressController');
     Route::resource('fair', 'AppFairController');
     Route::resource('volunteer', 'AppVolunteerController');
-    Route::get('/my_app', function () {
-        return view('pages/my_app');
-    });
+    Route::post('/comment/create', 'CommentController@create')->name('comment/create');
+    Route::post('/comment/delete', 'CommentController@delete')->name('comment/delete');
 });

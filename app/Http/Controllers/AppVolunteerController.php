@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
 use App\Models\App_volunteer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
