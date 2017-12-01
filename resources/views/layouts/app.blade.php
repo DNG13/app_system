@@ -42,8 +42,37 @@
                         &nbsp;@if (Auth::user())
                             <li class={{ Request::is('main')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"> Главная</i></a></li>
                             <li ><a href="http://khanifest.com/?page_id=346 ">Читать правила</a></li>
-                            <li class={{ Request::is('my_app')? "active" : ''}}><a href="/my_app">Мои заявки</a></li>
-                            <li class={{ Request::is('home')? "active" : ''}}><a href="/home"><strong>Подать заявку</strong></a></li>
+                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    Мои заявки<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/cosplay">Косплей-шоу</a>
+                                        <a href="/fair">Ярмарка</a>
+                                        <a href="/press">Пресса </a>
+                                        <a href="/volunteer">волонтер</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    Подать заявку<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/cosplay/create">Косплей-шоу</a>
+                                        <a href="/fair/create">Ярмарка</a>
+                                        <a href="/press/create">Пресса </a>
+                                        <a href="/volunteer/create">волонтер</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    <i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/type/create">Добавить тип заявки</a>
+                                        <a href="/type">Все типы заявок</a>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                     </ul>
 

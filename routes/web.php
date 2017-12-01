@@ -10,9 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/my_app', function () {
-    return view('pages/my_app');
-});
 Route::get('/', function () {
     return view('pages/main');
 });
@@ -27,6 +24,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('press', 'AppPressController');
     Route::resource('fair', 'AppFairController');
     Route::resource('volunteer', 'AppVolunteerController');
+    Route::resource('type', 'AddTypeController', ['except' => ['show', 'destroy']]);
+    Route::get('/type/delete', 'AddTypeController@destroy');
     Route::post('/comment/create', 'CommentController@create');
     Route::get('/comment/delete', 'CommentController@delete');
+
 });

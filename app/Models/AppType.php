@@ -11,4 +11,9 @@ class AppType extends Model
     protected $table = 'app_types';
 
     protected $fillable = ['user_id',  'title', 'app_type'];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'user_id');
+    }
 }
