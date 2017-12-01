@@ -116,16 +116,15 @@
                                         <div class="col-md-6">
                                             <p  id="comment" class="form-control" name="comment" required>{{ $comment->text }}</p>
                                         </div>
-                                        <form method="POST" action="{{ route('comment/delete') }}">
-                                            {{ csrf_field() }}
-                                            <button type="submit"  class="btn btn-danger" title='Удалить'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                            <input type="hidden" name="id" value="{{ $comment->id }}">
-                                            <input type="hidden" name="app_id" value="{{$cosplay->id}}">
-                                        </form>
+                                        <a href="/comment/delete?id={{ $comment->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
+                                            <div class="btn btn-danger">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </div>
+                                        </a>
                                     </div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ route('comment/create') }}">
+                            <form method="POST" action="/comment/create">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="comment" class="col-md-4 control-label">

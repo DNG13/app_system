@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class App_file extends Model
+class UserRole extends Model
 {
-    //
+    protected $table = 'user_roles';
 }

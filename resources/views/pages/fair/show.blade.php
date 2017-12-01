@@ -8,8 +8,7 @@
                     <div class="panel-heading">Ярмарка. Подробнее</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('fair.index') }}">
-                            {{ csrf_field() }}
+                        <div class="form-horizontal">
 
                             <div class="form-group">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
@@ -130,7 +129,38 @@
                                     <a href="/fair/{{ $fair->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
                                 </div>
                             </div>
-                        </form>
+                            @if(!count($comments)==0)
+                                <div style="text-align:center"><strong><h4>Коментарии заявки</h4></strong></div>
+                                @foreach($comments as $comment)
+                                    <div class="form-group">
+                                        <label for="comment" class="col-md-4 control-label">
+                                            <strong>{{ $comment->profile->nickname }}</strong>
+                                            <small><p>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</p></small> </label>
+                                        <div class="col-md-6">
+                                            <p  id="comment" class="form-control" name="comment" required>{{ $comment->text }}</p>
+                                        </div>
+                                        <a href="/comment/delete?id={{ $comment->id }}&app_id={{$fair->id}}&app_kind=fair">
+                                            <div class="btn btn-danger">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            @endif
+                            <form method="POST" action="/comment/create">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label for="comment" class="col-md-4 control-label">
+                                        Добавить комментарий</label>
+                                    <div class="col-md-6">
+                                        <textarea  id="comment" class="form-control" name="text" required></textarea>
+                                    </div>
+                                    <input type="hidden" name="app_kind" value="fair">
+                                    <input type="hidden" name="app_id" value="{{$fair->id}}">
+                                    <button type="submit" class="btn btn-primary" title=" Отправить коментарий"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

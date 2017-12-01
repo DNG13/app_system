@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class App_volunteer extends Model
+class AppVolunteer extends Model
 {
     protected $fillable = [
         'user_id',
@@ -20,6 +20,8 @@ class App_volunteer extends Model
         'phone',
         'photo'
     ];
+
+    protected $table = 'app_volunteers';
 
     public function profile()
     {

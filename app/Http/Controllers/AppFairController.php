@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\App_type;
+use App\Models\AppType;
 use Illuminate\Support\Facades\Auth;
-use App\Models\App_fair;
+use App\Models\AppFair;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use App\Models\Comment;
 
 class AppFairController extends Controller
 {
@@ -32,7 +33,7 @@ class AppFairController extends Controller
     {
         $keyword = $request->get('search');
 
-        $query = App_fair::select('*')
+        $query = AppFair::select('*')
             ->where('user_id', Auth::user()->id)
             ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
 
@@ -56,7 +57,7 @@ class AppFairController extends Controller
      */
     public function create()
     {
-        $types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
+        $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         return view('pages.fair.create', compact('types'));
     }
 
@@ -83,7 +84,7 @@ class AppFairController extends Controller
             'description' => 'required|string',
         ]);
         //store in database
-        $fair = new App_fair();
+        $fair = new AppFair();
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
         if($request['logo']) {
@@ -130,9 +131,12 @@ class AppFairController extends Controller
      */
     public function show($id)
     {
-        $fair = App_fair::where('id', $id)->first();
+        $fair = AppFair::where('id', $id)->first();
         $equipment =  json_decode($fair->equipment);
-        return view('pages.fair.show', compact('fair', 'equipment'));
+        $comments = Comment::orderBy('created_at','desc')
+            ->where('app_kind', 'fair')
+            ->where('app_id', $fair->id)->get();
+        return view('pages.fair.show', compact('fair', 'equipment', 'comments'));
     }
 
     /**
@@ -143,8 +147,8 @@ class AppFairController extends Controller
      */
     public function edit($id)
     {
-        $fair = App_fair::where('id', $id)->first();
-        $types = App_type::where('app_type', 'fair')->get()->pluck('title', 'id');
+        $fair = AppFair::where('id', $id)->first();
+        $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $equipment =  json_decode($fair->equipment);
         return view('pages.fair.edit', compact('types', 'fair', 'equipment'));
     }
@@ -174,7 +178,7 @@ class AppFairController extends Controller
         ]);
 
         //store in database
-        $fair = App_fair::where('id', $id)->first();
+        $fair = AppFair::where('id', $id)->first();
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
         if($request['logo']) {

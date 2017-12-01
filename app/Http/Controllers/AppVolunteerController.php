@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\App_volunteer;
+use App\Models\AppVolunteer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use App\Models\Comment;
 
 class AppVolunteerController extends Controller
 {
@@ -31,7 +32,7 @@ class AppVolunteerController extends Controller
     {
         $keyword = $request->get('search');
 
-        $query = App_volunteer::select('*')
+        $query = AppVolunteer::select('*')
             ->where('user_id', Auth::user()->id)
             ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
 
@@ -83,7 +84,7 @@ class AppVolunteerController extends Controller
             'experience' => 'nullable|string',
         ]);
         //store in database
-        $volunteer = new App_volunteer();
+        $volunteer = new AppVolunteer();
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
         if($request->get('nickname')==null){
@@ -127,9 +128,12 @@ class AppVolunteerController extends Controller
      */
     public function show($id)
     {
-        $volunteer= App_volunteer::where('id', $id)->first();
+        $volunteer= AppVolunteer::where('id', $id)->first();
         $social_links =  json_decode( $volunteer->social_links);
-        return view('pages.volunteer.show', compact('volunteer', 'social_links'));
+        $comments = Comment::orderBy('created_at','desc')
+            ->where('app_kind', 'volunteer')
+            ->where('app_id', $volunteer->id)->get();
+        return view('pages.volunteer.show', compact('volunteer', 'social_links', 'comments'));
     }
 
     /**
@@ -140,7 +144,7 @@ class AppVolunteerController extends Controller
      */
     public function edit($id)
     {
-        $volunteer = App_volunteer::where('id', $id)->first();
+        $volunteer = AppVolunteer::where('id', $id)->first();
         $social_links =  json_decode($volunteer->social_links);
         return view('pages.volunteer.edit', compact('volunteer', 'social_links'));
     }
@@ -169,7 +173,7 @@ class AppVolunteerController extends Controller
             'social_links' => '',
         ]);
         //store in database
-        $volunteer = App_volunteer::where('id', $id)->first();
+        $volunteer = AppVolunteer::where('id', $id)->first();
         if($request['photo']) {
             $imageFile = $request['photo'];
             $extension = $imageFile->extension();

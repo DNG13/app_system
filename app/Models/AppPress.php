@@ -4,24 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class App_fair extends Model
+class AppPress extends Model
 {
     protected $fillable = [
         'user_id',
         'type_id',
-        'members_count',
-        'description',
         'phone',
         'contact_name',
-        'social_link',
+        'social_links',
         'group_link',
-        'group_nick',
+        'members_count',
         'equipment',
-        'square',
-        'payment_type',
+        'city',
+        'camera',
+        'media_name',
+        'portfolio_link',
         'status',
-        'logo',
+
     ];
+
+    protected $table = 'app_press';
 
     public function profile()
     {
@@ -30,6 +32,6 @@ class App_fair extends Model
 
     public function type()
     {
-        return $this->hasOne(App_type::class, 'id', 'type_id');
+        return $this->hasOne(AppType::class, 'id', 'type_id');
     }
 }

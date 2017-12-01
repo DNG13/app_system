@@ -4,22 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class App_cosplay extends Model
+class AppFair extends Model
 {
     protected $fillable = [
         'user_id',
         'type_id',
-        'members',
-        'title',
-        'fandom',
-        'length',
-        'description',
         'members_count',
-        'city',
+        'description',
+        'phone',
+        'contact_name',
+        'social_link',
+        'group_link',
+        'group_nick',
+        'equipment',
+        'square',
+        'payment_type',
         'status',
-        'comment',
-        'prev_part',
+        'logo',
     ];
+
+    protected $table = 'app_fairs';
 
     public function profile()
     {
@@ -28,6 +32,6 @@ class App_cosplay extends Model
 
     public function type()
     {
-        return $this->hasOne(App_type::class, 'id', 'type_id');
+        return $this->hasOne(AppType::class, 'id', 'type_id');
     }
 }

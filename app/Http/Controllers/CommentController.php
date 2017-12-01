@@ -24,7 +24,7 @@ class CommentController extends Controller
         $comment->app_kind = $request->get('app_kind');
         $comment->text = $request->get('text');
         $comment->save();
-        return redirect('cosplay/'. $comment->app_id);
+        return redirect($comment->app_kind .'/'. $comment->app_id);
     }
 
     /**
@@ -35,6 +35,6 @@ class CommentController extends Controller
     {
         $id = $request->get('id');
         Comment::where('id', $id)->delete();
-        return redirect('cosplay/'. $request->get('app_id'));
+        return redirect($request->get('app_kind'). '/' . $request->get('app_id'));
     }
 }

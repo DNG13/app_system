@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\App_type;
+use App\Models\AppType;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
-use App\Models\App_cosplay;
+use App\Models\AppCosplay;
 use Illuminate\Http\Request;
 
 class AppCosplayController extends Controller
@@ -32,7 +32,7 @@ class AppCosplayController extends Controller
     {
         $keyword = $request->get('search');
 
-        $query = App_cosplay::select('*')
+        $query = AppCosplay::select('*')
             ->where('user_id', Auth::user()->id)
             ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
 
@@ -58,7 +58,7 @@ class AppCosplayController extends Controller
      */
     public function create()
     {
-        $types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         return view('pages.cosplay.create', ['types' => $types]);
     }
 
@@ -82,7 +82,7 @@ class AppCosplayController extends Controller
             'comment' => '',
         ]);
         //store in database
-        $cosplays = new App_cosplay();
+        $cosplays = new AppCosplay();
         $cosplays->type_id = $request->get('type_id');
         $cosplays->title = $request->get('title');
         $cosplays->fandom = $request->get('fandom');
@@ -112,7 +112,7 @@ class AppCosplayController extends Controller
      */
     public function show($id)
     {
-        $cosplay = App_cosplay::where('id', $id)->first();
+        $cosplay = AppCosplay::where('id', $id)->first();
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();
@@ -129,8 +129,8 @@ class AppCosplayController extends Controller
      */
     public function edit($id)
     {
-        $cosplay = App_cosplay::where('id', $id)->first();
-        $types = App_type::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $cosplay = AppCosplay::where('id', $id)->first();
+        $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $members =  json_decode($cosplay->members);
         $count = 0;
         return view('pages.cosplay.edit', compact('types', 'cosplay', 'members', 'count'));
@@ -157,7 +157,7 @@ class AppCosplayController extends Controller
             'comment' => '',
         ]);
         //store in database
-        $cosplays = App_cosplay::where('id', $id)->first();
+        $cosplays = AppCosplay::where('id', $id)->first();
         $cosplays->type_id = $request->get('type_id');
         $cosplays->title = $request->get('title');
         $cosplays->fandom = $request->get('fandom');
@@ -189,4 +189,5 @@ class AppCosplayController extends Controller
     {
         //
     }
+
 }

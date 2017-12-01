@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\App_type;
+use App\Models\AppType;
 use Illuminate\Support\Facades\Auth;
-use App\Models\App_press;
+use App\Models\AppPress;
+use App\Models\Comment;
 
 class AppPressController extends Controller
 {
@@ -31,7 +32,7 @@ class AppPressController extends Controller
     {
         $keyword = $request->get('search');
 
-        $query = App_press::select('*')
+        $query = AppPress::select('*')
             ->where('user_id', Auth::user()->id)
             ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
 
@@ -56,7 +57,7 @@ class AppPressController extends Controller
      */
     public function create()
     {
-        $types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
+        $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
         return view('pages.press.create', compact('types'));
     }
 
@@ -82,7 +83,7 @@ class AppPressController extends Controller
             'social_links' => '',
         ]);
         //store in database
-        $press = new App_press();
+        $press = new AppPress();
         $press->type_id = $request->get('type_id');
         $press->media_name = $request->get('media_name');
         $press->contact_name = $request->get('contact_name');
@@ -107,9 +108,12 @@ class AppPressController extends Controller
      */
     public function show($id)
     {
-        $press = App_press::where('id', $id)->first();
+        $press = AppPress::where('id', $id)->first();
         $social_links =  json_decode($press->social_links);
-        return view('pages.press.show', compact('press', 'social_links'));
+        $comments = Comment::orderBy('created_at','desc')
+            ->where('app_kind', 'press')
+            ->where('app_id', $press->id)->get();
+        return view('pages.press.show', compact('press', 'social_links', 'comments'));
     }
 
     /**
@@ -120,8 +124,8 @@ class AppPressController extends Controller
      */
     public function edit($id)
     {
-        $press = App_press::where('id', $id)->first();
-        $types = App_type::where('app_type', 'press')->get()->pluck('title', 'id');
+        $press = AppPress::where('id', $id)->first();
+        $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
         $social_links =  json_decode($press->social_links);
         return view('pages.press.edit', compact('types', 'press', 'social_links'));
     }
@@ -149,7 +153,7 @@ class AppPressController extends Controller
             'social_links' => '',
         ]);
         //store in database
-        $press  = App_press::where('id', $id)->first();
+        $press  = AppPress::where('id', $id)->first();
         $press->type_id = $request->get('type_id');
         $press->media_name = $request->get('media_name');
         $press->contact_name = $request->get('contact_name');

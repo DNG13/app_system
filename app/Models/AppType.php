@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class App_type extends Model
+class AppType extends Model
 {
     public $timestamps = false;
+
+    protected $table = 'app_types';
 
     protected $fillable = ['user_id',  'title', 'app_type'];
 }
