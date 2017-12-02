@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <lable >По подателю</lable>
                                     @if(!empty($data['user_id']))
-                                        <input class="form-control  input-sm" type="text"  name="id" value="{{$data['user_id']}}">
+                                        <input class="form-control  input-sm" type="text"  name="user_id" value="{{$data['user_id']}}">
                                     @else
                                         <input class="form-control  input-sm "type="text"  name="user_id">
                                     @endif
