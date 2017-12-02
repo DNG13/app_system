@@ -31,6 +31,8 @@ class AppFairController extends Controller
      */
     public function index(Request $request)
     {
+        $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $data = $request->all();
         $keyword = $request->get('search');
 
         $query = AppFair::select('*')
@@ -40,14 +42,34 @@ class AppFairController extends Controller
         if (!empty($keyword)) {
             $query->where(function($q) use ($keyword) {
                 $q->where('contact_name', 'LIKE', "%$keyword%")
-                    ->orWhere('group_nick', 'LIKE', "%$keyword%")
-                    ->orWhere('status', 'LIKE', "%$keyword%");
+                    ->orWhere('group_nick', 'LIKE', "%$keyword%");
             });
+        }
+
+        if(!empty($request->get('type_id'))){
+            $query->where('type_id', $request->get('type_id'));
+        }
+
+        if(!empty($request->get('user_id'))){
+            $query->where('user_id', $request->get('user_id'));
+        }
+
+        if(!empty($request->get('status'))){
+            $query->where('status', $request->get('status'));
+        }
+
+        if(!empty($request->get('id'))){
+            $query->where('id', $request->get('id'));
         }
 
         $applications = $query->paginate(5);
 
-        return view('pages.fair.index', ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
+        return view('pages.fair.index', [
+            'applications' => $applications,
+            'sort' => $this->prepareSort($request, $this->sortFields),
+            'types' => $types,
+                'data' =>$data
+        ]);
     }
 
     /**

@@ -5,16 +5,16 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка косплей-шоу <a class="btn btn-info btn pull-right"  href="/cosplay/create">Подать заявку</a></strong></h4>
             <hr>
-                    <form action="/cosplay" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Поиск(Город, Фендом, Название постановки)" >
-                            <span class="input-group-addon btn btn-info">
-                                <button type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
+            <form action="/cosplay" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Поиск(Город, Фендом, Название постановки)" >
+                    <span class="input-group-addon btn btn-info">
+                        <button type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
             <hr>
             <div class="col-md-4">
                 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
@@ -79,9 +79,8 @@
                     </div>
                 </div>
             </div>
-                <hr>
+            <hr>
             @if(!count($applications)==0)
-                <form action="/cosplay" method="GET">
                 <table class="table table-striped" border="1">
                     <thead>
                     <tr>
@@ -127,7 +126,6 @@
                     </tbody>
                     @endforeach
                 </table>
-            </form>
             <div class="text-center">
                 {!! $applications->links() !!}
             </div>

@@ -22,8 +22,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/profile', 'ProfileController@update');
     Route::resource('cosplay', 'AppCosplayController', ['except' => ['index']]);
     Route::any('cosplay', 'AppCosplayController@index')->name('cosplay.index');
-    Route::resource('press', 'AppPressController');
-    Route::resource('fair', 'AppFairController');
+    Route::resource('press', 'AppPressController', ['except' => ['index']]);
+    Route::any('press', 'AppPressController@index')->name('press.index');
+    Route::resource('fair', 'AppFairController', ['except' => ['index']]);
+    Route::any('fair', 'AppFairController@index')->name('fair.index');
     Route::resource('volunteer', 'AppVolunteerController');
     Route::resource('type', 'AddTypeController', ['except' => ['show', 'destroy']]);
     Route::get('/type/delete', 'AddTypeController@destroy');
