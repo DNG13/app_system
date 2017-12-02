@@ -25,12 +25,22 @@ class Controller extends BaseController
 
         $orderBy = $data['order_by'] ?? 'id';
         $order = $data['order'] ?? 'asc';
-
+        if (!empty($data['order_by'])) {
+            unset($data['order_by']);
+        }
+        if (!empty($data['order'])) {
+            unset($data['order']);
+        }
+        if (!empty($data['_token'])) {
+            unset($data['_token']);
+        }
         $sort = [];
+
+        $queryString = http_build_query($data);
 
         foreach ($sortFields as $field) {
 
-            $link = $request->path() . '?order_by=' . $field;
+            $link = $request->path() . '?' . (!empty($queryString) ? $queryString . '&' : '') . 'order_by=' . $field;
 
             if ($field == $orderBy) {
                 if ($order == 'asc') {

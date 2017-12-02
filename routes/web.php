@@ -20,7 +20,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'ProfileController@edit')->name('edit');
     Route::post('/profile', 'ProfileController@update');
-    Route::resource('cosplay', 'AppCosplayController');
+    Route::resource('cosplay', 'AppCosplayController', ['except' => ['index']]);
+    Route::any('cosplay', 'AppCosplayController@index')->name('cosplay.index');
     Route::resource('press', 'AppPressController');
     Route::resource('fair', 'AppFairController');
     Route::resource('volunteer', 'AppVolunteerController');
