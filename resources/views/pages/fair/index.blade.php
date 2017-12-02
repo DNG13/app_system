@@ -23,7 +23,7 @@
                 <div id="filter-panel" class="collapse filter-panel">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form class="form-inline" action="/cosplay" method="POST">
+                            <form class="form-inline" action="/fair" method="POST">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <lable>По типу</lable>

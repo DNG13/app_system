@@ -14,8 +14,72 @@
                                 </span>
                 </div>
             </form>
+            <hr>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Фильтр
+                </button>
+                <div id="filter-panel" class="collapse filter-panel">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-inline" action="/press" method="POST">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <lable>По типу</lable>
+                                    <select  class="form-control  input-sm" id="type_id" name="type_id">
+                                        <option ></option>
+                                        @foreach($types as $key=>$type)
+                                            @if(!empty($data['type_id']) && $data['type_id'] == $key)
+                                                <option selected value="{{$key}}">{{$type}}</option>
+                                            @else
+                                                <option value="{{$key}}">{{$type}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <lable >По статусу</lable>
+                                    <select class="form-control input-sm" id="status" name="status">
+                                        @if(!empty($data['status']))
+                                            <option selected value="{{($data['status'])}}">{{($data['status'])}}</option>
+                                        @else
+                                            <option selected></option>
+                                        @endif
+                                        <option value="В обработке">В обработке</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пол-ля</option>
+                                        <option value="Принята">Принята</option>
+                                        <option value="Отклонена">Отклонена</option>
+                                        <option value="Внесены изменения">Внесены изменения</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <lable >По номеру</lable>
+                                    @if(!empty($data['id']))
+                                        <input class="form-control input-sm" type="text"  name="id" value="{{$data['id']}}">
+                                    @else
+                                        <input class="form-control input-sm" type="text"  name="id">
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <lable >По подателю</lable>
+                                    @if(!empty($data['user_id']))
+                                        <input class="form-control  input-sm" type="text"  name="user_id" value="{{$data['user_id']}}">
+                                    @else
+                                        <input class="form-control  input-sm "type="text"  name="user_id">
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-filter" aria-hidden="true"></i>Фильтрувати
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
             @if(!count($applications)==0)
-                <h5>Page {{ $applications->currentPage() }} of {{ $applications->lastPage() }}</h5>
                 <form action="/press" method="GET">
                 <table class="table table-striped" border="1">
                     <thead>
