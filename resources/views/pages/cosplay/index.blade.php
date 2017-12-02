@@ -17,6 +17,9 @@
             </form>
             <hr>
             <div class="col-md-4">
+                @foreach ($errors->all() as $error)
+                    <p class="alert alert-danger">{{ $error }}</p>
+                @endforeach
                 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
                     <i class="fa fa-filter" aria-hidden="true"></i> Фильтр
                 </button>
@@ -55,18 +58,18 @@
                                 </div>
                                 <div class="form-group">
                                     <lable >По номеру</lable>
-                                    @if(!empty($data['id']))
-                                        <input class="form-control input-sm" type="text"  name="id" value="{{$data['id']}}">
+                                    @if(!empty($data['ids']))
+                                        <input class="form-control input-sm" type="text"  name="ids" value="{{$data['ids']}}">
                                     @else
-                                        <input class="form-control input-sm" type="text"  name="id">
+                                        <input class="form-control input-sm" type="text"  name="ids">
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <lable >По подателю</lable>
-                                    @if(!empty($data['user_id']))
-                                        <input class="form-control  input-sm" type="text"  name="user_id" value="{{$data['user_id']}}">
+                                    @if(!empty($data['nickname']))
+                                        <input class="form-control  input-sm" type="text"  name="nickname" value="{{$data['nickname']}}">
                                         @else
-                                        <input class="form-control  input-sm "type="text"  name="user_id">
+                                        <input class="form-control  input-sm "type="text"  name="nickname">
                                     @endif
                                 </div>
                                 <div class="form-group">
