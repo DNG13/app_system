@@ -48,8 +48,8 @@
                                     <li>
                                         <a href="/cosplay">Косплей-шоу</a>
                                         <a href="/fair">Ярмарка</a>
-                                        <a href="/press">Пресса </a>
-                                        <a href="/volunteer">волонтер</a>
+                                        <a href="/press">Пресса</a>
+                                        <a href="/volunteer">Волонтер</a>
                                     </li>
                                 </ul>
                             </li>
@@ -59,8 +59,8 @@
                                     <li>
                                         <a href="/cosplay/create">Косплей-шоу</a>
                                         <a href="/fair/create">Ярмарка</a>
-                                        <a href="/press/create">Пресса </a>
-                                        <a href="/volunteer/create">волонтер</a>
+                                        <a href="/press/create">Пресса</a>
+                                        <a href="/volunteer/create">Волонтер</a>
                                     </li>
                                 </ul>
                             </li>

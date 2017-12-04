@@ -4,19 +4,18 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка ярмарка <a class="btn btn-info btn pull-right"  href="/volunteer/create">Подать заявку</a></strong></h4>
-            <hr><form action="/volunteer" method="GET">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search" >
-                    <span class="input-group-addon btn btn-info">
+            @if(!count($applications )==0)
+                <hr><form action="/volunteer" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search" >
+                        <span class="input-group-addon btn btn-info">
                         <button type="submit">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </span>
-                </div>
-            </form>
-            @if(!count($applications )==0)
+                    </div>
+                </form>
                 <h5>Page {{ $applications->currentPage() }} of {{ $applications->lastPage() }}</h5>
-                <form action="/volunteer" method="GET">
                     <table class="table table-striped" border="1">
                         <thead>
                         <tr>
@@ -59,7 +58,6 @@
                         </tbody>
                      @endforeach
                     </table>
-                </form>
             </div>
             <div class="text-center">
                 {!! $applications->links() !!}

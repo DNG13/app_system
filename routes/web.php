@@ -23,12 +23,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::post('/profile', 'ProfileController@update');
+    Route::match(['get', 'post'],'cosplay', 'AppCosplayController@index')->name('cosplay.index');
     Route::resource('cosplay', 'AppCosplayController', ['except' => ['index']]);
-    Route::any('cosplay', 'AppCosplayController@index')->name('cosplay.index');
+    Route::match(['get', 'post'],'press', 'AppPressController@index')->name('press.index');
     Route::resource('press', 'AppPressController', ['except' => ['index']]);
-    Route::any('press', 'AppPressController@index')->name('press.index');
+    Route::match(['get', 'post'],'fair', 'AppFairController@index')->name('fair.index');
     Route::resource('fair', 'AppFairController', ['except' => ['index']]);
-    Route::any('fair', 'AppFairController@index')->name('fair.index');
     Route::resource('volunteer', 'AppVolunteerController');
     Route::resource('type', 'AddTypeController', ['except' => ['show', 'destroy']]);
     Route::get('/type/delete', 'AddTypeController@destroy');
