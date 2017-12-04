@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppCosplay\IndexRequest;
 use App\Models\AppType;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
@@ -50,16 +51,22 @@ class AppCosplayController extends Controller
             $query->where('type_id', $request->get('type_id'));
         }
 
-        if(!empty($request->get('user_id'))){
-            $query->where('user_id', $request->get('user_id'));
+        if(!empty($request->get('nickname'))){
+            $nickname = $request->get('nickname');
+            $query->with('Profile')->whereHas('Profile', function($q) use ($nickname){
+                $q->where('nickname', 'LIKE', '%' . $nickname . '%');
+            });
         }
 
-        if(!empty($request->get('status'))){
+        if(!empty($request->get('status'))) {
             $query->where('status', $request->get('status'));
         }
 
-        if(!empty($request->get('id'))){
-            $query->where('id', $request->get('id'));
+        if(!empty($request->get('ids'))){
+            $ids = array_map(function ($value) {
+                return (int)trim($value);
+            }, explode(',', $request->get('ids')));
+            $query->whereIn('id', $ids);
         }
 
         $applications = $query->paginate(5);

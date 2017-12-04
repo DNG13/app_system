@@ -5,82 +5,85 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка косплей-шоу <a class="btn btn-info btn pull-right"  href="/cosplay/create">Подать заявку</a></strong></h4>
             <hr>
-            @if(!count($applications)==0)
-                <form action="/cosplay" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Поиск(Город, Фендом, Название постановки)" >
-                        <span class="input-group-addon btn btn-info">
+            <form action="/cosplay" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Поиск(Город, Фендом, Название постановки)" >
+                    <span class="input-group-addon btn btn-info">
                         <button type="submit">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </span>
-                    </div>
-                </form>
-                <hr>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
-                        <i class="fa fa-filter" aria-hidden="true"></i> Фильтр
-                    </button>
-                    <div id="filter-panel" class="collapse filter-panel">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <form class="form-inline" action="/cosplay" method="POST">
-                                    {{csrf_field()}}
-                                    <div class="form-group">
-                                        <lable>По типу</lable>
-                                        <select  class="form-control  input-sm" id="type_id" name="type_id">
-                                            <option ></option>
-                                            @foreach($types as $key=>$type)
+                </div>
+            </form>
+            <hr>
+            <div class="col-md-4">
+                @foreach ($errors->all() as $error)
+                    <p class="alert alert-danger">{{ $error }}</p>
+                @endforeach
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Фильтр
+                </button>
+                <div id="filter-panel" class="collapse filter-panel">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form class="form-inline" action="/cosplay" method="POST">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <lable>По типу</lable>
+                                    <select  class="form-control  input-sm" id="type_id" name="type_id">
+                                        <option ></option>
+                                        @foreach($types as $key=>$type)
                                                 @if(!empty($data['type_id']) && $data['type_id'] == $key)
                                                     <option selected value="{{$key}}">{{$type}}</option>
                                                 @else
                                                     <option value="{{$key}}">{{$type}}</option>
                                                 @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <lable >По статусу</lable>
-                                        <select class="form-control input-sm" id="status" name="status">
-                                            @if(!empty($data['status']))
-                                                <option selected value="{{($data['status'])}}">{{($data['status'])}}</option>
-                                            @else
-                                                <option selected></option>
-                                            @endif
-                                            <option value="В обработке">В обработке</option>
-                                            <option value="Ожидает ответа пользователя">Ожидает ответа пол-ля</option>
-                                            <option value="Принята">Принята</option>
-                                            <option value="Отклонена">Отклонена</option>
-                                            <option value="Внесены изменения">Внесены изменения</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <lable >По номеру</lable>
-                                        @if(!empty($data['id']))
-                                            <input class="form-control input-sm" type="text"  name="id" value="{{$data['id']}}">
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <lable >По статусу</lable>
+                                    <select class="form-control input-sm" id="status" name="status">
+                                        @if(!empty($data['status']))
+                                            <option selected value="{{($data['status'])}}">{{($data['status'])}}</option>
                                         @else
-                                            <input class="form-control input-sm" type="text"  name="id">
+                                            <option selected></option>
                                         @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <lable >По подателю</lable>
-                                        @if(!empty($data['user_id']))
-                                            <input class="form-control  input-sm" type="text"  name="user_id" value="{{$data['user_id']}}">
+                                        <option value="В обработке">В обработке</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пол-ля</option>
+                                        <option value="Принята">Принята</option>
+                                        <option value="Отклонена">Отклонена</option>
+                                        <option value="Внесены изменения">Внесены изменения</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <lable >По номеру</lable>
+                                    @if(!empty($data['ids']))
+                                        <input class="form-control input-sm" type="text"  name="ids" value="{{$data['ids']}}">
+                                    @else
+                                        <input class="form-control input-sm" type="text"  name="ids">
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <lable >По подателю</lable>
+                                    @if(!empty($data['nickname']))
+                                        <input class="form-control  input-sm" type="text"  name="nickname" value="{{$data['nickname']}}">
                                         @else
-                                            <input class="form-control  input-sm "type="text"  name="user_id">
-                                        @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="fa fa-filter" aria-hidden="true"></i>Фильтрувати
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                                        <input class="form-control  input-sm "type="text"  name="nickname">
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-filter" aria-hidden="true"></i>Фильтрувати
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <hr>
+            </div>
+            <hr>
+            @if(!count($applications)==0)
                 <table class="table table-striped" border="1">
                     <thead>
                     <tr>
