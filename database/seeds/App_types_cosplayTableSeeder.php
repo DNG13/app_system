@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\App_type;
+use App\Models\AppType;
 
 class App_types_cosplayTableSeeder extends Seeder
 {
@@ -24,7 +24,7 @@ class App_types_cosplayTableSeeder extends Seeder
             'Внеконкурсa'
         ];
         for ($i=0, $count=count($titles); $i < $count; $i++) {
-            App_type::create([
+            AppType::create([
                 'app_type' => 'cosplay',
                 'title' => $titles[$i],
                 'created_at' => Carbon\Carbon::now(),

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use App\Models\Profile;
 use App\Models\Avatar;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Intervention\Image\Facades\Image;
+//use Faker\Provider\File;
+use File;
 
 class RegisterController extends Controller
 {
@@ -63,6 +67,7 @@ class RegisterController extends Controller
             'city' => 'required|string|max:100',
             'social_links' => '',
             'info' => '',
+            'fb'=>'',
         ]);
     }
 
@@ -77,7 +82,7 @@ class RegisterController extends Controller
         $user = new User();
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
-        $user->fb = null;
+        $user->fb = $data['fb']?? null;
         $user->save();
 
         $user_id = $user->id;
@@ -122,5 +127,71 @@ class RegisterController extends Controller
         $profile->save();
 
         return $user;
+    }
+
+    /**
+     * Redirect the user to the Facebook authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        try {
+            $socialUser = Socialite::driver('facebook')->user();
+        }catch (\Exception $exception){
+            return redirect('/');
+        };
+
+        $user = User::where('fb', $socialUser->getId())->first();
+        if(!$user){
+            $user = new User();
+            $user->email = $socialUser->getEmail();
+            $user->fb = $socialUser->getId();
+            $user->password = bcrypt($user->fb);
+            $user->save();
+
+            $user_id = $user->id;
+
+            $avatar = new Avatar();
+            $avatar->user_id = $user_id;
+            $socialUser->getAvatar();
+            $fileContents = file_get_contents($socialUser->getAvatar());
+            $imageName =  $user_id . '_'.uniqid() .'.' . ".jpg";
+            File::put(public_path() . '/uploads/avatars/' .  $imageName, $fileContents);
+            $avatar->link = 'uploads/avatars/'.$imageName;
+            $avatar->name = $imageName;
+            $avatar->save();
+
+            $avatar_id = $avatar->id;
+
+            $profile = new Profile();
+            $profile->user_id = $user_id;
+            $profile->avatar_id = $avatar_id;
+            $profile->nickname = $socialUser->getName();
+            $fbName = explode(" ", $socialUser->getName());
+            $profile->surname =  $fbName [1];
+            $profile->first_name = $fbName [0];
+            $social_links= ['vk' => null, 'tg' => null, 'fb' => null, 'sk'=>null];
+            $profile->social_links = json_encode($social_links);
+            $profile->save();
+
+            auth()->login($user);
+            $avatar = Avatar::where('user_id', Auth::user()->id)->pluck('link')->first();
+            $profile = Profile::where('user_id', Auth::user()->id)->first();
+            $social_links =  json_decode($profile->social_links);
+            return view('pages.profile.edit', compact('profile', 'social_links', 'avatar'));
+        }
+        auth()->login($user);
+        return redirect('/home');
     }
 }

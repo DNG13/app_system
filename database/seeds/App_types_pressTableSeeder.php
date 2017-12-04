@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\App_type;
+use App\Models\AppType;
 
 class App_types_pressTableSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class App_types_pressTableSeeder extends Seeder
             'Прочее'
         ];
         for ($i=0, $count=count($titles); $i < $count; $i++) {
-            App_type::create([
+            AppType::create([
                 'app_type' => 'press',
                 'title' => $titles[$i],
                 'created_at' => Carbon\Carbon::now(),

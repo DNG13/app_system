@@ -21,11 +21,11 @@ class CreateProfilesTable extends Migration
             $table->integer('avatar_id')->nullable();
             $table->string('first_name', 64);
             $table->string('surname', 64);
-            $table->string('middle_name', 64);
+            $table->string('middle_name', 64)->nullable();
             $table->string('nickname', 100);
-            $table->date('birthday');
-            $table->string('city', 100);
-            $table->string('phone', 64);
+            $table->date('birthday')->nullable();
+            $table->string('city', 100)->nullable();
+            $table->string('phone', 64)->nullable();
             $table->json('social_links')->nullable();
             $table->text('info')->nullable();
             $table->timestamps();
