@@ -3,11 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Заявка пресса <a class="btn btn-info btn pull-right"  href="/press/create">Подать заявку</a></strong></h4>
+            <h4><strong>Заявка пресса <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подать заявку</a></strong></h4>
             @if(!count($applications)==0)
-                <hr><form action="/press" method="GET">
+                <hr><form action="{{url('/press')}}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search" >
+                        <input type="text" class="form-control" name="search" placeholder="Поиск(Контактное лицо, город, Название СМИ)" >
                         <span class="input-group-addon btn btn-info">
                             <button type="submit">
                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -17,13 +17,16 @@
                 </form>
                 <hr>
                 <div class="col-md-4">
+                    @foreach ($errors->all() as $error)
+                        <p class="alert alert-danger">{{ $error }}</p>
+                    @endforeach
                     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
                         <i class="fa fa-filter" aria-hidden="true"></i> Фильтр
                     </button>
                     <div id="filter-panel" class="collapse filter-panel">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <form class="form-inline" action="/press" method="POST">
+                                <form class="form-inline" action="{{url('/press')}}" method="POST">
                                     {{csrf_field()}}
                                     <div class="form-group">
                                         <lable>По типу</lable>
@@ -55,18 +58,18 @@
                                     </div>
                                     <div class="form-group">
                                         <lable >По номеру</lable>
-                                        @if(!empty($data['id']))
-                                            <input class="form-control input-sm" type="text"  name="id" value="{{$data['id']}}">
+                                        @if(!empty($data['ids']))
+                                            <input class="form-control input-sm" type="text"  name="ids" value="{{$data['ids']}}">
                                         @else
-                                            <input class="form-control input-sm" type="text"  name="id">
+                                            <input class="form-control input-sm" type="text"  name="ids">
                                         @endif
                                     </div>
                                     <div class="form-group">
                                         <lable >По подателю</lable>
-                                        @if(!empty($data['user_id']))
-                                            <input class="form-control  input-sm" type="text"  name="user_id" value="{{$data['user_id']}}">
+                                        @if(!empty($data['nickname']))
+                                            <input class="form-control  input-sm" type="text"  name="nickname" value="{{$data['nickname']}}">
                                         @else
-                                            <input class="form-control  input-sm "type="text"  name="user_id">
+                                            <input class="form-control  input-sm "type="text"  name="nickname">
                                         @endif
                                     </div>
                                     <div class="form-group">

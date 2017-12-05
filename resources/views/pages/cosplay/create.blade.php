@@ -8,14 +8,14 @@
                     <div class="panel-heading">Новая заявка косплей-шоу</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('cosplay.index') }}">
+                        <form class="form-horizontal" method="POST" action="{{ url('/cosplay/store')}}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
                                 <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
+                                    <select id="type_id" class="form-control" name="type_id">
                                         @foreach($types as $key=>$type)
                                             <option value="{{$key}}">{{$type}}</option>
                                         @endforeach
@@ -59,7 +59,7 @@
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
                                 <div class="col-md-6">
-                                    <input id="length" type="number" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
+                                    <input id="length" type="number" min="1" step="0.5" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
 
                                     @if ($errors->has('length'))
                                         <span class="help-block">
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
 
-                            <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
+                            <div style="text-align:center"><strong>Участники</strong></div>
                             <div id="dynamic_field">
                                 <div class="members" id="row0">
                                     <div class="form-group">
@@ -139,7 +139,7 @@
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Дата рождения</label>
                                         <div class="col-md-6">
-                                            <input type="date" name="members[0][birthday]" class="form-control name_list" required/>
+                                            <input type="date" min='1899-01-01' max="{{date("Y-d-m")}}" name="members[0][birthday]" class="form-control name_list" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -184,7 +184,7 @@
                                         ' <div class="form-group"> ' +
                                             '<label  class="col-md-4 control-label">Дата рождения</label>' +
                                             ' <div class="col-md-3"> ' +
-                                                '<input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
+                                                '<input type="date"  min="1899-01-01" max="Date()" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
                                             '</div>'+
                                             '<div class="col-md-1">'+
                                                 '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
@@ -201,7 +201,7 @@
                                     }
                                 });
                                 $(document).on('click', '#btn_remove', function(){
-                                    $(this).closest('.members').remove();;
+                                    $(this).closest('.members').remove();
                                     i--;
                                 });
 
@@ -210,7 +210,7 @@
                                         url:postURL,
                                         method:"POST",
                                         data:$('#add_name').serialize(),
-                                        type:'json',
+                                        type:'json'
                                     });
                                 });
                             });

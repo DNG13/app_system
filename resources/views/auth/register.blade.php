@@ -100,7 +100,7 @@
                             <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
 
                             <div class="col-md-6">
-                                <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
+                                <input id="birthday" type="date" min='1899-01-01' max="{{date("Y-m-d")}}" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
 
                                 @if ($errors->has('birthday'))
                                     <span class="help-block">
@@ -220,7 +220,7 @@
                             <label for="info" class="col-md-4 control-label">Дополнительные данные</label>
 
                             <div class="col-md-6">
-                                <textarea id="info" rows="5" class="form-control" name="info" value="{{ old('info') }}"  autofocus></textarea>
+                                <textarea id="info" rows="5" class="form-control" name="info" autofocus>{{ old('info') }}</textarea>
 
                                 @if ($errors->has('info'))
                                     <span class="help-block">

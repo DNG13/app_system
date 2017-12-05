@@ -30,7 +30,7 @@ class AppPressController extends Controller
      */
     public function index(Request $request)
     {
-        $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
         $data = $request->all();
         $keyword = $request->get('search');
 
@@ -42,24 +42,29 @@ class AppPressController extends Controller
             $query->where(function($q) use ($keyword) {
                 $q->where('contact_name', 'LIKE', "%$keyword%")
                     ->orWhere('media_name', 'LIKE', "%$keyword%")
-                    ->orWhere('city', 'LIKE', "%$keyword%")
-                    ->orWhere('status', 'LIKE', "%$keyword%");
+                    ->orWhere('city', 'LIKE', "%$keyword%");
             });
         }
-        if(!empty($request->get('type_id'))){
+        if(!empty($request->get('type_id'))) {
             $query->where('type_id', $request->get('type_id'));
         }
 
-        if(!empty($request->get('user_id'))){
-            $query->where('user_id', $request->get('user_id'));
+        if(!empty($request->get('nickname'))) {
+            $nickname = $request->get('nickname');
+            $query->with('Profile')->whereHas('Profile', function ($q) use ($nickname) {
+                $q->where('nickname', 'LIKE', '%' . $nickname . '%');
+            });
         }
 
         if(!empty($request->get('status'))){
             $query->where('status', $request->get('status'));
         }
 
-        if(!empty($request->get('id'))){
-            $query->where('id', $request->get('id'));
+        if(!empty($request->get('ids'))){
+            $ids = array_map(function ($value) {
+                return (int)trim($value);
+            }, explode(',', $request->get('ids')));
+            $query->whereIn('id', $ids);
         }
 
         $applications = $query->paginate(5);

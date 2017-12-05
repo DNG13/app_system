@@ -47,13 +47,13 @@ class AppCosplayController extends Controller
             });
         }
 
-        if(!empty($request->get('type_id'))){
+        if(!empty($request->get('type_id'))) {
             $query->where('type_id', $request->get('type_id'));
         }
 
-        if(!empty($request->get('nickname'))){
+        if(!empty($request->get('nickname'))) {
             $nickname = $request->get('nickname');
-            $query->with('Profile')->whereHas('Profile', function($q) use ($nickname){
+            $query->with('Profile')->whereHas('Profile', function($q) use ($nickname) {
                 $q->where('nickname', 'LIKE', '%' . $nickname . '%');
             });
         }
@@ -62,7 +62,7 @@ class AppCosplayController extends Controller
             $query->where('status', $request->get('status'));
         }
 
-        if(!empty($request->get('ids'))){
+        if(!empty($request->get('ids'))) {
             $ids = array_map(function ($value) {
                 return (int)trim($value);
             }, explode(',', $request->get('ids')));

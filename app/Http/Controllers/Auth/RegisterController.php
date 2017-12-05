@@ -111,7 +111,7 @@ class RegisterController extends Controller
 
         $profile = new Profile();
         $profile->user_id = $user_id;
-        $profile->avatar_id= $avatar_id;
+        $profile->avatar_id = $avatar_id;
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
         $profile->middle_name = $data['middle_name'];
@@ -148,12 +148,12 @@ class RegisterController extends Controller
     {
         try {
             $socialUser = Socialite::driver('facebook')->user();
-        }catch (\Exception $exception){
+        }catch (\Exception $exception) {
             return redirect('/');
         };
 
         $user = User::where('fb', $socialUser->getId())->first();
-        if(!$user){
+        if(!$user) {
             $user = new User();
             $user->email = $socialUser->getEmail();
             $user->fb = $socialUser->getId();
@@ -181,7 +181,7 @@ class RegisterController extends Controller
             $fbName = explode(" ", $socialUser->getName());
             $profile->surname =  $fbName [1];
             $profile->first_name = $fbName [0];
-            $social_links= ['vk' => null, 'tg' => null, 'fb' => null, 'sk'=>null];
+            $social_links = ['vk' => null, 'tg' => null, 'fb' => null, 'sk'=>null];
             $profile->social_links = json_encode($social_links);
             $profile->save();
 

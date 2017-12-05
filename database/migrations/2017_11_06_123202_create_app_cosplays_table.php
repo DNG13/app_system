@@ -27,7 +27,7 @@ class CreateAppCosplaysTable extends Migration
             $table->integer('members_count');
             $table->string('title', 100);
             $table->string('fandom', 255);
-            $table->integer('length');
+            $table->float('length');
             $table->text('description');
             $table->string('city', 100);
             $table->string('status', 100);

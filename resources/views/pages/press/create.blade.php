@@ -8,14 +8,14 @@
                     <div class="panel-heading">Новая заявка пресса</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('press.index') }}">
+                        <form class="form-horizontal" method="POST" action="{{url('/press/store')}}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
                                 <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
+                                    <select id="type_id" class="form-control" name="type_id">
                                         @foreach($types as $key=>$type)
                                             <option value="{{$key}}">{{$type}}</option>
                                         @endforeach
@@ -87,7 +87,7 @@
                                 <label for="portfolio_link" class="col-md-4 control-label">Ссылка на портфолио</label>
 
                                 <div class="col-md-6">
-                                    <input id="portfolio_link" type="url" class="form-control" name="portfolio_link" value="{{ old('portfolio_link') }}"required autofocus>
+                                    <input id="portfolio_link" type="url" class="form-control" name="portfolio_link" value="{{ old('portfolio_link') }}" required autofocus>
 
                                     @if ($errors->has('portfolio_link'))
                                         <span class="help-block">

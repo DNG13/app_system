@@ -3,20 +3,20 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Типи заявок <a class="btn btn-info btn pull-right"  href="/type/create">Добавить тип</a></strong></h4>
-            <hr><form action="/type" method="GET">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search" >
-                    <span class="input-group-addon btn btn-info">
+            <h4><strong>Типи заявок <a class="btn btn-info btn pull-right"  href="{{url('/type/create')}}">Добавить тип</a></strong></h4>
+            @if(!count($types)==0)
+                <hr><form action="{{url('/type')}}" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search" >
+                        <span class="input-group-addon btn btn-info">
                         <button type="submit">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </span>
-                </div>
-            </form>
-            @if(!count($types)==0)
-                <h5>Page {{ $types->currentPage() }} of {{ $types->lastPage() }}</h5>
-                <form action="/type" method="GET">
+                    </div>
+                </form>
+            <hr>
+                <form action="{{url('/type')}}" method="GET">
                     <table class="table table-striped" border="1">
                         <thead>
                         <tr>

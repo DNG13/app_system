@@ -19,13 +19,17 @@ class ProfileController extends Controller
         return view('pages.profile.index', compact('profile', 'social_links', 'avatar'));
     }
 
-    public function edit(){
+    public function edit() {
         $avatar = Avatar::where('user_id', Auth::user()->id)->pluck('link')->first();
         $profile = Profile::where('user_id', Auth::user()->id)->first();
         $social_links =  json_decode($profile->social_links);
         return view('pages.profile.edit', compact('profile', 'social_links', 'avatar'));
     }
 
+    /**
+     * @param Request $data
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $data){
 
         $this->validate(request(),[

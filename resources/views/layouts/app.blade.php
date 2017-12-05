@@ -46,10 +46,10 @@
                                     Мои заявки<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="/cosplay">Косплей-шоу</a>
-                                        <a href="/fair">Ярмарка</a>
-                                        <a href="/press">Пресса</a>
-                                        <a href="/volunteer">Волонтер</a>
+                                        <a href="{{ url('/cosplay')}}">Косплей-шоу</a>
+                                        <a href="{{ url('/fair')}}">Ярмарка</a>
+                                        <a href="{{ url('/press')}}">Пресса</a>
+                                        <a href="{{ url('/volunteer')}}">Волонтер</a>
                                     </li>
                                 </ul>
                             </li>
@@ -57,10 +57,10 @@
                                     Подать заявку<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="/cosplay/create">Косплей-шоу</a>
-                                        <a href="/fair/create">Ярмарка</a>
-                                        <a href="/press/create">Пресса</a>
-                                        <a href="/volunteer/create">Волонтер</a>
+                                        <a href="{{ url('/cosplay/create')}}">Косплей-шоу</a>
+                                        <a href="{{ url('/fair/create')}}">Ярмарка</a>
+                                        <a href="{{ url('/press/create')}}">Пресса</a>
+                                        <a href="{{ url('/volunteer/create')}}">Волонтер</a>
                                     </li>
                                 </ul>
                             </li>
@@ -68,8 +68,8 @@
                                     <i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="/type/create">Добавить тип заявки</a>
-                                        <a href="/type">Все типы заявок</a>
+                                        <a href="{{ url('/type/create')}}">Добавить тип заявки</a>
+                                        <a href="{{ url('/type')}}">Все типы заявок</a>
                                     </li>
                                 </ul>
                             </li>
@@ -80,7 +80,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="auth/facebook" title="Войти через facebook"><i class="fa fa-facebook-square fa-2x text-primary" aria-hidden="true"></i></a></li>
+                            <li><a href="{{ url('auth/facebook')}}" title="Войти через facebook"><i class="fa fa-facebook-square fa-2x text-primary" aria-hidden="true"></i></a></li>
                             <li><a href="{{ route('login') }}">Войти</a></li>
                             <li><a href="{{ route('register') }}">Регистрация</a></li>
                         @else

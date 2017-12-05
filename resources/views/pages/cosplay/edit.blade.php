@@ -64,7 +64,7 @@
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
                                 <div class="col-md-6">
-                                    <input id="length" type="number" class="form-control" name="length" value="{{ $cosplay->length}}" required autofocus>
+                                    <input id="length" type="number" min="1" step="0.5" class="form-control" name="length" value="{{ $cosplay->length}}" required autofocus>
 
                                     @if ($errors->has('length'))
                                         <span class="help-block">
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
 
-                            <div style="text-align:center"><strong><h4>Участники</h4></strong></div>
+                            <div style="text-align:center"><strong>Участники</strong></div>
                             <div id="dynamic_field">
                                     @foreach($members as $member=>$attributes)
                                     <div class="members" id="row{{$count}}">
@@ -149,7 +149,7 @@
                                                 <div class="form-group">
                                                     <label  class="col-md-4 control-label">Дата рождения</label>
                                                      <div class="col-md-3">
-                                                        <input type="date" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/>
+                                                        <input type="date" min='1899-01-01' max="{{date("Y-m-d")}}" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/>
                                                      </div>
                                                     <div class="col-md-1">
                                                         <a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника">
@@ -202,7 +202,7 @@
                                             ' <div class="form-group"> ' +
                                                 '<label  class="col-md-4 control-label">Дата рождения</label>' +
                                                 ' <div class="col-md-3"> ' +
-                                                    '<input type="date" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
+                                                    '<input type="date"  min="1899-01-01" max="Date()"  name="members['+i+'][birthday]" class="form-control name_list" required/>' +
                                                 '</div>'+
                                                 '<div class="col-md-1">'+
                                                     '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
@@ -219,7 +219,7 @@
                                     }
                                 });
                                 $(document).on('click', '#btn_remove', function(){
-                                    $(this).closest('.members').remove();;
+                                    $(this).closest('.members').remove();
                                     i--;
                                 });
 
@@ -228,7 +228,7 @@
                                         url:postURL,
                                         method:"POST",
                                         data:$('#add_name').serialize(),
-                                        type:'json',
+                                        type:'json'
                                     });
                                 });
                             });

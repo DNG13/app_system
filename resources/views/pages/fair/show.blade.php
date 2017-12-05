@@ -13,14 +13,14 @@
                             <div class="form-group">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
                                 <div class="col-md-6">
-                                    <p id="type_id"  class="form-control" name="type_id">{{ $fair->type_id }}</p>
+                                    <p id="type_id"  class="form-control">{{ $fair->type_id }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="group_nick" class="col-md-4 control-label">Hазвание группы/ник</label>
                                 <div class="col-md-6">
-                                    <p id="title" class="form-control" name="group_nick">{{ $fair->group_nick }}</p>
+                                    <p id="group_nick" class="form-control">{{ $fair->group_nick }}</p>
                                 </div>
                             </div>
 
@@ -34,49 +34,49 @@
                             <div class="form-group">
                                 <label for="contact_name" class="col-md-4 control-label">Контактное лицо</label>
                                 <div class="col-md-6">
-                                    <p id="title" class="form-control" name="contact_name">{{ $fair->contact_name }}</p>
+                                    <p id="contact_name" class="form-control">{{ $fair->contact_name }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
                                 <div class="col-md-6">
-                                    <p id="phone" class="form-control" name="phone">{{ $fair->phone }}</p>
+                                    <p id="phone" class="form-control">{{ $fair->phone }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="members_count" class="col-md-4 control-label">Количество представителей</label>
                                 <div class="col-md-6">
-                                    <p id="members_count" class="form-control" name="members_count">{{ $fair->members_count }}</p>
+                                    <p id="members_count" class="form-control">{{ $fair->members_count }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
                                 <div class="col-md-6">
-                                    <p id="social_link"  class="form-control" name="social_link">{{ $fair->social_link }}</p>
+                                    <p id="social_link"  class="form-control">{{ $fair->social_link }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
                                 <div class="col-md-6">
-                                    <p id="group_link" class="form-control" name="group_link">{{ $fair->group_link }}</p>
+                                    <p id="group_link" class="form-control">{{ $fair->group_link }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
                                 <div class="col-md-6">
-                                    <p id="square" class="form-control" name="square">{{ $fair->square }}</p>
+                                    <p id="square" class="form-control">{{ $fair->square }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
                                 <div class="col-md-6">
-                                    <p id="square" class="form-control" name="payment_type">{{ $fair->payment_type }}</p>
+                                    <p id="square" class="form-control">{{ $fair->payment_type }}</p>
                                 </div>
                             </div>
 
@@ -85,7 +85,7 @@
                                     <div class="form-group">
                                         <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
                                         <div class="col-md-6">
-                                            <p id="equipment[chair]" class="form-control" name="payment_type">{{ $equipment->chair }}</p>
+                                            <p id="equipment[chair]" class="form-control">{{ $equipment->chair }}</p>
                                         </div>
                                     </div>
                                     @endif
@@ -94,7 +94,7 @@
                                         <div class="form-group">
                                             <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
                                             <div class="col-md-6">
-                                                <p id="equipment[table]" class="form-control" name="payment_type">{{ $equipment->table }}</p>
+                                                <p id="equipment[table]" class="form-control">{{ $equipment->table }}</p>
                                             </div>
                                         </div>
                                     @endif
@@ -103,7 +103,7 @@
                                     <div class="form-group">
                                         <label for="equipment[electricity]" class="col-md-4 control-label">Надобность подведения электричества</label>
                                         <div class="col-md-6">
-                                            <p id="equipment[electricity]" class="form-control" name="payment_type">{{ $equipment->electricity }}</p>
+                                            <p id="equipment[electricity]" class="form-control">{{ $equipment->electricity }}</p>
                                         </div>
                                     </div>
                                     @endif
@@ -112,7 +112,7 @@
                                     <div class="form-group">
                                         <label for="equipment[extra]" class="col-md-4 control-label">Дополнительное оборудование с размерами</label>
                                         <div class="col-md-6">
-                                            <p id="equipment[extra]" class="form-control" name="payment_type">{{ $equipment->extra }}</p>
+                                            <p id="equipment[extra]" class="form-control">{{ $equipment->extra }}</p>
                                         </div>
                                     </div>
                                     @endif
@@ -121,7 +121,7 @@
                             <div class="form-group">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <p id="description" class="form-control" name="payment_type">{{ $fair->description }}</p>
+                                    <p id="description" class="form-control">{{ $fair->description }}</p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -130,14 +130,14 @@
                                 </div>
                             </div>
                             @if(!count($comments)==0)
-                                <div style="text-align:center"><strong><h4>Коментарии заявки</h4></strong></div>
+                                <div style="text-align:center"><strong>Коментарии заявки</strong></div>
                                 @foreach($comments as $comment)
                                     <div class="form-group">
                                         <label for="comment" class="col-md-4 control-label">
                                             <strong>{{ $comment->profile->nickname }}</strong>
-                                            <small><p>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</p></small> </label>
+                                            <small>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small> </label>
                                         <div class="col-md-6">
-                                            <p  id="comment" class="form-control" name="comment" required>{{ $comment->text }}</p>
+                                            <p  id="comment" class="form-control">{{ $comment->text }}</p>
                                         </div>
                                         <a href="/comment/delete?id={{ $comment->id }}&app_id={{$fair->id}}&app_kind=fair">
                                             <div class="btn btn-danger">
@@ -147,7 +147,7 @@
                                     </div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="/comment/create">
+                            <form method="POST" action="{{url('/comment/create')}}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="comment" class="col-md-4 control-label">

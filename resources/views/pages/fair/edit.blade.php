@@ -115,7 +115,7 @@
                                 <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="social_link" type="url" class="form-control" name="social_link" required autofocus>{{  $fair->social_link }}</textarea>
+                                    <input id="social_link" type="url" class="form-control" name="social_link" value="{{$fair->social_link }}" required autofocus>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">
@@ -129,7 +129,7 @@
                                 <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
 
                                 <div class="col-md-6">
-                                     <textarea  id="group_link" type="url" class="form-control" name="group_link" required autofocus>{{  $fair->group_link }}</textarea>
+                                     <input  id="group_link" type="url" class="form-control" name="group_link" value="{{  $fair->group_link }}" required autofocus>
 
                                     @if ($errors->has('group_link'))
                                         <span class="help-block">
@@ -142,7 +142,7 @@
                             <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
                                 <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
                                 <div class="col-md-6">
-                                    <input id="square" type="number" min="1" class="form-control" name="square" value="{{  $fair->square }}" required autofocus>
+                                    <input id="square" type="number" min="1" step="0.5" class="form-control" name="square" value="{{  $fair->square }}" required autofocus>
 
                                     @if ($errors->has('square'))
                                         <span class="help-block">
@@ -156,9 +156,14 @@
                                 <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
 
                                 <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="payment_type" value="{{  $fair->payment_type }}">
-                                        <option value="наличный">наличный (в день фестиваля)</option>
-                                        <option value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
+                                    <select id="type_id" class="form-control" name="payment_type">
+                                        @if( $fair->payment_type == 'наличный')
+                                            <option selected value="наличный">наличный (в день фестиваля)</option>
+                                            <option value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
+                                        @else
+                                            <option value="наличный">наличный (в день фестиваля)</option>
+                                            <option selected  value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
+                                        @endif
                                     </select>
                                     @if ($errors->has('payment_type'))
                                         <span class="help-block">
@@ -169,6 +174,19 @@
                             </div>
 
                             <div>
+                                <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
+                                    <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
+                                    <div class="col-md-6">
+                                        <input id="equipment[chair]" type="number" min="1" class="form-control" name="equipment[chair]" value="{{ $equipment->chair }}"  required autofocus>
+
+                                        @if ($errors->has('equipment[chair]'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('equipment[chair]') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="form-group{{ $errors->has('equipment[table]') ? ' has-error' : '' }}">
                                     <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
 
@@ -183,25 +201,17 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
-                                    <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
-                                    <div class="col-md-6">
-                                        <input id="equipment[chair]" type="number" min="1" class="form-control" name="equipment[chair]" value="{{ $equipment->chair }}"  required autofocus>
-
-                                        @if ($errors->has('equipment[chair]'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('equipment[chair]') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
                                 <div class="form-group{{ $errors->has('equipment[electricity]') ? ' has-error' : '' }}">
                                     <label for="equipment[electricity]" class="col-md-4 control-label">Надобность подведения электричества</label>
                                     <div class="col-md-6">
-                                        <select id="type_id" class="form-control" name="equipment[electricity]" value="{{ $equipment->electricity }}">
-                                            <option value="no">Нет</option>
-                                            <option value="yes">Да</option>
+                                        <select id="type_id" class="form-control" name="equipment[electricity]">
+                                            @if($equipment->electricity == 'no')
+                                                <option selected value="no">Нет</option>
+                                                <option value="yes">Да</option>
+                                            @else
+                                                <option value="no">Нет</option>
+                                                <option  selected value="yes">Да</option>
+                                            @endif
                                         </select>
                                         @if ($errors->has('equipment[electricity]'))
                                             <span class="help-block">
@@ -215,7 +225,9 @@
                                     <label for="equipment[extra]" class="col-md-4 control-label">Дополнительное оборудование с размерами</label>
 
                                     <div class="col-md-6">
-                                        <input id="equipment[extra]" type="text" class="form-control" placeholder="Например, баннер, этажерка, ширма и тд" name="equipment[extra]" value="{{ $equipment->extra }}" required autofocus>
+                                        <textarea id="equipment[extra]" rows="5"
+                                                  class="form-control" placeholder="Например, баннер, этажерка, ширма и т.д."
+                                                  name="equipment[extra]"  required autofocus>{{ $equipment->extra }}</textarea>
 
                                         @if ($errors->has('equipment[extra]'))
                                             <span class="help-block">

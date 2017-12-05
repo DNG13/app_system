@@ -92,7 +92,7 @@
                                 <label for="portfolio_link" class="col-md-4 control-label">Ссылка на портфолио</label>
 
                                 <div class="col-md-6">
-                                    <input id="portfolio_link" type="url" class="form-control" name="portfolio_link" value="{{ $press->portfolio_link }}"required autofocus>
+                                    <input id="portfolio_link" type="url" class="form-control" name="portfolio_link" value="{{ $press->portfolio_link }}" required autofocus>
 
                                     @if ($errors->has('portfolio_link'))
                                         <span class="help-block">

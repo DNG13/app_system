@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -15,10 +15,9 @@
                                 <label for="type" class="col-md-4 control-label">Тип заявки</label>
                                 <div class="col-md-6">
                                     <select id="type" class="form-control" name="type">
-                                        <option  value="{{ $type->app_type }}" selected>Косплей</option>
-                                        <option value="cosplay">Косплей</option>
-                                        <option value="fair">Ярмарка</option>
-                                        <option value="press">Пресса</option>
+                                        <option value="cosplay" @if($type->app_type == 'cosplay') selected @endif >Косплей</option>
+                                        <option value="fair" @if($type->app_type == 'fair' ) selected @endif >Ярмарка</option>
+                                        <option value="press" @if($type->app_type == 'press') selected @endif >Пресса</option>
                                     </select>
                                     @if ($errors->has('type'))
                                         <span class="help-block">
@@ -30,7 +29,7 @@
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="col-md-4 control-label">Название</label>
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ $type->title }}"required autofocus >
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ $type->title }}" required autofocus >
 
                                     @if ($errors->has('title'))
                                         <span class="help-block">

@@ -21,21 +21,21 @@
                             <div class="form-group">
                                 <label for="surname" class="col-md-4 control-label">Фамилия</label>
                                 <div class="col-md-6">
-                                    <p id="surname" class="form-control" name="surname"> {{ $profile->surname}}</p>
+                                    <p id="surname" class="form-control"> {{ $profile->surname}}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="first_name" class="col-md-4 control-label">Имя</label>
                                 <div class="col-md-6">
-                                    <p id="first_name" class="form-control" name="first_name">{{ $profile->first_name }}</p>
+                                    <p id="first_name" class="form-control">{{ $profile->first_name }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="middle_name" class="col-md-4 control-label">Отчество</label>
                                 <div class="col-md-6">
-                                    <p id="middle_name" class="form-control" name="middle_name"> {{ $profile->middle_name }}</p>
+                                    <p id="middle_name" class="form-control"> {{ $profile->middle_name }}</p>
                                 </div>
                             </div>
 
@@ -43,35 +43,35 @@
                             <div class="form-group">
                                 <label for="nickname" class="col-md-4 control-label">Никнейм</label>
                                 <div class="col-md-6">
-                                    <p id="nickname" class="form-control" name="nickname"> {{ $profile->nickname }}</p>
+                                    <p id="nickname" class="form-control"> {{ $profile->nickname }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
                                 <div class="col-md-6">
-                                    <p id="birthday" class="form-control" name="birthday"> {{ $profile->birthday }}</p>
+                                    <p id="birthday" class="form-control"> {{ $profile->birthday }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="city" class="col-md-4 control-label">Город</label>
                                 <div class="col-md-6">
-                                    <p id="city" class="form-control" name="city"> {{ $profile->city }}</p>
+                                    <p id="city" class="form-control"> {{ $profile->city }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
                                 <div class="col-md-6">
-                                    <p id="phone" class="form-control" name="phone" > {{ $profile->phone }}</p>
+                                    <p id="phone" class="form-control"> {{ $profile->phone }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="col-md-4 control-label">E-Mail</label>
                                 <div class="col-md-6">
-                                    <p id="email" class="form-control" name="email" >{{Auth::user()->email}}}</p>
+                                    <p id="email" class="form-control">{{Auth::user()->email}}}</p>
                                 </div>
                             </div>
 
@@ -79,7 +79,7 @@
                                 <div class="form-group">
                                 <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
                                 <div class="col-md-6">
-                                    <p id="social_links[vk]" class="form-control" name="social_links[vk]"> {{ $social_links->vk}}</p>
+                                    <p id="social_links[vk]" class="form-control"> {{ $social_links->vk}}</p>
                                 </div>
                             </div>
                             @endif
@@ -88,7 +88,7 @@
                                 <div class="form-group">
                                 <label for="social_links[fb]" class="col-md-4 control-label">Facebook</label>
                                 <div class="col-md-6">
-                                    <p id="social_links[fb]" class="form-control" name="social_links[fb]"> {{$social_links->fb }}</p>
+                                    <p id="social_links[fb]" class="form-control"> {{$social_links->fb }}</p>
                                 </div>
                             </div>
                             @endif
@@ -97,7 +97,7 @@
                                 <div class="form-group">
                                 <label for="social_links[sk]" class="col-md-4 control-label">Skype</label>
                                 <div class="col-md-6">
-                                    <p id="social_links[sk]" class="form-control" name="social_links[sk]" > {{ $social_links->fb }}</p>
+                                    <p id="social_links[sk]" class="form-control"> {{ $social_links->fb }}</p>
                                 </div>
                             </div>
                             @endif
@@ -106,7 +106,7 @@
                              <div class="form-group">
                                 <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
                                 <div class="col-md-6">
-                                    <p id="social_links[tg]" class="form-control" name="social_links[tg]">{{ $social_links->tg }}</p>
+                                    <p id="social_links[tg]" class="form-control">{{ $social_links->tg }}</p>
                                 </div>
                             </div>
                             @endif
@@ -115,14 +115,14 @@
                              <div class="form-group">
                                 <label for="info" class="col-md-4 control-label">Дополнительные данные</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control" name="info">{{ $profile->info }}</textarea>
+                                    <textarea class="form-control " name="info">{{ $profile->info }}</textarea>
                                 </div>
                             </div>
                             @endif
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="/profile/edit" class="btn btn-primary" role="button">Редактировать</a>
+                                    <a href="{{ route('profile.edit')}}" class="btn btn-primary" role="button">Редактировать</a>
                                 </div>
                             </div>
                         </div>

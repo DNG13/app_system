@@ -31,7 +31,7 @@ class AppFairController extends Controller
      */
     public function index(Request $request)
     {
-        $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
+        $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $data = $request->all();
         $keyword = $request->get('search');
 
@@ -46,20 +46,26 @@ class AppFairController extends Controller
             });
         }
 
-        if(!empty($request->get('type_id'))){
+        if(!empty($request->get('type_id'))) {
             $query->where('type_id', $request->get('type_id'));
         }
 
-        if(!empty($request->get('user_id'))){
-            $query->where('user_id', $request->get('user_id'));
+        if(!empty($request->get('nickname'))) {
+            $nickname = $request->get('nickname');
+            $query->with('Profile')->whereHas('Profile', function ($q) use ($nickname) {
+                $q->where('nickname', 'LIKE', '%' . $nickname . '%');
+            });
         }
 
-        if(!empty($request->get('status'))){
+        if(!empty($request->get('status'))) {
             $query->where('status', $request->get('status'));
         }
 
-        if(!empty($request->get('id'))){
-            $query->where('id', $request->get('id'));
+        if(!empty($request->get('ids'))) {
+            $ids = array_map(function ($value) {
+                return (int)trim($value);
+            }, explode(',', $request->get('ids')));
+            $query->whereIn('id', $ids);
         }
 
         $applications = $query->paginate(5);
@@ -130,8 +136,8 @@ class AppFairController extends Controller
         $fair->social_link = $request->get('social_link');
         $fair->group_link = $request->get('group_link');
         $fair->square = $request->get('square');
-        $fair->payment_type= $request->get('payment_type');
-        $fair->description= $request->get('description');
+        $fair->payment_type = $request->get('payment_type');
+        $fair->description = $request->get('description');
         $fair->user_id = Auth::user()->id;
         $fair->status = 'В обработке';
 

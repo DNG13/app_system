@@ -8,14 +8,14 @@
                     <div class="panel-heading">Новая заявка ярмарка</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST"  enctype="multipart/form-data" action="{{ route('fair.index') }}">
+                        <form class="form-horizontal" method="POST"  enctype="multipart/form-data" action="{{ url('/fair/store')}}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
                                 <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="type_id" value="{{ old('type_id') }}">
+                                    <select id="type_id" class="form-control" name="type_id">
                                         @foreach($types as $key=>$type)
                                             <option value="{{$key}}">{{$type}}</option>
                                         @endforeach
@@ -89,7 +89,7 @@
                             <div class="form-group{{ $errors->has('members_count') ? ' has-error' : '' }}">
                                 <label for="members_count" class="col-md-4 control-label">Количество представителей</label>
                                 <div class="col-md-6">
-                                    <input id="members_count" type="number" min="1" class="form-control" name="members_count" value="{{ old('members_count') }}" required autofocus>
+                                    <input id="members_count" type="number" min="1"  class="form-control" name="members_count" value="{{ old('members_count') }}" required autofocus>
 
                                     @if ($errors->has('members_count'))
                                         <span class="help-block">
@@ -103,7 +103,7 @@
                                 <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
 
                                 <div class="col-md-6">
-                                    <input id="social_link" type="url" class="form-control" name="social_link" value="{{ old('social_link') }}"required autofocus>
+                                    <input id="social_link" type="url" class="form-control" name="social_link" value="{{ old('social_link') }}" required autofocus>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">
@@ -130,7 +130,7 @@
                             <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
                                 <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
                                 <div class="col-md-6">
-                                    <input id="square" type="number" min="1" class="form-control" name="square" value="{{ old('square') }}" required autofocus>
+                                    <input id="square" type="number" min="1" step="0.5" class="form-control" name="square" value="{{ old('square') }}" required autofocus>
 
                                     @if ($errors->has('square'))
                                         <span class="help-block">
@@ -144,7 +144,7 @@
                                 <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
 
                                 <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="payment_type" value="{{ old('payment_type') }}">
+                                    <select id="type_id" class="form-control" name="payment_type">
                                         <option value="наличный">наличный (в день фестиваля)</option>
                                         <option value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
                                     </select>
@@ -157,6 +157,19 @@
                             </div>
 
                             <div>
+                                <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
+                                    <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
+                                    <div class="col-md-6">
+                                        <input id="equipment[chair]" type="number" min="1" class="form-control" name="equipment[chair]" value="{{ old('equipment[chair]') }}"  required autofocus>
+
+                                        @if ($errors->has('equipment[chair]'))
+                                            <span class="help-block">
+                                            <strong>{{ $errors->first('equipment[chair]') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="form-group{{ $errors->has('equipment[table]') ? ' has-error' : '' }}">
                                     <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
 
@@ -171,23 +184,10 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
-                                    <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
-                                    <div class="col-md-6">
-                                        <input id="equipment[chair]" type="number" min="1" class="form-control" name="equipment[chair]" value="{{ old('equipment[chair]') }}"  required autofocus>
-
-                                        @if ($errors->has('equipment[chair]'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('equipment[chair]') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
                                 <div class="form-group{{ $errors->has('equipment[electricity]') ? ' has-error' : '' }}">
                                     <label for="equipment[electricity]" class="col-md-4 control-label">Надобность подведения электричества</label>
                                     <div class="col-md-6">
-                                        <select id="type_id" class="form-control" name="equipment[electricity]" value="{{ old('equipment[electricity]') }}">
+                                        <select id="type_id" class="form-control" name="equipment[electricity]">
                                             <option value="no">Нет</option>
                                             <option value="yes">Да</option>
                                         </select>
@@ -203,7 +203,9 @@
                                     <label for="equipment[extra]" class="col-md-4 control-label">Дополнительное оборудование с размерами</label>
 
                                     <div class="col-md-6">
-                                        <input id="equipment[extra]" type="text" class="form-control" placeholder="Например, баннер, этажерка, ширма и тд" name="equipment[extra]" value="{{ old('equipment[extra]') }}" required autofocus>
+                                        <textarea id="equipment[extra]" class="form-control"
+                                                  placeholder="Например, баннер, этажерка, ширма и т.д."
+                                                  name="equipment[extra]" required autofocus>{{ old('equipment[extra]') }}</textarea>
 
                                         @if ($errors->has('equipment[extra]'))
                                             <span class="help-block">

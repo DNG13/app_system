@@ -38,8 +38,7 @@ class AppVolunteerController extends Controller
 
         if (!empty($keyword)) {
             $query->where(function($q) use ($keyword) {
-                $q->where('contact_name', 'LIKE', "%$keyword%")
-                    ->orWhere('skills', 'LIKE', "%$keyword%")
+                $q->where('skills', 'LIKE', "%$keyword%")
                     ->orWhere('nickname', 'LIKE', "%$keyword%")
                     ->orWhere('city', 'LIKE', "%$keyword%")
                     ->orWhere('status', 'LIKE', "%$keyword%");
@@ -87,7 +86,7 @@ class AppVolunteerController extends Controller
         $volunteer = new AppVolunteer();
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
-        if($request->get('nickname')==null){
+        if($request->get('nickname') == null){
             $volunteer->nickname = $request->get('surname') .' '. $request->get('first_name');
         }else {
             $volunteer->nickname = $request->get('nickname');
