@@ -10,9 +10,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-//use Faker\Provider\File;
+use Mail;
 use File;
+use DB;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -193,5 +196,47 @@ class RegisterController extends Controller
         }
         auth()->login($user);
         return redirect('/home');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+    public function register(Request $request) {
+        $input = $request->all();
+        $validator = $this->validator($input);
+
+        if ($validator->passes()){
+            $user = $this->create($input)->toArray();
+            $user['conformation_code'] = str_random(30);
+            DB::table('users')->where('id', $user['id'])->update(['conformation_code'=>$user['conformation_code']]);
+
+            Mail::send('mails.activation',  $user , function($message) use ( $user ){
+                $message->to( $user ['email']);
+                $message->subject('Код активации сайта Khanifest');
+            });
+            return redirect()->to('login')->with('success', "Вам отправлен код активации. Пожалуйста проверте почту.");
+        }
+        return back()->with('errors',$validator->errors());
+    }
+
+    /**
+     * @param $token
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+    public function userActivation($token) {
+        $user = User::where('conformation_code', $token)->first();
+        if(!is_null($user)){
+            if (!is_null($user->conformed_at)){
+                return redirect()->to('login')->with('success',"Профиль уже активирован.");
+
+            }
+            $user->conformed_at = Carbon::now();
+            $user->save();
+            return redirect()->to('login')->with('success',"Пользователь активирован успешно.");
+        }
+        return redirect()->to('login')->with('Warning',"Ваша ссылка не валидна.");
     }
 }

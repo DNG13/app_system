@@ -14,6 +14,7 @@ Route::get('/', function () {
     return view('pages/main');
 });
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user/activation/{token}', 'Auth\RegisterController@userActivation');
 
 Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');

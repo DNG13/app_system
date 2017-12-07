@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('conformed_at')->nullable();
             $table->timestamp('blocked_at')->nullable();
             $table->json('password_reset_token')->nullable();
-            $table->json('conformation_code')->nullable();
+            $table->string('conformation_code')->nullable();
         });
     }
 
