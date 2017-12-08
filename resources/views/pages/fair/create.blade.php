@@ -235,6 +235,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Отправить
                                     </button>
+                                    <p>Нажимая кнопку “Отправить” Вы подтверждаете, что ознакомились с <a href="/home">правилами фестиваля</a></p>
                                 </div>
                             </div>
                         </form>

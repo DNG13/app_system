@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AppCosplay\IndexRequest;
 use App\Models\AppType;
 use App\Models\Comment;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AppCosplay;
 use Illuminate\Http\Request;
+use Mail;
 
 class AppCosplayController extends Controller
 {
@@ -130,7 +132,14 @@ class AppCosplayController extends Controller
         $cosplays->members_count = count($members);
         $cosplays->members = json_encode($members);
         $cosplays->save();
-        return redirect('cosplay');
+
+        $user = User::where('id', Auth::user()->id)->get()->pluck('email');
+        $mail[] = $user[0];
+        Mail::send('mails.application',  $mail , function($message) use ( $mail ){
+            $message->to( $mail[0]);
+            $message->subject('Ваша заявка успешно отправлена');
+        });
+        return redirect('cosplay')->with('success', "Ваша заявка успешно отправлена.");;
     }
 
     /**

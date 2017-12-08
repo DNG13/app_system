@@ -216,7 +216,10 @@ class RegisterController extends Controller
                 $message->to( $user ['email']);
                 $message->subject('Код активации сайта Khanifest');
             });
-            return redirect()->to('login')->with('success', "Вам отправлен код активации. Пожалуйста проверте почту.");
+            return redirect()->to('login')->with('success', "Пользователь успешно создан. 
+            Вам отправлен код активации, 
+            по которому Вы можете подтвердить свою регистрацию. 
+            Пожалуйста проверьте почту.");
         }
         return back()->with('errors',$validator->errors());
     }
@@ -230,12 +233,13 @@ class RegisterController extends Controller
         $user = User::where('conformation_code', $token)->first();
         if(!is_null($user)){
             if (!is_null($user->conformed_at)){
-                return redirect()->to('login')->with('success',"Профиль уже активирован.");
+                return redirect()->to('home')->with('success',"Профиль уже подтвержден.");
 
             }
             $user->conformed_at = Carbon::now();
             $user->save();
-            return redirect()->to('login')->with('success',"Пользователь активирован успешно.");
+            auth()->login($user);
+            return redirect()->to('home')->with('success',"Поздравляем, ваш аккаунт подтвержден.");
         }
         return redirect()->to('login')->with('Warning',"Ваша ссылка не валидна.");
     }

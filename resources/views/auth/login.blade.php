@@ -17,15 +17,7 @@
                                     {{ $message }}
                                 </p>
                             </div>
-                        @endif
-                        @if ($message = Session::get('warning'))
-                            <div class="alert alert-warning">
-                                <p>
-                                    {{ $message }}
-                                </p>
-                            </div>
-                        @endif
-
+                        @else
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail </label>
 
@@ -75,6 +67,14 @@
                                 </a>
                             </div>
                         </div>
+                        @endif
+                        @if ($message = Session::get('warning'))
+                            <div class="alert alert-warning">
+                                <p>
+                                    {{ $message }}
+                                </p>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>

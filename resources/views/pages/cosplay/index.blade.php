@@ -5,6 +5,13 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка косплей-шоу <a class="btn btn-info btn pull-right"  href="{{ url('/cosplay/create')}}">Подать заявку</a></strong></h4>
             @if(!count($applications)==0)
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>
+                            {{ $message }}
+                        </p>
+                    </div>
+                @endif
                 <hr>
                 <form action="{{ url('/cosplay')}}" method="GET">
                     <div class="input-group">

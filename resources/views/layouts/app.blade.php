@@ -40,8 +40,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;@if (Auth::user())
-                            <li class={{ Request::is('main')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"> Главная</i></a></li>
-                            <li ><a href="http://khanifest.com/?page_id=346 ">Читать правила</a></li>
+                            <li class={{ Request::is('/')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"> Главная</i></a></li>
+                            <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">Читать правила</a></li>
                             <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     Мои заявки<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
