@@ -130,7 +130,7 @@
                             <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
                                 <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
                                 <div class="col-md-6">
-                                    <input id="square" type="number" min="1" step="0.5" class="form-control" name="square" value="{{ old('square') }}" required autofocus>
+                                    <input id="square" type="number" min="0" step="0.5" class="form-control" name="square" value="{{ old('square') }}" required autofocus>
 
                                     @if ($errors->has('square'))
                                         <span class="help-block">
@@ -160,7 +160,7 @@
                                 <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
                                     <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
                                     <div class="col-md-6">
-                                        <input id="equipment[chair]" type="number" min="1" class="form-control" name="equipment[chair]" value="{{ old('equipment[chair]') }}"  required autofocus>
+                                        <input id="equipment[chair]" type="number" min="0" class="form-control" name="equipment[chair]" value="{{ old('equipment[chair]') }}"  required autofocus>
 
                                         @if ($errors->has('equipment[chair]'))
                                             <span class="help-block">
@@ -174,7 +174,7 @@
                                     <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
 
                                     <div class="col-md-6">
-                                        <input id="equipment[table]" type="number" min="1" class="form-control" name="equipment[table]" value="{{ old('equipment[table]') }}" required autofocus>
+                                        <input id="equipment[table]" type="number" min="0" class="form-control" name="equipment[table]" value="{{ old('equipment[table]') }}" required autofocus>
 
                                         @if ($errors->has('equipment[table]'))
                                             <span class="help-block">

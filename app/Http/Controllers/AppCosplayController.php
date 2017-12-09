@@ -134,9 +134,10 @@ class AppCosplayController extends Controller
         $cosplays->save();
 
         $user = User::where('id', Auth::user()->id)->get()->pluck('email');
-        $mail[] = $user[0];
+        $mail['email'] = $user[0];
+        $mail['page']='/cosplay/'. $cosplays->id;
         Mail::send('mails.application',  $mail , function($message) use ( $mail ){
-            $message->to( $mail[0]);
+            $message->to( $mail['email']);
             $message->subject('Ваша заявка успешно отправлена');
         });
         return redirect('cosplay')->with('success', "Ваша заявка успешно отправлена.");;

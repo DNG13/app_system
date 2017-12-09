@@ -34,6 +34,30 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <label for="status" class="col-md-4 control-label">Статус заявки</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm" id="status" name="status">
+                                        @if(!empty($cosplay->status))
+                                            <option selected value="{{$cosplay->status}}">{{$cosplay->status}}</option>
+                                        @else
+                                            <option selected></option>
+                                        @endif
+                                        <option value="В обработке">В обработке</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пол-ля</option>
+                                        <option value="Принята">Принята</option>
+                                        <option value="Отклонена">Отклонена</option>
+                                        <option value="Внесены изменения">Внесены изменения</option>
+                                    </select>
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="col-md-4 control-label">Название постановки</label>
 
@@ -64,7 +88,7 @@
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
                                 <div class="col-md-6">
-                                    <input id="length" type="number" min="1" step="0.5" class="form-control" name="length" value="{{ $cosplay->length}}" required autofocus>
+                                    <input id="length" type="number" min="0" step="0.5" class="form-control" name="length" value="{{ $cosplay->length}}" required autofocus>
 
                                     @if ($errors->has('length'))
                                         <span class="help-block">

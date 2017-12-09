@@ -59,7 +59,7 @@
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
                                 <div class="col-md-6">
-                                    <input id="length" type="number" min="1" step="0.5" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
+                                    <input id="length" type="number" min="0" step="0.5" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
 
                                     @if ($errors->has('length'))
                                         <span class="help-block">
