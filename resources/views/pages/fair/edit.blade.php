@@ -34,6 +34,27 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <label for="status" class="col-md-4 control-label">Статус заявки</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm" id="status" name="status">
+                                        @if(!empty($fair->status))
+                                            <option selected value="{{$fair->status}}">{{$fair->status}}</option>
+                                        @endif
+                                        <option value="В обработке">В обработке</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пользователя</option>
+                                        <option value="Принята">Принята</option>
+                                        <option value="Отклонена">Отклонена</option>
+                                        <option value="Внесены изменения">Внесены изменения</option>
+                                    </select>
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('group_nick') ? ' has-error' : '' }}">
                                 <label for="group_nick" class="col-md-4 control-label">Hазвание группы/ник</label>

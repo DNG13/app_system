@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppVolunteer;
+use App\Models\Comment;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-use App\Models\Comment;
+use Mail;
 
 class AppVolunteerController extends Controller
 {
@@ -116,7 +118,15 @@ class AppVolunteerController extends Controller
         $volunteer->user_id = Auth::user()->id;
         $volunteer->status = 'В обработке';
         $volunteer->save();
-        return redirect('volunteer');
+
+        $user = User::find( Auth::user()->id);
+        $mail['email'] = $user->email;
+        $mail['page'] = "/volunteer/ $volunteer->id";
+        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
+            $message->to( $mail['email']);
+            $message->subject('Ваша заявка успешно отправлена');
+        });
+        return redirect('volunteer')->with('success', "Ваша заявка успешно отправлена.");
     }
 
     /**
@@ -199,7 +209,18 @@ class AppVolunteerController extends Controller
         $volunteer->difficulties = $request->get('difficulties');
         $volunteer->experience = $request->get('experience');
         $volunteer->user_id = Auth::user()->id;
-        $volunteer->status = 'В обработке';
+
+        if($volunteer->status != $request->get('status')) {
+            $user = User::find( Auth::user()->id);
+            $mail['email'] = $user->email;
+            $mail['page'] = '/volunteer/'.  $volunteer->id;
+            $mail['status'] = $request->get('status');
+            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
+                $message->to( $mail['email']);
+                $message->subject('Изминение статуса завки');
+            });
+        }
+        $volunteer->status = $request->get('status');
         $volunteer->save();
         return redirect('volunteer');
     }

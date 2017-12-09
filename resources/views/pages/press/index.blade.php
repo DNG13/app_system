@@ -5,6 +5,13 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка пресса <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подать заявку</a></strong></h4>
             @if(!count($applications)==0)
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>
+                            {{ $message }}
+                        </p>
+                    </div>
+                @endif
                 <hr><form action="{{url('/press')}}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="Поиск(Контактное лицо, город, Название СМИ)" >

@@ -34,6 +34,28 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <label for="status" class="col-md-4 control-label">Статус заявки</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm" id="status" name="status">
+                                        @if(!empty($press->status))
+                                            <option selected value="{{$press->status}}">{{$press->status}}</option>
+                                        @endif
+                                        <option value="В обработке">В обработке</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пользователя</option>
+                                        <option value="Принята">Принята</option>
+                                        <option value="Отклонена">Отклонена</option>
+                                        <option value="Внесены изменения">Внесены изменения</option>
+                                    </select>
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('media_name') ? ' has-error' : '' }}">
                                 <label for="media_name" class="col-md-4 control-label">Наименование СМИ/никнейм</label>
 

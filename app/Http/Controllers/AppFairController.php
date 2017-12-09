@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppType;
-use Illuminate\Support\Facades\Auth;
 use App\Models\AppFair;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use App\Models\Comment;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Mail;
 
 class AppFairController extends Controller
 {
@@ -148,7 +150,15 @@ class AppFairController extends Controller
         $fair->equipment = json_encode($equipment);
         $fair->save();
 
-        return redirect('fair');
+        $user = User::find( Auth::user()->id);
+        $mail['email'] = $user->email;
+        $mail['page'] = '/fair/'. $fair->id;
+        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
+            $message->to( $mail['email']);
+            $message->subject('Ваша заявка успешно отправлена');
+        });
+
+        return redirect('fair')->with('success', "Ваша заявка успешно отправлена.");
     }
 
     /**
@@ -234,6 +244,17 @@ class AppFairController extends Controller
         $fair->description= $request->get('description');
         $fair->user_id = Auth::user()->id;
 
+        if($fair->status != $request->get('status')) {
+            $user = User::find( Auth::user()->id);
+            $mail['email'] = $user->email;
+            $mail['page'] = '/fair/'. $fair->id;
+            $mail['status'] = $request->get('status');
+            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
+                $message->to( $mail['email']);
+                $message->subject('Изминение статуса завки');
+            });
+        }
+        $fair->status = $request->get('status');
         $equipment = [];
         foreach($request->input('equipment') as  $key => $value) {
             $equipment["{$key}"] = $value;

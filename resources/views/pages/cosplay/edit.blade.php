@@ -41,11 +41,9 @@
                                     <select class="form-control input-sm" id="status" name="status">
                                         @if(!empty($cosplay->status))
                                             <option selected value="{{$cosplay->status}}">{{$cosplay->status}}</option>
-                                        @else
-                                            <option selected></option>
                                         @endif
                                         <option value="В обработке">В обработке</option>
-                                        <option value="Ожидает ответа пользователя">Ожидает ответа пол-ля</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пользователя</option>
                                         <option value="Принята">Принята</option>
                                         <option value="Отклонена">Отклонена</option>
                                         <option value="Внесены изменения">Внесены изменения</option>
