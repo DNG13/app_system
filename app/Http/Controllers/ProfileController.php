@@ -45,8 +45,12 @@ class ProfileController extends Controller
             'info' => '',
         ]);
         $avatar = Avatar::where('user_id', Auth::user()->id)->first();
-        $avatar->user_id =  Auth::user()->id;
+
         if($data['avatar']) {
+            if(!$avatar) {
+                $avatar = new Avatar();
+                $avatar->user_id = Auth::user()->id;
+            }
             $imageFile = $data['avatar'];
             $extension = $imageFile->extension();
             $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
@@ -61,11 +65,12 @@ class ProfileController extends Controller
             $img->save();
             $avatar->link = $imagePath;
             $avatar->name = $imageName;
+            $avatar->save();
         }
-        $avatar->save();
+        $avatarId = $avatar ? Auth::user()->id : null;
 
         $profile = Profile::where('user_id', Auth::user()->id)->first();
-        $profile->avatar_id = '1';
+        $profile->avatar_id = $avatarId;
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
         $profile->middle_name = $data['middle_name'];

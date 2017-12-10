@@ -16,7 +16,7 @@
                             <label for="image_uploads" class="col-md-4 control-label">Аватар</label>
 
                             <div class="col-md-6">Выберите файл для загрузки(PNG, JPG, JPEG)
-                                <input name="avatar" type="file"  accept=".jpeg, .jpg, .png" required/>
+                                <input name="avatar" type="file"  value="" accept=".jpeg, .jpg, .png"/>
 
                                 @if ($errors->has('avatar'))
                                     <span class="help-block">

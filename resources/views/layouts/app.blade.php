@@ -87,7 +87,9 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    <img width="20" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>
+                                    @if(Auth::user()->avatar)
+                                        <img width="20" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>
+                                    @endif
                                     {{ Auth::user()->profile->nickname }} <span class="caret"></span>
                                 </a>
 

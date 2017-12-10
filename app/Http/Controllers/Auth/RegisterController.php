@@ -58,7 +58,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'avatar'=>'required|image|mimes:jpeg,jpg,png|max:4096',
+            'avatar'=>'nullable|image|mimes:jpeg,jpg,png|max:4096',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'surname' => 'required|string|max:64',
@@ -87,12 +87,11 @@ class RegisterController extends Controller
         $user->password = bcrypt($data['password']);
         $user->fb = $data['fb']?? null;
         $user->save();
-
         $user_id = $user->id;
 
-        $avatar = new Avatar();
-        $avatar->user_id = $user_id;
-        if($data['avatar']) {
+        if(isset($data['avatar'])) {
+            $avatar = new Avatar();
+            $avatar->user_id = $user_id;
             $imageFile = $data['avatar'];
             $extension = $imageFile->extension();
             $imageName = $user_id . '_'.uniqid() .'.'. $extension;
@@ -107,10 +106,11 @@ class RegisterController extends Controller
             $img->save();
             $avatar->link = $imagePath;
             $avatar->name = $imageName;
+            $avatar->save();
+            $avatar_id = $avatar->id;
+        }else{
+            $avatar_id = null;
         }
-        $avatar->save();
-
-        $avatar_id = $avatar->id;
 
         $profile = new Profile();
         $profile->user_id = $user_id;

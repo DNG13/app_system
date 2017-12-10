@@ -10,13 +10,14 @@
                     <div class="panel-body">
                         <div class="form-horizontal">
 
-
+                            @if($avatar)
                             <div>
                                 <label for="avatar" class="col-md-4">Аватар</label>
                                 <div class="col-md-6">
                                     <img src="/{{ $avatar }}" id="avatar" name="avatar"/>
                                 </div>
                             </div>
+                            @endif
 
                             <div>
                                 <label for="surname" class="col-md-4">Фамилия</label>
