@@ -173,6 +173,11 @@ class RegisterController extends Controller
             File::put(public_path() . '/uploads/avatars/' .  $imageName, $fileContents);
             $avatar->link = 'uploads/avatars/'.$imageName;
             $avatar->name = $imageName;
+            $img = Image::make($avatar->link);
+            $img->resize(null, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
             $avatar->save();
 
             $avatar_id = $avatar->id;
@@ -206,9 +211,10 @@ class RegisterController extends Controller
     public function register(Request $request) {
         $input = $request->all();
         $validator = $this->validator($input);
-
         if ($validator->passes()){
             $user = $this->create($input)->toArray();
+            $profile = Profile::where('user_id', $user['id'])->first();
+            $user['nickname'] = $profile->nickname;
             $user['conformation_code'] = str_random(30);
             DB::table('users')->where('id', $user['id'])->update(['conformation_code'=>$user['conformation_code']]);
 

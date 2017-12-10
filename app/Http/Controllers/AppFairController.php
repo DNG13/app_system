@@ -152,6 +152,8 @@ class AppFairController extends Controller
 
         $user = User::find( Auth::user()->id);
         $mail['email'] = $user->email;
+        $mail['nickname'] = $user->profile->nickname;
+        $mail['title'] = $fair->group_nick;
         $mail['page'] = '/fair/'. $fair->id;
         Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
             $message->to( $mail['email']);
@@ -247,6 +249,8 @@ class AppFairController extends Controller
         if($fair->status != $request->get('status')) {
             $user = User::find( Auth::user()->id);
             $mail['email'] = $user->email;
+            $mail['nickname'] = $user->profile->nickname;
+            $mail['title'] = $fair->group_nick;
             $mail['page'] = '/fair/'. $fair->id;
             $mail['status'] = $request->get('status');
             Mail::send('mails.status',  $mail , function($message) use ( $mail ){

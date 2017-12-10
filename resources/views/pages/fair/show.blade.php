@@ -3,165 +3,172 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                     <div class="panel-heading">Ярмарка. Подробнее</div>
 
                     <div class="panel-body">
                         <div class="form-horizontal">
 
-                            <div class="form-group">
-                                <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
+                            <div>
+                                <label for="type_id" class="col-md-4">Тип заявки</label>
                                 <div class="col-md-6">
-                                    <p id="type_id"  class="form-control">{{ $fair->type_id }}</p>
+                                    <p id="type_id">{{ $fair->type_id }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="group_nick" class="col-md-4 control-label">Hазвание группы/ник</label>
+                            <div>
+                                <label for="group_nick" class="col-md-4">Hазвание группы/ник</label>
                                 <div class="col-md-6">
-                                    <p id="group_nick" class="form-control">{{ $fair->group_nick }}</p>
+                                    <p id="group_nick">{{ $fair->group_nick }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="logo" class="col-md-4 control-label">Логотип</label>
+                            <div>
+                                <label for="logo" class="col-md-4">Логотип</label>
                                 <div class="col-md-6">
                                     <img src="/{{  $fair->logo }}" id="logo" name="logo"/>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="contact_name" class="col-md-4 control-label">Контактное лицо</label>
+                            <div>
+                                <label for="contact_name" class="col-md-4">Контактное лицо</label>
                                 <div class="col-md-6">
-                                    <p id="contact_name" class="form-control">{{ $fair->contact_name }}</p>
+                                    <p id="contact_name">{{ $fair->contact_name }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="phone" class="col-md-4 control-label">Телефон</label>
+                            <div>
+                                <label for="phone" class="col-md-4">Телефон</label>
                                 <div class="col-md-6">
-                                    <p id="phone" class="form-control">{{ $fair->phone }}</p>
+                                    <p id="phone">{{ $fair->phone }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="members_count" class="col-md-4 control-label">Количество представителей</label>
+                            <div>
+                                <label for="members_count" class="col-md-4">Количество представителей</label>
                                 <div class="col-md-6">
-                                    <p id="members_count" class="form-control">{{ $fair->members_count }}</p>
+                                    <p id="members_count">{{ $fair->members_count }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
+                            <div>
+                                <label for="social_link" class="col-md-4">Ссылка на личную страницу в соцсети</label>
                                 <div class="col-md-6">
-                                    <p id="social_link"  class="form-control">{{ $fair->social_link }}</p>
+                                    <p id="social_link">{{ $fair->social_link }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
+                            <div>
+                                <label for="group_link" class="col-md-4">Ссылка на сайт или группу в соцсетях</label>
                                 <div class="col-md-6">
-                                    <p id="group_link" class="form-control">{{ $fair->group_link }}</p>
+                                    <p id="group_link">{{ $fair->group_link }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
+                            <div>
+                                <label for="square" class="col-md-4">Площадь(м²)</label>
                                 <div class="col-md-6">
-                                    <p id="square" class="form-control">{{ $fair->square }}</p>
+                                    <p id="square">{{ $fair->square }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
+                            <div >
+                                <label for="payment_type" class="col-md-4">Способ оплаты</label>
                                 <div class="col-md-6">
-                                    <p id="square" class="form-control">{{ $fair->payment_type }}</p>
+                                    <p id="square">{{ $fair->payment_type }}</p>
                                 </div>
                             </div>
 
                             <div>
                                 @if(!$equipment->chair==null)
-                                    <div class="form-group">
-                                        <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
+                                    <div>
+                                        <label for="equipment[chair]" class="col-md-4">Оборудование: Количество стульев</label>
                                         <div class="col-md-6">
-                                            <p id="equipment[chair]" class="form-control">{{ $equipment->chair }}</p>
+                                            <p id="equipment[chair]">{{ $equipment->chair }}</p>
                                         </div>
                                     </div>
                                     @endif
 
                                     @if(!$equipment->table==null)
-                                        <div class="form-group">
-                                            <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
+                                        <div>
+                                            <label for="equipment[table]" class="col-md-4">Количество столов</label>
                                             <div class="col-md-6">
-                                                <p id="equipment[table]" class="form-control">{{ $equipment->table }}</p>
+                                                <p id="equipment[table]">{{ $equipment->table }}</p>
                                             </div>
                                         </div>
                                     @endif
 
                                     @if(!$equipment->electricity==null)
-                                    <div class="form-group">
-                                        <label for="equipment[electricity]" class="col-md-4 control-label">Надобность подведения электричества</label>
+                                    <div>
+                                        <label for="equipment[electricity]" class="col-md-4">Надобность подведения электричества</label>
                                         <div class="col-md-6">
-                                            <p id="equipment[electricity]" class="form-control">{{ $equipment->electricity }}</p>
+                                            <p id="equipment[electricity]">{{ $equipment->electricity }}</p>
                                         </div>
                                     </div>
                                     @endif
 
                                     @if(!$equipment->extra==null)
-                                    <div class="form-group">
-                                        <label for="equipment[extra]" class="col-md-4 control-label">Дополнительное оборудование с размерами</label>
+                                    <div>
+                                        <label for="equipment[extra]" class="col-md-4">Дополнительное оборудование с размерами</label>
                                         <div class="col-md-6">
-                                            <p id="equipment[extra]" class="form-control">{{ $equipment->extra }}</p>
+                                            <p id="equipment[extra]">{{ $equipment->extra }}</p>
                                         </div>
                                     </div>
                                     @endif
                             </div>
 
-                            <div class="form-group">
-                                <label for="description" class="col-md-4 control-label">Описание</label>
+                            <div>
+                                <label for="description" class="col-md-4">Описание</label>
                                 <div class="col-md-6">
-                                    <p id="description" class="form-control">{{ $fair->description }}</p>
+                                    <p id="description">{{ $fair->description }}</p>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+
+                            <div>
+                                <div class="col-md-12">
                                     <a href="/fair/{{ $fair->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
                                 </div>
                             </div>
-                            @if(!count($comments)==0)
-                                <div style="text-align:center"><strong>Коментарии заявки</strong></div>
-                                @foreach($comments as $comment)
-                                    <div class="form-group">
-                                        <label for="comment" class="col-md-4 control-label">
-                                            <strong>{{ $comment->profile->nickname }}</strong>
-                                            <small>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small> </label>
-                                        <div class="col-md-6">
-                                            <p  id="comment" class="form-control">{{ $comment->text }}</p>
-                                        </div>
-                                        <a href="/comment/delete?id={{ $comment->id }}&app_id={{$fair->id}}&app_kind=fair">
-                                            <div class="btn btn-danger">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            @endif
-                            <form method="POST" action="{{url('/comment/create')}}">
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label for="comment" class="col-md-4 control-label">
-                                        Добавить комментарий</label>
-                                    <div class="col-md-6">
-                                        <textarea  id="comment" class="form-control" name="text" required></textarea>
-                                    </div>
-                                    <input type="hidden" name="app_kind" value="fair">
-                                    <input type="hidden" name="app_id" value="{{$fair->id}}">
-                                    <button type="submit" class="btn btn-primary" title=" Отправить коментарий"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                </div>
-                            </form>
+
                         </div>
                     </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">Коментарии заявки( количество {{count($comments)}} )</div>
+                <div class="panel-body">
+                    @if(!count($comments)==0)
+                        @foreach($comments as $comment)
+                            <div>
+                                <label for="comment" class="col-md-3">
+                                    {{ $comment->profile->nickname }}
+                                    <small>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small> </label>
+                                <div class="col-md-8">
+                                    <p  id="comment">{{ $comment->text }}</p>
+                                </div>
+                                <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$fair->id}}&app_kind=fair">
+                                    <div class="btn btn-danger">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    @endif
+                    <form method="POST" action="{{ url('/comment/create')}}">
+                        {{ csrf_field() }}
+                        <div>
+                            <label for="comment" class="col-md-3">
+                                Добавить комментарий</label>
+                            <div class="col-md-8 form-group">
+                                <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
+                                <input type="hidden" name="app_kind" value="fair">
+                                <input type="hidden" name="app_id" value="{{$fair->id}}">
+                            </div>
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-primary" title="Добавить коментарий"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

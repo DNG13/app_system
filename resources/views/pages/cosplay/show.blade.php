@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div>
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-12">
                                 <a href="/cosplay/{{ $cosplay->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
                             </div>
                         </div>
@@ -138,8 +138,8 @@
                     <div>
                         <label for="comment" class="col-md-3">
                             Добавить комментарий</label>
-                        <div class="col-md-8">
-                            <textarea  id="comment" cols="100" name="text" required></textarea>
+                        <div class="col-md-8 form-group">
+                            <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
                             <input type="hidden" name="app_kind" value="cosplay">
                             <input type="hidden" name="app_id" value="{{$cosplay->id}}">
                         </div>

@@ -134,6 +134,8 @@ class AppCosplayController extends Controller
         $cosplays->save();
 
         $user = User::find( Auth::user()->id);
+        $mail['nickname'] = $user->profile->nickname;
+        $mail['title'] = $cosplays->title;
         $mail['email'] = $user->email;
         $mail['page'] = '/cosplay/'. $cosplays->id;
         Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
@@ -208,6 +210,8 @@ class AppCosplayController extends Controller
         $cosplays->user_id = Auth::user()->id;
         if($cosplays->status != $request->get('status')) {
             $user = User::find( Auth::user()->id);
+            $mail['nickname'] = $user->profile->nickname;
+            $mail['title'] = $cosplays->title;
             $mail['email'] = $user->email;
             $mail['page'] ='/cosplay/'. $cosplays->id;
             $mail['status'] = $request->get('status');

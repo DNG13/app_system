@@ -3,8 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                     <div class="panel-heading">Новая заявка косплей-шоу</div>
 
                     <div class="panel-body">
@@ -195,12 +194,6 @@
                                     );
                                     i++;
                                 });
-
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    }
-                                });
                                 $(document).on('click', '#btn_remove', function(){
                                     $(this).closest('.members').remove();
                                     i--;
@@ -218,7 +211,6 @@
                         </script>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

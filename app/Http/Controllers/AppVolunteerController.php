@@ -121,6 +121,8 @@ class AppVolunteerController extends Controller
 
         $user = User::find( Auth::user()->id);
         $mail['email'] = $user->email;
+        $mail['nickname'] = $user->profile->nickname;
+        $mail['title'] = $volunteer->nickname;
         $mail['page'] = "/volunteer/ $volunteer->id";
         Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
             $message->to( $mail['email']);
@@ -213,6 +215,8 @@ class AppVolunteerController extends Controller
         if($volunteer->status != $request->get('status')) {
             $user = User::find( Auth::user()->id);
             $mail['email'] = $user->email;
+            $mail['nickname'] = $user->profile->nickname;
+            $mail['title'] = $volunteer->nickname;
             $mail['page'] = '/volunteer/'.  $volunteer->id;
             $mail['status'] = $request->get('status');
             Mail::send('mails.status',  $mail , function($message) use ( $mail ){
