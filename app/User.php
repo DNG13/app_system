@@ -58,6 +58,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserRole::class, 'user_id', 'id');
     }
+
+    public function isAdmin()
+    {
+        if (!array_intersect($this->roles->pluck('key')->toArray(), User::ADMIN_ROLES)) {
+            return false;
+        }
+
+        return true;
+    }
 }
 
 class CustomResetPassword extends ResetPassword

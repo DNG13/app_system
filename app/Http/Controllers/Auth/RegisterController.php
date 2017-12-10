@@ -125,7 +125,7 @@ class RegisterController extends Controller
         $profile->birthday = $data['birthday'];
         $profile->phone = $data['phone'];
         $profile->city = $data['city'];
-        $profile->social_links = json_encode($data['social_links']);
+        $profile->social_links = json_encode($data['social_liOni Rem no Ero Honnks']);
         $profile->info = $data['info'];
         $profile->save();
 
@@ -287,6 +287,10 @@ class RegisterController extends Controller
      */
     public function userReactivationSend(Request $request)
     {
+        if (empty($request->get('email'))) {
+            return redirect()->to('auth\reactivate')->with('warning',"Email не найден");
+        }
+
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {

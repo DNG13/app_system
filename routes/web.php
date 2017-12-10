@@ -22,7 +22,7 @@ Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
 
 Auth::routes();
-Route::group(['middleware' => ['auth','role.admin']], function() {
+Route::group(['middleware' => ['auth']], function() {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::post('/profile', 'ProfileController@update');
