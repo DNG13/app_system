@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AppCosplay\IndexRequest;
 use App\Models\AppType;
+use App\Models\AppCosplay;
 use App\Models\Comment;
 use App\User;
-use Illuminate\Support\Facades\Auth;
-use App\Models\AppCosplay;
+use Illuminate\Support\Facades\Auth;;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -133,16 +133,16 @@ class AppCosplayController extends Controller
         $cosplays->members = json_encode($members);
         $cosplays->save();
 
-        $user = User::find(Auth::user()->id);
+        $user = User::find( Auth::user()->id);
+        $mail['nickname'] = $user->profile->nickname;
+        $mail['title'] = $cosplays->title;
         $mail['email'] = $user->email;
-        $mail['page']='/cosplay/'. $cosplays->id;
-
-        Mail::send('mails.application',  $mail , function($message) use ( $mail ){
+        $mail['page'] = '/cosplay/'. $cosplays->id;
+        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
             $message->to( $mail['email']);
             $message->subject('Ваша заявка успешно отправлена');
         });
-
-        return redirect('cosplay')->with('success', "Ваша заявка успешно отправлена.");;
+        return redirect('cosplay')->with('success', "Ваша заявка успешно отправлена.");
     }
 
     /**
@@ -208,7 +208,19 @@ class AppCosplayController extends Controller
         $cosplays->prev_part = $request->get('prev_part');
         $cosplays->comment = $request->get('comment');
         $cosplays->user_id = Auth::user()->id;
-        $cosplays->status = 'В обработке';
+        if($cosplays->status != $request->get('status')) {
+            $user = User::find( Auth::user()->id);
+            $mail['nickname'] = $user->profile->nickname;
+            $mail['title'] = $cosplays->title;
+            $mail['email'] = $user->email;
+            $mail['page'] ='/cosplay/'. $cosplays->id;
+            $mail['status'] = $request->get('status');
+            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
+                $message->to( $mail['email']);
+                $message->subject('Изминение статуса завки');
+            });
+        }
+        $cosplays->status = $request->get('status');
 
         $members = [];
         foreach($request->input('members') as  $key => $value) {

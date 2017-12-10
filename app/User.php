@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Models\UserRole;
+use App\Models\Avatar;
+use App\Models\Profile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -36,6 +38,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
+
+    public function avatar()
+    {
+        return $this->hasOne(Avatar::class, 'user_id', 'id');
+    }
 
     public function sendPasswordResetNotification($token)
     {

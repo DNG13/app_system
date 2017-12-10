@@ -3,8 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                     <div class="panel-heading">Редактирование  заявки косплей-шоу</div>
 
                     <div class="panel-body">
@@ -41,11 +40,9 @@
                                     <select class="form-control input-sm" id="status" name="status">
                                         @if(!empty($cosplay->status))
                                             <option selected value="{{$cosplay->status}}">{{$cosplay->status}}</option>
-                                        @else
-                                            <option selected></option>
                                         @endif
                                         <option value="В обработке">В обработке</option>
-                                        <option value="Ожидает ответа пользователя">Ожидает ответа пол-ля</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пользователя</option>
                                         <option value="Принята">Принята</option>
                                         <option value="Отклонена">Отклонена</option>
                                         <option value="Внесены изменения">Внесены изменения</option>
@@ -236,12 +233,6 @@
                                     );
                                     i++;
                                 });
-
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    }
-                                });
                                 $(document).on('click', '#btn_remove', function(){
                                     $(this).closest('.members').remove();
                                     i--;
@@ -259,7 +250,6 @@
                         </script>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

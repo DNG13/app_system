@@ -3,8 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                     <div class="panel-heading">Редактирование  заявки персса</div>
 
                     <div class="panel-body">
@@ -29,6 +28,28 @@
                                     @if ($errors->has('type_id'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('type_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <label for="status" class="col-md-4 control-label">Статус заявки</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm" id="status" name="status">
+                                        @if(!empty($press->status))
+                                            <option selected value="{{$press->status}}">{{$press->status}}</option>
+                                        @endif
+                                        <option value="В обработке">В обработке</option>
+                                        <option value="Ожидает ответа пользователя">Ожидает ответа пользователя</option>
+                                        <option value="Принята">Принята</option>
+                                        <option value="Отклонена">Отклонена</option>
+                                        <option value="Внесены изменения">Внесены изменения</option>
+                                    </select>
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -207,7 +228,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

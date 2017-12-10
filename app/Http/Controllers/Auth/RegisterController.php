@@ -40,7 +40,9 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * RegisterController constructor.
+     * Create a new controller instance.
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -56,7 +58,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'avatar'=>'image|mimes:jpeg,jpg,png|max:4096',
+            'avatar'=>'nullable|image|mimes:jpeg,jpg,png|max:4096',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'surname' => 'required|string|max:64',
@@ -168,17 +170,24 @@ class RegisterController extends Controller
 
             $user_id = $user->id;
 
-            $avatar = new Avatar();
-            $avatar->user_id = $user_id;
-            $socialUser->getAvatar();
-            $fileContents = file_get_contents($socialUser->getAvatar());
-            $imageName =  $user_id . '_'.uniqid() .'.' . ".jpg";
-            File::put(public_path() . '/uploads/avatars/' .  $imageName, $fileContents);
-            $avatar->link = 'uploads/avatars/'.$imageName;
-            $avatar->name = $imageName;
-            $avatar->save();
-
-            $avatar_id = $avatar->id;
+            if($socialUser->getAvatar()) {
+                $avatar = new Avatar();
+                $avatar->user_id = $user_id;
+                $fileContents = file_get_contents($socialUser->getAvatar());
+                $imageName = $user_id . '_' . uniqid() . '.' . ".jpg";
+                File::put(public_path() . '/uploads/avatars/' . $imageName, $fileContents);
+                $avatar->link = 'uploads/avatars/' . $imageName;
+                $avatar->name = $imageName;
+                $img = Image::make($avatar->link);
+                $img->resize(null, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $img->save();
+                $avatar->save();
+                $avatar_id = $avatar->id;
+            } else {
+                $avatar_id = null;
+            }
 
             $profile = new Profile();
             $profile->user_id = $user_id;
@@ -218,7 +227,10 @@ class RegisterController extends Controller
             $myUser->confirmation_code = $confirmation;
             $myUser->save();
 
-            Mail::send('mails.activation',  ['confirmation_code' => $confirmation, 'id' => $user['id']] , function($message) use ( $user ){
+            $profile = Profile::where('user_id', $user['id'])->first();
+            $user['nickname'] = $profile->nickname;
+
+            Mail::send('mails.activation',  ['confirmation_code' => $confirmation, 'id' => $user['id'], 'nickname' => $user['nickname']] , function($message) use ( $user ){
                 $message->to( $user ['email']);
                 $message->subject('Код активации сайта Khanifest');
             });

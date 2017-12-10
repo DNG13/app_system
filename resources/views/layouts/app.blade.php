@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app_system.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 </head>
 <body>
@@ -86,7 +87,10 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->email }} <span class="caret"></span>
+                                    @if(Auth::user()->avatar)
+                                        <img width="20" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>
+                                    @endif
+                                    {{ Auth::user()->profile->nickname }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">

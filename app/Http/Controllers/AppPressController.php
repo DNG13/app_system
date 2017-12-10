@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\AppType;
-use Illuminate\Support\Facades\Auth;
 use App\Models\AppPress;
 use App\Models\Comment;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class AppPressController extends Controller
 {
@@ -124,7 +126,17 @@ class AppPressController extends Controller
         $press->status = 'В обработке';
         $press->social_links = json_encode($request['social_links']);
         $press->save();
-        return redirect('press');
+
+        $user = User::find( Auth::user()->id);
+        $mail['email'] = $user->email;
+        $mail['nickname'] = $user->profile->nickname;
+        $mail['title'] = $press->media_name;
+        $mail['page'] = '/press/'. $press->id;
+        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
+            $message->to( $mail['email']);
+            $message->subject('Ваша заявка успешно отправлена');
+        });
+        return redirect('press')->with('success', "Ваша заявка успешно отправлена.");
     }
 
     /**
@@ -191,7 +203,21 @@ class AppPressController extends Controller
         $press->city = $request->get('city');
         $press->camera = $request->get('camera');
         $press->user_id = Auth::user()->id;
-        $press->status = 'В обработке';
+
+        if($press->status != $request->get('status')) {
+            $user = User::find( Auth::user()->id);
+            $mail['email'] = $user->email;
+            $mail['nickname'] = $user->profile->nickname;
+            $mail['title'] = $press->media_name;
+            $mail['page'] = '/press/'. $press->id;
+            $mail['status'] = $request->get('status');
+            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
+                $message->to( $mail['email']);
+                $message->subject('Изминение статуса завки');
+            });
+        }
+        $press->status = $request->get('status');
+
         $press->social_links = json_encode($request['social_links']);
         $press->save();
         return redirect('press');
