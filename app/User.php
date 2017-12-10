@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\UserRole;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -12,13 +13,19 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ADMIN_ROLES = ['admin'];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'fb', 'email', 'password', 'conformation_code', 'conformed_at'
+        'fb', 'email', 'password', 'confirmation_code', 'confirmed_at'
+    ];
+
+    protected $casts = [
+        'confirmation_code' => 'array',
     ];
 
     /**
@@ -33,6 +40,11 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomResetPassword($token));
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(UserRole::class, 'user_id', 'id');
     }
 }
 

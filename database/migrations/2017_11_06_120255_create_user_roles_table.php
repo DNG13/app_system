@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateUserRolesTable extends Migration
@@ -13,13 +11,11 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('key', 20);
-            $table->foreign('key')
-                ->references('key')->on('roles')
-                ->onDelete('cascade');
-        });
+        app('db')->statement("CREATE TABLE user_roles (            
+        user_id INTEGER NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        key VARCHAR NOT NULL REFERENCES roles(key) ON UPDATE CASCADE ON DELETE CASCADE,
+        PRIMARY KEY  (user_id, key)
+        )");
     }
 
     /**
@@ -29,6 +25,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_roles');
+        app('db')->statement("DROP TABLE IF EXISTS user_roles");
     }
 }

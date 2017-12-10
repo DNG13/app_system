@@ -14,13 +14,15 @@ Route::get('/', function () {
     return view('pages/main');
 });
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/user/activation/{token}', 'Auth\RegisterController@userActivation');
+Route::get('/user/activation/{id}/{code}', 'Auth\RegisterController@userActivation');
+Route::get('auth/reactivate', 'Auth\RegisterController@userReactivation')->name('reactivate');
+Route::post('auth/reactivate/send', 'Auth\RegisterController@userReactivationSend')->name('reactivate.send');
 
 Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
 
 Auth::routes();
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => ['auth','role.admin']], function() {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::post('/profile', 'ProfileController@update');

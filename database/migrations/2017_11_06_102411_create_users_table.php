@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('fb', 100)->nullable()->unique();
-            $table->timestamp('conformed_at')->nullable();
+            $table->timestamp('confirmed_at')->nullable();
             $table->timestamp('blocked_at')->nullable();
             $table->json('password_reset_token')->nullable();
-            $table->string('conformation_code')->nullable();
+            $table->jsonb('confirmation_code')->nullable();
         });
     }
 

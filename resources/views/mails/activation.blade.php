@@ -12,11 +12,11 @@
                     text-align: center;
                     text-decoration: none;
                     display: inline-block;
-                    font-size: 16px;" href="{{ url('user/activation', $conformation_code)}}">Подтверждение профиля</a></div>
+                    font-size: 16px;" href="{{ url('user/activation', [$id, $confirmation_code['code']])}}">Подтверждение профиля</a></div>
     </div>
     <div><h2>С уважением,<br>Оргкомитет Ханифеста</h2></div>
     <div><p>Если у Вас проблеми кнопкой "Подтверждение профиля",</p>
         <p> скопируйте и вставте ссылку ниже в Ваш веб браузер:</p>
-        <p> {{ url('user/activation', $conformation_code)}}</p>
+        <p> {{ url('user/activation', [$id, $confirmation_code['code']])}}</p>
     </div>
 </div>

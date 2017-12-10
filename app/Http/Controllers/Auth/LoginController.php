@@ -44,7 +44,7 @@ class LoginController extends Controller
      */
     public function credentials(Request $request)
     {
-       $request['conformed_at'] = Carbon::now();
-       return $request->only('email', 'password', 'conformation_code');
+       $request['confirmed_at'] = Carbon::now();
+       return $request->only('email', 'password', 'confirmation_code');
     }
 }
