@@ -125,7 +125,7 @@ class RegisterController extends Controller
         $profile->birthday = $data['birthday'];
         $profile->phone = $data['phone'];
         $profile->city = $data['city'];
-        $profile->social_links = json_encode($data['social_liOni Rem no Ero Honnks']);
+        $profile->social_links = json_encode($data['social_links']);
         $profile->info = $data['info'];
         $profile->save();
 

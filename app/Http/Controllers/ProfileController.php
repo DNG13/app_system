@@ -84,4 +84,12 @@ class ProfileController extends Controller
 
         return redirect('profile');
     }
+
+    public function showProfile($data)
+    {
+        $avatar = Avatar::where('user_id', $data)->pluck('link')->first();
+        $profile = Profile::where('user_id', $data)->first();
+        $social_links =  json_decode($profile->social_links);
+        return view('pages.profile.index', compact('profile', 'social_links', 'avatar'));
+    }
 }

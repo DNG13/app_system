@@ -112,7 +112,15 @@
                     @foreach($applications as $application)
                         <tr class="odd">
                             <td>{{ $application->id }}</td>
-                            <td>{{ $application->profile->nickname }}</td>
+                            <td>
+                                @if(Auth::user()->isAdmin())
+                                    <a  class="btn btn-info btn-sm" title="Профиль" href="{{ url('/profile/' . $application->user_id) }}">
+                                        {{ $application->profile->nickname }}
+                                    </a>
+                                @else
+                                    {{ $application->profile->nickname }}
+                                @endif
+                            </td>
                             <td>{{ $application->type->title }}</td>
                             <td>{{ $application->status }}</td>
                             <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>

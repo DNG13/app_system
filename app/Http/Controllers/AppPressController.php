@@ -37,8 +37,11 @@ class AppPressController extends Controller
         $keyword = $request->get('search');
 
         $query = AppPress::select('*')
-            ->where('user_id', Auth::user()->id)
             ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
+
+        if (!Auth::user()->isAdmin()) {
+            $query->where('user_id', Auth::user()->id);
+        }
 
         if (!empty($keyword)) {
             $query->where(function($q) use ($keyword) {

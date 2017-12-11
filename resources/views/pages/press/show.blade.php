@@ -24,6 +24,13 @@
                             </div>
 
                             <div>
+                                <label for="type_id" class="col-md-4">Статус заявки</label>
+                                <div class="col-md-6">
+                                    <p id="type_id">{{ $press->status}}</p>
+                                </div>
+                            </div>
+
+                            <div>
                                 <label for="contact_name" class="col-md-4">Контактное лицо</label>
                                 <div class="col-md-6">
                                     <p id="contact_name">{{ $press->contact_name }}</p>
@@ -118,7 +125,7 @@
                 </div>
 
             <div class="panel panel-info">
-                <div class="panel-heading">Коментарии заявки( количество {{count($comments)}} )</div>
+                <div class="panel-heading">Коментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
                         @foreach($comments as $comment)
@@ -129,11 +136,13 @@
                                 <div class="col-md-8">
                                     <p  id="comment">{{ $comment->text }}</p>
                                 </div>
+                                @if(Auth::user()->isAdmin())
                                 <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$press->id}}&app_kind=press">
                                     <div class="btn btn-danger">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </div>
                                 </a>
+                                @endif
                             </div>
                         @endforeach
                     @endif

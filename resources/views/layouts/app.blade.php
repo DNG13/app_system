@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;@if (Auth::user())
+                        @if (Auth::user())
                             <li class={{ Request::is('/')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"> Главная</i></a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">Читать правила</a></li>
                             <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -65,6 +65,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            @if(Auth::user()->isAdmin())
                             <li class="dropdown"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     <i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -74,6 +75,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            @endif
                         @endif
                     </ul>
 

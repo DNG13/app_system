@@ -36,8 +36,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('fair/store', 'AppFairController@store');
     Route::resource('fair', 'AppFairController', ['except' => ['index', 'store']]);
     Route::resource('volunteer', 'AppVolunteerController');
-    Route::resource('type', 'AddTypeController', ['except' => ['show', 'destroy']]);
-    Route::get('/type/delete', 'AddTypeController@destroy');
     Route::post('/comment/create', 'CommentController@create');
     Route::get('/comment/delete', 'CommentController@delete');
+});
+
+Route::group(['middleware' => ['role.admin']], function() {
+    Route::resource('type', 'AddTypeController', ['except' => ['show', 'destroy']]);
+    Route::get('/type/delete', 'AddTypeController@destroy');
+    Route::get('/profile/{profile}', 'ProfileController@showProfile');
 });

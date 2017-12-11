@@ -33,6 +33,7 @@
                                 </div>
                             </div>
 
+                            @if(Auth::user()->isAdmin())
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-md-4 control-label">Статус заявки</label>
 
@@ -54,6 +55,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @endif
 
                             <div class="form-group{{ $errors->has('media_name') ? ' has-error' : '' }}">
                                 <label for="media_name" class="col-md-4 control-label">Наименование СМИ/никнейм</label>

@@ -18,6 +18,7 @@
                                 </div>
                             </div>
 
+                            @if(Auth::user()->isAdmin())
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-md-4 control-label">Статус заявки</label>
 
@@ -39,6 +40,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @endif
 
                             <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
 

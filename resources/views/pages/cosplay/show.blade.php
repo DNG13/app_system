@@ -114,7 +114,7 @@
             </div>
 
             <div class="panel panel-info">
-                <div class="panel-heading">Коментарии заявки( количество {{count($comments)}} )</div>
+                <div class="panel-heading">Коментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
                     @foreach($comments as $comment)
@@ -125,11 +125,13 @@
                             <div class="col-md-8">
                                 <p  id="comment">{{ $comment->text }}</p>
                             </div>
+                            @if(Auth::user()->isAdmin())
                             <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
                                 <div class="btn btn-danger">
                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </div>
                             </a>
+                            @endif
                         </div>
                     @endforeach
                 @endif
