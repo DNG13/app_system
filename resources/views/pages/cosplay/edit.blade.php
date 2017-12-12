@@ -4,9 +4,9 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                    <div class="panel-heading">Редактирование  заявки косплей-шоу</div>
+                <div class="panel-heading">Редактирование  заявки косплей-шоу</div>
 
-                    <div class="panel-body">
+                <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('cosplay.update', $cosplay->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -251,7 +251,42 @@
                             });
                         </script>
                     </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">Прикрепить файлы</div>
+                <div class="panel-body">
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
+                        <i class="fa fa-file" aria-hidden="true"></i> Технические ограничения
+                    </button>
+                    <div id="filter-panel" class="collapse filter-panel">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <ul>
+                                    <li>размеры файлов не более 10 мегабайт</li>
+                                    <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
+                                    <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
+                                    <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
+                                    <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="{{ url('/upload') }}" enctype="multipart/form-data" method="post" class="dropzone" id="my-awesome-dropzone">
+                        {{ csrf_field() }}
+                        <div class="dz-message" data-dz-message><span>Перенесите файлы сюда, чтобы загрузить</span></div>
+                        <input type="hidden" name="app_kind" value="cosplay">
+                        <input type="hidden" name="app_id" value="{{$cosplay->id}}">
+                        {{--<input type=file name=file>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<div class="col-md-6 col-md-offset-4">--}}
+                                {{--<button type="submit" class="btn btn-primary">--}}
+                                    {{--Отправить--}}
+                                {{--</button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
 @endsection

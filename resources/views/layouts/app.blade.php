@@ -15,6 +15,8 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app_system.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/basic.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dropzone.min.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 </head>
 <body>
@@ -124,7 +126,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
+    <script src="{{ asset('js/dropzone.min.js') }}"></script>
+    <script src="{{ asset('js/dropzone-amd-module.min.js') }}"></script>
 
 </body>
 </html>

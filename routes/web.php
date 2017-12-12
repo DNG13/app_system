@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('volunteer', 'AppVolunteerController');
     Route::post('/comment/create', 'CommentController@create');
     Route::get('/comment/delete', 'CommentController@delete');
+    Route::post('/upload', 'FileController@upload');
+
 });
 
 Route::group(['middleware' => ['role.admin']], function() {
