@@ -6,6 +6,7 @@ use App\Http\Requests\AppCosplay\IndexRequest;
 use App\Models\AppType;
 use App\Models\AppCosplay;
 use App\Models\Comment;
+use App\Models\AppFile;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -157,12 +158,14 @@ class AppCosplayController extends Controller
     public function show($id)
     {
         $cosplay = AppCosplay::where('id', $id)->first();
+        $files = AppFile::where('type', 'cosplay')
+            ->where('app_id', $cosplay->id)->get();
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();
         $members =  json_decode($cosplay->members);
         $count = 0;
-        return view('pages.cosplay.show', compact('cosplay', 'members', 'count', 'comments'));
+        return view('pages.cosplay.show', compact('cosplay', 'members', 'count', 'comments', 'files'));
     }
 
     /**

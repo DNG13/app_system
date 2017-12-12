@@ -113,6 +113,26 @@
                 </div>
             </div>
 
+            <div class="panel panel-warning">
+                <div class="panel-heading">Файли заявки( {{count($files)}} )</div>
+                <div class="panel-body">
+                    @if(!count($files)==0)
+                        @foreach($files as $file)
+                            <div class="col-md-2">
+                                <a href="/{{$file->link}}"><img src="{{'/uploads/file/cosplay/'.$cosplay->id.'/thumbnail_'.$file->name}}"></a>
+                                @if(Auth::user()->isAdmin())
+                                    <a title="Удалить file" href="/file/delete?id={{ $file->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
+                                        <div class="btn btn-danger">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                @endif
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+
             <div class="panel panel-info">
                 <div class="panel-heading">Коментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">

@@ -19,27 +19,45 @@ class FileController extends Controller
         $file = $request->file('file');
 
         if($file) {
-            $imageFile = $request->file('file');
-            $imageName = uniqid(). $imageFile->getClientOriginalName();
-            $imagePath = public_path('uploads/file/' . $request->get('app_kind') . '/' . $request->get('app_id') ).'/' . $imageName;
-            //$extension = $imageFile->extension();
-            $imageFile->move(public_path('uploads/file/'. $request->get('app_kind') . '/' . $request->get('app_id')) .'/', $imageName);
+            $fileName = uniqid(). $file->getClientOriginalName();
+            $path = 'uploads/file/' . $request->get('app_kind') . '/' . $request->get('app_id');
+            $filePath = public_path( $path ).'/' . $fileName;
+            $extension = $file->extension();
+            if($extension) {
+                $file->move(public_path( $path) . '/', $fileName);
 
-            $img = Image::make($imagePath);
-            $img->resize(null, 100, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save(public_path('uploads/file/' . $request->get('app_kind') . '/' . $request->get('app_id') ).'/thumbnail_'.$imageName);
+                $img = Image::make($filePath);
 
-            $image = new AppFile;
-            $image->name = $imageName;
-            $image->app_id = $request->get('app_id');
-            $image->type = $request->get('app_kind');
-            $image->link = $imagePath;
-            $image->save();
+                if($img->width() <= $img->height()) {
+                    $img->resize(null, 100, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                } else {
+                    $img->resize( 100, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                }
+                $img->save(public_path( $path) . '/thumbnail_' . $fileName);
+            }
 
+            $appFile = new AppFile;
+            $appFile->name = $fileName;
+            $appFile->app_id = $request->get('app_id');
+            $appFile->type = $request->get('app_kind');
+            $appFile->link =  $path .'/' . $fileName;;
+            $appFile->save();
         }
         return back()->with('ok');
+    }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->get('id');
+        $file = AppFile::where('id', $id)->first();
+        unlink($file->link);
+        unlink('uploads/file/'.$request->get('app_kind').'/'. $request->get('app_id') .'/thumbnail_'.$file->name);
+        $file->delete();
+        return redirect($request->get('app_kind'). '/' . $request->get('app_id'));
     }
 
 }
