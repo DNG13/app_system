@@ -205,10 +205,9 @@ class AppPressController extends Controller
         $press->portfolio_link = $request->get('portfolio_link');
         $press->city = $request->get('city');
         $press->camera = $request->get('camera');
-        $press->user_id = Auth::user()->id;
 
         if($press->status != $request->get('status')) {
-            $user = User::find( Auth::user()->id);
+            $user =  User::where('id', $press->user_id)->first();
             $mail['email'] = $user->email;
             $mail['nickname'] = $user->profile->nickname;
             $mail['title'] = $press->media_name;

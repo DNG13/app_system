@@ -143,7 +143,7 @@
                                     <p  id="comment">{{ $comment->text }}</p>
                                 </div>
                                 @if(Auth::user()->isAdmin())
-                                <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$volunteer->id}}&app_kind=volunteer">
+                                <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$volunteer->id}}&app_kind=Volunteer">
                                     <div class="btn btn-danger">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </div>
@@ -159,7 +159,7 @@
                                 Добавить комментарий</label>
                             <div class="col-md-8 form-group">
                                 <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
-                                <input type="hidden" name="app_kind" value="volunteer">
+                                <input type="hidden" name="app_kind" value="Volunteer">
                                 <input type="hidden" name="app_id" value="{{$volunteer->id}}">
                             </div>
                             <div class="col-md-1">

@@ -247,10 +247,9 @@ class AppFairController extends Controller
         $fair->square = $request->get('square');
         $fair->payment_type= $request->get('payment_type');
         $fair->description= $request->get('description');
-        $fair->user_id = Auth::user()->id;
 
         if($fair->status != $request->get('status')) {
-            $user = User::find( Auth::user()->id);
+            $user =  User::where('id', $fair->user_id)->first();
             $mail['email'] = $user->email;
             $mail['nickname'] = $user->profile->nickname;
             $mail['title'] = $fair->group_nick;

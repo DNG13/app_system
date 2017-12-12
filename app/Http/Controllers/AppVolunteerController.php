@@ -213,10 +213,9 @@ class AppVolunteerController extends Controller
         $volunteer->skills= $request->get('skills');
         $volunteer->difficulties = $request->get('difficulties');
         $volunteer->experience = $request->get('experience');
-        $volunteer->user_id = Auth::user()->id;
 
         if($volunteer->status != $request->get('status')) {
-            $user = User::find( Auth::user()->id);
+            $user =  User::where('id', $volunteer->user_id)->first();
             $mail['email'] = $user->email;
             $mail['nickname'] = $user->profile->nickname;
             $mail['title'] = $volunteer->nickname;

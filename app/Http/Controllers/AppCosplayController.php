@@ -7,7 +7,7 @@ use App\Models\AppType;
 use App\Models\AppCosplay;
 use App\Models\Comment;
 use App\User;
-use Illuminate\Support\Facades\Auth;;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -210,9 +210,8 @@ class AppCosplayController extends Controller
         $cosplays->description = $request->get('description');
         $cosplays->prev_part = $request->get('prev_part');
         $cosplays->comment = $request->get('comment');
-        $cosplays->user_id = Auth::user()->id;
         if($cosplays->status != $request->get('status')) {
-            $user = User::find( Auth::user()->id);
+            $user =  User::where('id', $cosplays->user_id)->first();
             $mail['nickname'] = $user->profile->nickname;
             $mail['title'] = $cosplays->title;
             $mail['email'] = $user->email;
