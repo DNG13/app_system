@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/comment/create', 'CommentController@create');
     Route::get('/comment/delete', 'CommentController@delete');
     Route::post('/upload', 'FileController@upload');
-
+    Route::get('create-zip', 'FileController@zip')->name('create-zip');
 });
 
 Route::group(['middleware' => ['role.admin']], function() {

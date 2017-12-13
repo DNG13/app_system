@@ -115,11 +115,20 @@
 
             <div class="panel panel-warning">
                 <div class="panel-heading">Файли заявки( {{count($files)}} )</div>
+                <div><a href="/create-zip?download=zip&app_id={{$cosplay->id}}&app_kind=cosplay" class="btn btn-info" >Download ZIP</a></div>
                 <div class="panel-body">
                     @if(!count($files)==0)
                         @foreach($files as $file)
                             <div class="col-md-2">
-                                <a href="/{{$file->link}}"><img src="{{'/uploads/file/cosplay/'.$cosplay->id.'/thumbnail_'.$file->name}}"></a>
+                                <a href="/{{$file->link}}">
+                                    @if($file->type == 'image')
+                                        <img src="/{{$file->thumbnail_link}}">
+                                    @elseif($file->type == 'audio')
+                                        <i class="fa fa-file-audio-o fa-5x" aria-hidden="true"></i>
+                                    @elseif($file->type == 'document')
+                                        <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
+                                    @endif
+                                </a>
                                 @if(Auth::user()->isAdmin())
                                     <a title="Удалить file" href="/file/delete?id={{ $file->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
                                         <div class="btn btn-danger">
@@ -127,6 +136,7 @@
                                         </div>
                                     </a>
                                 @endif
+                                <div>{{$file->name}}</div>
                             </div>
                         @endforeach
                     @endif

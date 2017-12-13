@@ -16,7 +16,9 @@ class CreateAppFilesTable extends Migration
         Schema::create('app_files', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('app_id');
+            $table->string('app_kind');
             $table->text('link');
+            $table->text('thumbnail_link')->nullable();
             $table->string('name', 255);
             $table->string('type', 64);
         });

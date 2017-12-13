@@ -158,7 +158,7 @@ class AppCosplayController extends Controller
     public function show($id)
     {
         $cosplay = AppCosplay::where('id', $id)->first();
-        $files = AppFile::where('type', 'cosplay')
+        $files = AppFile::where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'cosplay')
