@@ -226,7 +226,11 @@ class AppVolunteerController extends Controller
                 $message->subject('Изминение статуса завки');
             });
         }
-        $volunteer->status = $request->get('status');
+        if($request->get('status')) {
+            if (Auth::user()->isAdmin()) {
+                $volunteer->status = $request->get('status');
+            }
+        }
         $volunteer->save();
         return redirect('volunteer');
     }

@@ -225,8 +225,11 @@ class AppCosplayController extends Controller
                 $message->subject('Изминение статуса завки');
             });
         }
-        $cosplays->status = $request->get('status');
-
+        if($request->get('status')) {
+            if (Auth::user()->isAdmin()) {
+                $cosplays->status = $request->get('status');
+            }
+        }
         $members = [];
         foreach($request->input('members') as  $key => $value) {
             $members["member{$key}"] = $value;
@@ -234,7 +237,17 @@ class AppCosplayController extends Controller
         $cosplays->members_count = count($members);
         $cosplays->members = json_encode($members);
         $cosplays->save();
-        return redirect('cosplay');
+        if (!Auth::user()->isAdmin()) {
+            $mail['nickname'] = 'Admin';
+            $mail['email'] = 'khanifest.mail@gmail.com';
+            $mail['title'] = $cosplays->title;
+            $mail['page'] = '/cosplay/'. $cosplays->id;
+            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
+                $message->to($mail['email']);
+                $message->subject('Ваша заявка успешно отправлена');
+            });
+        }
+        return redirect('cosplay')->with('success', "Ваша заявка успешно изменена.");;
     }
 
     /**

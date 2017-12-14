@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AppType;
 use App\Models\AppFair;
+use App\Models\AppFile;
 use App\Models\Comment;
 use App\User;
 use Illuminate\Http\Request;
@@ -175,11 +176,13 @@ class AppFairController extends Controller
     public function show($id)
     {
         $fair = AppFair::where('id', $id)->first();
+        $files = AppFile::where('app_kind', 'fair')
+            ->where('app_id', $fair->id)->get();
         $equipment =  json_decode($fair->equipment);
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
-        return view('pages.fair.show', compact('fair', 'equipment', 'comments'));
+        return view('pages.fair.show', compact('fair', 'files', 'equipment', 'comments'));
     }
 
     /**
@@ -260,7 +263,11 @@ class AppFairController extends Controller
                 $message->subject('Изминение статуса завки');
             });
         }
-        $fair->status = $request->get('status');
+        if($request->get('status')) {
+            if (Auth::user()->isAdmin()) {
+                $fair->status = $request->get('status');
+            }
+        }
         $equipment = [];
         foreach($request->input('equipment') as  $key => $value) {
             $equipment["{$key}"] = $value;

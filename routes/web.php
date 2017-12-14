@@ -37,14 +37,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('fair', 'AppFairController', ['except' => ['index', 'store']]);
     Route::resource('volunteer', 'AppVolunteerController');
     Route::post('/comment/create', 'CommentController@create');
-    Route::get('/comment/delete', 'CommentController@delete');
     Route::post('/upload', 'FileController@upload');
-    Route::get('create-zip', 'FileController@zip')->name('create-zip');
+
 });
 
 Route::group(['middleware' => ['role.admin']], function() {
+    Route::get('create-zip', 'FileController@zip')->name('create-zip');
     Route::resource('type', 'AddTypeController', ['except' => ['show', 'destroy']]);
     Route::get('/type/delete', 'AddTypeController@destroy');
     Route::get('/profile/{profile}', 'ProfileController@showProfile');
     Route::get('/file/delete', 'FileController@destroy');
+    Route::get('/comment/delete', 'CommentController@delete');
 });

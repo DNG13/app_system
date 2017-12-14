@@ -74,7 +74,6 @@ class FileController extends Controller
 
     public function zip(Request $request)
     {
-
         if($request->download == 'zip') {
             // Define Dir Folder
             $public_dir=public_path('/zip');
@@ -125,5 +124,4 @@ class FileController extends Controller
         $file->delete();
         return redirect($request->get('app_kind'). '/' . $request->get('app_id'));
     }
-
 }

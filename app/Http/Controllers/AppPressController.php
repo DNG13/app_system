@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppFile;
 use App\Models\AppType;
 use App\Models\AppPress;
 use App\Models\Comment;
@@ -151,11 +152,13 @@ class AppPressController extends Controller
     public function show($id)
     {
         $press = AppPress::where('id', $id)->first();
+        $files = AppFile::where('app_kind', 'press')
+            ->where('app_id', $press->id)->get();
         $social_links =  json_decode($press->social_links);
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'press')
             ->where('app_id', $press->id)->get();
-        return view('pages.press.show', compact('press', 'social_links', 'comments'));
+        return view('pages.press.show', compact('press', 'files', 'social_links', 'comments'));
     }
 
     /**
@@ -218,7 +221,11 @@ class AppPressController extends Controller
                 $message->subject('Изминение статуса завки');
             });
         }
-        $press->status = $request->get('status');
+        if($request->get('status')) {
+            if (Auth::user()->isAdmin()) {
+                $press->status = $request->get('status');
+            }
+        }
 
         $press->social_links = json_encode($request['social_links']);
         $press->save();

@@ -114,12 +114,44 @@
             </div>
 
             <div class="panel panel-warning">
-                <div class="panel-heading">Файли заявки( {{count($files)}} )</div>
-                <div><a href="/create-zip?download=zip&app_id={{$cosplay->id}}&app_kind=cosplay" class="btn btn-info" >Download ZIP</a></div>
+                <div class="panel-heading">Файли заявки( {{count($files)}} )
+                    @if(Auth::user()->isAdmin())
+                        <div>
+                            <a href="/create-zip?download=zip&app_id={{$cosplay->id}}&app_kind=cosplay" class="btn btn-info" >Загрузить ZIP cosplay_{{$cosplay->id}}</a>
+                        </div>
+                    @endif
+                </div>
+
                 <div class="panel-body">
+                    <div>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
+                            <i class="fa fa-file" aria-hidden="true"></i> Добавить файлы
+                        </button>
+                        <div id="filter-panel" class="collapse filter-panel">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>Добавить файлы можна при редактировании заявки</li>
+                                        <li>Технические ограничения:</li>
+                                        <ul>
+                                            <li>размеры файлов не более 10 мегабайт</li>
+                                            <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
+                                            <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
+                                            <li><i class="fa fa-file-image-o" aria-hidden="true"></i> возвожные форматы картинок/фото: jpeg,jpg,png</li>
+                                            <li><i class="fa fa-file-audio-o" aria-hidden="true"></i> возвожные аудио форматы: ogg, mp3, wav, wma, mid, flac, aac, alac, ac3, m4a, aif, iff, m3u, mpa, ra</li>
+                                            <li><i class="fa fa-file-o" aria-hidden="true"></i> возвожные форматы документов: doc, rtf, pdf, docx, sxw, txt, odt </li>
+                                            <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
+                                            <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            <hr>
                     @if(!count($files)==0)
                         @foreach($files as $file)
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="width: 225px; height:150px;">
                                 <a href="/{{$file->link}}">
                                     @if($file->type == 'image')
                                         <img src="/{{$file->thumbnail_link}}">

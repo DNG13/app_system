@@ -141,6 +141,68 @@
                     </div>
             </div>
 
+            <div class="panel panel-warning">
+                <div class="panel-heading">Файли заявки( {{count($files)}} )
+                    @if(Auth::user()->isAdmin())
+                        <div>
+                            <a href="/create-zip?download=zip&app_id={{$fair->id}}&app_kind=fair" class="btn btn-info" >Загрузить ZIP fair_{{$fair->id}}</a>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="panel-body">
+                    <div>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
+                            <i class="fa fa-file" aria-hidden="true"></i> Добавить файлы
+                        </button>
+                        <div id="filter-panel" class="collapse filter-panel">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>Добавить файлы можна при редактировании заявки</li>
+                                        <li>Технические ограничения:</li>
+                                        <ul>
+                                            <li>размеры файлов не более 10 мегабайт</li>
+                                            <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
+                                            <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
+                                            <li><i class="fa fa-file-image-o" aria-hidden="true"></i> возвожные форматы картинок/фото: jpeg,jpg,png</li>
+                                            <li><i class="fa fa-file-audio-o" aria-hidden="true"></i> возвожные аудио форматы: ogg, mp3, wav, wma, mid, flac, aac, alac, ac3, m4a, aif, iff, m3u, mpa, ra</li>
+                                            <li><i class="fa fa-file-o" aria-hidden="true"></i> возвожные форматы документов: doc, rtf, pdf, docx, sxw, txt, odt </li>
+                                            <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
+                                            <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    @if(!count($files)==0)
+                        @foreach($files as $file)
+                            <div class="col-md-2" style="width: 225px; height:150px;">
+                                <a href="/{{$file->link}}">
+                                    @if($file->type == 'image')
+                                        <img src="/{{$file->thumbnail_link}}">
+                                    @elseif($file->type == 'audio')
+                                        <i class="fa fa-file-audio-o fa-5x" aria-hidden="true"></i>
+                                    @elseif($file->type == 'document')
+                                        <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
+                                    @endif
+                                </a>
+                                @if(Auth::user()->isAdmin())
+                                    <a title="Удалить file" href="/file/delete?id={{ $file->id }}&app_id={{$fair->id}}&app_kind=fair">
+                                        <div class="btn btn-danger">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                @endif
+                                <div>{{$file->name}}</div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+
             <div class="panel panel-info">
                 <div class="panel-heading">Коментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
