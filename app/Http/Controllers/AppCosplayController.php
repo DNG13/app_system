@@ -244,10 +244,10 @@ class AppCosplayController extends Controller
             $mail['page'] = '/cosplay/'. $cosplays->id;
             Mail::send('mails.edit', $mail, function ($message) use ($mail) {
                 $message->to($mail['email']);
-                $message->subject('Ваша заявка успешно отправлена');
+                $message->subject('Заявка ' .$mail['title'] . ' изменена');
             });
         }
-        return redirect('cosplay')->with('success', "Ваша заявка успешно изменена.");;
+        return redirect('cosplay')->with('success', "Ваша заявка успешно изменена.");
     }
 
     /**

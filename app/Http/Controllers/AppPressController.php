@@ -229,7 +229,17 @@ class AppPressController extends Controller
 
         $press->social_links = json_encode($request['social_links']);
         $press->save();
-        return redirect('press');
+        if (!Auth::user()->isAdmin()) {
+            $mail['nickname'] = 'Admin';
+            $mail['email'] = 'khanifest.mail@gmail.com';
+            $mail['title'] = $press->title;
+            $mail['page'] = '/press/'. $press->id;
+            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
+                $message->to($mail['email']);
+                $message->subject('Заявка ' .$mail['title'] . ' изменена');
+            });
+        }
+        return redirect('press')->with('success', "Ваша заявка успешно изменена.");
     }
 
     /**

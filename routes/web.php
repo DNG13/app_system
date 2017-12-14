@@ -20,6 +20,7 @@ Route::post('auth/reactivate/send', 'Auth\RegisterController@userReactivationSen
 
 Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
+Route::post('auth/profile', 'Auth\RegisterController@profile');
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function() {

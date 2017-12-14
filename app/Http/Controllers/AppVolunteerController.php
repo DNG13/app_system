@@ -232,7 +232,17 @@ class AppVolunteerController extends Controller
             }
         }
         $volunteer->save();
-        return redirect('volunteer');
+        if (!Auth::user()->isAdmin()) {
+            $mail['nickname'] = 'Admin';
+            $mail['email'] = 'khanifest.mail@gmail.com';
+            $mail['title'] = $volunteer->title;
+            $mail['page'] = '/volunteer/'. $volunteer->id;
+            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
+                $message->to($mail['email']);
+                $message->subject('Заявка ' .$mail['title'] . ' изменена');
+            });
+        }
+        return redirect('volunteer')->with('success', "Ваша заявка успешно изменена.");
     }
 
     /**

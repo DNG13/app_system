@@ -163,6 +163,9 @@ class RegisterController extends Controller
 
         if(!$user) {
             $user = new User();
+            if(is_null($socialUser->getEmail())) {
+                return redirect()->to('login')->with('warning',"Сохратить настройки аккаунта без email невозможно.");
+            }
             $user->email = $socialUser->getEmail();
             $user->fb = $socialUser->getId();
             $user->password = bcrypt($user->fb);
@@ -200,14 +203,43 @@ class RegisterController extends Controller
             $profile->social_links = json_encode($social_links);
             $profile->save();
 
-            auth()->login($user);
-            $avatar = Avatar::where('user_id', Auth::user()->id)->pluck('link')->first();
-            $profile = Profile::where('user_id', Auth::user()->id)->first();
+            $avatar = Avatar::where('user_id', $user_id )->pluck('link')->first();
+            $profile = Profile::where('user_id', $user_id )->first();
             $social_links =  json_decode($profile->social_links);
-            return view('pages.profile.edit', compact('profile', 'social_links', 'avatar'));
+            return view('auth.profile', compact('profile', 'social_links', 'avatar'));
         }
         auth()->login($user);
         return redirect('/home');
+    }
+
+    public function profile(Request $data){
+
+        $this->validate(request(),[
+            'surname' => 'required|string|max:64',
+            'first_name' => 'required|string|max:64',
+            'middle_name' => 'required|string|max:64',
+            'nickname' => 'max:64',
+            'birthday' => 'required|date',
+            'phone' => 'required|string|max:64',
+            'city' => 'required|string|max:100',
+            'social_links' => '',
+            'info' => '',
+        ]);
+
+        $profile = Profile::where('user_id', $data->id)->first();
+        $profile->middle_name = $data['middle_name'];
+        if($data['nickname']==null){
+            $data['nickname'] = $data['surname'] .' '. $data['first_name'];
+        }
+        $profile->birthday = $data['birthday'];
+        $profile->phone = $data['phone'];
+        $profile->city = $data['city'];
+        $profile->social_links = json_encode($data['social_links']);
+        $profile->info = $data['info'];
+        $profile->save();
+        $user = User::where('id', $data->id)->first();
+        auth()->login($user);
+        return redirect('profile');
     }
 
     /**

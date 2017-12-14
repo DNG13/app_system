@@ -274,7 +274,17 @@ class AppFairController extends Controller
         }
         $fair->equipment = json_encode($equipment);
         $fair->save();
-        return redirect('fair');
+        if (!Auth::user()->isAdmin()) {
+            $mail['nickname'] = 'Admin';
+            $mail['email'] = 'khanifest.mail@gmail.com';
+            $mail['title'] = $fair->title;
+            $mail['page'] = '/fair/'. $fair->id;
+            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
+                $message->to($mail['email']);
+                $message->subject('Заявка ' .$mail['title'] . ' изменена');
+            });
+        }
+        return redirect('fair')->with('success', "Ваша заявка успешно изменена.");
     }
 
     /**
