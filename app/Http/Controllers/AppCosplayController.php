@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\AppCosplay\ListAction;
 use App\Actions\AppCosplay\UpdateAction;
 use App\Http\Requests\AppCosplay\IndexRequest;
 use App\Models\AppType;
@@ -31,56 +32,17 @@ class AppCosplayController extends Controller
 
     /**
      * @param Request $request
+     * @param ListAction $action
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, ListAction $action)
     {
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $data = $request->all();
-        $keyword = $request->get('search');
-
-        $query = AppCosplay::select('*')
-            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
-
-        if (!Auth::user()->isAdmin()) {
-            $query->where('user_id', Auth::user()->id);
-        }
-
-        if (!empty($keyword)) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('title', 'LIKE', "%$keyword%")
-                    ->orWhere('fandom', 'LIKE', "%$keyword%")
-                    ->orWhere('city', 'LIKE', "%$keyword%");
-            });
-        }
-
-        if(!empty($request->get('type_id'))) {
-            $query->where('type_id', $request->get('type_id'));
-        }
-
-        if(!empty($request->get('nickname'))) {
-            $nickname = $request->get('nickname');
-            $query->with('Profile')->whereHas('Profile', function($q) use ($nickname) {
-                $q->where('nickname', 'LIKE', '%' . $nickname . '%');
-            });
-        }
-
-        if(!empty($request->get('status'))) {
-            $query->where('status', $request->get('status'));
-        }
-
-        if(!empty($request->get('ids'))) {
-            $ids = array_map(function ($value) {
-                return (int)trim($value);
-            }, explode(',', $request->get('ids')));
-            $query->whereIn('id', $ids);
-        }
-
-        $applications = $query->paginate(5);
 
         return view('pages.cosplay.index',
             [
-                'applications' => $applications,
+                'applications' => $action->run($request),
                 'sort' => $this->prepareSort($request, $this->sortFields),
                 'types' => $types,
                 'data' =>$data
