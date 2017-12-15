@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\AppVolunteer\ListAction;
+use App\Actions\AppVolunteer\UpdateAction;
 use App\Models\AppVolunteer;
 use App\Models\Comment;
 use App\User;
@@ -28,31 +30,13 @@ class AppVolunteerController extends Controller
 
     /**
      * @param Request $request
+     * @param ListAction $action
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, ListAction $action)
     {
-        $keyword = $request->get('search');
 
-        $query = AppVolunteer::select('*')
-            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
-
-        if (!Auth::user()->isAdmin()) {
-            $query->where('user_id', Auth::user()->id);
-        }
-
-        if (!empty($keyword)) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('skills', 'LIKE', "%$keyword%")
-                    ->orWhere('nickname', 'LIKE', "%$keyword%")
-                    ->orWhere('city', 'LIKE', "%$keyword%")
-                    ->orWhere('status', 'LIKE', "%$keyword%");
-            });
-        }
-
-        $applications = $query->paginate(5);
-
-        return view('pages.volunteer.index', ['applications' => $applications, 'sort' => $this->prepareSort($request, $this->sortFields)]);
+        return view('pages.volunteer.index', ['applications' => $action->run($request), 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**
@@ -164,13 +148,12 @@ class AppVolunteerController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @param UpdateAction $action
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, UpdateAction $action)
     {
         //validate the data
         $this->validate($request,[
@@ -186,63 +169,7 @@ class AppVolunteerController extends Controller
             'city' => 'required|string|max:100',
             'social_links' => '',
         ]);
-        //store in database
-        $volunteer = AppVolunteer::where('id', $id)->first();
-        if($request['photo']) {
-            $imageFile = $request['photo'];
-            $extension = $imageFile->extension();
-            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
-            $imageFile->move(public_path('uploads/volunteers'), $imageName);
-            $imagePath = 'uploads/volunteers/'.$imageName;
-
-            // create Image from file
-            $img = Image::make($imagePath);
-            $img->resize(null, 100, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save();
-            $volunteer->photo= $imagePath;
-        }
-        $volunteer->surname= $request->get('surname');
-        $volunteer->first_name = $request->get('first_name');
-        $volunteer->nickname = $request->get('nickname');
-        $volunteer->birthday = $request->get('birthday');
-        $volunteer->phone = $request->get('phone');
-        $volunteer->city = $request->get('city');
-        $volunteer->social_links = json_encode($request['social_links']);
-        $volunteer->skills= $request->get('skills');
-        $volunteer->difficulties = $request->get('difficulties');
-        $volunteer->experience = $request->get('experience');
-
-        if($volunteer->status != $request->get('status')) {
-            $user =  User::where('id', $volunteer->user_id)->first();
-            $mail['email'] = $user->email;
-            $mail['nickname'] = $user->profile->nickname;
-            $mail['title'] = $volunteer->nickname;
-            $mail['page'] = '/volunteer/'.  $volunteer->id;
-            $mail['status'] = $request->get('status');
-            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                $message->to( $mail['email']);
-                $message->subject('Изминение статуса завки');
-            });
-        }
-        if($request->get('status')) {
-            if (Auth::user()->isAdmin()) {
-                $volunteer->status = $request->get('status');
-            }
-        }
-        $volunteer->save();
-        if (!Auth::user()->isAdmin()) {
-            $mail['nickname'] = 'Admin';
-            $mail['email'] = 'khanifest.mail@gmail.com';
-            $mail['title'] = $volunteer->title;
-            $mail['page'] = '/volunteer/'. $volunteer->id;
-            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
-                $message->to($mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
-        }
-        return redirect('volunteer')->with('success', "Ваша заявка успешно изменена.");
+        return $action->run($request, $id);
     }
 
     /**

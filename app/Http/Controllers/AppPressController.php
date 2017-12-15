@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\AppPress\ListAction;
+use App\Actions\AppPress\UpdateAction;
 use App\Models\AppFile;
 use App\Models\AppType;
 use App\Models\AppPress;
@@ -29,54 +31,17 @@ class AppPressController extends Controller
 
     /**
      * @param Request $request
+     * @param ListAction $action
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, ListAction $action)
     {
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
         $data = $request->all();
-        $keyword = $request->get('search');
 
-        $query = AppPress::select('*')
-            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
-
-        if (!Auth::user()->isAdmin()) {
-            $query->where('user_id', Auth::user()->id);
-        }
-
-        if (!empty($keyword)) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('contact_name', 'LIKE', "%$keyword%")
-                    ->orWhere('media_name', 'LIKE', "%$keyword%")
-                    ->orWhere('city', 'LIKE', "%$keyword%");
-            });
-        }
-        if(!empty($request->get('type_id'))) {
-            $query->where('type_id', $request->get('type_id'));
-        }
-
-        if(!empty($request->get('nickname'))) {
-            $nickname = $request->get('nickname');
-            $query->with('Profile')->whereHas('Profile', function ($q) use ($nickname) {
-                $q->where('nickname', 'LIKE', '%' . $nickname . '%');
-            });
-        }
-
-        if(!empty($request->get('status'))){
-            $query->where('status', $request->get('status'));
-        }
-
-        if(!empty($request->get('ids'))){
-            $ids = array_map(function ($value) {
-                return (int)trim($value);
-            }, explode(',', $request->get('ids')));
-            $query->whereIn('id', $ids);
-        }
-
-        $applications = $query->paginate(5);
 
         return view('pages.press.index', [
-            'applications' => $applications,
+            'applications' => $action->run($request),
             'sort' => $this->prepareSort($request, $this->sortFields),
             'types' => $types,
             'data' =>$data
@@ -176,13 +141,12 @@ class AppPressController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @param UpdateAction $action
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, UpdateAction $action)
     {
         //validate the data
         $this->validate($request,[
@@ -197,49 +161,7 @@ class AppPressController extends Controller
             'camera' =>'required|string|max:100',
             'social_links' => '',
         ]);
-        //store in database
-        $press  = AppPress::where('id', $id)->first();
-        $press->type_id = $request->get('type_id');
-        $press->media_name = $request->get('media_name');
-        $press->contact_name = $request->get('contact_name');
-        $press->phone = $request->get('phone');
-        $press->members_count = $request->get('members_count');
-        $press->equipment = $request->get('equipment');
-        $press->portfolio_link = $request->get('portfolio_link');
-        $press->city = $request->get('city');
-        $press->camera = $request->get('camera');
-
-        if($press->status != $request->get('status')) {
-            $user =  User::where('id', $press->user_id)->first();
-            $mail['email'] = $user->email;
-            $mail['nickname'] = $user->profile->nickname;
-            $mail['title'] = $press->media_name;
-            $mail['page'] = '/press/'. $press->id;
-            $mail['status'] = $request->get('status');
-            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                $message->to( $mail['email']);
-                $message->subject('Изминение статуса завки');
-            });
-        }
-        if($request->get('status')) {
-            if (Auth::user()->isAdmin()) {
-                $press->status = $request->get('status');
-            }
-        }
-
-        $press->social_links = json_encode($request['social_links']);
-        $press->save();
-        if (!Auth::user()->isAdmin()) {
-            $mail['nickname'] = 'Admin';
-            $mail['email'] = 'khanifest.mail@gmail.com';
-            $mail['title'] = $press->title;
-            $mail['page'] = '/press/'. $press->id;
-            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
-                $message->to($mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
-        }
-        return redirect('press')->with('success', "Ваша заявка успешно изменена.");
+        return $action->run($request, $id);
     }
 
     /**

@@ -145,7 +145,7 @@
                 <div class="panel-heading">Файли заявки( {{count($files)}} )
                     @if(Auth::user()->isAdmin())
                         <div>
-                            <a href="/create-zip?download=zip&app_id={{$fair->id}}&app_kind=fair" class="btn btn-info" >Загрузить ZIP fair_{{$fair->id}}</a>
+                            <a href="/create-zip?download=zip&app_id={{$fair->id}}&app_kind=fair" class="btn btn-info" >Скачать <i class="fa fa-download" aria-hidden="true"></i></a>
                         </div>
                     @endif
                 </div>
@@ -159,7 +159,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <ul>
-                                        <li>Добавить файлы можна при редактировании заявки</li>
+                                        <li>Добавить файлы можно при редактировании заявки</li>
                                         <li>Технические ограничения:</li>
                                         <ul>
                                             <li>размеры файлов не более 10 мегабайт</li>

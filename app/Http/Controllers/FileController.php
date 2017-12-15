@@ -10,6 +10,10 @@ use ZipArchive;
 
 class FileController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function upload(Request $request)
     {
         $this->validate($request,[
@@ -72,6 +76,10 @@ class FileController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function zip(Request $request)
     {
         if($request->download == 'zip') {
@@ -113,6 +121,10 @@ class FileController extends Controller
         return redirect($request->get('app_kind'). '/' . $request->get('app_id'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy(Request $request)
     {
         $id = $request->get('id');

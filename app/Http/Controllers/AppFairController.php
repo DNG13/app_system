@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\AppFair\ListAction;
+use App\Actions\AppFair\UpdateAction;
 use App\Models\AppType;
 use App\Models\AppFair;
 use App\Models\AppFile;
@@ -30,54 +32,16 @@ class AppFairController extends Controller
 
     /**
      * @param Request $request
+     * @param ListAction $action
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, ListAction $action)
     {
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $data = $request->all();
-        $keyword = $request->get('search');
-
-        $query = AppFair::select('*')
-            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
-
-        if (!Auth::user()->isAdmin()) {
-            $query->where('user_id', Auth::user()->id);
-        }
-
-        if (!empty($keyword)) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('contact_name', 'LIKE', "%$keyword%")
-                    ->orWhere('group_nick', 'LIKE', "%$keyword%");
-            });
-        }
-
-        if(!empty($request->get('type_id'))) {
-            $query->where('type_id', $request->get('type_id'));
-        }
-
-        if(!empty($request->get('nickname'))) {
-            $nickname = $request->get('nickname');
-            $query->with('Profile')->whereHas('Profile', function ($q) use ($nickname) {
-                $q->where('nickname', 'LIKE', '%' . $nickname . '%');
-            });
-        }
-
-        if(!empty($request->get('status'))) {
-            $query->where('status', $request->get('status'));
-        }
-
-        if(!empty($request->get('ids'))) {
-            $ids = array_map(function ($value) {
-                return (int)trim($value);
-            }, explode(',', $request->get('ids')));
-            $query->whereIn('id', $ids);
-        }
-
-        $applications = $query->paginate(5);
 
         return view('pages.fair.index', [
-            'applications' => $applications,
+            'applications' => $action->run($request),
             'sort' => $this->prepareSort($request, $this->sortFields),
             'types' => $types,
                 'data' =>$data
@@ -200,13 +164,12 @@ class AppFairController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @param UpdateAction $action
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, UpdateAction $action)
     {
         //validate the data
         $this->validate($request,[
@@ -223,68 +186,7 @@ class AppFairController extends Controller
             'description' => 'required|string',
         ]);
 
-        //store in database
-        $fair = AppFair::where('id', $id)->first();
-        $fair->type_id = $request->get('type_id');
-        $fair->group_nick = $request->get('group_nick');
-        if($request['logo']) {
-            $imageFile = $request['logo'];
-            $extension = $imageFile->extension();
-            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
-            $imageFile->move(public_path('uploads/logos'), $imageName);
-            $imagePath = 'uploads/logos/'.$imageName;
-
-            // create Image from file
-            $img = Image::make($imagePath);
-            $img->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save();
-            $fair->logo = $imagePath;
-        }
-        $fair->contact_name = $request->get('contact_name');
-        $fair->phone = $request->get('phone');
-        $fair->members_count = $request->get('members_count');
-        $fair->social_link = $request->get('social_link');
-        $fair->group_link = $request->get('group_link');
-        $fair->square = $request->get('square');
-        $fair->payment_type= $request->get('payment_type');
-        $fair->description= $request->get('description');
-
-        if($fair->status != $request->get('status')) {
-            $user =  User::where('id', $fair->user_id)->first();
-            $mail['email'] = $user->email;
-            $mail['nickname'] = $user->profile->nickname;
-            $mail['title'] = $fair->group_nick;
-            $mail['page'] = '/fair/'. $fair->id;
-            $mail['status'] = $request->get('status');
-            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                $message->to( $mail['email']);
-                $message->subject('Изминение статуса завки');
-            });
-        }
-        if($request->get('status')) {
-            if (Auth::user()->isAdmin()) {
-                $fair->status = $request->get('status');
-            }
-        }
-        $equipment = [];
-        foreach($request->input('equipment') as  $key => $value) {
-            $equipment["{$key}"] = $value;
-        }
-        $fair->equipment = json_encode($equipment);
-        $fair->save();
-        if (!Auth::user()->isAdmin()) {
-            $mail['nickname'] = 'Admin';
-            $mail['email'] = 'khanifest.mail@gmail.com';
-            $mail['title'] = $fair->title;
-            $mail['page'] = '/fair/'. $fair->id;
-            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
-                $message->to($mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
-        }
-        return redirect('fair')->with('success', "Ваша заявка успешно изменена.");
+        return $action->run($request, $id);
     }
 
     /**
