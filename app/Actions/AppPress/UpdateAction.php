@@ -7,7 +7,7 @@ use App\Models\AppPress;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 
 class UpdateAction extends Action
 {
@@ -19,7 +19,6 @@ class UpdateAction extends Action
 
     public function run(Request $request, $id)
     {
-        //store in database
         $press  = AppPress::where('id', $id)->first();
         $press->type_id = $request->get('type_id');
         $press->media_name = $request->get('media_name');
@@ -31,36 +30,38 @@ class UpdateAction extends Action
         $press->city = $request->get('city');
         $press->camera = $request->get('camera');
 
-        if($press->status != $request->get('status')) {
-            $user =  User::where('id', $press->user_id)->first();
-            $mail['email'] = $user->email;
-            $mail['nickname'] = $user->profile->nickname;
-            $mail['title'] = $press->media_name;
-            $mail['page'] = '/press/'. $press->id;
-            $mail['status'] = $request->get('status');
-            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                $message->to( $mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
-        }
         if($request->get('status')) {
             if (Auth::user()->isAdmin()) {
+                if($press->status != $request->get('status')) {
+                    $user =  User::where('id', $press->user_id)->first();
+                    $mail['email'] = $user->email;
+                    $mail['nickname'] = $user->profile->nickname;
+                    $mail['title'] = $press->media_name;
+                    $mail['page'] = '/press/'. $press->id;
+                    $mail['status'] = $request->get('status');
+                    Mail::send('mails.status',  $mail , function($message) use ( $mail ){
+                        $message->to( $mail['email']);
+                        $message->subject('Заявка ' .$mail['title'] . ' изменена');
+                    });
+                }
                 $press->status = $request->get('status');
             }
         }
 
         $press->social_links = json_encode($request['social_links']);
         $press->save();
+
         if (!Auth::user()->isAdmin()) {
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest.mail@gmail.com';
-            $mail['title'] = $press->title;
+            $mail['title'] = $press->media_name;
             $mail['page'] = '/press/'. $press->id;
             Mail::send('mails.edit', $mail, function ($message) use ($mail) {
                 $message->to($mail['email']);
                 $message->subject('Заявка ' .$mail['title'] . ' изменена');
             });
         }
+
         return redirect('press')->with('success', "Ваша заявка успешно изменена.");
     }
 }

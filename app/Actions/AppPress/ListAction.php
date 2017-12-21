@@ -33,6 +33,7 @@ class ListAction extends Action
                     ->orWhere('city', 'LIKE', "%$keyword%");
             });
         }
+
         if(!empty($request->get('type_id'))) {
             $query->where('type_id', $request->get('type_id'));
         }

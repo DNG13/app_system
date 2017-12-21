@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Register\CreateAction;
+use App\Actions\Register\HandleProviderCallbackAction;
+use App\Actions\Register\ProfileFacebookAction;
+use App\Actions\Register\UserReactivationSendAction;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use App\Models\Profile;
 use App\Models\Avatar;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use Mail;
 use File;
-use DB;
 use Carbon\Carbon;
 
 class RegisterController extends Controller
@@ -40,9 +41,7 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * RegisterController constructor.
      */
     public function __construct()
     {
@@ -75,10 +74,8 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     * @return User
      */
     protected function create(array $data)
     {
@@ -87,48 +84,6 @@ class RegisterController extends Controller
         $user->password = bcrypt($data['password']);
         $user->fb = $data['fb']?? null;
         $user->save();
-
-        $user_id = $user->id;
-
-        if (!empty($data['avatar'])) {
-            $avatar = new Avatar();
-            $avatar->user_id = $user_id;
-            if($data['avatar']) {
-                $imageFile = $data['avatar'];
-                $extension = $imageFile->extension();
-                $imageName = $user_id . '_'.uniqid() .'.'. $extension;
-                $imageFile->move(public_path('uploads/avatars'), $imageName);
-                $imagePath = 'uploads/avatars/'.$imageName;
-
-                // create Image from file
-                $img = Image::make($imagePath);
-                $img->resize(null, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $img->save();
-                $avatar->link = $imagePath;
-                $avatar->name = $imageName;
-            }
-            $avatar->save();
-        }
-
-        $profile = new Profile();
-        $profile->user_id = $user_id;
-        $profile->avatar_id = $avatar->id ?? null;
-        $profile->surname = $data['surname'];
-        $profile->first_name = $data['first_name'];
-        $profile->middle_name = $data['middle_name'];
-        if($data['nickname']==null){
-            $data['nickname'] = $data['surname'] .' '. $data['first_name'];
-        }
-        $profile->nickname = $data['nickname'];
-        $profile->birthday = $data['birthday'];
-        $profile->phone = $data['phone'];
-        $profile->city = $data['city'];
-        $profile->social_links = json_encode($data['social_links']);
-        $profile->info = $data['info'];
-        $profile->save();
-
         return $user;
     }
 
@@ -143,11 +98,10 @@ class RegisterController extends Controller
     }
 
     /**
-     * Obtain the user information from Facebook.
-     *
-     * @return \Illuminate\Http\Response
+     * @param HandleProviderCallbackAction $action
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(HandleProviderCallbackAction $action)
     {
         try {
             $socialUser = Socialite::driver('facebook')->user();
@@ -162,47 +116,10 @@ class RegisterController extends Controller
         }
 
         if(!$user) {
-            $user = new User();
             if(is_null($socialUser->getEmail())) {
                 return redirect()->to('login')->with('warning',"Сохратить настройки аккаунта без email невозможно.");
             }
-            $user->email = $socialUser->getEmail();
-            $user->fb = $socialUser->getId();
-            $user->password = bcrypt($user->fb);
-            $user->save();
-
-            $user_id = $user->id;
-
-            if($socialUser->getAvatar()) {
-                $avatar = new Avatar();
-                $avatar->user_id = $user_id;
-                $fileContents = file_get_contents($socialUser->getAvatar());
-                $imageName = $user_id . '_' . uniqid() . '.' . ".jpg";
-                File::put(public_path() . '/uploads/avatars/' . $imageName, $fileContents);
-                $avatar->link = 'uploads/avatars/' . $imageName;
-                $avatar->name = $imageName;
-                $img = Image::make($avatar->link);
-                $img->resize(null, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $img->save();
-                $avatar->save();
-                $avatar_id = $avatar->id;
-            } else {
-                $avatar_id = null;
-            }
-
-            $profile = new Profile();
-            $profile->user_id = $user_id;
-            $profile->avatar_id = $avatar_id;
-            $profile->nickname = $socialUser->getName();
-            $fbName = explode(" ", $socialUser->getName());
-            $profile->surname =  $fbName [1];
-            $profile->first_name = $fbName [0];
-            $social_links = ['vk' => null, 'tg' => null, 'fb' => null, 'sk'=>null];
-            $profile->social_links = json_encode($social_links);
-            $profile->save();
-
+            $user_id = $action->run($socialUser);
             $avatar = Avatar::where('user_id', $user_id )->pluck('link')->first();
             $profile = Profile::where('user_id', $user_id )->first();
             $social_links =  json_decode($profile->social_links);
@@ -212,7 +129,7 @@ class RegisterController extends Controller
         return redirect('/home');
     }
 
-    public function profile(Request $data){
+    public function profileFacebook(Request $data, ProfileFacebookAction $action){
 
         $this->validate(request(),[
             'surname' => 'required|string|max:64',
@@ -225,47 +142,22 @@ class RegisterController extends Controller
             'social_links' => '',
             'info' => '',
         ]);
-
-        $profile = Profile::where('user_id', $data->id)->first();
-        $profile->middle_name = $data['middle_name'];
-        if($data['nickname']==null){
-            $data['nickname'] = $data['surname'] .' '. $data['first_name'];
-        }
-        $profile->birthday = $data['birthday'];
-        $profile->phone = $data['phone'];
-        $profile->city = $data['city'];
-        $profile->social_links = json_encode($data['social_links']);
-        $profile->info = $data['info'];
-        $profile->save();
-        $user = User::where('id', $data->id)->first();
-        auth()->login($user);
+        $action->run($data);
         return redirect('profile');
     }
 
     /**
      * @param Request $request
+     * @param CreateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-
-    public function register(Request $request) {
+    public function register(Request $request, CreateAction $action) {
         $input = $request->all();
         $validator = $this->validator($input);
 
         if ($validator->passes()){
             $user = $this->create($input)->toArray();
-            $confirmation = ['code' => str_random(30), 'created' => gmdate('Y-m-d H:i:s'), 'type' => 'confirm'];
-
-            $myUser = User::find($user['id']);
-            $myUser->confirmation_code = $confirmation;
-            $myUser->save();
-
-            $profile = Profile::where('user_id', $user['id'])->first();
-            $user['nickname'] = $profile->nickname;
-
-            Mail::send('mails.activation',  ['confirmation_code' => $confirmation, 'id' => $user['id'], 'nickname' => $user['nickname']] , function($message) use ( $user ){
-                $message->to( $user ['email']);
-                $message->subject('Код активации сайта Khanifest');
-            });
+            $action->run( $input, $user['id']);
             return redirect()->to('login')->with('success', "Пользователь успешно создан. 
             Вам отправлен код активации, 
             по которому Вы можете подтвердить свою регистрацию. 
@@ -285,7 +177,6 @@ class RegisterController extends Controller
         $user = User::find($id);
 
         if(!is_null($user)){
-
             if (!is_null($user->confirmed_at)){
                 return redirect()->to('home')->with('success',"Профиль уже подтвержден.");
             }
@@ -315,9 +206,10 @@ class RegisterController extends Controller
 
     /**
      * @param Request $request
+     * @param UserReactivationSendAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function userReactivationSend(Request $request)
+    public function userReactivationSend(Request $request, UserReactivationSendAction $action)
     {
         if (empty($request->get('email'))) {
             return redirect()->to('auth\reactivate')->with('warning',"Email не найден");
@@ -332,15 +224,7 @@ class RegisterController extends Controller
         if (!is_null($user->confirmed_at)){
             return redirect()->to('home')->with('success',"Профиль уже подтвержден.");
         }
-
-        $confirmation = ['code' => str_random(30), 'created' => gmdate('Y-m-d H:i:s'), 'type' => 'confirm'];
-        $user->confirmation_code = $confirmation;
-        $user->save();
-
-        Mail::send('mails.activation',  ['confirmation_code' => $confirmation, 'id' => $user['id']] , function($message) use ( $user ){
-            $message->to( $user ['email']);
-            $message->subject('Код активации сайта Khanifest');
-        });
+        $action->run($user);
         return redirect()->to('login')->with('success', "Вам повторно отправлен код активации, 
             по которому Вы можете подтвердить свою регистрацию. 
             Пожалуйста проверьте почту.");

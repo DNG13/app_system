@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Actions\AppCosplay\ListAction;
+use App\Actions\AppCosplay\StoreAction;
 use App\Actions\AppCosplay\UpdateAction;
 use App\Http\Requests\AppCosplay\IndexRequest;
 use App\Models\AppType;
 use App\Models\AppCosplay;
 use App\Models\Comment;
 use App\Models\AppFile;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Mail;
+
 
 class AppCosplayController extends Controller
 {
@@ -61,14 +60,12 @@ class AppCosplayController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param StoreAction $action
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, StoreAction $action )
     {
-        //validate the data
         $this->validate($request,[
             'type_id' => 'required',
             'title' => 'required|string|max:255',
@@ -79,37 +76,8 @@ class AppCosplayController extends Controller
             'prev_part' => '',
             'comment' => '',
         ]);
-        //store in database
-        $cosplays = new AppCosplay();
-        $cosplays->type_id = $request->get('type_id');
-        $cosplays->title = $request->get('title');
-        $cosplays->fandom = $request->get('fandom');
-        $cosplays->length = $request->get('length');
-        $cosplays->city = $request->get('city');
-        $cosplays->description = $request->get('description');
-        $cosplays->prev_part = $request->get('prev_part');
-        $cosplays->comment = $request->get('comment');
-        $cosplays->user_id = Auth::user()->id;
-        $cosplays->status = 'В обработке';
 
-        $members = [];
-        foreach($request->input('members') as  $key => $value) {
-            $members["member{$key}"] = $value;
-        }
-        $cosplays->members_count = count($members);
-        $cosplays->members = json_encode($members);
-        $cosplays->save();
-
-        $user = User::find( Auth::user()->id);
-        $mail['nickname'] = $user->profile->nickname;
-        $mail['title'] = $cosplays->title;
-        $mail['email'] = $user->email;
-        $mail['page'] = '/cosplay/'. $cosplays->id;
-        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
-            $message->to( $mail['email']);
-            $message->subject('Ваша заявка успешно отправлена');
-        });
-        return redirect('cosplay')->with('success', "Ваша заявка успешно отправлена.");
+        return $action->run($request);
     }
 
     /**
@@ -128,6 +96,7 @@ class AppCosplayController extends Controller
             ->where('app_id', $cosplay->id)->get();
         $members =  json_decode($cosplay->members);
         $count = 0;
+
         return view('pages.cosplay.show', compact('cosplay', 'members', 'count', 'comments', 'files'));
     }
 
@@ -143,6 +112,7 @@ class AppCosplayController extends Controller
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $members =  json_decode($cosplay->members);
         $count = 0;
+
         return view('pages.cosplay.edit', compact('types', 'cosplay', 'members', 'count'));
     }
 
@@ -154,7 +124,6 @@ class AppCosplayController extends Controller
      */
     public function update(Request $request, $id, UpdateAction $action)
     {
-        //validate the data
         $this->validate($request,[
             'type_id' => 'required',
             'title' => 'required|string|max:255',
@@ -168,16 +137,4 @@ class AppCosplayController extends Controller
 
         return $action->run($request, $id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
 }

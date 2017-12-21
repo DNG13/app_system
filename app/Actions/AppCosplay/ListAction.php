@@ -58,5 +58,4 @@ class ListAction extends Action
 
         return $query->paginate(5);
     }
-
 }

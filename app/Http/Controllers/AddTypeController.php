@@ -55,30 +55,19 @@ class AddTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //validate the data
         $this->validate($request,[
             'title' => 'required|string|max:255',
             'type' => 'required|string|max:255',
         ]);
-        //store in database
+
         $type = new AppType();
         $type->title = $request->get('title');
         $type->app_type = $request->get('type');
         $type->user_id = Auth::user()->id;
         $type->created_at = Carbon::now();
         $type->save();
-        return redirect('type');
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect('type');
     }
 
     /**
@@ -102,18 +91,18 @@ class AddTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //validate the data
         $this->validate($request,[
             'title' => 'required|string|max:255',
             'type' => 'required|string|max:255',
         ]);
-        //store in database
+
         $type = AppType::where('id', $id)->first();
         $type->title = $request->get('title');
         $type->app_type = $request->get('type');
         $type->user_id = Auth::user()->id;
         $type->created_at = Carbon::now();
         $type->save();
+
         return redirect('type');
     }
 

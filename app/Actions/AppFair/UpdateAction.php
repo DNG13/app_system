@@ -7,7 +7,7 @@ use App\Models\AppFair;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 
 class UpdateAction extends Action
 {
@@ -19,10 +19,10 @@ class UpdateAction extends Action
 
     public function run(Request $request, $id)
     {
-        //store in database
         $fair = AppFair::where('id', $id)->first();
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
+
         if($request['logo']) {
             $imageFile = $request['logo'];
             $extension = $imageFile->extension();
@@ -47,20 +47,20 @@ class UpdateAction extends Action
         $fair->payment_type= $request->get('payment_type');
         $fair->description= $request->get('description');
 
-        if($fair->status != $request->get('status')) {
-            $user =  User::where('id', $fair->user_id)->first();
-            $mail['email'] = $user->email;
-            $mail['nickname'] = $user->profile->nickname;
-            $mail['title'] = $fair->group_nick;
-            $mail['page'] = '/fair/'. $fair->id;
-            $mail['status'] = $request->get('status');
-            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                $message->to( $mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
-        }
         if($request->get('status')) {
             if (Auth::user()->isAdmin()) {
+                if($fair->status != $request->get('status')) {
+                    $user =  User::where('id', $fair->user_id)->first();
+                    $mail['email'] = $user->email;
+                    $mail['nickname'] = $user->profile->nickname;
+                    $mail['title'] = $fair->group_nick;
+                    $mail['page'] = '/fair/'. $fair->id;
+                    $mail['status'] = $request->get('status');
+                    Mail::send('mails.status',  $mail , function($message) use ( $mail ){
+                        $message->to( $mail['email']);
+                        $message->subject('Заявка ' .$mail['title'] . ' изменена');
+                    });
+                }
                 $fair->status = $request->get('status');
             }
         }
@@ -73,13 +73,14 @@ class UpdateAction extends Action
         if (!Auth::user()->isAdmin()) {
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest.mail@gmail.com';
-            $mail['title'] = $fair->title;
+            $mail['title'] = $fair->group_nick;
             $mail['page'] = '/fair/'. $fair->id;
             Mail::send('mails.edit', $mail, function ($message) use ($mail) {
                 $message->to($mail['email']);
                 $message->subject('Заявка ' .$mail['title'] . ' изменена');
             });
         }
+
         return redirect('fair')->with('success', "Ваша заявка успешно изменена.");
     }
 }

@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Actions\AppFair\ListAction;
+use App\Actions\AppFair\StoreAction;
 use App\Actions\AppFair\UpdateAction;
 use App\Models\AppType;
 use App\Models\AppFair;
 use App\Models\AppFile;
 use App\Models\Comment;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
 use Mail;
 
 class AppFairController extends Controller
@@ -60,14 +58,12 @@ class AppFairController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param StoreAction $action
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, StoreAction $action)
     {
-        //validate the data
         $this->validate($request,[
             'logo'=>'required|image|mimes:jpeg,jpg,png|max:4096',
             'type_id' => 'required',
@@ -81,54 +77,8 @@ class AppFairController extends Controller
             'payment_type'=>'required|string|max:64',
             'description' => 'required|string',
         ]);
-        //store in database
-        $fair = new AppFair();
-        $fair->type_id = $request->get('type_id');
-        $fair->group_nick = $request->get('group_nick');
-        if($request['logo']) {
-            $imageFile = $request['logo'];
-            $extension = $imageFile->extension();
-            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
-            $imageFile->move(public_path('uploads/logos'), $imageName);
-            $imagePath = 'uploads/logos/'.$imageName;
 
-            // create Image from file
-            $img = Image::make($imagePath);
-            $img->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save();
-            $fair->logo = $imagePath;
-        }
-        $fair->contact_name = $request->get('contact_name');
-        $fair->phone = $request->get('phone');
-        $fair->members_count = $request->get('members_count');
-        $fair->social_link = $request->get('social_link');
-        $fair->group_link = $request->get('group_link');
-        $fair->square = $request->get('square');
-        $fair->payment_type = $request->get('payment_type');
-        $fair->description = $request->get('description');
-        $fair->user_id = Auth::user()->id;
-        $fair->status = 'В обработке';
-
-        $equipment = [];
-        foreach($request->input('equipment') as  $key => $value) {
-            $equipment["{$key}"] = $value;
-        }
-        $fair->equipment = json_encode($equipment);
-        $fair->save();
-
-        $user = User::find( Auth::user()->id);
-        $mail['email'] = $user->email;
-        $mail['nickname'] = $user->profile->nickname;
-        $mail['title'] = $fair->group_nick;
-        $mail['page'] = '/fair/'. $fair->id;
-        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
-            $message->to( $mail['email']);
-            $message->subject('Ваша заявка успешно отправлена');
-        });
-
-        return redirect('fair')->with('success', "Ваша заявка успешно отправлена.");
+        return $action->run($request);
     }
 
     /**
@@ -146,6 +96,7 @@ class AppFairController extends Controller
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
+
         return view('pages.fair.show', compact('fair', 'files', 'equipment', 'comments'));
     }
 
@@ -160,6 +111,7 @@ class AppFairController extends Controller
         $fair = AppFair::where('id', $id)->first();
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $equipment =  json_decode($fair->equipment);
+
         return view('pages.fair.edit', compact('types', 'fair', 'equipment'));
     }
 
@@ -171,7 +123,6 @@ class AppFairController extends Controller
      */
     public function update(Request $request, $id, UpdateAction $action)
     {
-        //validate the data
         $this->validate($request,[
             'logo'=>'image|mimes:jpeg,jpg,png|max:4096',
             'type_id' => 'required',
@@ -187,16 +138,5 @@ class AppFairController extends Controller
         ]);
 
         return $action->run($request, $id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

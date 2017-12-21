@@ -18,8 +18,8 @@ class UpdateAction extends Action
 
     public function run(Request $request, $id)
     {
-        //store in database
         $volunteer = AppVolunteer::where('id', $id)->first();
+
         if($request['photo']) {
             $imageFile = $request['photo'];
             $extension = $imageFile->extension();
@@ -35,6 +35,7 @@ class UpdateAction extends Action
             $img->save();
             $volunteer->photo= $imagePath;
         }
+
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
         $volunteer->nickname = $request->get('nickname');
@@ -46,34 +47,36 @@ class UpdateAction extends Action
         $volunteer->difficulties = $request->get('difficulties');
         $volunteer->experience = $request->get('experience');
 
-        if($volunteer->status != $request->get('status')) {
-            $user =  User::where('id', $volunteer->user_id)->first();
-            $mail['email'] = $user->email;
-            $mail['nickname'] = $user->profile->nickname;
-            $mail['title'] = $volunteer->nickname;
-            $mail['page'] = '/volunteer/'.  $volunteer->id;
-            $mail['status'] = $request->get('status');
-            Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                $message->to( $mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
-        }
         if($request->get('status')) {
             if (Auth::user()->isAdmin()) {
+                if($volunteer->status != $request->get('status')) {
+                    $user =  User::where('id', $volunteer->user_id)->first();
+                    $mail['email'] = $user->email;
+                    $mail['nickname'] = $user->profile->nickname;
+                    $mail['title'] = $volunteer->nickname;
+                    $mail['page'] = '/volunteer/'.  $volunteer->id;
+                    $mail['status'] = $request->get('status');
+                    Mail::send('mails.status',  $mail , function($message) use ( $mail ){
+                        $message->to( $mail['email']);
+                        $message->subject('Заявка ' .$mail['title'] . ' изменена');
+                    });
+                }
                 $volunteer->status = $request->get('status');
             }
         }
         $volunteer->save();
+
         if (!Auth::user()->isAdmin()) {
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest.mail@gmail.com';
-            $mail['title'] = $volunteer->title;
+            $mail['title'] = $volunteer->nickname;
             $mail['page'] = '/volunteer/'. $volunteer->id;
             Mail::send('mails.edit', $mail, function ($message) use ($mail) {
                 $message->to($mail['email']);
                 $message->subject('Заявка ' .$mail['title'] . ' изменена');
             });
         }
+
         return redirect('volunteer')->with('success', "Ваша заявка успешно изменена.");
     }
 }
