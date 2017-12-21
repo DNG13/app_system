@@ -41,14 +41,11 @@ class HandleProviderCallbackAction extends Action
             });
             $img->save();
             $avatar->save();
-            $avatar_id = $avatar->id;
-        } else {
-            $avatar_id = null;
         }
 
         $profile = new Profile();
         $profile->user_id = $user_id;
-        $profile->avatar_id = $avatar_id;
+        $profile->avatar_id = $avatar->id ?? null;
         $profile->nickname = $socialUser->getName();
         $fbName = explode(" ", $socialUser->getName());
         $profile->surname =  $fbName [1];

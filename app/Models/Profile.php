@@ -29,5 +29,8 @@ class Profile extends Model
         'social_links'
     ];
 
-
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -21,7 +21,7 @@ class ProfileFacebookAction extends Action
         $profile = Profile::where('user_id', $data->id)->first();
         $profile->middle_name = $data['middle_name'];
 
-        if($data['nickname']==null) {
+        if(is_null($data['nickname'])) {
             $data['nickname'] = $data['surname'] .' '. $data['first_name'];
         }
 

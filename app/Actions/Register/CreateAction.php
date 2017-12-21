@@ -48,7 +48,7 @@ class CreateAction extends Action
         $profile->first_name = $data['first_name'];
         $profile->middle_name = $data['middle_name'];
 
-        if($data['nickname']==null) {
+        if(is_null($data['nickname'])) {
             $data['nickname'] = $data['surname'] .' '. $data['first_name'];
         }
 

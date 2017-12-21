@@ -24,7 +24,7 @@ class StoreAction extends Action
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
 
-        if($request->get('nickname') == null) {
+        if(is_null($request->get('nickname'))) {
             $volunteer->nickname = $request->get('surname') .' '. $request->get('first_name');
         }else {
             $volunteer->nickname = $request->get('nickname');
