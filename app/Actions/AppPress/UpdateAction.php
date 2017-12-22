@@ -30,9 +30,8 @@ class UpdateAction extends Action
         $press->city = $request->get('city');
         $press->camera = $request->get('camera');
 
-        if($request->get('status')) {
-            if (Auth::user()->isAdmin()) {
-                if($press->status != $request->get('status')) {
+        if($request->get('status') && Auth::user()->isAdmin()) {
+            if($press->status != $request->get('status')) {
                     $user =  User::where('id', $press->user_id)->first();
                     $mail['email'] = $user->email;
                     $mail['nickname'] = $user->profile->nickname;
@@ -44,8 +43,7 @@ class UpdateAction extends Action
                         $message->subject('Заявка ' .$mail['title'] . ' изменена');
                     });
                 }
-                $press->status = $request->get('status');
-            }
+            $press->status = $request->get('status');
         }
 
         $press->social_links = json_encode($request['social_links']);

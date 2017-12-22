@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Actions\AppCosplay\ListAction;
 use App\Actions\AppCosplay\StoreAction;
 use App\Actions\AppCosplay\UpdateAction;
@@ -109,7 +110,7 @@ class AppCosplayController extends Controller
     public function edit($id)
     {
         $cosplay = AppCosplay::where('id', $id)->first();
-        if($cosplay->status == 'Отклонена'){
+        if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
            return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');

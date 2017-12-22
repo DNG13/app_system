@@ -11,16 +11,18 @@
                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('profile') }}">
                             {{ csrf_field() }}
 
+                            @if($avatar)
                             <div class="form-group">
-                                <label for="avatar" class="col-md-4 control-label">Аватар</label>
+                                <label for="avatar" class="col-md-4 control-label"></label>
                                 <div class="col-md-6">
-                                    <img src="/{{  $avatar }}" id="avatar"/>
+                                    <img src="/{{ $avatar }}" id="avatar"/>
                                 </div>
                             </div>
+                            @endif
 
                             <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
 
-                                <label for="image_uploads" class="col-md-4 control-label"></label>
+                                <label for="image_uploads" class="col-md-4 control-label">Аватар</label>
 
                                 <div class="col-md-6">Выберите файл для изменения автара (PNG,JPG,JPEG)
                                     <input name="avatar" type="file"  accept=".jpeg, .jpg, .png" />

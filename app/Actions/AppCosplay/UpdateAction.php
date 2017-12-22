@@ -28,9 +28,8 @@ class UpdateAction extends Action
         $cosplays->prev_part = $request->get('prev_part');
         $cosplays->comment = $request->get('comment');
 
-        if($request->get('status')) {
-            if (Auth::user()->isAdmin()) {
-                if($cosplays->status != $request->get('status')) {
+        if($request->get('status') && Auth::user()->isAdmin()) {
+            if($cosplays->status != $request->get('status')) {
                     $user =  User::where('id', $cosplays->user_id)->first();
                     $mail['nickname'] = $user->profile->nickname;
                     $mail['title'] = $cosplays->title;
@@ -42,8 +41,7 @@ class UpdateAction extends Action
                         $message->subject('Изминение статуса завки');
                     });
                 }
-                $cosplays->status = $request->get('status');
-            }
+            $cosplays->status = $request->get('status');
         }
         $members = [];
         foreach($request->input('members') as  $key => $value) {
@@ -52,6 +50,7 @@ class UpdateAction extends Action
         $cosplays->members_count = count($members);
         $cosplays->members = json_encode($members);
         $cosplays->save();
+
         if (!Auth::user()->isAdmin()) {
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest.mail@gmail.com';

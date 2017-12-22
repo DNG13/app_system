@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Actions\AppPress\StoreAction;
 use App\Actions\AppPress\ListAction;
 use App\Actions\AppPress\UpdateAction;
@@ -109,7 +110,7 @@ class AppPressController extends Controller
     public function edit($id)
     {
         $press = AppPress::where('id', $id)->first();
-        if($press->status == 'Отклонена'){
+        if($press->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');

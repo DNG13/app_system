@@ -43,10 +43,8 @@ class UpdateAction extends Action
             $avatar->save();
         }
 
-        $avatarId = $avatar ? Auth::user()->id : null;
-
         $profile = Profile::where('user_id', Auth::user()->id)->first();
-        $profile->avatar_id = $avatarId;
+        $profile->avatar_id = $avatar->id ?? null;
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
         $profile->middle_name = $data['middle_name'];

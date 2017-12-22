@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Actions\AppFair\ListAction;
 use App\Actions\AppFair\StoreAction;
 use App\Actions\AppFair\UpdateAction;
@@ -109,7 +110,7 @@ class AppFairController extends Controller
     public function edit($id)
     {
         $fair = AppFair::where('id', $id)->first();
-        if($fair->status == 'Отклонена'){
+        if($fair->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('fair')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');

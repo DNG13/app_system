@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Actions\AppVolunteer\ListAction;
 use App\Actions\AppVolunteer\StoreAction;
 use App\Actions\AppVolunteer\UpdateAction;
@@ -97,7 +98,7 @@ class AppVolunteerController extends Controller
     public function edit($id)
     {
         $volunteer = AppVolunteer::where('id', $id)->first();
-        if($volunteer->status == 'Отклонена'){
+        if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $social_links =  json_decode($volunteer->social_links);

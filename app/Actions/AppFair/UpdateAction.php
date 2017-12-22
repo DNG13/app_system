@@ -47,9 +47,8 @@ class UpdateAction extends Action
         $fair->payment_type= $request->get('payment_type');
         $fair->description= $request->get('description');
 
-        if($request->get('status')) {
-            if (Auth::user()->isAdmin()) {
-                if($fair->status != $request->get('status')) {
+        if($request->get('status') && Auth::user()->isAdmin()) {
+            if($fair->status != $request->get('status')) {
                     $user =  User::where('id', $fair->user_id)->first();
                     $mail['email'] = $user->email;
                     $mail['nickname'] = $user->profile->nickname;
@@ -61,8 +60,7 @@ class UpdateAction extends Action
                         $message->subject('Заявка ' .$mail['title'] . ' изменена');
                     });
                 }
-                $fair->status = $request->get('status');
-            }
+            $fair->status = $request->get('status');
         }
         $equipment = [];
         foreach($request->input('equipment') as  $key => $value) {
@@ -70,6 +68,7 @@ class UpdateAction extends Action
         }
         $fair->equipment = json_encode($equipment);
         $fair->save();
+
         if (!Auth::user()->isAdmin()) {
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest.mail@gmail.com';

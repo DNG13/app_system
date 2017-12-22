@@ -153,17 +153,20 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function register(Request $request, CreateAction $action) {
+
         $input = $request->all();
         $validator = $this->validator($input);
 
         if ($validator->passes()){
             $user = $this->create($input)->toArray();
             $action->run( $input, $user['id']);
+
             return redirect()->to('login')->with('success', "Пользователь успешно создан. 
             Вам отправлен код активации, 
             по которому Вы можете подтвердить свою регистрацию. 
             Пожалуйста проверьте почту.");
         }
+
         return back()->with('errors',$validator->errors());
     }
 
@@ -174,6 +177,7 @@ class RegisterController extends Controller
      */
 
     public function userActivation($id, $code) {
+
         $user = User::find($id);
         if(!is_null($user)){
             if (!is_null($user->confirmed_at)){
@@ -191,6 +195,7 @@ class RegisterController extends Controller
                 $user->confirmation_code = [];
                 $user->save();
                 auth()->login($user);
+
                 return redirect()->to('home')->with('success', "Поздравляем, ваш аккаунт подтвержден.");
             }
         }
