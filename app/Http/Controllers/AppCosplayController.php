@@ -109,6 +109,9 @@ class AppCosplayController extends Controller
     public function edit($id)
     {
         $cosplay = AppCosplay::where('id', $id)->first();
+        if($cosplay->status == 'Отклонена'){
+           return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+        }
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $members =  json_decode($cosplay->members);
         $count = 0;

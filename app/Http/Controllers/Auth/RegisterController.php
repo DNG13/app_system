@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\Actions\Register\CreateAction;
 use App\Actions\Register\HandleProviderCallbackAction;
 use App\Actions\Register\ProfileFacebookAction;
@@ -173,12 +174,13 @@ class RegisterController extends Controller
      */
 
     public function userActivation($id, $code) {
-
         $user = User::find($id);
-
         if(!is_null($user)){
             if (!is_null($user->confirmed_at)){
-                return redirect()->to('home')->with('success',"Профиль уже подтвержден.");
+                if(!Auth::user()){
+                    auth()->login($user);
+                }
+                return redirect()->to('home')->with('success', "Профиль уже подтвержден.");
             }
 
             if ($user->confirmation_code['code'] == $code
@@ -189,11 +191,11 @@ class RegisterController extends Controller
                 $user->confirmation_code = [];
                 $user->save();
                 auth()->login($user);
-                return redirect()->to('home')->with('success',"Поздравляем, ваш аккаунт подтвержден.");
+                return redirect()->to('home')->with('success', "Поздравляем, ваш аккаунт подтвержден.");
             }
         }
 
-        return redirect()->to('auth\reactivate')->with('warning',"Ваша ссылка не валидна.");
+        return redirect()->to('auth\reactivate')->with('warning', "Ваша ссылка не валидна.");
     }
 
     /**
@@ -222,6 +224,9 @@ class RegisterController extends Controller
         }
 
         if (!is_null($user->confirmed_at)){
+            if(!Auth::user()){
+                auth()->login($user);
+            }
             return redirect()->to('home')->with('success',"Профиль уже подтвержден.");
         }
         $action->run($user);

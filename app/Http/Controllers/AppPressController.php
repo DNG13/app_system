@@ -109,6 +109,9 @@ class AppPressController extends Controller
     public function edit($id)
     {
         $press = AppPress::where('id', $id)->first();
+        if($press->status == 'Отклонена'){
+            return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+        }
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
         $social_links =  json_decode($press->social_links);
 

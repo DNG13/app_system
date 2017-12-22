@@ -97,6 +97,9 @@ class AppVolunteerController extends Controller
     public function edit($id)
     {
         $volunteer = AppVolunteer::where('id', $id)->first();
+        if($volunteer->status == 'Отклонена'){
+            return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+        }
         $social_links =  json_decode($volunteer->social_links);
         return view('pages.volunteer.edit', compact('volunteer', 'social_links'));
     }

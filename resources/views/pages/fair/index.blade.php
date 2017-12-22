@@ -12,6 +12,13 @@
                         </p>
                     </div>
                 @endif
+                    @if ($message = Session::get('warning'))
+                        <div class="alert alert-warning">
+                            <p>
+                                {{ $message }}
+                            </p>
+                        </div>
+                    @endif
                 <hr>
                 <form action="{{ url('/fair')}}" method="GET">
                     <div class="input-group">

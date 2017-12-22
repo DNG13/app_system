@@ -109,6 +109,9 @@ class AppFairController extends Controller
     public function edit($id)
     {
         $fair = AppFair::where('id', $id)->first();
+        if($fair->status == 'Отклонена'){
+            return redirect('fair')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+        }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $equipment =  json_decode($fair->equipment);
 
