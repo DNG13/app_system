@@ -20,6 +20,8 @@ class CreateRolesTable extends Migration
             $table->timestamps();
             $table->boolean('active');
         });
+
+        app('db')->statement("INSERT INTO roles (key, title, active) VALUES ('admin', 'Admin', true)");
     }
 
     /**

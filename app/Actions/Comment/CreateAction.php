@@ -50,7 +50,7 @@ class CreateAction extends Action
             $mail['email'] = $user->email;
         } else {
             $mail['nickname'] = 'Admin';
-            $mail['email'] = 'khanifest.mail@gmail.com';
+            $mail['email'] = env('ADMIN_MAIL');
         }
 
         Mail::send('mails.comment',  $mail , function($message) use ($mail) {
