@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Type\StoreUpdateRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\AppType;
@@ -48,18 +49,11 @@ class AddTypeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreUpdateRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreUpdateRequest $request)
     {
-        $this->validate($request,[
-            'title' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-        ]);
-
         $type = new AppType();
         $type->title = $request->get('title');
         $type->app_type = $request->get('type');
@@ -83,19 +77,12 @@ class AddTypeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreUpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateRequest $request, $id)
     {
-        $this->validate($request,[
-            'title' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-        ]);
-
         $type = AppType::where('id', $id)->first();
         $type->title = $request->get('title');
         $type->app_type = $request->get('type');

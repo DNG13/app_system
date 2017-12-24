@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Profile\UpdateAction;
+use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\Avatar;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class ProfileController extends Controller
         return view('pages.profile.index', compact('profile', 'social_links', 'avatar'));
     }
 
-    public function edit() {
+    public function edit()
+    {
         $avatar = Avatar::where('user_id', Auth::user()->id)->pluck('link')->first();
         $profile = Profile::where('user_id', Auth::user()->id)->first();
         $social_links =  json_decode($profile->social_links);
@@ -28,26 +30,13 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param Request $data
+     * @param UpdateRequest $data
      * @param UpdateAction $action
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $data, UpdateAction $action){
-
-        $this->validate(request(),[
-            'avatar'=>'nullable|image|mimes:jpeg,jpg,png|max:4096',
-            'surname' => 'required|string|max:64',
-            'first_name' => 'required|string|max:64',
-            'middle_name' => 'required|string|max:64',
-            'nickname' => 'max:64',
-            'birthday' => 'required|date',
-            'phone' => 'required|string|max:64',
-            'city' => 'required|string|max:100',
-            'social_links' => '',
-            'info' => '',
-        ]);
+    public function update(UpdateRequest $data, UpdateAction $action)
+    {
         $action->run($data);
-
         return redirect('profile');
     }
 

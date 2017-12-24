@@ -2,36 +2,26 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
 use App\Actions\Register\CreateAction;
 use App\Actions\Register\HandleProviderCallbackAction;
 use App\Actions\Register\ProfileFacebookAction;
 use App\Actions\Register\UserReactivationSendAction;
-use Laravel\Socialite\Facades\Socialite;
+use App\Http\Requests\Register\ProfileFacebookRequest;
 use App\User;
 use App\Models\Profile;
 use App\Models\Avatar;
 use App\Http\Controllers\Controller;
+use Auth;
+use Carbon\Carbon;
+use File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 use Mail;
-use File;
-use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
     /**
@@ -115,7 +105,6 @@ class RegisterController extends Controller
         if (!$user) {
             $user = User::where('email', $socialUser->getEmail())->first();
         }
-
         if(!$user) {
             if(is_null($socialUser->getEmail())) {
                 return redirect()->to('login')->with('warning',"Сохратить настройки аккаунта без email невозможно.");
@@ -130,19 +119,13 @@ class RegisterController extends Controller
         return redirect('/home');
     }
 
-    public function profileFacebook(Request $data, ProfileFacebookAction $action){
-
-        $this->validate(request(),[
-            'surname' => 'required|string|max:64',
-            'first_name' => 'required|string|max:64',
-            'middle_name' => 'required|string|max:64',
-            'nickname' => 'max:64',
-            'birthday' => 'required|date',
-            'phone' => 'required|string|max:64',
-            'city' => 'required|string|max:100',
-            'social_links' => '',
-            'info' => '',
-        ]);
+    /**
+     * @param ProfileFacebookRequest $data
+     * @param ProfileFacebookAction $action
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function profileFacebook(ProfileFacebookRequest $data, ProfileFacebookAction $action)
+    {
         $action->run($data);
         return redirect('profile');
     }
@@ -152,8 +135,8 @@ class RegisterController extends Controller
      * @param CreateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function register(Request $request, CreateAction $action) {
-
+    public function register(Request $request, CreateAction $action)
+    {
         $input = $request->all();
         $validator = $this->validator($input);
 
@@ -166,7 +149,6 @@ class RegisterController extends Controller
             по которому Вы можете подтвердить свою регистрацию. 
             Пожалуйста проверьте почту.");
         }
-
         return back()->with('errors',$validator->errors());
     }
 
@@ -175,9 +157,8 @@ class RegisterController extends Controller
      * @param $code
      * @return \Illuminate\Http\RedirectResponse
      */
-
-    public function userActivation($id, $code) {
-
+    public function userActivation($id, $code)
+    {
         $user = User::find($id);
         if(!is_null($user)){
             if (!is_null($user->confirmed_at)){
@@ -199,7 +180,6 @@ class RegisterController extends Controller
                 return redirect()->to('home')->with('success', "Поздравляем, ваш аккаунт подтвержден.");
             }
         }
-
         return redirect()->to('auth\reactivate')->with('warning', "Ваша ссылка не валидна.");
     }
 

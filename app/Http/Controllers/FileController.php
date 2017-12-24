@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\File\LoadAction;
 use App\Actions\File\ZipAction;
+use App\Http\Requests\File\UploadRequest;
 use App\Models\AppFile;
 use Illuminate\Http\Request;
 use File;
@@ -11,16 +12,12 @@ use File;
 class FileController extends Controller
 {
     /**
-     * @param Request $request
+     * @param UploadRequest $request
      * @param LoadAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function upload(Request $request, LoadAction $action)
+    public function upload(UploadRequest $request, LoadAction $action)
     {
-        $this->validate($request,[
-            'file' => 'nullable|file|mimes:jpeg,jpg,png,ogg,mp3,wav,wma,mid,flac,aac,alac,ac3,m4a,aif,iff,m3u,mpa,ra,doc,rtf,pdf,docx,sxw,txt,odt|max:102400',
-
-        ]);
         $file = $request->file('file');
 
         if($file) {

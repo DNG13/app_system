@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppVolunteer\StoreRequest;
+use App\Http\Requests\AppVolunteer\UpdateRequest;
 use Auth;
 use App\Actions\AppVolunteer\ListAction;
 use App\Actions\AppVolunteer\StoreAction;
@@ -49,26 +51,12 @@ class AppVolunteerController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreRequest $request
      * @param StoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, StoreAction $action)
+    public function store(StoreRequest $request, StoreAction $action)
     {
-        $this->validate($request,[
-            'photo'=>'required|image|mimes:jpeg,jpg,png|max:4096',
-            'surname' => 'required|string|max:64',
-            'first_name' => 'required|string|max:64',
-            'nickname' => 'max:64',
-            'birthday' => 'required|date',
-            'phone' => 'required|string|max:64',
-            'city' => 'required|string|max:100',
-            'social_links' => '',
-            'skills' => 'required|string',
-            'difficulties' => 'nullable|string',
-            'experience' => 'nullable|string',
-        ]);
-
         return $action->run($request);
     }
 
@@ -106,27 +94,13 @@ class AppVolunteerController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param UpdateRequest $request
      * @param $id
      * @param UpdateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id, UpdateAction $action)
+    public function update(UpdateRequest $request, $id, UpdateAction $action)
     {
-        $this->validate($request,[
-            'photo'=>'nullable|image|mimes:jpeg,jpg,png|max:4096',
-            'skills' => 'required|string',
-            'difficulties' => 'nullable|string',
-            'experience' => 'nullable|string',
-            'surname' => 'required|string|max:64',
-            'first_name' => 'required|string|max:64',
-            'nickname' => 'max:64',
-            'birthday' => 'required|date',
-            'phone' => 'required|string|max:64',
-            'city' => 'required|string|max:100',
-            'social_links' => '',
-        ]);
-
         return $action->run($request, $id);
     }
 }

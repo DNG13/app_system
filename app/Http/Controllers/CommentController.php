@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Comment\CreateAction;
+use App\Http\Requests\Comment\CreateRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Mail;
@@ -10,15 +11,12 @@ use Mail;
 class CommentController extends Controller
 {
     /**
-     * @param Request $request
+     * @param CreateRequest $request
      * @param CreateAction $action
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function create( Request $request, CreateAction $action )
+    public function create( CreateRequest $request, CreateAction $action )
     {
-        $this->validate($request,[
-            'text' => 'required|string|max:255',
-        ]);
         return $action->run($request);
     }
 

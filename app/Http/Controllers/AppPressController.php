@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppPress\StoreUpdateRequest;
 use Auth;
 use App\Actions\AppPress\StoreAction;
 use App\Actions\AppPress\ListAction;
@@ -59,26 +60,12 @@ class AppPressController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreUpdateRequest $request
      * @param StoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, StoreAction $action)
+    public function store(StoreUpdateRequest $request, StoreAction $action)
     {
-        //validate the data
-        $this->validate($request,[
-            'type_id' => 'required',
-            'contact_name' => 'required|string|max:255',
-            'media_name' => 'required|string|max:100',
-            'phone' => 'required|string|max:64',
-            'members_count' => 'required|numeric',
-            'portfolio_link'=>'required',
-            'equipment' => 'required|string',
-            'city' => 'required|string|max:100',
-            'camera' =>'required|string|max:100',
-            'social_links' => '',
-        ]);
-
         return $action->run($request);
     }
 
@@ -120,26 +107,13 @@ class AppPressController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreUpdateRequest $request
      * @param $id
      * @param UpdateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id, UpdateAction $action)
+    public function update(StoreUpdateRequest $request, $id, UpdateAction $action)
     {
-        $this->validate($request,[
-            'type_id' => 'required',
-            'contact_name' => 'required|string|max:255',
-            'media_name' => 'required|string|max:100',
-            'phone' => 'required|string|max:64',
-            'members_count' => 'required|numeric',
-            'portfolio_link'=>'required',
-            'equipment' => 'required|string',
-            'city' => 'required|string|max:100',
-            'camera' =>'required|string|max:100',
-            'social_links' => '',
-        ]);
-
         return $action->run($request, $id);
     }
 }

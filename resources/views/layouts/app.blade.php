@@ -74,6 +74,8 @@
                                     <li>
                                         <a href="{{ url('/type/create')}}">Добавить тип заявки</a>
                                         <a href="{{ url('/type')}}">Все типы заявок</a>
+                                        <a href="{{ url('/role/create')}}">Добавить роль</a>
+                                        <a href="{{ url('/role')}}">Все роли</a>
                                     </li>
                                 </ul>
                             </li>

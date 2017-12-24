@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppFair\StoreRequest;
+use App\Http\Requests\AppFair\UpdateRequest;
 use Auth;
 use App\Actions\AppFair\ListAction;
 use App\Actions\AppFair\StoreAction;
@@ -59,26 +61,12 @@ class AppFairController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreRequest $request
      * @param StoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, StoreAction $action)
+    public function store(StoreRequest $request, StoreAction $action)
     {
-        $this->validate($request,[
-            'logo'=>'required|image|mimes:jpeg,jpg,png|max:4096',
-            'type_id' => 'required',
-            'group_nick'=>'required|string|max:100',
-            'contact_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:64',
-            'members_count' => 'required|numeric',
-            'social_link'=>'required',
-            'group_link'=>'required',
-            'square' => 'required|numeric',
-            'payment_type'=>'required|string|max:64',
-            'description' => 'required|string',
-        ]);
-
         return $action->run($request);
     }
 
@@ -120,27 +108,13 @@ class AppFairController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param UpdateRequest $request
      * @param $id
      * @param UpdateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id, UpdateAction $action)
+    public function update(UpdateRequest $request, $id, UpdateAction $action)
     {
-        $this->validate($request,[
-            'logo'=>'image|mimes:jpeg,jpg,png|max:4096',
-            'type_id' => 'required',
-            'group_nick'=>'required|string|max:100',
-            'contact_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:64',
-            'members_count' => 'required|numeric',
-            'social_link'=>'required',
-            'group_link'=>'required',
-            'square' => 'required|numeric',
-            'payment_type'=>'required|string|max:64',
-            'description' => 'required|string',
-        ]);
-
         return $action->run($request, $id);
     }
 }

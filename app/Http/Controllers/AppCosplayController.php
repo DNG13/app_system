@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppCosplay\StoreUpdateRequest;
 use Auth;
 use App\Actions\AppCosplay\ListAction;
 use App\Actions\AppCosplay\StoreAction;
 use App\Actions\AppCosplay\UpdateAction;
-use App\Http\Requests\AppCosplay\IndexRequest;
 use App\Models\AppType;
 use App\Models\AppCosplay;
 use App\Models\Comment;
@@ -61,23 +61,12 @@ class AppCosplayController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreUpdateRequest $request
      * @param StoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, StoreAction $action )
+    public function store(StoreUpdateRequest $request, StoreAction $action )
     {
-        $this->validate($request,[
-            'type_id' => 'required',
-            'title' => 'required|string|max:255',
-            'fandom' => 'required|string|max:255',
-            'length' => 'required|numeric',
-            'city' => 'required|string|max:100',
-            'description' => 'required|string',
-            'prev_part' => '',
-            'comment' => '',
-        ]);
-
         return $action->run($request);
     }
 
@@ -121,24 +110,13 @@ class AppCosplayController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreUpdateRequest $request
      * @param $id
      * @param UpdateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id, UpdateAction $action)
+    public function update(StoreUpdateRequest $request, $id, UpdateAction $action)
     {
-        $this->validate($request,[
-            'type_id' => 'required',
-            'title' => 'required|string|max:255',
-            'fandom' => 'required|string|max:255',
-            'length' => 'required|numeric',
-            'city' => 'required|string|max:100',
-            'description' => 'required|string',
-            'prev_part' => '',
-            'comment' => '',
-        ]);
-
         return $action->run($request, $id);
     }
 }

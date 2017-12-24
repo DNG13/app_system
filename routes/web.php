@@ -44,8 +44,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group(['middleware' => ['role.admin']], function() {
     Route::get('create-zip', 'FileController@zip')->name('create-zip');
-    Route::resource('type', 'AddTypeController', ['except' => 'show']);
+    Route::resource('type', 'AddTypeController', ['except' => ['show', 'destroy']]);
     Route::get('/type/delete', 'AddTypeController@destroy');
+    Route::resource('role', 'AddRoleController', ['except' => ['show', 'destroy']]);
+    Route::get('/role/delete', 'AddRoleController@destroy');
     Route::get('/profile/{profile}', 'ProfileController@show');
     Route::get('/file/delete', 'FileController@destroy');
     Route::get('/comment/delete', 'CommentController@destroy');
