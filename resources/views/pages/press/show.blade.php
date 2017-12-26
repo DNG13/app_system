@@ -115,6 +115,38 @@
                                 </div>
                             @endif
 
+                            <div class="col-md-12"><h4>Участники</h4></div>
+                            <div id="dynamic_field">
+                                <div class="members" id="row0">
+                                    @foreach($members as $member=>$attributes)
+                                        @foreach($attributes as $attribute=>$data)
+                                            @if($attribute=='surname')
+                                                <div>
+                                                    <label  class="col-md-4">Участник {{++$count}}: Фамилия</label>
+                                                    <div class="col-md-6">
+                                                        <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
+                                                    </div>
+                                                </div>
+                                            @elseif($attribute=='first_name')
+                                                <div>
+                                                    <label  class="col-md-4">Имя</label>
+                                                    <div class="col-md-6">
+                                                        <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
+                                                    </div>
+                                                </div>
+                                            @elseif($attribute=='duty')
+                                                <div>
+                                                    <label  class="col-md-4">Обязанности на фестивале</label>
+                                                    <div class="col-md-6">
+                                                        <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </div>
+                            </div>
+
                             <div>
                                 <div class="col-md-12">
                                     <a href="/press/{{ $press->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>

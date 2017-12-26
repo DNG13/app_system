@@ -168,6 +168,13 @@
                                                         <input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
                                                 </div>
+                                            @elseif($attribute=='character')
+                                                <div class="form-group">
+                                                    <label  class="col-md-4 control-label">Персонаж</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="members[{{$count}}][character]" class="form-control name_list" required value="{{ $data }}"/>
+                                                    </div>
+                                                </div>
                                             @elseif($attribute=='birthday')
                                                 <div class="form-group">
                                                     <label  class="col-md-4 control-label">Дата рождения</label>
@@ -183,6 +190,7 @@
                                             @endif
                                         @endforeach
                                     </div>
+                                    <input hidden {{$count++}}}>
                                     @endforeach
                             </div>
 
@@ -204,34 +212,39 @@
 
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                var postURL = "<?php echo url('cosplay/create'); ?>";
-                                var i=1;
-
+                                var postURL = "<?php echo url('cosplay/edite'); ?>";
+                                var i="<?php echo $count; ?>";
                                 $('#add').click(function(){
                                     $('#dynamic_field').append(
-                                        ' <div class="members" id="row'+i+'">' +
-                                            ' <div class="form-group">'+
+                                        '<div class="members" id="row'+i+'">' +
+                                            '<div class="form-group">'+
                                                 '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
-                                                '<div class="col-md-6"> ' +
+                                                '<div class="col-md-6">' +
                                                     '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                                 '</div>' +
                                             '</div>'+
-                                            '<div class="form-group"> ' +
+                                            '<div class="form-group">' +
                                                 '<label class="col-md-4 control-label">Имя</label>' +
-                                                ' <div class="col-md-6"> ' +
+                                                '<div class="col-md-6">' +
                                                     '<input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/> ' +
                                                 '</div>' +
-                                            ' </div>' +
-                                            ' <div class="form-group"> ' +
+                                            '</div>' +
+                                            '<div class="form-group">' +
+                                                '<label class="col-md-4 control-label">Персонаж</label>' +
+                                                '<div class="col-md-6">' +
+                                                    '<input type="text" name="members['+i+'][character]" class="form-control name_list" required/>' +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<div class="form-group">' +
                                                 '<label  class="col-md-4 control-label">Дата рождения</label>' +
-                                                ' <div class="col-md-3"> ' +
+                                                '<div class="col-md-3">' +
                                                     '<input type="date"  min="1899-01-01" max="Date()"  name="members['+i+'][birthday]" class="form-control name_list" required/>' +
                                                 '</div>'+
                                                 '<div class="col-md-1">'+
-                                                    '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
-                                                ' </div>' +
-                                            ' </div>' +
-                                        ' </div>'
+                                                    '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"><i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>'
                                     );
                                     i++;
                                 });

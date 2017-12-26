@@ -101,7 +101,7 @@
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" pattern='[\+]\d{3}[\(]\d{2}[\)]\d{7}'  placeholder="+380(00)0000000" type="tel" class="form-control" name="phone" value="{{ $press->phone }}" required autofocus>
+                                    <input id="phone" pattern='[\+]\d{3}[\]\d{2}[\]\d{7}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{ $press->phone }}" required autofocus>
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
@@ -220,6 +220,51 @@
                                 </div>
                             </div>
 
+                            <div style="text-align:center"><strong>Участники</strong></div>
+                            <div id="dynamic_field">
+                                @foreach($members as $member=>$attributes)
+                                    <div class="members" id="row{{$count}}">
+                                        @foreach($attributes as $attribute=>$data)
+                                            @if($attribute=='surname')
+                                                <div class="form-group">
+                                                    <label  class="col-md-4 control-label">Участник : Фамилия</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/>
+                                                    </div>
+                                                </div>
+                                            @elseif($attribute=='first_name')
+                                                <div class="form-group">
+                                                    <label  class="col-md-4 control-label">Имя</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/>
+                                                    </div>
+                                                </div>
+                                            @elseif($attribute=='duty')
+                                                <div class="form-group">
+                                                    <label  class="col-md-4 control-label">Обязанности на фестивале</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="members[{{$count}}][duty]" class="form-control name_list" required value="{{ $data }}"/>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника">
+                                                            <i class="fa fa-user-times" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <input hidden {{$count++}}}>
+                                @endforeach
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"></label>
+                                <div class="col-md-6">
+                                    <button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -228,6 +273,53 @@
                                 </div>
                             </div>
                         </form>
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                var postURL = "<?php echo url('fair/edit'); ?>";
+                                var i="<?php echo $count; ?>";
+                                $('#add').click(function(){
+                                    $('#dynamic_field').append(
+                                        '<div class="members" id="row'+i+'">' +
+                                        '<div class="form-group">'+
+                                        '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
+                                        '<div class="col-md-6">' +
+                                        '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
+                                        '</div>' +
+                                        '</div>'+
+                                        '<div class="form-group">' +
+                                        '<label class="col-md-4 control-label">Имя</label>' +
+                                        '<div class="col-md-6">' +
+                                        '<input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/>' +
+                                        '</div>' +
+                                        '</div>'+
+                                        '<div class="form-group">' +
+                                        '<label class="col-md-4 control-label">Обязанности</label>' +
+                                        '<div class="col-md-3">' +
+                                        '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
+                                        '</div>' +
+                                        '<div class="col-md-1">'+
+                                        '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"><i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>'
+                                    );
+                                    i++;
+                                });
+                                $(document).on('click', '#btn_remove', function(){
+                                    $(this).closest('.members').remove();
+                                    i--;
+                                });
+
+                                $('#submit').click(function(){
+                                    $.ajax({
+                                        url:postURL,
+                                        method:"POST",
+                                        data:$('#add_name').serialize(),
+                                        type:'json'
+                                    });
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
 

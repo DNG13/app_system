@@ -26,6 +26,7 @@ class CreateAppFairsTable extends Migration
             $table->timestamps();
             $table->string('group_nick', 100);
             $table->string('contact_name', 255);
+            $table->json('members');
             $table->integer('members_count');
             $table->string('phone', 64);
             $table->string('status', 100);

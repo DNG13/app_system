@@ -85,6 +85,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
+                                <label for="middle_name" class="col-md-4 control-label">Отчество</label>
+
+                                <div class="col-md-6">
+                                    <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ $volunteer->middle_name }}" required autofocus>
+
+                                    @if ($errors->has('middle_name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('middle_name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
                                 <label for="nickname" class="col-md-4 control-label">Никнейм</label>
 
@@ -131,7 +145,7 @@
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" pattern='[\+]\d{3}[\(]\d{2}[\)]\d{7}'  placeholder="+380(00)0000000" type="tel" class="form-control" name="phone" value="{{ $volunteer->phone }}" required autofocus>
+                                    <input id="phone" pattern='[\+]\d{3}[\]\d{2}[\]\d{7}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{ $volunteer->phone }}" required autofocus>
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">

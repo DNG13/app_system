@@ -27,7 +27,6 @@ class UpdateRequest extends FormRequest
             'avatar'=>'nullable|image|mimes:jpeg,jpg,png|max:4096',
             'surname' => 'required|string|max:64',
             'first_name' => 'required|string|max:64',
-            'middle_name' => 'required|string|max:64',
             'nickname' => 'max:64',
             'birthday' => 'required|date',
             'phone' => 'required|string|max:64',

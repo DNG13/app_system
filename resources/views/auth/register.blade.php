@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail</label>
+                            <label for="email" class="col-md-4 control-label">E-Mail<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
-                            <label for="surname" class="col-md-4 control-label">Фамилия</label>
+                            <label for="surname" class="col-md-4 control-label">Фамилия<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}" required autofocus>
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="first_name" class="col-md-4 control-label">Имя</label>
+                            <label for="first_name" class="col-md-4 control-label">Имя<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
@@ -63,20 +63,6 @@
                                 @if ($errors->has('first_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                            <label for="middle_name" class="col-md-4 control-label">Отчество</label>
-
-                            <div class="col-md-6">
-                                <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ old('middle_name') }}" required autofocus>
-
-                                @if ($errors->has('middle_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('middle_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -97,7 +83,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                            <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
+                            <label for="birthday" class="col-md-4 control-label">Дата рождения<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="birthday" type="date" min='1899-01-01' max="{{date("Y-m-d")}}" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
@@ -111,7 +97,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                            <label for="city" class="col-md-4 control-label">Город</label>
+                            <label for="city" class="col-md-4 control-label">Город<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
@@ -125,10 +111,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="phone" class="col-md-4 control-label">Телефон</label>
+                            <label for="phone" class="col-md-4 control-label">Телефон<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
-                                <input id="phone" pattern='[\+]\d{3}[\(]\d{2}[\)]\d{7}'  placeholder="+380(00)0000000" type="tel" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
+                                <input id="phone" pattern='[\+]\d{3}[\]\d{2}[\]\d{7}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
 
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
@@ -139,7 +125,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Пароль</label>
+                            <label for="password" class="col-md-4 control-label">Пароль<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -153,7 +139,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Подтверждение пароля</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Подтверждение пароля<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>

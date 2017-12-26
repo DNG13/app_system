@@ -52,13 +52,6 @@
                             </div>
 
                             <div>
-                                <label for="members_count" class="col-md-4">Количество представителей</label>
-                                <div class="col-md-6">
-                                    <p id="members_count">{{ $fair->members_count }}</p>
-                                </div>
-                            </div>
-
-                            <div>
                                 <label for="social_link" class="col-md-4">Ссылка на личную страницу в соцсети</label>
                                 <div class="col-md-6">
                                     <p id="social_link">{{ $fair->social_link }}</p>
@@ -128,6 +121,38 @@
                                 <label for="description" class="col-md-4">Описание</label>
                                 <div class="col-md-6">
                                     <p id="description">{{ $fair->description }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12"><h4>Участники</h4></div>
+                            <div id="dynamic_field">
+                                <div class="members" id="row0">
+                                    @foreach($members as $member=>$attributes)
+                                        @foreach($attributes as $attribute=>$data)
+                                            @if($attribute=='surname')
+                                                <div>
+                                                    <label  class="col-md-4">Участник {{++$count}}: Фамилия</label>
+                                                    <div class="col-md-6">
+                                                        <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
+                                                    </div>
+                                                </div>
+                                            @elseif($attribute=='first_name')
+                                                <div>
+                                                    <label  class="col-md-4">Имя</label>
+                                                    <div class="col-md-6">
+                                                        <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
+                                                    </div>
+                                                </div>
+                                            @elseif($attribute=='duty')
+                                                <div>
+                                                    <label  class="col-md-4">Обязанности на фестивале</label>
+                                                    <div class="col-md-6">
+                                                        <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
                                 </div>
                             </div>
 

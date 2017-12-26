@@ -27,6 +27,7 @@ class CreateAppPressTable extends Migration
             $table->text('portfolio_link');
             $table->string('media_name', 100);
             $table->string('contact_name', 255);
+            $table->json('members');
             $table->integer('members_count');
             $table->string('city', 100);
             $table->string('status', 100);

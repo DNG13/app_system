@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Role\StoreUpdateRequest;
-use Carbon\Carbon;
+use App\User;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\Models\UserRole;
 
-class AddRoleController extends Controller
+class UserRoleController extends Controller
 {
     private $sortFields = [
         'key',
-        'title',
-        'created_at',
-        'active'
+        'user_id'
     ];
     /**
      * @param Request $request
@@ -21,19 +19,20 @@ class AddRoleController extends Controller
      */
     public function index(Request $request)
     {
+        $users =  UserRole::all();
+
         $keyword = $request->get('search');
-        $query = Role::select('*')
-            ->orderby($request->order_by ?? 'key', $request->order ?? 'asc');
+        $query = User::select('*')
+            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
 
         if (!empty($keyword)) {
             $query->where(function($q) use ($keyword) {
-                $q->where('title',  $keyword)
-                    ->orWhere('key',  $keyword);
+                $q->where('usr_id',  $keyword);
             });
         }
 
         $roles = $query->paginate(10);
-        return view('pages.role.index', ['roles'=>$roles, 'sort' => $this->prepareSort($request, $this->sortFields)]);
+        return view('pages.user-role.index', ['roles'=>$roles, 'users'=>$users, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**
@@ -43,7 +42,7 @@ class AddRoleController extends Controller
      */
     public function create()
     {
-        return view('pages.role.create');
+        return view('pages.user-role.create');
     }
 
     /**
@@ -52,14 +51,11 @@ class AddRoleController extends Controller
      */
     public function store(StoreUpdateRequest $request)
     {
-        $role = new Role();
-        $role->title = $request->get('title');
+        $role = new UserRole();
         $role->key = $request->get('key');
-        $role->active = $request->get('active');
-        $role->created_at = Carbon::now();
         $role->save();
 
-        return redirect('role');
+        return redirect('user-role');
     }
 
     /**\
@@ -68,8 +64,8 @@ class AddRoleController extends Controller
      */
     public function edit($key)
     {
-        $role = Role::where('key', $key)->first();
-        return view('pages.role.edit', compact('role'));
+        $role = UserRole::where('key', $key)->first();
+        return view('pages.user-role.edit', compact('role'));
     }
 
     /**
@@ -79,24 +75,10 @@ class AddRoleController extends Controller
      */
     public function update(StoreUpdateRequest $request, $key)
     {
-        $role = Role::where('key', $key)->first();
-        $role->title = $request->get('title');
+        $role = UserRole::where('key', $key)->first();
         $role->key = $request->get('key');
-        $role->active = $request->get('active');
-        $role->created_at = Carbon::now();
         $role->save();
 
-        return redirect('role');
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(Request $request)
-    {
-        $key = $request->get('key');
-        Role::where('key', $key)->delete();
-        return redirect()->back();
+        return redirect('user-role');
     }
 }

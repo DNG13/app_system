@@ -41,7 +41,6 @@ class StoreAction extends Action
         }
         $fair->contact_name = $request->get('contact_name');
         $fair->phone = $request->get('phone');
-        $fair->members_count = $request->get('members_count');
         $fair->social_link = $request->get('social_link');
         $fair->group_link = $request->get('group_link');
         $fair->square = $request->get('square');
@@ -49,6 +48,12 @@ class StoreAction extends Action
         $fair->description = $request->get('description');
         $fair->user_id = Auth::user()->id;
         $fair->status = 'В обработке';
+        $members = [];
+        foreach($request->input('members') as  $key => $value) {
+            $members["member{$key}"] = $value;
+        }
+        $fair->members_count = count($members);
+        $fair->members = json_encode($members);
 
         $equipment = [];
         foreach($request->input('equipment') as  $key => $value) {

@@ -43,7 +43,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::user())
-                            <li class={{ Request::is('/')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"> Главная</i></a></li>
+                            <li class={{ Request::is('/')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Главная</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">Читать правила</a></li>
                             <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     Мои заявки<span class="caret"></span></a>
@@ -72,10 +72,9 @@
                                     <i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/type/create')}}">Добавить тип заявки</a>
-                                        <a href="{{ url('/type')}}">Все типы заявок</a>
-                                        <a href="{{ url('/role/create')}}">Добавить роль</a>
-                                        <a href="{{ url('/role')}}">Все роли</a>
+                                        <a href="{{ url('/type')}}">Типы заявок</a>
+                                        <a href="{{ url('/role')}}">Роли</a>
+                                        <a href="{{ url('/user-role')}}">Добавить роль пользователю</a>
                                     </li>
                                 </ul>
                             </li>

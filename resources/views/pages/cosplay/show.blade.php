@@ -48,11 +48,11 @@
                             </div>
                         </div>
 
-                        @if(!$cosplay->comment==null)
+                        @if(!$cosplay->prev_part==null)
                             <div>
                                 <label for="prev_part" class="col-md-4">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <p id="prev_part">{{ $cosplay->comment }}</p>
+                                    <p id="prev_part">{{ $cosplay->prev_part }}</p>
                                 </div>
                             </div>
                         @endif
@@ -90,6 +90,13 @@
                                                 <label  class="col-md-4">Имя</label>
                                                 <div class="col-md-6">
                                                     <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
+                                                </div>
+                                            </div>
+                                        @elseif($attribute=='character')
+                                            <div>
+                                                <label  class="col-md-4">Персонаж</label>
+                                                <div class="col-md-6">
+                                                    <p  id="members[{{$count}}][character]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='birthday')

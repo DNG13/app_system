@@ -29,7 +29,6 @@ class StoreRequest extends FormRequest
             'group_nick'=>'required|string|max:100',
             'contact_name' => 'required|string|max:255',
             'phone' => 'required|string|max:64',
-            'members_count' => 'required|numeric',
             'social_link'=>'required',
             'group_link'=>'required',
             'square' => 'required|numeric',

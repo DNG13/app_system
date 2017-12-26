@@ -47,7 +47,6 @@ class UpdateAction extends Action
         $profile->avatar_id = $avatar->id ?? null;
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
-        $profile->middle_name = $data['middle_name'];
         $profile->nickname = $data['nickname'];
         $profile->birthday = $data['birthday'];
         $profile->phone = $data['phone'];

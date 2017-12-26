@@ -19,7 +19,6 @@ class ProfileFacebookAction extends Action
     public function run(Request $data)
     {
         $profile = Profile::where('user_id', $data->id)->first();
-        $profile->middle_name = $data['middle_name'];
 
         if(is_null($data['nickname'])) {
             $data['nickname'] = $data['surname'] .' '. $data['first_name'];

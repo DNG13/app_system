@@ -63,20 +63,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                                <label for="middle_name" class="col-md-4 control-label">Отчество</label>
-
-                                <div class="col-md-6">
-                                    <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ $profile->middle_name }}" required autofocus>
-
-                                    @if ($errors->has('middle_name'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('middle_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
                                 <label for="nickname" class="col-md-4 control-label">Никнейм</label>
 

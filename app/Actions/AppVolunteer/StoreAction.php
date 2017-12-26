@@ -23,6 +23,7 @@ class StoreAction extends Action
         $volunteer = new AppVolunteer();
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
+        $volunteer->middle_name = $request->get('middle_name');
 
         if(is_null($request->get('nickname'))) {
             $volunteer->nickname = $request->get('surname') .' '. $request->get('first_name');

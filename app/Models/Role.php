@@ -14,8 +14,8 @@ class Role extends Model
 
     protected $fillable = ['key',  'title'];
 
-//    public function profile()
-//    {
-//        return $this->hasOne(Profile::class, 'user_id', 'user_id');
-//    }
+    public function userRole()
+    {
+        return $this->hasOne(UserRole::class, 'key', 'key');
+    }
 }

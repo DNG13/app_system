@@ -24,7 +24,6 @@ class UpdateAction extends Action
         $press->media_name = $request->get('media_name');
         $press->contact_name = $request->get('contact_name');
         $press->phone = $request->get('phone');
-        $press->members_count = $request->get('members_count');
         $press->equipment = $request->get('equipment');
         $press->portfolio_link = $request->get('portfolio_link');
         $press->city = $request->get('city');
@@ -45,7 +44,12 @@ class UpdateAction extends Action
                 }
             $press->status = $request->get('status');
         }
-
+        $members = [];
+        foreach($request->input('members') as  $key => $value) {
+            $members["member{$key}"] = $value;
+        }
+        $press->members_count = count($members);
+        $press->members = json_encode($members);
         $press->social_links = json_encode($request['social_links']);
         $press->save();
 

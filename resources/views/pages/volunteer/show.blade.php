@@ -31,6 +31,13 @@
                             </div>
 
                             <div>
+                                <label for="middle_name" class="col-md-4">Отчество</label>
+                                <div class="col-md-6">
+                                    <p id="middle_name">{{ $volunteer->middle_name }}</p>
+                                </div>
+                            </div>
+
+                            <div>
                                 <label for="nickname" class="col-md-4">Никнейм</label>
                                 <div class="col-md-6">
                                     <p id="nickname"> {{ $volunteer->nickname }}</p>

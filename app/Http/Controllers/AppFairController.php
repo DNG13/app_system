@@ -85,8 +85,10 @@ class AppFairController extends Controller
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
+        $members =  json_decode($fair->members);
+        $count = 0;
 
-        return view('pages.fair.show', compact('fair', 'files', 'equipment', 'comments'));
+        return view('pages.fair.show', compact('fair', 'files', 'equipment', 'comments', 'members', 'count'));
     }
 
     /**
@@ -103,8 +105,10 @@ class AppFairController extends Controller
         }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $equipment =  json_decode($fair->equipment);
+        $members =  json_decode($fair->members);
+        $count = 0;
 
-        return view('pages.fair.edit', compact('types', 'fair', 'equipment'));
+        return view('pages.fair.edit', compact('types', 'fair', 'equipment', 'members', 'count'));
     }
 
     /**

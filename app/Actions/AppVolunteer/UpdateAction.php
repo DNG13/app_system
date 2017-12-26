@@ -38,6 +38,7 @@ class UpdateAction extends Action
 
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
+        $volunteer->middle_name = $request->get('middle_name');
         $volunteer->nickname = $request->get('nickname');
         $volunteer->birthday = $request->get('birthday');
         $volunteer->phone = $request->get('phone');

@@ -4,3 +4,11 @@ textarea{
 label{
     margin-bottom:0;
 }
+
+input:valid + span:after{
+    content: url(http://htmlbook.ru/example/images/ok.png);
+}
+
+input:invalid + span:after{
+    content: url(http://htmlbook.ru/example/images/nook.png);
+}

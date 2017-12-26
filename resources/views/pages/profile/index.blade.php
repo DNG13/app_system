@@ -34,14 +34,6 @@
                             </div>
 
                             <div>
-                                <label for="middle_name" class="col-md-4">Отчество</label>
-                                <div class="col-md-6">
-                                    <p id="middle_name"> {{ $profile->middle_name }}</p>
-                                </div>
-                            </div>
-
-
-                            <div>
                                 <label for="nickname" class="col-md-4">Никнейм</label>
                                 <div class="col-md-6">
                                     <p id="nickname"> {{ $profile->nickname }}</p>
@@ -72,7 +64,7 @@
                             <div>
                                 <label for="email" class="col-md-4">E-Mail</label>
                                 <div class="col-md-6">
-                                    <p id="email">{{Auth::user()->email}}}</p>
+                                    <p id="email">{{Auth::user()->email}}</p>
                                 </div>
                             </div>
 
