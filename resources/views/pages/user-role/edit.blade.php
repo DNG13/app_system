@@ -8,44 +8,39 @@
                     <div class="panel-heading">Редактировать роль</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('role.update', $role->key)  }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('user-role.update', $user->user_id)}}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
-                            <div class="form-group{{ $errors->has('key') ? ' has-error' : '' }}">
-                                <label for="key" class="col-md-4 control-label">Ключ</label>
-                                <div class="col-md-6">
-                                    <input id="key" type="text" class="form-control" name="key" value="{{ $role->key }}" required autofocus >
-                                    @if ($errors->has('key'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('key') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label for="title" class="col-md-4 control-label">Название</label>
+                                <label for="title" class="col-md-4 control-label">Пользователь</label>
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ $role->title }}" required autofocus >
+                                    <p>{{$user->nickname}}</p>
 
-                                    @if ($errors->has('title'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
-                                <label for="active" class="col-md-4 control-label">Активна</label>
+                            <div class="form-group{{ $errors->has('key') ? ' has-error' : '' }}">
+                                <label for="key" class="col-md-4 control-label">Вибрать роли</label>
+
                                 <div class="col-md-6">
-                                    <select id="active" class="form-control" name="active">
-                                        <option value="false" @if($role->active == 'false') selected @endif >Нет</option>
-                                        <option value="true" @if($role->active == 'true' ) selected @endif >Да</option>
-                                    </select>
-                                    @if ($errors->has('active'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('active') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input type="hidden"  name="key">
+                                    @foreach( $roles as $key => $title )
+                                        <div class="checkbox">
+                                            <label>
+                                                @if(!is_null($userRoles))
+                                                    @if(in_array($key, $userRoles))
+                                                        <input type="checkbox" value="{{ $key }}" name="key[]" checked="checked"> {{ $title }}
+                                                    @else
+                                                        <input type="checkbox" value="{{ $key }}" name="key[]">{{ $title }}
+                                                    @endif
+                                                @else
+                                                    <input type="hidden"  value="0" name="key[]"/>
+                                                    <input type="checkbox" value="{{ $key }}" name="key[]">
+                                                {{ $title }}
+                                                @endif
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    <input hidden name="id" value=" {{$user->user_id}}">
                                 </div>
                             </div>
                             <div class="form-group">

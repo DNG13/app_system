@@ -2,83 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Role\StoreUpdateRequest;
+use App\Models\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use App\Models\UserRole;
+use App\Models\Role;
 
 class UserRoleController extends Controller
 {
-    private $sortFields = [
-        'key',
-        'user_id'
-    ];
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $query = User::with(['profile','roles']);
+        $users = $query->paginate(10);
+        return view('pages.user-role.index', ['users'=>$users]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $user_roles = UserRole::where('user_id', $id)->get()->pluck('key');
+        $userRoles = [];
+        if(!is_null($user_roles)) {
+            foreach ($user_roles as $role) {
+                $userRoles[] = $role;
+            }
+        }
+        $roles = Role::where('active', true)->get()->pluck('title', 'key');
+        $user = Profile::where('user_id', $id)->first();
+        return view('pages.user-role.edit', compact('userRoles', 'roles', 'user', 'id'));
+    }
+
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function index(Request $request)
+    public function update( Request $request)
     {
-        $users =  UserRole::all();
-
-        $keyword = $request->get('search');
-        $query = User::select('*')
-            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
-
-        if (!empty($keyword)) {
-            $query->where(function($q) use ($keyword) {
-                $q->where('usr_id',  $keyword);
-            });
+        $userRoles = UserRole::where('user_id', $request->get('id'))->get()->pluck('key') ?? null;
+        $roles = [];
+        foreach ($userRoles as $userRole) {
+            $roles[] = $userRole;
         }
-
-        $roles = $query->paginate(10);
-        return view('pages.user-role.index', ['roles'=>$roles, 'users'=>$users, 'sort' => $this->prepareSort($request, $this->sortFields)]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('pages.user-role.create');
-    }
-
-    /**
-     * @param StoreUpdateRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store(StoreUpdateRequest $request)
-    {
-        $role = new UserRole();
-        $role->key = $request->get('key');
-        $role->save();
-
-        return redirect('user-role');
-    }
-
-    /**\
-     * @param $key
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($key)
-    {
-        $role = UserRole::where('key', $key)->first();
-        return view('pages.user-role.edit', compact('role'));
-    }
-
-    /**
-     * @param StoreUpdateRequest $request
-     * @param $key
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function update(StoreUpdateRequest $request, $key)
-    {
-        $role = UserRole::where('key', $key)->first();
-        $role->key = $request->get('key');
-        $role->save();
-
+        $keys = $request->get('key');
+        if(count($keys) == 0) {
+            UserRole::where('user_id', $request->get('id'))->delete();
+            return redirect('user-role');
+        }
+        elseif(count($keys) == 1 && !(in_array($keys, $roles))) {
+                $newRole = new UserRole;
+                $newRole->key = $keys[0];
+                $newRole->user_id = $request->get('id');
+                $newRole->save();
+            return redirect('user-role');
+        }else {
+            foreach ($keys as $key) {
+                if (!(in_array($key, $roles))) {
+                    $newRole = new UserRole;
+                    $newRole->key = $key;
+                    $newRole->user_id = $request->get('id');
+                    $newRole->save();
+                }
+            }
+        }
+        foreach ($roles as $role) {
+            if (!(in_array($role, $keys))) {
+                UserRole::where('key', $role)->delete();
+            }
+        }
         return redirect('user-role');
     }
 }

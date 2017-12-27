@@ -48,7 +48,7 @@ Route::group(['middleware' => ['role.admin']], function() {
     Route::get('/type/delete', 'AddTypeController@destroy');
     Route::resource('role', 'AddRoleController', ['except' => ['show', 'destroy']]);
     Route::get('/role/delete', 'AddRoleController@destroy');
-    Route::resource('user-role', 'UserRoleController', ['except' => ['show', 'destroy']]);
+    Route::resource('user-role', 'UserRoleController', ['except' => ['show', 'destroy', 'create', 'store']]);
     Route::get('/profile/{profile}', 'ProfileController@show');
     Route::get('/file/delete', 'FileController@destroy');
     Route::get('/comment/delete', 'CommentController@destroy');
