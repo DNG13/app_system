@@ -24,7 +24,7 @@ class UploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'nullable|mimes:jpeg,jpg,png,ogg,mp3,wav,wma,mid,flac,aac,alac,ac3,m4a,aif,iff,m3u,mpa,ra,doc,rtf,pdf,docx,sxw,txt,odt|max:102400',
+            'file' => 'nullable|max:102400',
         ];
     }
 }
