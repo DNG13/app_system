@@ -14,5 +14,6 @@ yarn-error.log
 avatars
 volunteers
 logos
-public
+uploads
+zip
 composer.lock
