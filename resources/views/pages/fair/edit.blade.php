@@ -110,7 +110,7 @@
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" pattern='[\+]\d{3}[\]\d{2}[\]\d{7}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{  $fair->phone }}" required autofocus>
+                                    <input id="phone" pattern='[\+]\d{3}[0-9]{9}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{  $fair->phone }}" required autofocus>
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
@@ -376,6 +376,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <ul>
+                                    <li>названия файлов должны быть выполнены латиницей и не содержать пробелов (scenraio_defile.doc)</li>
                                     <li>размеры файлов не более 10 мегабайт</li>
                                     <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
                                     <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
@@ -390,7 +391,7 @@
                     </div>
                     <form action="{{ url('/upload') }}" enctype="multipart/form-data" method="post" class="dropzone" id="my-awesome-dropzone">
                         {{ csrf_field() }}
-                        <div class="dz-message" data-dz-message><span>Перенесите файлы сюда, чтобы загрузить</span></div>
+                        <div class="dz-message" data-dz-message><span>Кликните здесь мышью или перенесите файлы, чтобы загрузить</span></div>
                         <input type="hidden" name="app_kind" value="fair">
                         <input type="hidden" name="app_id" value="{{$fair->id}}">
                     </form>

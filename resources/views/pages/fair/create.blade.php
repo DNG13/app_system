@@ -75,7 +75,7 @@
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" pattern='[\+]\d{3}[\]\d{2}[\]\d{7}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
+                                    <input id="phone" pattern='[\+]\d{3}[0-9]{9}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">

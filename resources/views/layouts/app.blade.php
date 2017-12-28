@@ -127,8 +127,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/dropzone.min.js') }}"></script>
-    <script src="{{ asset('js/dropzone-amd-module.min.js') }}"></script>
+    <script src="{{ asset('js/dropzone.js') }}"></script>
 
 </body>
 </html>

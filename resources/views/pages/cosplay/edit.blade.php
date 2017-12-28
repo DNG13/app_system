@@ -275,6 +275,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <ul>
+                                    <li>названия файлов должны быть выполнены латиницей и не содержать пробелов (scenraio_defile.doc)</li>
                                     <li>размеры файлов не более 10 мегабайт</li>
                                     <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
                                     <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
@@ -289,9 +290,10 @@
                     </div>
                     <form action="{{ url('/upload') }}" enctype="multipart/form-data" method="post" class="dropzone" id="my-awesome-dropzone">
                         {{ csrf_field() }}
-                        <div class="dz-message" data-dz-message><span>Перенесите файлы сюда, чтобы загрузить</span></div>
+                        <div class="dz-message" data-dz-message><span>Кликните здесь мышью или перенесите файлы, чтобы загрузить</span></div>
                         <input type="hidden" name="app_kind" value="cosplay">
                         <input type="hidden" name="app_id" value="{{$cosplay->id}}">
+
                         {{--<input type=file name=file>--}}
                         {{--<div class="form-group">--}}
                             {{--<div class="col-md-6 col-md-offset-4">--}}

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Создание профиля</div>
+                    <div class="panel-heading">Создание профиля<br><p style="color: red"><strong>* Поля обязательные для заполнения</strong></div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ url('/auth/profile') }}">
