@@ -42,21 +42,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
-
-                                <label for="image_uploads" class="col-md-4 control-label">Логотип</label>
-
-                                <div class="col-md-6">Выберите файл для загрузки(PNG, JPG, JPEG)
-                                    <input name="logo" type="file"  accept=".jpeg, .jpg, .png" required/>
-
-                                    @if ($errors->has('logo'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('logo') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
                                 <label for="contact_name" class="col-md-4 control-label">Контактное лицо</label>
 
@@ -113,51 +98,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
-                                <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
-                                <div class="col-md-6">
-                                    <input id="square" type="number" min="0" step="0.5" class="form-control" name="square" value="{{ old('square') }}" required autofocus>
-
-                                    @if ($errors->has('square'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('square') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('payment_type') ? ' has-error' : '' }}">
-                                <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
-
-                                <div class="col-md-6">
-                                    <select id="type_id" class="form-control" name="payment_type">
-                                        <option value="наличный">наличный (в день фестиваля)</option>
-                                        <option value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
-                                    </select>
-                                    @if ($errors->has('payment_type'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('payment_type') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div>
-                                <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
-                                    <label for="equipment[chair]" class="col-md-4 control-label">Оборудование: Количество стульев</label>
-                                    <div class="col-md-6">
-                                        <input id="equipment[chair]" type="number" min="0" class="form-control" name="equipment[chair]" value="{{ old('equipment[chair]') }}"  required autofocus>
-
-                                        @if ($errors->has('equipment[chair]'))
-                                            <span class="help-block">
-                                            <strong>{{ $errors->first('equipment[chair]') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-
                                 <div class="form-group{{ $errors->has('equipment[table]') ? ' has-error' : '' }}">
-                                    <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
+                                    <label for="equipment[table]" class="col-md-4 control-label">Оборудование: Количество столов</label>
 
                                     <div class="col-md-6">
                                         <input id="equipment[table]" type="number" min="0" class="form-control" name="equipment[table]" value="{{ old('equipment[table]') }}" required autofocus>
@@ -170,17 +113,15 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('equipment[electricity]') ? ' has-error' : '' }}">
-                                    <label for="equipment[electricity]" class="col-md-4 control-label">Надобность подведения электричества</label>
+                                <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
+                                    <label for="equipment[chair]" class="col-md-4 control-label">Количество стульев</label>
                                     <div class="col-md-6">
-                                        <select id="type_id" class="form-control" name="equipment[electricity]">
-                                            <option value="no">Нет</option>
-                                            <option value="yes">Да</option>
-                                        </select>
-                                        @if ($errors->has('equipment[electricity]'))
+                                        <input id="equipment[chair]" type="number" min="0" class="form-control" name="equipment[chair]" value="{{ old('equipment[chair]') }}"  required autofocus>
+
+                                        @if ($errors->has('equipment[chair]'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('equipment[electricity]') }}</strong>
-                                    </span>
+                                            <strong>{{ $errors->first('equipment[chair]') }}</strong>
+                                        </span>
                                         @endif
                                     </div>
                                 </div>
@@ -200,13 +141,58 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="form-group{{ $errors->has('equipment[electricity]') ? ' has-error' : '' }}">
+                                    <label for="equipment[electricity]" class="col-md-4 control-label">Надобность подведения электричества</label>
+                                    <div class="col-md-6">
+                                        <select id="type_id" class="form-control" name="equipment[electricity]">
+                                            <option value="Нет">Нет</option>
+                                            <option value="Да">Да</option>
+                                        </select>
+                                        @if ($errors->has('equipment[electricity]'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('equipment[electricity]') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
+                                <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
+                                <div class="col-md-6">
+                                    <input id="square" type="number" min="0" step="0.5" placeholder="Обязательно для стендов, игровых зон, фудкорта" class="form-control" name="square" value="{{ old('square') }}"  autofocus>
+
+                                    @if ($errors->has('square'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('square') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('payment_type') ? ' has-error' : '' }}">
+                                <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
+
+                                <div class="col-md-6">
+                                    <select id="type_id" class="form-control" name="payment_type">
+                                        <option value="наличный">наличный (в день фестиваля)</option>
+                                        <option value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
+                                        <option value="фанатский">на условиях участника фестиваля(для фанатских стендов)</option>
+                                    </select>
+                                    @if ($errors->has('payment_type'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('payment_type') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
                                     <textarea  id="description" rows="5"
-                                               placeholder="C указанием, что именно. Этот текст мы опубликуем в качестве рекламы в соцсетях."
+                                               placeholder="Обратите внимание, что именно этот текст мы опубликуем в качестве рекламы. После отправки заявки не забудьте зайти в меню редактирования и прикрепить к заявке промо-фото вашей продукции/стенда, которые мы опубликуем. Также можете добавить свой логотип."
                                                class="form-control" name="description"  autofocus required>{{ old('description') }}</textarea>
 
                                     @if ($errors->has('description'))
@@ -235,7 +221,7 @@
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Обязанности на фестивале</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="members[0][вген]" class="form-control name_list" required/>
+                                            <input type="text" name="members[0][duty]" class="form-control name_list" required/>
                                         </div>
                                     </div>
                                 </div>

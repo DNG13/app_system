@@ -28,6 +28,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('group_nick') ? ' has-error' : '' }}">
+                                <label for="group_nick" class="col-md-4 control-label">Название команды/ник выступающего</label>
+
+                                <div class="col-md-6">
+                                    <input id="group_nick" type="text" class="form-control" name="group_nick" value="{{ old('group_nick') }}" required autofocus>
+
+                                    @if ($errors->has('group_nick'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('group_nick') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="col-md-4 control-label">Название постановки</label>
 

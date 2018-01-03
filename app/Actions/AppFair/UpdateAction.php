@@ -22,22 +22,6 @@ class UpdateAction extends Action
         $fair = AppFair::where('id', $id)->first();
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
-
-        if($request['logo']) {
-            $imageFile = $request['logo'];
-            $extension = $imageFile->extension();
-            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
-            $imageFile->move(public_path('uploads/logos'), $imageName);
-            $imagePath = 'uploads/logos/'.$imageName;
-
-            // create Image from file
-            $img = Image::make($imagePath);
-            $img->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save();
-            $fair->logo = $imagePath;
-        }
         $fair->contact_name = $request->get('contact_name');
         $fair->phone = $request->get('phone');
         $fair->social_link = $request->get('social_link');
@@ -45,6 +29,7 @@ class UpdateAction extends Action
         $fair->square = $request->get('square');
         $fair->payment_type= $request->get('payment_type');
         $fair->description= $request->get('description');
+
 
         if($request->get('status') && Auth::user()->isAdmin()) {
             if($fair->status != $request->get('status')) {
@@ -56,7 +41,7 @@ class UpdateAction extends Action
                     $mail['status'] = $request->get('status');
                     Mail::send('mails.status',  $mail , function($message) use ( $mail ){
                         $message->to( $mail['email']);
-                        $message->subject('Заявка ' .$mail['title'] . ' изменена');
+                        $message->subject('Изменение статуса заявки');
                     });
                 }
             $fair->status = $request->get('status');

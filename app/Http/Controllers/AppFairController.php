@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AppFair\StoreRequest;
-use App\Http\Requests\AppFair\UpdateRequest;
+use App\Http\Requests\AppFair\StoreUpdateRequest;
 use Auth;
 use App\Actions\AppFair\ListAction;
 use App\Actions\AppFair\StoreAction;
@@ -61,11 +60,11 @@ class AppFairController extends Controller
     }
 
     /**
-     * @param StoreRequest $request
+     * @param StoreUpdateRequest $request
      * @param StoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request, StoreAction $action)
+    public function store(StoreUpdateRequest $request, StoreAction $action)
     {
         return $action->run($request);
     }
@@ -112,12 +111,12 @@ class AppFairController extends Controller
     }
 
     /**
-     * @param UpdateRequest $request
+     * @param StoreUpdateRequest $request
      * @param $id
      * @param UpdateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, $id, UpdateAction $action)
+    public function update(StoreUpdateRequest $request, $id, UpdateAction $action)
     {
         return $action->run($request, $id);
     }

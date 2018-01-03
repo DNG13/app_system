@@ -160,6 +160,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('social_links->in') ? ' has-error' : '' }}">
+                            <label for="social_links[in]" class="col-md-4 control-label">Instagram</label>
+
+                            <div class="col-md-6">
+                                <input id="social_links[in]" type="url" class="form-control" name="social_links[in]" value="{{ old('social_links[in]') }}"  autofocus>
+
+                                @if ($errors->has('social_links->in'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('social_links->in') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('social_links[fb]') ? ' has-error' : '' }}">
                             <label for="social_links[fb]" class="col-md-4 control-label">Facebook</label>
 

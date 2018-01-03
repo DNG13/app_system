@@ -58,7 +58,7 @@ class UpdateAction extends Action
                     $mail['status'] = $request->get('status');
                     Mail::send('mails.status',  $mail , function($message) use ( $mail ){
                         $message->to( $mail['email']);
-                        $message->subject('Заявка ' .$mail['title'] . ' изменена');
+                        $message->subject('Изминение статуса заявки');
                     });
                 }
             $volunteer->status = $request->get('status');

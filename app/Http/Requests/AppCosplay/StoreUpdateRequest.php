@@ -25,6 +25,7 @@ class StoreUpdateRequest extends FormRequest
     {
         return [
             'type_id' => 'required',
+            'group_nick' => 'required|string|max:100',
             'title' => 'required|string|max:255',
             'fandom' => 'required|string|max:255',
             'length' => 'required|numeric',

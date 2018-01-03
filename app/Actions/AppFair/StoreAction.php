@@ -23,22 +23,6 @@ class StoreAction extends Action
         $fair = new AppFair();
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
-
-        if($request['logo']) {
-            $imageFile = $request['logo'];
-            $extension = $imageFile->extension();
-            $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
-            $imageFile->move(public_path('uploads/logos'), $imageName);
-            $imagePath = 'uploads/logos/'.$imageName;
-
-            // create Image from file
-            $img = Image::make($imagePath);
-            $img->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save();
-            $fair->logo = $imagePath;
-        }
         $fair->contact_name = $request->get('contact_name');
         $fair->phone = $request->get('phone');
         $fair->social_link = $request->get('social_link');

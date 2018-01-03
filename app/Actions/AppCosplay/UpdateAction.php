@@ -21,6 +21,7 @@ class UpdateAction extends Action
         $cosplays = AppCosplay::where('id', $id)->first();
         $cosplays->type_id = $request->get('type_id');
         $cosplays->title = $request->get('title');
+        $cosplays->group_nick = $request->get('group_nick');
         $cosplays->fandom = $request->get('fandom');
         $cosplays->length = $request->get('length');
         $cosplays->city = $request->get('city');
@@ -38,7 +39,7 @@ class UpdateAction extends Action
                     $mail['status'] = $request->get('status');
                     Mail::send('mails.status',  $mail , function($message) use ( $mail ){
                         $message->to( $mail['email']);
-                        $message->subject('Изминение статуса завки');
+                        $message->subject('Изменение статуса заявки');
                     });
                 }
             $cosplays->status = $request->get('status');

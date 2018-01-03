@@ -4,7 +4,7 @@ namespace App\Http\Requests\AppFair;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,13 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'logo'=>'image|mimes:jpeg,jpg,png|max:4096',
             'type_id' => 'required',
             'group_nick'=>'required|string|max:100',
             'contact_name' => 'required|string|max:255',
             'phone' => 'required|string|max:64',
             'social_link'=>'required',
             'group_link'=>'required',
-            'square' => 'required|numeric',
+            'square' => 'nullable|numeric',
             'payment_type'=>'required|string|max:64',
             'description' => 'required|string',
         ];

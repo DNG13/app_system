@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success">
-                                            <i class="fa fa-filter" aria-hidden="true"></i>Фильтрувати
+                                            <i class="fa fa-filter" aria-hidden="true"></i>Фильтровать
                                         </button>
                                     </div>
                                 </form>

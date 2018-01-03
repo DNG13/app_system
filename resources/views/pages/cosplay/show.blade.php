@@ -13,6 +13,14 @@
                                 <p id="type_id" >{{ $cosplay->type->title }}</p>
                             </div>
                         </div>
+
+                        <div>
+                            <label for="group_nick" class="col-md-4">Название команды/ник выступающего</label>
+                            <div class="col-md-6">
+                                <p id="group_nick">{{ $cosplay->group_nick }}</p>
+                            </div>
+                        </div>
+
                         <div>
                             <label for="title" class="col-md-4">Название постановки</label>
                             <div class="col-md-6">

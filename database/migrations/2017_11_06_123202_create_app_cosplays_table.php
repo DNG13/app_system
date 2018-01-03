@@ -25,6 +25,7 @@ class CreateAppCosplaysTable extends Migration
             $table->timestamps();
             $table->json('members');
             $table->integer('members_count');
+            $table->string('group_nick', 100);
             $table->string('title', 100);
             $table->string('fandom', 255);
             $table->float('length');

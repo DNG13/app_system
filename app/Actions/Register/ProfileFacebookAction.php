@@ -18,6 +18,9 @@ class ProfileFacebookAction extends Action
 
     public function run(Request $data)
     {
+        if(is_null($data['birthday']) || is_null($data['phone']) || is_null($data['city'])) {
+            User:find($data->id)->delete();
+        }
         $profile = Profile::where('user_id', $data->id)->first();
 
         if(is_null($data['nickname'])) {

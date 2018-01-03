@@ -21,7 +21,7 @@ class App_types_cosplayTableSeeder extends Seeder
             'K-Pop',
             'Светошоу',
             'Прочее',
-            'Внеконкурсa'
+            'Внеконкурс'
         ];
         for ($i=0, $count=count($titles); $i < $count; $i++) {
             AppType::create([

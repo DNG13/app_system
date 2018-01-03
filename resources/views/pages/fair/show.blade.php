@@ -12,7 +12,7 @@
                             <div>
                                 <label for="type_id" class="col-md-4">Тип заявки</label>
                                 <div class="col-md-6">
-                                    <p id="type_id">{{ $fair->type_id }}</p>
+                                    <p id="type_id">{{ $fair->type->title }}</p>
                                 </div>
                             </div>
 
@@ -27,13 +27,6 @@
                                 <label for="type_id" class="col-md-4">Статус заявки</label>
                                 <div class="col-md-6">
                                     <p id="type_id">{{ $fair->status}}</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="logo" class="col-md-4">Логотип</label>
-                                <div class="col-md-6">
-                                    <img src="/{{  $fair->logo }}" id="logo" name="logo"/>
                                 </div>
                             </div>
 
@@ -66,34 +59,29 @@
                             </div>
 
                             <div>
-                                <label for="square" class="col-md-4">Площадь(м²)</label>
-                                <div class="col-md-6">
-                                    <p id="square">{{ $fair->square }}</p>
-                                </div>
-                            </div>
+                                @if(!$equipment->table==null)
+                                    <div>
+                                        <label for="equipment[table]" class="col-md-4">Оборудование: Количество столов</label>
+                                        <div class="col-md-6">
+                                            <p id="equipment[table]">{{ $equipment->table }}</p>
+                                        </div>
+                                    </div>
+                                @endif
 
-                            <div >
-                                <label for="payment_type" class="col-md-4">Способ оплаты</label>
-                                <div class="col-md-6">
-                                    <p id="square">{{ $fair->payment_type }}</p>
-                                </div>
-                            </div>
-
-                            <div>
                                 @if(!$equipment->chair==null)
                                     <div>
-                                        <label for="equipment[chair]" class="col-md-4">Оборудование: Количество стульев</label>
+                                        <label for="equipment[chair]" class="col-md-4">Количество стульев</label>
                                         <div class="col-md-6">
                                             <p id="equipment[chair]">{{ $equipment->chair }}</p>
                                         </div>
                                     </div>
                                     @endif
 
-                                    @if(!$equipment->table==null)
+                                    @if(!$equipment->extra==null)
                                         <div>
-                                            <label for="equipment[table]" class="col-md-4">Количество столов</label>
+                                            <label for="equipment[extra]" class="col-md-4">Дополнительное оборудование с размерами</label>
                                             <div class="col-md-6">
-                                                <p id="equipment[table]">{{ $equipment->table }}</p>
+                                                <p id="equipment[extra]">{{ $equipment->extra }}</p>
                                             </div>
                                         </div>
                                     @endif
@@ -106,17 +94,23 @@
                                         </div>
                                     </div>
                                     @endif
-
-                                    @if(!$equipment->extra==null)
-                                    <div>
-                                        <label for="equipment[extra]" class="col-md-4">Дополнительное оборудование с размерами</label>
-                                        <div class="col-md-6">
-                                            <p id="equipment[extra]">{{ $equipment->extra }}</p>
-                                        </div>
-                                    </div>
-                                    @endif
                             </div>
 
+                            @if(!$fair->square==null)
+                            <div>
+                                <label for="square" class="col-md-4">Площадь(м²)</label>
+                                <div class="col-md-6">
+                                    <p id="square">{{ $fair->square }}</p>
+                                </div>
+                            </div>
+                            @endif
+
+                            <div >
+                                <label for="payment_type" class="col-md-4">Способ оплаты</label>
+                                <div class="col-md-6">
+                                    <p id="square">{{ $fair->payment_type }}</p>
+                                </div>
+                            </div>
                             <div>
                                 <label for="description" class="col-md-4">Описание</label>
                                 <div class="col-md-6">

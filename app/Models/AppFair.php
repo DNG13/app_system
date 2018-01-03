@@ -20,7 +20,6 @@ class AppFair extends Model
         'square',
         'payment_type',
         'status',
-        'logo',
     ];
 
     protected $table = 'app_fairs';

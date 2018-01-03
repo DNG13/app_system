@@ -64,18 +64,27 @@
                             <div>
                                 <label for="email" class="col-md-4">E-Mail</label>
                                 <div class="col-md-6">
-                                    <p id="email">{{Auth::user()->email}}</p>
+                                    <p id="email">{{$profile->user->email}}</p>
                                 </div>
                             </div>
 
                             @if(!$social_links->vk==null)
                                 <div>
-                                <label for="social_links[vk]" class="col-md-4">VK</label>
-                                <div class="col-md-6">
-                                    <p id="social_links[vk]"> {{ $social_links->vk}}</p>
+                                    <label for="social_links[vk]" class="col-md-4">VK</label>
+                                    <div class="col-md-6">
+                                        <p id="social_links[vk]"> {{ $social_links->vk}}</p>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
+
+                                @if(!$social_links->in==null)
+                                    <div>
+                                        <label for="social_links[in]" class="col-md-4">Instagram</label>
+                                        <div class="col-md-6">
+                                            <p id="social_links[in]"> {{ $social_links->in}}</p>
+                                        </div>
+                                    </div>
+                                @endif
 
                             @if(!$social_links->fb==null)
                                 <div>
