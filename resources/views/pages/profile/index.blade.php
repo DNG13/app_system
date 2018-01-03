@@ -40,26 +40,32 @@
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="birthday" class="col-md-4">Дата рождения</label>
-                                <div class="col-md-6">
-                                    <p id="birthday"> {{ $profile->birthday }}</p>
+                                @if($profile->birthday)
+                                <div>
+                                    <label for="birthday" class="col-md-4">Дата рождения</label>
+                                    <div class="col-md-6">
+                                        <p id="birthday"> {{ $profile->birthday }}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
 
+                                @if($profile->city)
                             <div>
                                 <label for="city" class="col-md-4">Город</label>
                                 <div class="col-md-6">
                                     <p id="city"> {{ $profile->city }}</p>
                                 </div>
                             </div>
+                                @endif
 
+                                @if($profile->phone)
                             <div>
                                 <label for="phone" class="col-md-4">Телефон</label>
                                 <div class="col-md-6">
                                     <p id="phone"> {{ $profile->phone }}</p>
                                 </div>
                             </div>
+                                @endif
 
                             <div>
                                 <label for="email" class="col-md-4">E-Mail</label>
