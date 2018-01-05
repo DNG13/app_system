@@ -49,8 +49,11 @@ class CreateAction extends Action
             $mail['nickname'] = $user->profile->nickname;
             $mail['email'] = $user->email;
         } else {
+            $mailPluses = ['show', 'fair', 'photo', 'volunteers'];
+            $appKinds = ['cosplay', 'fair', 'press', 'volunteer'];
+            $mailPlus = $mailPluses[array_search($comment->app_kind, $appKinds)];
             $mail['nickname'] = 'Admin';
-            $mail['email'] = env('ADMIN_MAIL');
+            $mail['email'] = 'khanifest+' . $mailPlus .'@gmail.com';
         }
 
         Mail::send('mails.comment',  $mail , function($message) use ($mail) {

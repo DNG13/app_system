@@ -16,10 +16,8 @@ class RoleAdmin
     protected $auth;
 
     /**
-     * Create a new middleware instance.
-     *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
-     * @return void
+     * RoleAdmin constructor.
+     * @param Auth $auth
      */
     public function __construct(Auth $auth)
     {

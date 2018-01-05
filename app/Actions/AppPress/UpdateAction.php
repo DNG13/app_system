@@ -56,7 +56,7 @@ class UpdateAction extends Action
 
         if (!Auth::user()->isAdmin()) {
             $mail['nickname'] = 'Admin';
-            $mail['email'] = 'khanifest.mail@gmail.com';
+            $mail['email'] = 'khanifest+photo@gmail.com';
             $mail['title'] = $press->media_name;
             $mail['page'] = '/press/'. $press->id;
             Mail::send('mails.edit', $mail, function ($message) use ($mail) {
