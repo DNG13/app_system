@@ -82,6 +82,19 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
+                                <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
+                                <div class="col-md-6">
+                                    <textarea id="prev_part" rows="5" class="form-control" placeholder="Ваше участие в качестве СМИ в фестивалях. Желательно со ссылками на фото/видео/статьи" name="prev_part" autofocus> {{ old('prev_part') }}</textarea>
+
+                                    @if ($errors->has('prev_part'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('prev_part') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('portfolio_link') ? ' has-error' : '' }}">
                                 <label for="portfolio_link" class="col-md-4 control-label">Ссылка на портфолио</label>
 

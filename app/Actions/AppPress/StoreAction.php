@@ -24,6 +24,7 @@ class StoreAction extends Action
         $press->media_name = $request->get('media_name');
         $press->contact_name = $request->get('contact_name');
         $press->phone = $request->get('phone');
+        $press->prev_part = $request->get('prev_part');
         $press->equipment = $request->get('equipment');
         $press->portfolio_link = $request->get('portfolio_link');
         $press->city = $request->get('city');

@@ -28,6 +28,7 @@ class StoreAction extends Action
         $fair->social_link = $request->get('social_link');
         $fair->group_link = $request->get('group_link');
         $fair->square = $request->get('square');
+        $fair->city = $request->get('city');
         $fair->payment_type = $request->get('payment_type');
         $fair->description = $request->get('description');
         $fair->user_id = Auth::user()->id;

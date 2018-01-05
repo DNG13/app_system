@@ -51,6 +51,15 @@
                                 </div>
                             </div>
 
+                            @if(!$press->prev_part==null)
+                                <div>
+                                    <label for="prev_part" class="col-md-4">Предыдущее участие</label>
+                                    <div class="col-md-6">
+                                        <p id="prev_part">{{ $press->prev_part }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
                             <div>
                                 <label for="portfolio_link" class="col-md-4">Ссылка на портфолио</label>
                                 <div class="col-md-6">

@@ -127,7 +127,7 @@
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
                                 <div class="col-md-6">
-                                    <textarea id="prev_part"  class="form-control" name="prev_part" autofocus>{{ $cosplay->prev_part }}</textarea>
+                                    <textarea id="prev_part" placeholder="Участие костюма/постановки в других фестивалях(с указанием на каких именно со ссылками на фото/видео. Получали ли призовые места)" class="form-control" name="prev_part" autofocus>{{ $cosplay->prev_part }}</textarea>
 
                                     @if ($errors->has('prev_part'))
                                         <span class="help-block">

@@ -85,6 +85,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                                <label for="city" class="col-md-4 control-label"> Город</label>
+
+                                <div class="col-md-6">
+                                    <input id="title" type="text" placeholder="Для иногородних - город и дата/время прибытия" class="form-control" name="city" value="{{ $fair->city }}" required autofocus>
+
+                                    @if ($errors->has('city'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
 
@@ -122,6 +136,19 @@
                                     @if ($errors->has('group_link'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('group_link') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
+                                <label for="square" class="col-md-4 control-label">Размер торгово-развлекательной точки</label>
+                                <div class="col-md-6">
+                                    <textarea id="square" type="text" class="form-control" placeholder="Обязательно для стендов, игровых зон, фудкорта(ширина, глубина и высота в сантиметрах)" name="square" autofocus>{{ $fair->square }}</textarea>
+
+                                    @if ($errors->has('square'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('square') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -184,19 +211,6 @@
                                     </span>
                                         @endif
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
-                                <label for="square" class="col-md-4 control-label">Площадь(м²)</label>
-                                <div class="col-md-6">
-                                    <input id="square" type="number" min="0" step="0.5" class="form-control" placeholder="Обязательно для стендов, игровых зон, фудкорта" name="square" value="{{  $fair->square }}" autofocus>
-
-                                    @if ($errors->has('square'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('square') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
 

@@ -338,7 +338,7 @@ var Dropzone = function (_Emitter) {
          * [`accept`](https://developer.mozilla.org/en-US/docs/HTML/Element/input#attr-accept)
          * parameter on the hidden file input as well.
          */
-        acceptedFiles: ".jpeg, .jpg, .png, .doc, .ogg, .mp3, .wav, .wma, .mid, .flac, .aac, .alac, .ac3, .m4a, .aif, .iff, .m3u, .mpa, .ra,.rtf, .pdf, .docx, .sxw, .txt, .odt",
+        acceptedFiles: "audio/*, video/*, image/*,  text/*, .pdf",
 
         /**
          * **Deprecated!**

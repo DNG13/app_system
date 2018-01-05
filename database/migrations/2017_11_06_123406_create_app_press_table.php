@@ -25,6 +25,7 @@ class CreateAppPressTable extends Migration
                 ->onDelete('cascade');
             $table->timestamps();
             $table->text('portfolio_link');
+            $table->string('prev_part', 255)->nullable();
             $table->string('media_name', 100);
             $table->string('contact_name', 255);
             $table->json('members');

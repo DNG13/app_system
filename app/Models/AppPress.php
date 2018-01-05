@@ -15,6 +15,7 @@ class AppPress extends Model
         'group_link',
         'members_count',
         'equipment',
+        'prev_part',
         'city',
         'camera',
         'media_name',

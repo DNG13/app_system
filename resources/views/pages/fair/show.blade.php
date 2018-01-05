@@ -38,6 +38,13 @@
                             </div>
 
                             <div>
+                                <label for="city" class="col-md-4">Город</label>
+                                <div class="col-md-6">
+                                    <p id="city">{{ $fair->city }}</p>
+                                </div>
+                            </div>
+
+                            <div>
                                 <label for="phone" class="col-md-4">Телефон</label>
                                 <div class="col-md-6">
                                     <p id="phone">{{ $fair->phone }}</p>
@@ -57,6 +64,15 @@
                                     <p id="group_link">{{ $fair->group_link }}</p>
                                 </div>
                             </div>
+
+                            @if(!$fair->square==null)
+                                <div>
+                                    <label for="square" class="col-md-4">Размер торгово-развлекательной точки</label>
+                                    <div class="col-md-6">
+                                        <p id="square">{{ $fair->square }}</p>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div>
                                 @if(!$equipment->table==null)
@@ -95,15 +111,6 @@
                                     </div>
                                     @endif
                             </div>
-
-                            @if(!$fair->square==null)
-                            <div>
-                                <label for="square" class="col-md-4">Площадь(м²)</label>
-                                <div class="col-md-6">
-                                    <p id="square">{{ $fair->square }}</p>
-                                </div>
-                            </div>
-                            @endif
 
                             <div >
                                 <label for="payment_type" class="col-md-4">Способ оплаты</label>

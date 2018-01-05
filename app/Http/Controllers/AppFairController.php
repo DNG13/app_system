@@ -26,7 +26,6 @@ class AppFairController extends Controller
         'phone',
         'contact_name',
         'group_nick',
-        'square',
         'status'
     ];
 

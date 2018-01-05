@@ -23,6 +23,7 @@ class UpdateAction extends Action
         $fair->type_id = $request->get('type_id');
         $fair->group_nick = $request->get('group_nick');
         $fair->contact_name = $request->get('contact_name');
+        $fair->city = $request->get('city');
         $fair->phone = $request->get('phone');
         $fair->social_link = $request->get('social_link');
         $fair->group_link = $request->get('group_link');

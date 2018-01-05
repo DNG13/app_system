@@ -28,9 +28,10 @@ class StoreUpdateRequest extends FormRequest
             'group_nick'=>'required|string|max:100',
             'contact_name' => 'required|string|max:255',
             'phone' => 'required|string|max:64',
+            'city' => 'required|string',
             'social_link'=>'required',
             'group_link'=>'required',
-            'square' => 'nullable|numeric',
+            'square' => 'nullable|string|max:255',
             'payment_type'=>'required|string|max:64',
             'description' => 'required|string',
         ];

@@ -114,6 +114,7 @@ class RegisterController extends Controller
             $social_links =  json_decode($profile->social_links);
             return view('auth.profile', compact('profile', 'social_links', 'avatar'));
         }
+        auth()->login($user);
         return redirect('/home');
     }
 

@@ -110,7 +110,6 @@
                         <th><p>Название</p> <a href="{{ $sort['group_nick']['link'] }}"><i class="fa {{ $sort['group_nick']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Контактное лицо</p> <a href="{{ $sort['contact_name']['link'] }}"><i class="fa {{ $sort['contact_name']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Телефон</p> <a href="{{ $sort['phone']['link'] }}"><i class="fa {{ $sort['phone']['icon'] }}" aria-hidden="true"></i></a></th>
-                        <th><p>S (м²)</p> <a href="{{ $sort['square']['link'] }}"><i class="fa {{ $sort['square']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p><i class="fa fa-users fa-2x" aria-hidden="true"></i>(человек)</p> <a href="{{ $sort['members_count']['link'] }}"><i class="fa {{ $sort['members_count']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th>Действие</th>
                     </tr>
@@ -135,7 +134,6 @@
                             <td>{{ $application->group_nick }}</td>
                             <td>{{ $application->contact_name }}</td>
                             <td>{{ $application->phone }}</td>
-                            <td>{{ $application->square }}</td>
                             <td>{{ $application->members_count }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/fair/{{$application->id }}" title="Подробнее" >

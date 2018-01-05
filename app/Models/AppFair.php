@@ -12,6 +12,7 @@ class AppFair extends Model
         'members_count',
         'description',
         'phone',
+        'city',
         'contact_name',
         'social_link',
         'group_link',

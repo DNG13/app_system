@@ -28,6 +28,7 @@ class StoreUpdateRequest extends FormRequest
             'contact_name' => 'required|string|max:255',
             'media_name' => 'required|string|max:100',
             'phone' => 'required|string|max:64',
+            'prev_part' => 'nullable|string',
             'portfolio_link'=>'required',
             'equipment' => 'required|string',
             'city' => 'required|string|max:100',

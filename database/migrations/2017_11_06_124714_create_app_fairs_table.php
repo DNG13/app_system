@@ -26,6 +26,7 @@ class CreateAppFairsTable extends Migration
             $table->timestamps();
             $table->string('group_nick', 100);
             $table->string('contact_name', 255);
+            $table->string('city');
             $table->json('members');
             $table->integer('members_count');
             $table->string('phone', 64);
@@ -34,7 +35,7 @@ class CreateAppFairsTable extends Migration
             $table->text('group_link');
             $table->json('equipment');
             $table->string('payment_type', 64);
-            $table->float('square', 4, 2)->nullable();
+            $table->string('square')->nullable();
             $table->text('description');
         });
     }
