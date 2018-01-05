@@ -17,12 +17,12 @@ class LoadAction extends Action
 
     public function run($file, $app_kind, $app_id)
     {
-        $fileName = iconv("UTF-8","ISO-8859-1", stripslashes($file->getClientOriginalName()));
+        $fileName =  iconv("UTF-8", "ISO-8859-1//TRANSLIT", stripslashes($file->getClientOriginalName()));
         $path = 'uploads/file/' . $app_kind . '/' . $app_id;
         $filePath = public_path( $path ).'/' . $fileName;
         $extension = $file->extension();
-        $image = ['png', 'jpg', 'jpeg'];
-        $audio = ['ogg', 'mp3', 'wav', 'wma', 'mid', 'flac', 'aac', 'alac', 'ac3', 'm4a', 'aif', 'iff', 'm3u', 'mpa', 'ra'];
+        $image = ['png', 'jpg', 'jpeg', 'gif', 'tiff', 'pjpeg'];
+        $audio = ['ogg', 'mp3', 'wav', 'wma', 'mid', 'flac', 'aac', 'alac', 'ac3', 'm4a', 'aif', 'iff', 'm3u', 'mpa', 'ra', 'mpeg', 'mp4'];
         $document = ['doc', 'rtf', 'pdf', 'docx', 'sxw', 'txt', 'odt'];
 
         $appFile = new AppFile;
@@ -63,7 +63,7 @@ class LoadAction extends Action
         } elseif (in_array($extension, $audio)) {
             $appFile->type = 'audio';
         } else {
-            return back()->with('We have problems, Huston');
+            $appFile->type = 'else';
         }
         $appFile->thumbnail_link = $thumbnailLink;
         $appFile->save();
