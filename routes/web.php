@@ -29,14 +29,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/profile', 'ProfileController@update');
     Route::match(['get', 'post'],'cosplay', 'AppCosplayController@index')->name('cosplay.index');
     Route::post('cosplay/store', 'AppCosplayController@store');
-    Route::resource('cosplay', 'AppCosplayController', ['except' => ['index', 'store', 'destroy']]);
+    Route::resource('cosplay', 'AppCosplayController', ['except' => ['index', 'store', 'destroy']])->middleware('check.profile');
     Route::match(['get', 'post'],'press', 'AppPressController@index')->name('press.index');
     Route::post('press/store', 'AppPressController@store');
-    Route::resource('press', 'AppPressController', ['except' => ['index',  'store', 'destroy']]);
+    Route::resource('press', 'AppPressController', ['except' => ['index',  'store', 'destroy']])->middleware('check.profile');
     Route::match(['get', 'post'],'fair', 'AppFairController@index')->name('fair.index');
     Route::post('fair/store', 'AppFairController@store');
-    Route::resource('fair', 'AppFairController', ['except' => ['index', 'store', 'destroy']]);
-    Route::resource('volunteer', 'AppVolunteerController', ['except' => 'destroy']);
+    Route::resource('fair', 'AppFairController', ['except' => ['index', 'store', 'destroy']])->middleware('check.profile');
+    Route::resource('volunteer', 'AppVolunteerController', ['except' => 'destroy'])->middleware('check.profile');
     Route::post('/comment/create', 'CommentController@create');
     Route::post('/upload', 'FileController@upload');
 
