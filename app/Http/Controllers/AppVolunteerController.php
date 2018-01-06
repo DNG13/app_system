@@ -11,6 +11,7 @@ use App\Actions\AppVolunteer\UpdateAction;
 use App\Models\AppVolunteer;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Abstracts\Controller;
 use Mail;
 
 class AppVolunteerController extends Controller

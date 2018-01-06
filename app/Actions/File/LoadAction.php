@@ -17,7 +17,7 @@ class LoadAction extends Action
 
     public function run($file, $app_kind, $app_id)
     {
-        $fileName =  preg_replace("/[^.a-z0-9]/i","", iconv("UTF-8", "ISO-8859-1//TRANSLIT", stripslashes($file->getClientOriginalName())));
+        $fileName =  preg_replace("/[^._-a-z0-9]/i","_", $this->rus2translit($file->getClientOriginalName()));
         $path = 'uploads/file/' . $app_kind . '/' . $app_id;
         $filePath = public_path( $path ).'/' . $fileName;
         $extension = $file->extension();
@@ -67,5 +67,40 @@ class LoadAction extends Action
         }
         $appFile->thumbnail_link = $thumbnailLink;
         $appFile->save();
+    }
+
+    /**
+     * @param $string
+     * @return string
+     */
+    function rus2translit($string): string
+    {
+        $converter = array(
+            'а' => 'a',   'б' => 'b',   'в' => 'v',
+            'г' => 'g',   'д' => 'd',   'е' => 'e',
+            'ё' => 'e',   'ж' => 'zh',  'з' => 'z',
+            'и' => 'i',   'й' => 'y',   'к' => 'k',
+            'л' => 'l',   'м' => 'm',   'н' => 'n',
+            'о' => 'o',   'п' => 'p',   'р' => 'r',
+            'с' => 's',   'т' => 't',   'у' => 'u',
+            'ф' => 'f',   'х' => 'h',   'ц' => 'c',
+            'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
+            'ь' => '',  'ы' => 'y',   'ъ' => '',
+            'э' => 'e',   'ю' => 'yu',  'я' => 'ya',
+
+            'А' => 'A',   'Б' => 'B',   'В' => 'V',
+            'Г' => 'G',   'Д' => 'D',   'Е' => 'E',
+            'Ё' => 'E',   'Ж' => 'Zh',  'З' => 'Z',
+            'И' => 'I',   'Й' => 'Y',   'К' => 'K',
+            'Л' => 'L',   'М' => 'M',   'Н' => 'N',
+            'О' => 'O',   'П' => 'P',   'Р' => 'R',
+            'С' => 'S',   'Т' => 'T',   'У' => 'U',
+            'Ф' => 'F',   'Х' => 'H',   'Ц' => 'C',
+            'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Sch',
+            'Ь' => '',  'Ы' => 'Y',   'Ъ' => '',
+            'Э' => 'E',   'Ю' => 'Yu',  'Я' => 'Ya',
+        );
+
+        return strtr($string, $converter);
     }
 }

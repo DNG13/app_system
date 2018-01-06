@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Abstracts\Controller;
 
 class HomeController extends Controller
 {

@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Models\UserRole;
 use App\Models\Role;
+use App\Abstracts\Controller;
 
 class UserRoleController extends Controller
 {

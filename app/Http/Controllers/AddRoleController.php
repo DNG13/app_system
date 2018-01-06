@@ -6,6 +6,7 @@ use App\Http\Requests\Role\StoreUpdateRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Abstracts\Controller;
 
 class AddRoleController extends Controller
 {

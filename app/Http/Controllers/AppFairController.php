@@ -12,6 +12,7 @@ use App\Models\AppFair;
 use App\Models\AppFile;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Abstracts\Controller;
 use Mail;
 
 class AppFairController extends Controller

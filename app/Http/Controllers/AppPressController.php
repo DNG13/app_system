@@ -12,6 +12,7 @@ use App\Models\AppType;
 use App\Models\AppPress;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Abstracts\Controller;
 use Mail;
 
 class AppPressController extends Controller

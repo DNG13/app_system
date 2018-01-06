@@ -12,7 +12,7 @@ use App\Models\AppCosplay;
 use App\Models\Comment;
 use App\Models\AppFile;
 use Illuminate\Http\Request;
-
+use App\Abstracts\Controller;
 
 class AppCosplayController extends Controller
 {

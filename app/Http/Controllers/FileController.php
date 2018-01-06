@@ -7,6 +7,7 @@ use App\Actions\File\ZipAction;
 use App\Http\Requests\File\UploadRequest;
 use App\Models\AppFile;
 use Illuminate\Http\Request;
+use App\Abstracts\Controller;
 use File;
 
 class FileController extends Controller

@@ -10,7 +10,7 @@ use App\Http\Requests\Register\ProfileFacebookRequest;
 use App\User;
 use App\Models\Profile;
 use App\Models\Avatar;
-use App\Http\Controllers\Controller;
+use App\Abstracts\Controller;
 use Auth;
 use Carbon\Carbon;
 use File;

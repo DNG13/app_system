@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\AppType;
 use Illuminate\Support\Facades\Auth;
+use App\Abstracts\Controller;
 
 class AddTypeController extends Controller
 {

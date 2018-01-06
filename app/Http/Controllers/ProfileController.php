@@ -7,6 +7,7 @@ use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\Avatar;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
+use App\Abstracts\Controller;
 
 class ProfileController extends Controller
 {
