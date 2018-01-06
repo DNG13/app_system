@@ -17,7 +17,7 @@ class LoadAction extends Action
 
     public function run($file, $app_kind, $app_id)
     {
-        $fileName =  preg_replace("/[^._-a-z0-9]/i","_", $this->rus2translit($file->getClientOriginalName()));
+        $fileName =  preg_replace("/[^-._a-z0-9]/i","_", $this->rus2translit($file->getClientOriginalName()));
         $path = 'uploads/file/' . $app_kind . '/' . $app_id;
         $filePath = public_path( $path ).'/' . $fileName;
         $extension = $file->extension();
