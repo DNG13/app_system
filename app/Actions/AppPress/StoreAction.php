@@ -4,10 +4,11 @@ namespace App\Actions\AppPress;
 
 use App\User;
 use App\Abstracts\Action;
+use App\Mail\Application;
 use App\Models\AppPress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class StoreAction extends Action
 {
@@ -45,10 +46,7 @@ class StoreAction extends Action
         $mail['nickname'] = $user->profile->nickname;
         $mail['title'] = $press->media_name;
         $mail['page'] = '/press/'. $press->id;
-        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
-            $message->to( $mail['email']);
-            $message->subject('Ваша заявка успешно отправлена');
-        });
+        Mail::to($mail['email'])->send(new Application($mail));
 
         return redirect('press')->with('success', "Ваша заявка успешно отправлена.");
     }

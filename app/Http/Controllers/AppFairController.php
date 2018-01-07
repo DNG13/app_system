@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AppFair\StoreUpdateRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Actions\AppFair\ListAction;
 use App\Actions\AppFair\StoreAction;
 use App\Actions\AppFair\UpdateAction;

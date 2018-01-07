@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AppPress\StoreUpdateRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Actions\AppPress\StoreAction;
 use App\Actions\AppPress\ListAction;
 use App\Actions\AppPress\UpdateAction;
@@ -13,7 +13,6 @@ use App\Models\AppPress;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Abstracts\Controller;
-use Mail;
 
 class AppPressController extends Controller
 {

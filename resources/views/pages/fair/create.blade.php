@@ -115,7 +115,7 @@
                             <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
                                 <label for="square" class="col-md-4 control-label">Размер торгово-развлекательной точки</label>
                                 <div class="col-md-6">
-                                    <<textarea id="square" type="text"  placeholder="Обязательно для стендов, игровых зон и фудкорта(ширина, глубина и высота в сантиметрах)" class="form-control" name="square" autofocus>{{ old('square') }}</textarea>
+                                    <textarea id="square" type="text"  placeholder="Обязательно для стендов, игровых зон и фудкорта(ширина, глубина и высота в сантиметрах)" class="form-control" name="square" autofocus>{{ old('square') }}</textarea>
 
                                     @if ($errors->has('square'))
                                         <span class="help-block">

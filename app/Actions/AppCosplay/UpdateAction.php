@@ -3,11 +3,14 @@
 namespace App\Actions\AppCosplay;
 
 use App\Abstracts\Action;
+use App\Mail\Edit;
+use App\Mail\Status;
 use App\Models\AppCosplay;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+
 class UpdateAction extends Action
 {
 
@@ -37,10 +40,7 @@ class UpdateAction extends Action
                     $mail['email'] = $user->email;
                     $mail['page'] ='/cosplay/'. $cosplays->id;
                     $mail['status'] = $request->get('status');
-                    Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                        $message->to( $mail['email']);
-                        $message->subject('Изменение статуса заявки');
-                    });
+                    Mail::to($mail['email'])->send(new Status($mail));
                 }
             $cosplays->status = $request->get('status');
         }
@@ -57,10 +57,7 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+show@gmail.com';
             $mail['title'] = $cosplays->title;
             $mail['page'] = '/cosplay/'. $cosplays->id;
-            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
-                $message->to($mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
+            Mail::to($mail['email'])->send(new Edit($mail));
         }
 
         return redirect('cosplay')->with('success', "Ваша заявка успешно изменена.");

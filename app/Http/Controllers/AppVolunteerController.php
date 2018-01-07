@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AppVolunteer\StoreRequest;
 use App\Http\Requests\AppVolunteer\UpdateRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Actions\AppVolunteer\ListAction;
 use App\Actions\AppVolunteer\StoreAction;
 use App\Actions\AppVolunteer\UpdateAction;
@@ -12,7 +12,6 @@ use App\Models\AppVolunteer;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Abstracts\Controller;
-use Mail;
 
 class AppVolunteerController extends Controller
 {

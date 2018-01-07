@@ -2,6 +2,8 @@
 namespace App\Actions\AppVolunteer;
 
 use App\Abstracts\Action;
+use App\Mail\Edit;
+use App\Mail\Status;
 use App\Models\AppVolunteer;
 use App\User;
 use Illuminate\Http\Request;
@@ -56,10 +58,7 @@ class UpdateAction extends Action
                     $mail['title'] = $volunteer->nickname;
                     $mail['page'] = '/volunteer/'.  $volunteer->id;
                     $mail['status'] = $request->get('status');
-                    Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                        $message->to( $mail['email']);
-                        $message->subject('Изминение статуса заявки');
-                    });
+                    Mail::to($mail['email'])->send(new Status($mail));
                 }
             $volunteer->status = $request->get('status');
         }
@@ -70,10 +69,7 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+volunteers@gmail.com';
             $mail['title'] = $volunteer->nickname;
             $mail['page'] = '/volunteer/'. $volunteer->id;
-            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
-                $message->to($mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
+            Mail::to($mail['email'])->send(new Edit($mail));
         }
 
         return redirect('volunteer')->with('success', "Ваша заявка успешно изменена.");

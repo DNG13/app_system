@@ -3,11 +3,13 @@
 namespace App\Actions\AppFair;
 
 use App\Abstracts\Action;
+use App\Mail\Edit;
+use App\Mail\Status;
 use App\Models\AppFair;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class UpdateAction extends Action
 {
@@ -40,10 +42,7 @@ class UpdateAction extends Action
                     $mail['title'] = $fair->group_nick;
                     $mail['page'] = '/fair/'. $fair->id;
                     $mail['status'] = $request->get('status');
-                    Mail::send('mails.status',  $mail , function($message) use ( $mail ){
-                        $message->to( $mail['email']);
-                        $message->subject('Изменение статуса заявки');
-                    });
+                Mail::to($mail['email'])->send(new Status($mail));
                 }
             $fair->status = $request->get('status');
         }
@@ -65,10 +64,7 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+fair@gmail.com';
             $mail['title'] = $fair->group_nick;
             $mail['page'] = '/fair/'. $fair->id;
-            Mail::send('mails.edit', $mail, function ($message) use ($mail) {
-                $message->to($mail['email']);
-                $message->subject('Заявка ' .$mail['title'] . ' изменена');
-            });
+            Mail::to($mail['email'])->send(new Edit($mail));
         }
 
         return redirect('fair')->with('success', "Ваша заявка успешно изменена.");

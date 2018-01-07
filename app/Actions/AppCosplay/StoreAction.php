@@ -4,10 +4,11 @@ namespace App\Actions\AppCosplay;
 
 use App\User;
 use App\Abstracts\Action;
+use App\Mail\Application;
 use App\Models\AppCosplay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class StoreAction extends Action
 {
@@ -45,10 +46,7 @@ class StoreAction extends Action
         $mail['title'] = $cosplays->title;
         $mail['email'] = $user->email;
         $mail['page'] = '/cosplay/'. $cosplays->id;
-        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
-            $message->to( $mail['email']);
-            $message->subject('Ваша заявка успешно отправлена');
-        });
+        Mail::to($mail['email'])->send(new Application($mail));
 
         return redirect('cosplay')->with('success', "Ваша заявка успешно отправлена.");
     }

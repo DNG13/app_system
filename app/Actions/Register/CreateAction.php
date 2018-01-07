@@ -3,11 +3,12 @@
 namespace App\Actions\Register;
 
 use App\Abstracts\Action;
+use App\Mail\Activation;
 use App\Models\Profile;
 use App\Models\Avatar;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
-use Mail;
 
 class CreateAction extends Action
 {
@@ -64,12 +65,10 @@ class CreateAction extends Action
         $myUser->confirmation_code = $confirmation;
         $myUser->save();
 
-        $user['nickname'] = $data['nickname'];
-        $user['email'] = $myUser->email;
-
-        Mail::send('mails.activation',  ['confirmation_code' => $confirmation, 'id' => $user_id, 'nickname' => $user['nickname']] , function($message) use ( $user ){
-            $message->to( $user['email']);
-            $message->subject('Код активации сайта Khanifest');
-        });
+        $mail['confirmation_code'] = $confirmation['code'];
+        $mail['id'] = $user_id;
+        $mail['nickname'] = $data['nickname'];
+        $mail['email'] = $myUser->email;
+        Mail::to($mail['email'])->send(new Activation($mail));
     }
 }

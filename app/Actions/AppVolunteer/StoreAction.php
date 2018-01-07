@@ -4,11 +4,12 @@ namespace App\Actions\AppVolunteer;
 
 use App\User;
 use App\Abstracts\Action;
+use App\Mail\Application;
 use App\Models\AppVolunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class StoreAction extends Action
 {
@@ -63,10 +64,7 @@ class StoreAction extends Action
         $mail['nickname'] = $user->profile->nickname;
         $mail['title'] = $volunteer->nickname;
         $mail['page'] = "/volunteer/ $volunteer->id";
-        Mail::send('mails.application',  $mail , function($message) use ( $mail ) {
-            $message->to( $mail['email']);
-            $message->subject('Ваша заявка успешно отправлена');
-        });
+        Mail::to($mail['email'])->send(new Application($mail));
 
         return redirect('volunteer')->with('success', "Ваша заявка успешно отправлена.");
     }
