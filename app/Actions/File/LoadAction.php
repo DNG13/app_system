@@ -20,7 +20,16 @@ class LoadAction extends Action
         $fileName =  preg_replace("/[^-._a-z0-9]/i","_", $this->rus2translit($file->getClientOriginalName()));
         $path = 'uploads/file/' . $app_kind . '/' . $app_id;
         $filePath = public_path( $path ).'/' . $fileName;
+
+        //if file with the same name exists
         $extension = $file->extension();
+        $info = pathinfo($fileName);
+        $i = 1;
+        while(file_exists($filePath)) {
+                $name = $info['filename'] . '_' . $i++ . '.' . $extension;
+                $filePath = public_path($path) . '/' . $name;
+            }
+        $fileName = $name ?? $fileName;
         $image = ['png', 'jpg', 'jpeg', 'gif', 'tiff', 'pjpeg'];
         $audio = ['ogg', 'mp3', 'wav', 'wma', 'mid', 'flac', 'aac', 'alac', 'ac3', 'm4a', 'aif', 'iff', 'm3u', 'mpa', 'ra', 'mpeg', 'mp4'];
         $document = ['doc', 'rtf', 'pdf', 'docx', 'sxw', 'txt', 'odt'];
