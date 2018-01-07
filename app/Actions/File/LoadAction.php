@@ -4,7 +4,7 @@ namespace App\Actions\File;
 
 use App\Abstracts\Action;
 use App\Models\AppFile;
-use File;
+//use File;
 use Intervention\Image\Facades\Image;
 
 class LoadAction extends Action
@@ -20,19 +20,17 @@ class LoadAction extends Action
         $fileName =  preg_replace("/[^-._a-z0-9]/i","_", $this->rus2translit($file->getClientOriginalName()));
         $path = 'uploads/file/' . $app_kind . '/' . $app_id;
         $filePath = public_path( $path ).'/' . $fileName;
+        $mime = $file->getMimeType();
 
         //if file with the same name exists
         $extension = $file->extension();
         $info = pathinfo($fileName);
         $i = 1;
         while(file_exists($filePath)) {
-                $name = $info['filename'] . '_' . $i++ . '.' . $extension;
-                $filePath = public_path($path) . '/' . $name;
-            }
+            $name = $info['filename'] . '_' . $i++ . '.' . $extension;
+            $filePath = public_path($path) . '/' . $name;
+        }
         $fileName = $name ?? $fileName;
-        $image = ['png', 'jpg', 'jpeg', 'gif', 'tiff', 'pjpeg'];
-        $audio = ['ogg', 'mp3', 'wav', 'wma', 'mid', 'flac', 'aac', 'alac', 'ac3', 'm4a', 'aif', 'iff', 'm3u', 'mpa', 'ra', 'mpeg', 'mp4'];
-        $document = ['doc', 'rtf', 'pdf', 'docx', 'sxw', 'txt', 'odt'];
 
         $appFile = new AppFile;
         $appFile->name = $fileName;
@@ -43,7 +41,7 @@ class LoadAction extends Action
         $file->move(public_path($path) . '/', $fileName);
         $thumbnailLink = null;
 
-        if (in_array($extension, $image)) {
+        if (strpos($mime, 'image')!== false) {
             $appFile->type = 'image';
 
             $img = Image::make($filePath);
@@ -67,10 +65,12 @@ class LoadAction extends Action
             $img->save($thumbnailPath . '/' . $fileName);
             $thumbnailLink = $thumbnailLink . '/' . $fileName;
 
-        } elseif (in_array($extension, $document)) {
+        } elseif ((strpos($mime, 'application')!== false) || (strpos($mime, 'text')!== false)) {
             $appFile->type = 'document';
-        } elseif (in_array($extension, $audio)) {
+        } elseif (strpos($mime, 'audio')!== false) {
             $appFile->type = 'audio';
+        } elseif (strpos($mime, 'video')!== false) {
+            $appFile->type = 'video';
         } else {
             $appFile->type = 'else';
         }

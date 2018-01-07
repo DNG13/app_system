@@ -305,14 +305,14 @@
                         <input type="hidden" name="app_kind" value="cosplay">
                         <input type="hidden" name="app_id" value="{{$cosplay->id}}">
 
-                        {{--<input type=file name=file>--}}
-                        {{--<div class="form-group">--}}
-                            {{--<div class="col-md-6 col-md-offset-4">--}}
-                                {{--<button type="submit" class="btn btn-primary">--}}
-                                    {{--Отправить--}}
-                                {{--</button>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <input type=file name=file>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Отправить
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

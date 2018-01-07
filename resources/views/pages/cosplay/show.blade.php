@@ -172,6 +172,8 @@
                                         <i class="fa fa-file-audio-o fa-5x" aria-hidden="true"></i>
                                     @elseif($file->type == 'document')
                                         <i class="fa fa-file-text-o fa-5x" aria-hidden="true"></i>
+                                    @elseif($file->type == 'video')
+                                        <i class="fa fa-file-video-o fa-5x" aria-hidden="true"></i>
                                     @else
                                         <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
                                     @endif
