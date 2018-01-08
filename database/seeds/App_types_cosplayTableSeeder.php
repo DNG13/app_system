@@ -27,7 +27,7 @@ class App_types_cosplayTableSeeder extends Seeder
             AppType::create([
                 'app_type' => 'cosplay',
                 'title' => $titles[$i],
-                'created_at' => Carbon\Carbon::now(),
+                'created_at' => '2018-01-08 12:37:00',
             ]);
         };
     }

@@ -28,7 +28,7 @@ class App_types_fairTableSeeder extends Seeder
             AppType::create([
                 'app_type' => 'fair',
                 'title' => $titles[$i],
-                'created_at' => Carbon\Carbon::now(),
+                'created_at' => '2018-01-08 12:37:00',
             ]);
         };
     }

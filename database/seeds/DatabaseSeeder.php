@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(App_types_fairTableSeeder::class);
         $this->call(App_types_pressTableSeeder::class);
         $this->call(RolesTableSeeder::class);
+        $this->call(DefaultUserSeeder::class);
     }
 }
