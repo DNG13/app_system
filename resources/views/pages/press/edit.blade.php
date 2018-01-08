@@ -151,19 +151,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('members_count') ? ' has-error' : '' }}">
-                                <label for="members_count" class="col-md-4 control-label">Количество представителей</label>
-                                <div class="col-md-6">
-                                    <input id="members_count" type="number" min="1" class="form-control" name="members_count" value="{{ $press->members_count }}" required autofocus>
-
-                                    @if ($errors->has('members_count'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('members_count') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('equipment') ? ' has-error' : '' }}">
                                 <label for="equipment" class="col-md-4 control-label">Доп. техника</label>
                                 <div class="col-md-6">

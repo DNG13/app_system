@@ -75,13 +75,6 @@
                             </div>
 
                             <div>
-                                <label for="members_count" class="col-md-4">Количество представителей</label>
-                                <div class="col-md-6">
-                                    <p id="members_count">{{ $press->members_count }}</p>
-                                </div>
-                            </div>
-
-                            <div>
                                 <label for="equipment" class="col-md-4">Доп. техника</label>
                                 <div class="col-md-6">
                                     <p id="equipment">{{ $press->equipment }}</p>
