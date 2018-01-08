@@ -33,6 +33,7 @@ class StoreUpdateRequest extends FormRequest
             'description' => 'required|string',
             'prev_part' => 'nullable|string',
             'comment' => 'nullable|string',
+            'props' => 'nullable|string',
         ];
     }
 }

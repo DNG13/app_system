@@ -65,11 +65,11 @@
                             </div>
                         @endif
 
-                        @if(!$cosplay->comment==null)
+                        @if(!$cosplay->props==null)
                             <div>
-                                <label for="comment" class="col-md-4">Коментарий</label>
+                                <label for="props" class="col-md-4">Реквизит</label>
                                 <div class="col-md-6">
-                                    <p  id="comment">{{ $cosplay->comment }}</p>
+                                    <p  id="props">{{ $cosplay->props }}</p>
                                 </div>
                             </div>
                         @endif
@@ -80,6 +80,15 @@
                                 <p  id="description">{{ $cosplay->description }}</p>
                             </div>
                         </div>
+
+                        @if(!$cosplay->comment==null)
+                            <div>
+                                <label for="comment" class="col-md-4">Коментарий</label>
+                                <div class="col-md-6">
+                                    <p  id="comment">{{ $cosplay->comment }}</p>
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="col-md-12"><h4>Участники</h4></div>
                         <div id="dynamic_field">

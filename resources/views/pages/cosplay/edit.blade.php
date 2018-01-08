@@ -137,14 +137,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                <label for="comment" class="col-md-4 control-label">Коментарий</label>
+                            <div class="form-group{{ $errors->has('props') ? ' has-error' : '' }}">
+                                <label for="props" class="col-md-4 control-label">Реквизит</label>
                                 <div class="col-md-6">
-                                    <textarea  id="comment" rows="5" class="form-control" name="comment" autofocus>{{ $cosplay->comment }}</textarea>
+                                    <textarea  id="props" rows="5" class="form-control" name="props" placeholder="Ширма, столы, стулья, микрофоны, волонтёры - всё то, что не везете с собой" autofocus>{{ $cosplay->props }}</textarea>
 
-                                    @if ($errors->has('comment'))
+                                    @if ($errors->has('props'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('comment') }}</strong>
+                                        <strong>{{ $errors->first('props') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -158,6 +158,19 @@
                                     @if ($errors->has('description'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                                <label for="comment" class="col-md-4 control-label">Коментарий</label>
+                                <div class="col-md-6">
+                                    <textarea  id="comment" rows="5" class="form-control" name="comment" autofocus>{{ $cosplay->comment }}</textarea>
+
+                                    @if ($errors->has('comment'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('comment') }}</strong>
                                     </span>
                                     @endif
                                 </div>

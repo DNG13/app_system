@@ -4,7 +4,6 @@ namespace App\Actions\File;
 
 use App\Abstracts\Action;
 use App\Models\AppFile;
-//use File;
 use Intervention\Image\Facades\Image;
 
 class LoadAction extends Action

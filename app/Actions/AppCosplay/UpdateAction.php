@@ -30,6 +30,7 @@ class UpdateAction extends Action
         $cosplays->city = $request->get('city');
         $cosplays->description = $request->get('description');
         $cosplays->prev_part = $request->get('prev_part');
+        $cosplays->props = $request->get('props');
         $cosplays->comment = $request->get('comment');
 
         if($request->get('status') && Auth::user()->isAdmin()) {

@@ -20,6 +20,7 @@ class AppCosplay extends Model
         'comment',
         'prev_part',
         'group_nick',
+        'props',
     ];
 
     protected $table = 'app_cosplays';

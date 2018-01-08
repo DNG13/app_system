@@ -29,6 +29,7 @@ class StoreAction extends Action
         $cosplays->city = $request->get('city');
         $cosplays->description = $request->get('description');
         $cosplays->prev_part = $request->get('prev_part');
+        $cosplays->props = $request->get('props');
         $cosplays->comment = $request->get('comment');
         $cosplays->user_id = Auth::user()->id;
         $cosplays->status = 'В обработке';
