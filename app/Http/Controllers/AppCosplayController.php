@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AppCosplay\StoreUpdateRequest;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\AppCosplay\ListAction;
 use App\Actions\AppCosplay\StoreAction;
@@ -78,6 +79,7 @@ class AppCosplayController extends Controller
      */
     public function show($id)
     {
+        $roles = Role::get();
         $cosplay = AppCosplay::where('id', $id)->first();
         $files = AppFile::where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();
@@ -87,7 +89,7 @@ class AppCosplayController extends Controller
         $members =  json_decode($cosplay->members);
         $count = 0;
 
-        return view('pages.cosplay.show', compact('cosplay', 'members', 'count', 'comments', 'files'));
+        return view('pages.cosplay.show', compact('cosplay', 'members', 'count', 'comments', 'files', 'roles'));
     }
 
     /**

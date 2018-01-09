@@ -207,10 +207,11 @@
                     @if(!count($comments)==0)
                     @foreach($comments as $comment)
                         <div>
-                            <label for="comment" class="col-md-3">
+                            <label for="comment" class="col-md-4">
+                                @if($comment->role)@if($comment->role->key =='admin')Координатор @endif @endif
                                {{ $comment->profile->nickname }}
                                 <small>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small> </label>
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <p  id="comment">{{ $comment->text }}</p>
                             </div>
                             @if(Auth::user()->isAdmin())
@@ -226,9 +227,9 @@
                 <form method="POST" action="{{ url('/comment/create')}}">
                     {{ csrf_field() }}
                     <div>
-                        <label for="comment" class="col-md-3">
+                        <label for="comment" class="col-md-4">
                             Добавить комментарий</label>
-                        <div class="col-md-8 form-group">
+                        <div class="col-md-7 form-group">
                             <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
                             <input type="hidden" name="app_kind" value="cosplay">
                             <input type="hidden" name="app_id" value="{{$cosplay->id}}">

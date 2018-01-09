@@ -14,7 +14,7 @@ class RolesTableSeeder extends Seeder
     {
         Role::create([
             'key' => 'admin',
-            'title' => 'Координаторы фестиваля',
+            'title' => 'Координатор',
             'created_at' => Carbon\Carbon::now(),
             'active' => true,
         ]);

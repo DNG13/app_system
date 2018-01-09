@@ -17,4 +17,9 @@ class Comment extends Model
     {
         return $this->hasOne(Profile::class, 'user_id', 'user_id');
     }
+
+    public function role()
+    {
+        return $this->hasOne(UserRole::class, 'user_id', 'user_id');
+    }
 }
