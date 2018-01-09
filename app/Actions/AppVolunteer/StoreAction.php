@@ -5,6 +5,7 @@ namespace App\Actions\AppVolunteer;
 use App\User;
 use App\Abstracts\Action;
 use App\Mail\Application;
+use App\Mail\ForAdminNewApp;
 use App\Models\AppVolunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +66,9 @@ class StoreAction extends Action
         $mail['title'] = $volunteer->nickname;
         $mail['page'] = "/volunteer/ $volunteer->id";
         Mail::to($mail['email'])->send(new Application($mail));
+        $mail['email'] = 'khanifest+volunteers@gmail.com';
+        $mail['nickname'] = 'Admin';
+        Mail::to($mail['email'])->send(new ForAdminNewApp($mail));
 
         return redirect('volunteer')->with('success', "Ваша заявка успешно отправлена.");
     }

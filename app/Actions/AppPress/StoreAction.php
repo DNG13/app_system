@@ -5,6 +5,7 @@ namespace App\Actions\AppPress;
 use App\User;
 use App\Abstracts\Action;
 use App\Mail\Application;
+use App\Mail\ForAdminNewApp;
 use App\Models\AppPress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,9 @@ class StoreAction extends Action
         $mail['title'] = $press->media_name;
         $mail['page'] = '/press/'. $press->id;
         Mail::to($mail['email'])->send(new Application($mail));
+        $mail['email'] = 'khanifest+photo@gmail.com';
+        $mail['nickname'] = 'Admin';
+        Mail::to($mail['email'])->send(new ForAdminNewApp($mail));
 
         return redirect('press')->with('success', "Ваша заявка успешно отправлена.");
     }

@@ -5,6 +5,7 @@ namespace App\Actions\AppCosplay;
 use App\User;
 use App\Abstracts\Action;
 use App\Mail\Application;
+use App\Mail\ForAdminNewApp;
 use App\Models\AppCosplay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,9 @@ class StoreAction extends Action
         $mail['email'] = $user->email;
         $mail['page'] = '/cosplay/'. $cosplays->id;
         Mail::to($mail['email'])->send(new Application($mail));
+        $mail['email'] = 'khanifest+show@gmail.com';
+        $mail['nickname'] = 'Admin';
+        Mail::to($mail['email'])->send(new ForAdminNewApp($mail));
 
         return redirect('cosplay')->with('success', "Ваша заявка успешно отправлена.");
     }

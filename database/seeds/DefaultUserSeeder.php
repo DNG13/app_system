@@ -20,7 +20,7 @@ class DefaultUserSeeder extends Seeder
             'password' => '$2y$10$5.voPgq.H5kmBO7dsHN5mu4yl/EaClGt.g7WISOfGhaGTGIGJtIF6',
             'created_at' => '2018-01-08 12:37:30',
             'confirmed_at' => '2018-01-08 12:37:31',
-            'confirmation_code'=> '[]',
+            'confirmation_code'=> [],
         ]);
         Profile::create([
             'user_id' => '1',

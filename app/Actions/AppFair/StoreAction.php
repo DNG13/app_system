@@ -5,6 +5,7 @@ namespace App\Actions\AppFair;
 use App\User;
 use App\Abstracts\Action;
 use App\Mail\Application;
+use App\Mail\ForAdminNewApp;
 use App\Models\AppFair;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,9 @@ class StoreAction extends Action
         $mail['title'] = $fair->group_nick;
         $mail['page'] = '/fair/'. $fair->id;
         Mail::to($mail['email'])->send(new Application($mail));
+        $mail['email'] = 'khanifest+fair@gmail.com';
+        $mail['nickname'] = 'Admin';
+        Mail::to($mail['email'])->send(new ForAdminNewApp($mail));
 
         return redirect('fair')->with('success', "Ваша заявка успешно отправлена.");
     }
