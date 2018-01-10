@@ -243,7 +243,7 @@
                             <div class="form-group{{ $errors->has('difficulties') ? ' has-error' : '' }}">
                                 <label for="difficulties" class="col-md-4 control-label">Возможные затруднения</label>
                                 <div class="col-md-6">
-                                    <textarea  id="difficulties" rows="5" class="form-control" name="difficulties"  autofocus >{{ $volunteer->difficulties }}</textarea>
+                                    <textarea  id="difficulties" rows="5" class="form-control" placeholder="Например: маленький рост, плохое зрение, невозможность присутствия на каком-либо этапе подготовки/проведения фестиваля, участие в косплей-шоу и т.д." name="difficulties"  autofocus >{{ $volunteer->difficulties }}</textarea>
 
                                     @if ($errors->has('difficulties'))
                                         <span class="help-block">
