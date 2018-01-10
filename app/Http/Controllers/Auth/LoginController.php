@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Abstracts\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -20,7 +22,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        login as protected traitLogin;
+    }
 
     /**
      * Where to redirect users after login.
@@ -46,5 +50,24 @@ class LoginController extends Controller
     {
        $request['confirmed_at'] = Carbon::now();
        return $request->only('email', 'password', 'confirmation_code');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @throws ValidationException
+     */
+    public function login(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !$user->confirmed_at) {
+
+            throw ValidationException::withMessages([
+                $this->username() => 'Пользователь не подтвердил адрес электронной почты',
+            ]);
+        }
+
+        return $this->traitLogin($request);
     }
 }
