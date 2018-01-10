@@ -3,7 +3,7 @@
 namespace App\Actions\AppCosplay;
 
 use App\Abstracts\Action;
-use App\Mail\Edit;
+use App\Jobs\SendEmailJob;
 use App\Mail\Status;
 use App\Models\AppCosplay;
 use App\User;
@@ -58,7 +58,8 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+show@gmail.com';
             $mail['title'] = $cosplays->title;
             $mail['page'] = '/cosplay/'. $cosplays->id;
-            Mail::to($mail['email'])->send(new Edit($mail));
+            SendEmailJob::dispatch($mail)
+                ->delay(now()->addSeconds(2));
         }
 
         return redirect('cosplay')->with('success', "Ваша заявка успешно изменена.");
