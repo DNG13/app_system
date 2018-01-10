@@ -3,9 +3,7 @@
 namespace App\Actions\Register;
 
 use App\Abstracts\Action;
-use App\User;
-use Illuminate\Http\Request;
-use Mail;
+use App\Jobs\SendActivationEmailJob;
 
 class UserReactivationSendAction extends Action
 {
@@ -21,9 +19,12 @@ class UserReactivationSendAction extends Action
         $user->confirmation_code = $confirmation;
         $user->save();
 
-        Mail::send('mails.activation',  ['confirmation_code' => $confirmation, 'id' => $user['id']] , function($message) use ( $user ){
-            $message->to( $user ['email']);
-            $message->subject('Код активации сайта Khanifest');
-        });
+        $mail['confirmation_code'] = $confirmation['code'];
+        $mail['id'] = $user['id'];
+        $mail['nickname'] = $user['nickname'];
+        $mail['email'] = $user->email;
+
+        SendActivationEmailJob::dispatch($mail)
+            ->delay(now()->addSeconds(2));
     }
 }

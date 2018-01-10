@@ -4,12 +4,11 @@ namespace App\Actions\AppPress;
 
 use App\User;
 use App\Abstracts\Action;
-use App\Mail\Application;
-use App\Mail\ForAdminNewApp;
+use App\Jobs\SendApplicationEmailJob;
+use App\Jobs\SendForAdminNewAppEmailJob;
 use App\Models\AppPress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class StoreAction extends Action
 {
@@ -47,10 +46,12 @@ class StoreAction extends Action
         $mail['nickname'] = $user->profile->nickname;
         $mail['title'] = $press->media_name;
         $mail['page'] = '/press/'. $press->id;
-        Mail::to($mail['email'])->send(new Application($mail));
+        SendApplicationEmailJob::dispatch($mail)
+            ->delay(now()->addSeconds(2));
         $mail['email'] = 'khanifest+photo@gmail.com';
         $mail['nickname'] = 'Admin';
-        Mail::to($mail['email'])->send(new ForAdminNewApp($mail));
+        SendForAdminNewAppEmailJob::dispatch($mail)
+            ->delay(now()->addSeconds(2));
 
         return redirect('press')->with('success', "Ваша заявка успешно отправлена.");
     }

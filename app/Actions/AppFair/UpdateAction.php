@@ -3,13 +3,12 @@
 namespace App\Actions\AppFair;
 
 use App\Abstracts\Action;
-use App\Mail\Edit;
-use App\Mail\Status;
+use App\Jobs\SendEditEmailJob;
+use App\Jobs\SendStatusEmailJob;
 use App\Models\AppFair;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class UpdateAction extends Action
 {
@@ -36,14 +35,15 @@ class UpdateAction extends Action
 
         if($request->get('status') && Auth::user()->isAdmin()) {
             if($fair->status != $request->get('status')) {
-                    $user =  User::where('id', $fair->user_id)->first();
-                    $mail['email'] = $user->email;
-                    $mail['nickname'] = $user->profile->nickname;
-                    $mail['title'] = $fair->group_nick;
-                    $mail['page'] = '/fair/'. $fair->id;
-                    $mail['status'] = $request->get('status');
-                Mail::to($mail['email'])->send(new Status($mail));
-                }
+                $user =  User::where('id', $fair->user_id)->first();
+                $mail['email'] = $user->email;
+                $mail['nickname'] = $user->profile->nickname;
+                $mail['title'] = $fair->group_nick;
+                $mail['page'] = '/fair/'. $fair->id;
+                $mail['status'] = $request->get('status');
+                SendStatusEmailJob::dispatch($mail)
+                    ->delay(now()->addSeconds(2));
+            }
             $fair->status = $request->get('status');
         }
         $members = [];
@@ -64,7 +64,8 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+fair@gmail.com';
             $mail['title'] = $fair->group_nick;
             $mail['page'] = '/fair/'. $fair->id;
-            Mail::to($mail['email'])->send(new Edit($mail));
+            SendEditEmailJob::dispatch($mail)
+                ->delay(now()->addSeconds(2));
         }
 
         return redirect('fair')->with('success', "Ваша заявка успешно изменена.");

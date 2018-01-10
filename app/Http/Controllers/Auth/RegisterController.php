@@ -13,12 +13,10 @@ use App\Models\Avatar;
 use App\Abstracts\Controller;
 use Auth;
 use Carbon\Carbon;
-use File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-use Mail;
 
 class RegisterController extends Controller
 {

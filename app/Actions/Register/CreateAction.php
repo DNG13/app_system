@@ -3,11 +3,10 @@
 namespace App\Actions\Register;
 
 use App\Abstracts\Action;
-use App\Mail\Activation;
+use App\Jobs\SendActivationEmailJob;
 use App\Models\Profile;
 use App\Models\Avatar;
 use App\User;
-use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
 class CreateAction extends Action
@@ -69,6 +68,7 @@ class CreateAction extends Action
         $mail['id'] = $user_id;
         $mail['nickname'] = $data['nickname'];
         $mail['email'] = $myUser->email;
-        Mail::to($mail['email'])->send(new Activation($mail));
+        SendActivationEmailJob::dispatch($mail)
+            ->delay(now()->addSeconds(2));
     }
 }

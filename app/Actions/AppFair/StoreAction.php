@@ -4,12 +4,11 @@ namespace App\Actions\AppFair;
 
 use App\User;
 use App\Abstracts\Action;
-use App\Mail\Application;
-use App\Mail\ForAdminNewApp;
+use App\Jobs\SendApplicationEmailJob;
+use App\Jobs\SendForAdminNewAppEmailJob;
 use App\Models\AppFair;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class StoreAction extends Action
 {
@@ -53,10 +52,12 @@ class StoreAction extends Action
         $mail['nickname'] = $user->profile->nickname;
         $mail['title'] = $fair->group_nick;
         $mail['page'] = '/fair/'. $fair->id;
-        Mail::to($mail['email'])->send(new Application($mail));
+        SendApplicationEmailJob::dispatch($mail)
+            ->delay(now()->addSeconds(2));
         $mail['email'] = 'khanifest+fair@gmail.com';
         $mail['nickname'] = 'Admin';
-        Mail::to($mail['email'])->send(new ForAdminNewApp($mail));
+        SendForAdminNewAppEmailJob::dispatch($mail)
+            ->delay(now()->addSeconds(2));
 
         return redirect('fair')->with('success', "Ваша заявка успешно отправлена.");
     }

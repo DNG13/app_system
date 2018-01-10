@@ -2,13 +2,12 @@
 namespace App\Actions\AppVolunteer;
 
 use App\Abstracts\Action;
-use App\Mail\Edit;
-use App\Mail\Status;
+use App\Jobs\SendEditEmailJob;
+use App\Jobs\SendStatusEmailJob;
 use App\Models\AppVolunteer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class UpdateAction extends Action
 {
@@ -52,14 +51,15 @@ class UpdateAction extends Action
 
         if($request->get('status') && Auth::user()->isAdmin()) {
             if($volunteer->status != $request->get('status')) {
-                    $user =  User::where('id', $volunteer->user_id)->first();
-                    $mail['email'] = $user->email;
-                    $mail['nickname'] = $user->profile->nickname;
-                    $mail['title'] = $volunteer->nickname;
-                    $mail['page'] = '/volunteer/'.  $volunteer->id;
-                    $mail['status'] = $request->get('status');
-                    Mail::to($mail['email'])->send(new Status($mail));
-                }
+                $user = User::where('id', $volunteer->user_id)->first();
+                $mail['email'] = $user->email;
+                $mail['nickname'] = $user->profile->nickname;
+                $mail['title'] = $volunteer->nickname;
+                $mail['page'] = '/volunteer/' . $volunteer->id;
+                $mail['status'] = $request->get('status');
+                SendStatusEmailJob::dispatch($mail)
+                    ->delay(now()->addSeconds(2));
+            }
             $volunteer->status = $request->get('status');
         }
         $volunteer->save();
@@ -69,7 +69,8 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+volunteers@gmail.com';
             $mail['title'] = $volunteer->nickname;
             $mail['page'] = '/volunteer/'. $volunteer->id;
-            Mail::to($mail['email'])->send(new Edit($mail));
+            SendEditEmailJob::dispatch($mail)
+                ->delay(now()->addSeconds(2));
         }
 
         return redirect('volunteer')->with('success', "Ваша заявка успешно изменена.");

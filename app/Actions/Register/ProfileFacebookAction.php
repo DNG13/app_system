@@ -6,7 +6,6 @@ use App\Abstracts\Action;
 use App\Models\Profile;
 use App\User;
 use Illuminate\Http\Request;
-use Mail;
 
 class ProfileFacebookAction extends Action
 {

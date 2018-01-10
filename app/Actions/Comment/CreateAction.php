@@ -3,7 +3,7 @@
 namespace App\Actions\Comment;
 
 use App\Abstracts\Action;
-use App\Mail\Comment as MailCommet;
+use App\Jobs\SendCommentEmailJob;
 use App\Models\AppFair;
 use App\Models\AppPress;
 use App\Models\AppVolunteer;
@@ -12,7 +12,6 @@ use App\Models\Comment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class CreateAction extends Action
 {
@@ -56,7 +55,8 @@ class CreateAction extends Action
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest+' . $mailPlus .'@gmail.com';
         }
-        Mail::to($mail['email'])->send(new MailCommet($mail));
+        SendCommentEmailJob::dispatch($mail)
+            ->delay(now()->addSeconds(2));
 
         return redirect($comment->app_kind .'/'. $comment->app_id);
     }

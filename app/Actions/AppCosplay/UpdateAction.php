@@ -3,13 +3,12 @@
 namespace App\Actions\AppCosplay;
 
 use App\Abstracts\Action;
-use App\Jobs\SendEmailJob;
-use App\Mail\Status;
+use App\Jobs\SendEditEmailJob;
+use App\Jobs\SendStatusEmailJob;
 use App\Models\AppCosplay;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class UpdateAction extends Action
 {
@@ -35,14 +34,15 @@ class UpdateAction extends Action
 
         if($request->get('status') && Auth::user()->isAdmin()) {
             if($cosplays->status != $request->get('status')) {
-                    $user =  User::where('id', $cosplays->user_id)->first();
-                    $mail['nickname'] = $user->profile->nickname;
-                    $mail['title'] = $cosplays->title;
-                    $mail['email'] = $user->email;
-                    $mail['page'] ='/cosplay/'. $cosplays->id;
-                    $mail['status'] = $request->get('status');
-                    Mail::to($mail['email'])->send(new Status($mail));
-                }
+                $user =  User::where('id', $cosplays->user_id)->first();
+                $mail['nickname'] = $user->profile->nickname;
+                $mail['title'] = $cosplays->title;
+                $mail['email'] = $user->email;
+                $mail['page'] ='/cosplay/'. $cosplays->id;
+                $mail['status'] = $request->get('status');
+                SendStatusEmailJob::dispatch($mail)
+                    ->delay(now()->addSeconds(2));
+            }
             $cosplays->status = $request->get('status');
         }
         $members = [];
@@ -58,7 +58,7 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+show@gmail.com';
             $mail['title'] = $cosplays->title;
             $mail['page'] = '/cosplay/'. $cosplays->id;
-            SendEmailJob::dispatch($mail)
+            SendEditEmailJob::dispatch($mail)
                 ->delay(now()->addSeconds(2));
         }
 
