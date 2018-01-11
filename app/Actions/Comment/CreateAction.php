@@ -32,19 +32,21 @@ class CreateAction extends Action
 
         if( $comment->app_kind == 'cosplay' ) {
             $app = AppCosplay::where('id',  $comment->app_id)->first();
+            $mail['title'] = $app->title;
         } elseif( $comment->app_kind == 'fair' ) {
             $app = AppFair::where('id',  $comment->app_id)->first();
+            $mail['title'] = $app->group_nick;
         } elseif( $comment->app_kind == 'press' ) {
             $app = AppPress::where('id',  $comment->app_id)->first();
+            $mail['title'] = $app->media_name;
         } elseif( $comment->app_kind == 'volunteer' ) {
             $app = AppVolunteer::where('id',  $comment->app_id)->first();
+            $mail['title'] = $app->nickname;
         }
-
+//dd($mail['title']);
         $user = User::find($app->user_id);
-        $mail['title'] = $app->title;
         $mail['page'] = '/' . $comment->app_kind. '/'. $comment->app_id;
         $mail['text'] = $comment->text;
-
         if (Auth::user()->isAdmin()) {
             $mail['nickname'] = $user->profile->nickname;
             $mail['email'] = $user->email;
@@ -55,6 +57,7 @@ class CreateAction extends Action
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest+' . $mailPlus .'@gmail.com';
         }
+
         SendCommentEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
 
