@@ -43,7 +43,6 @@ class CreateAction extends Action
             $app = AppVolunteer::where('id',  $comment->app_id)->first();
             $mail['title'] = $app->nickname;
         }
-//dd($mail['title']);
         $user = User::find($app->user_id);
         $mail['page'] = '/' . $comment->app_kind. '/'. $comment->app_id;
         $mail['text'] = $comment->text;
@@ -57,7 +56,6 @@ class CreateAction extends Action
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest+' . $mailPlus .'@gmail.com';
         }
-
         SendCommentEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
 

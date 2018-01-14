@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Редактирование профиля</div>
+                    <div class="panel-heading">Редактирование профиля<br><p style="color: red"><strong>* Поля обязательные для заполнения</strong></div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('profile') }}">
@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
-                                <label for="surname" class="col-md-4 control-label">Фамилия</label>
+                                <label for="surname" class="col-md-4 control-label">Фамилия<span style="color: red"><strong>*</strong></span></label>
 
                                 <div class="col-md-6">
                                     <input id="surname" type="text" class="form-control" name="surname" value="{{ $profile->surname }}" required autofocus>
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                <label for="first_name" class="col-md-4 control-label">Имя</label>
+                                <label for="first_name" class="col-md-4 control-label">Имя<span style="color: red"><strong>*</strong></span></label>
 
                                 <div class="col-md-6">
                                     <input id="first_name" type="text" class="form-control" name="first_name" value="{{ $profile->first_name }}" required autofocus>
@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
+                                <label for="birthday" class="col-md-4 control-label">Дата рождения<span style="color: red"><strong>*</strong></span></label>
 
                                 <div class="col-md-6">
                                     <input id="birthday" type="date" min='1899-01-01' max="{{date("Y-m-d")}}" class="form-control" name="birthday" value="{{ $profile->birthday}}" required autofocus>
@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-4 control-label">Город</label>
+                                <label for="city" class="col-md-4 control-label">Город<span style="color: red"><strong>*</strong></span></label>
 
                                 <div class="col-md-6">
                                     <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ $profile->city }}" required autofocus>
@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                                <label for="phone" class="col-md-4 control-label">Телефон</label>
+                                <label for="phone" class="col-md-4 control-label">Телефон<span style="color: red"><strong>*</strong></span></label>
 
                                 <div class="col-md-6">
                                     <input id="phone" pattern='[\+]\d{3}[0-9]{9}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{ $profile->phone }}" required autofocus>

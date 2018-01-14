@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="margin-bottom: 65px">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -35,7 +35,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                       Khanifest
+                        <img src="/images/logo.png" id="logo" alt="logo" style="max-height: 160%;"/>
                     </a>
                 </div>
 
@@ -43,7 +43,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::user())
-                            <li class={{ Request::is('/')? "active" : ''}}><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Главная</a></li>
+                            <li class={{ Request::is('/')? "active" : ''}}><a href="/">Главная</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">Читать правила</a></li>
                             <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     Мои заявки<span class="caret"></span></a>
@@ -128,6 +128,30 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/dropzone.js') }}"></script>
+
+    <footer id="colophon" class="navbar-inverse navbar-fixed-bottom">
+        <div class="container footer-inner" style="margin-right:0; ">
+            <div class="row">
+                <div class="site-info col-sm-6">
+                    <div class="copyright-text" style="line-height: 60px;">Copyright © 2017 - {{date("Y")}} <a href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia</a></div>
+                </div>
+                <div class="col-sm-6 text-right" style="width: 50%; float: left; line-height: 60px;">
+                    <nav id="social" class="social-icons">
+                        <ul class="list-inline social-list">
+                            <li><a href="https://www.instagram.com/khanifest" style="color: white"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.facebook.com/khanifest/" style="color: white"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a href="https://twitter.com/khanifest" style="color: white"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a href="http://www.youtube.com/channel/UCwLRUXwSQU_N_RJZRjOZJ9A" style="color: white"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a href="http://plus.google.com/u/0/117135632301135612843" style="color: white"><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a href="http://t.me/khanifest" style="color: white"></a></li>
+                            <li><a href="http://vk.com/khanifest" style="color: white"></a></li>
+                            <li><a class="btn btn-sm fade-half back-to-top inner-link" style="color: white; font-size: 18px;" href="#top"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

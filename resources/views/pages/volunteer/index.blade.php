@@ -12,25 +12,26 @@
                         </p>
                     </div>
                 @endif
-                    @if ($message = Session::get('warning'))
-                        <div class="alert alert-warning">
-                            <p>
-                                {{ $message }}
-                            </p>
-                        </div>
-                    @endif
-                <hr><form action="{{url('/volunteer')}}" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Поиск(Ник, город,  статус, навыки)" >
-                        <span class="input-group-addon btn btn-info">
-                        <button type="submit">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </span>
+                @if ($message = Session::get('warning'))
+                    <div class="alert alert-warning">
+                        <p>
+                            {{ $message }}
+                        </p>
                     </div>
-                </form>
-                <hr>
-                <table class="table table-striped" border="1">
+                @endif
+                <div style="display: inline-block; margin-top: 5px;">
+                    <form action="{{url('/volunteer')}}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Поиск(Ник, город,  статус, навыки)" >
+                            <span class="input-group-addon btn btn-info">
+                            <button type="submit">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                        </div>
+                    </form>
+                </div>
+                <table class="table table-striped" border="1" style="margin-top: 5px;">
                         <thead>
                         <tr>
                             <th><p>Номер заявки</p> <a href="{{ $sort['id']['link'] }}"><i class="fa {{ $sort['id']['icon'] }}" aria-hidden="true"></i></a></th>

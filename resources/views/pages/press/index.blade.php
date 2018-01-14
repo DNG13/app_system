@@ -12,25 +12,26 @@
                         </p>
                     </div>
                 @endif
-                    @if ($message = Session::get('warning'))
-                        <div class="alert alert-warning">
-                            <p>
-                                {{ $message }}
-                            </p>
-                        </div>
-                    @endif
-                <hr><form action="{{url('/press')}}" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Поиск(Контактное лицо, город, Название СМИ)" >
-                        <span class="input-group-addon btn btn-info">
-                            <button type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </span>
+                @if ($message = Session::get('warning'))
+                    <div class="alert alert-warning">
+                        <p>
+                            {{ $message }}
+                        </p>
                     </div>
-                </form>
-                <hr>
-                <div class="col-md-4">
+                @endif
+                <div style="display: inline-block; margin-top: 5px;">
+                   <form action="{{url('/press')}}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Поиск(Контактное лицо, город, Название СМИ)" >
+                            <span class="input-group-addon btn btn-info">
+                                <button type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div>
                     @foreach ($errors->all() as $error)
                         <p class="alert alert-danger">{{ $error }}</p>
                     @endforeach
@@ -87,7 +88,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">
+                                        <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-filter" aria-hidden="true"></i>Фильтровать
                                         </button>
                                     </div>
@@ -96,8 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <table class="table table-striped" border="1">
+                <table class="table table-striped" border="1" style="margin-top: 5px;">
                     <thead>
                     <tr>
                         <th><p>Номер заявки</p> <a href="{{ $sort['id']['link'] }}"><i class="fa {{ $sort['id']['icon'] }}" aria-hidden="true"></i></a></th>
