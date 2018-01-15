@@ -5,10 +5,39 @@ label{
     margin-bottom:0;
 }
 
-/*input:valid + span:after{*/
-    /*content: url(http://htmlbook.ru/example/images/ok.png);*/
-/*}*/
+a:hover {
+    text-decoration: none;
+}
 
-/*input:invalid + span:after{*/
-    /*content: url(http://htmlbook.ru/example/images/nook.png);*/
-/*}*/
+#logo{
+    max-height: 160%;
+}
+#logout-form{
+    display: none;
+}
+.li-footer-fa{
+    color: grey;
+}
+.li-footer-fa:hover {
+    color: white;
+}
+.col-sm-6.text-right {
+    width: 50%; float: left; line-height: 60px;
+}
+#footer > div > div > div:nth-child(1) > div{
+    line-height: 60px;
+}
+#footer > div{
+    margin-right:0;
+}
+
+/* for sticky bottom not overlapping footer */
+div.social-float-parent {
+    width: 100%; height: 1350px; background: #f8f8f8; position: relative;
+}
+div#social-float {
+    width: 200px; position: fixed; left: 10px; bottom: 10px; background: #777;
+}
+div#footer {
+    width: 100%; height: 200px; background: #eee;
+}

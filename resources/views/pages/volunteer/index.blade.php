@@ -23,11 +23,12 @@
                     <form action="{{url('/volunteer')}}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Поиск(Ник, город,  статус, навыки)" >
-                            <span class="input-group-addon btn btn-info">
-                            <button type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </span>
+                            <span class="input-group-addon btn btn-default">
+                                <button type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="submit">сбросить</button>
+                            </span>
                         </div>
                     </form>
                 </div>

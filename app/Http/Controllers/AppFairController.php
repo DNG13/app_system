@@ -43,7 +43,7 @@ class AppFairController extends Controller
             'applications' => $action->run($request),
             'sort' => $this->prepareSort($request, $this->sortFields),
             'types' => $types,
-                'data' =>$data
+            'data' =>$data
         ]);
     }
 

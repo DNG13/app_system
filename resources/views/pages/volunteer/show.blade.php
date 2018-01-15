@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                     <div class="panel-heading">Волонтер. Подробнее</div>
 
                     <div class="panel-body">
@@ -115,22 +115,26 @@
                                 </div>
                             </div>
 
+                            @if(!($volunteer->experience)==null)
                             <div>
                                 <label for="experience" class="col-md-4">Опыт работы волонтером</label>
                                 <div class="col-md-6">
                                     <p id="experience">{{ $volunteer->experience }}</p>
                                 </div>
                             </div>
+                            @endif
 
+                            @if(!($volunteer->difficulties)==null)
                             <div>
                                 <label for="difficulties" class="col-md-4">Возможные затруднения</label>
                                 <div class="col-md-6">
                                     <p  id="difficulties">{{ $volunteer->difficulties }}</p>
                                 </div>
                             </div>
+                            @endif
                             <div>
                                 <div class="col-md-12">
-                                    <a href="/volunteer/{{ $volunteer->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
+                                    <a href="/volunteer/{{ $volunteer->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
                                 </div>
                             </div>
                         </div>
@@ -141,37 +145,42 @@
                 <div class="panel-heading">Коментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
-                        @foreach($comments as $comment)
-                            <div>
-                                <label for="comment" class="col-md-4">
-                                    @if($comment->role)@if($comment->role->key =='admin')Координатор @endif @endif
-                                    {{ $comment->profile->nickname }}
-                                    <small>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small> </label>
-                                <div class="col-md-7">
-                                    <p  id="comment">{{ $comment->text }}</p>
-                                </div>
-                                @if(Auth::user()->isAdmin())
-                                <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$volunteer->id}}&app_kind=volunteer">
-                                    <div class="btn btn-danger">
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        <ul class="list-group col-md-12">
+                            @foreach($comments as $comment)
+                                <li class="list-group-item col-md-12"  @if($comment->role)@if($comment->role->key =='admin') style="background:beige;" @endif @endif>
+                                    <div>
+                                        <label for="comment" class="col-md-3" style="color:darkslategrey;">
+                                            <small> @if($comment->role)@if($comment->role->key =='admin')Координатор  @endif @endif
+                                                {{ $comment->profile->nickname }}
+                                                <br>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <p style="font-weight:bolder" id="comment">{{ $comment->text }}</p>
+                                        </div>
+                                        @if(Auth::user()->isAdmin())
+                                            <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$volunteer->id}}&app_kind=volunteer">
+                                                <div class="btn btn-default">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </div>
+                                            </a>
+                                        @endif
                                     </div>
-                                </a>
-                                @endif
-                            </div>
-                        @endforeach
+                                </li>
+                            @endforeach
+                        </ul>
                     @endif
                     <form method="POST" action="{{ url('/comment/create')}}">
                         {{ csrf_field() }}
                         <div>
-                            <label for="comment" class="col-md-4">
+                            <label for="comment" class="col-md-3">
                                 Добавить комментарий</label>
                             <div class="col-md-7 form-group">
                                 <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
                                 <input type="hidden" name="app_kind" value="volunteer">
                                 <input type="hidden" name="app_id" value="{{$volunteer->id}}">
                             </div>
-                            <div class="col-md-1">
-                                <button type="submit" class="btn btn-primary" title="Добавить коментарий"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-info">Отправить</button>
                             </div>
                         </div>
                     </form>

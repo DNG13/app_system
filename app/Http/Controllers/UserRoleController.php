@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
 use App\Models\UserRole;
@@ -11,14 +12,32 @@ use App\Abstracts\Controller;
 
 class UserRoleController extends Controller
 {
+    private $sortFields = [
+        'id',
+        'nickname',
+        'key',
+    ];
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = User::with(['profile','roles']);
+        $keyword = $request->get('search');
+        $query =  DB::table('users')
+            ->select('*')
+            ->join('profiles', 'profiles.user_id', '=', 'users.id')
+            ->leftJoin('user_roles', 'user_roles.user_id', '=', 'users.id')
+            ->orderby($request->order_by ?? 'id', $request->order ?? 'asc');
+
+        if (!empty($keyword)) {
+            $query->where(function($q) use ($keyword) {
+                $q->where('nickname', 'LIKE', "%$keyword%");
+            });
+        }
         $users = $query->paginate(10);
-        return view('pages.user-role.index', ['users'=>$users]);
+
+        return view('pages.user-role.index', ['users'=>$users, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 
     /**

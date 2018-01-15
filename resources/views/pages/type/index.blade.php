@@ -5,17 +5,19 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Типи заявок <a class="btn btn-info btn pull-right"  href="{{url('/type/create')}}">Добавить тип</a></strong></h4>
             @if(!count($types)==0)
-                <hr><form action="{{url('/type')}}" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search" >
-                        <span class="input-group-addon btn btn-info">
-                        <button type="submit">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </span>
-                    </div>
-                </form>
-            <hr>
+                <div style="display: inline-block; margin-top: 5px;">
+                    <form action="{{url('/type')}}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Поиск по типу, по названию заявки" >
+                            <span class="input-group-addon btn btn-default">
+                                <button type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="submit">сбросить</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
                 <form action="{{url('/type')}}" method="GET">
                     <table class="table table-striped" border="1">
                         <thead>
@@ -45,7 +47,7 @@
                                         <a class="btn btn-info btn-sm" href="/type/{{$type->id }}/edit" title="Редактировать">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
-                                        <a class="btn btn-danger btn-sm" href="/type/delete?id={{ $type->id }}" title="Удалить">
+                                        <a class="btn btn-info btn-sm" href="/type/delete?id={{ $type->id }}" title="Удалить">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </a>
                                     </div>

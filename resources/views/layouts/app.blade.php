@@ -20,8 +20,8 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 </head>
 <body>
-    <div id="app" style="margin-bottom: 65px">
-        <nav class="navbar navbar-default navbar-static-top">
+    <div id="app" style="margin-bottom: 65px"  class="social-float-parent">
+        <nav class="navbar navbar-default navbar-static-top social-float">
             <div class="container">
                 <div class="navbar-header">
 
@@ -35,7 +35,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="/images/logo.png" id="logo" alt="logo" style="max-height: 160%;"/>
+                        <img src="/images/logo.png" id="logo" alt="logo"/>
                     </a>
                 </div>
 
@@ -45,8 +45,7 @@
                         @if (Auth::user())
                             <li class={{ Request::is('/')? "active" : ''}}><a href="/">Главная</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">Читать правила</a></li>
-                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    Мои заявки<span class="caret"></span></a>
+                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Мои заявки<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/cosplay')}}">Косплей-шоу</a>
@@ -56,8 +55,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    Подать заявку<span class="caret"></span></a>
+                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Подать заявку<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/cosplay/create')}}">Косплей-шоу</a>
@@ -68,8 +66,7 @@
                                 </ul>
                             </li>
                             @if(Auth::user()->isAdmin())
-                            <li class="dropdown"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    <i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
+                            <li class="dropdown"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/type')}}">Типы заявок</a>
@@ -92,25 +89,20 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    @if(Auth::user()->avatar)
-                                        <img width="20" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>
-                                    @endif
+                                    @if(Auth::user()->avatar)<img width="20" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>@endif
                                     {{ Auth::user()->profile->nickname }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
                                     <li>
-
                                         <a href="{{ url('/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> Профиль</a>
-
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                                             Выйти
                                         </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
@@ -128,24 +120,24 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/dropzone.js') }}"></script>
+    <script src="{{ asset('checkOffset/app.js') }}"></script>
 
-    <footer id="colophon" class="navbar-inverse navbar-fixed-bottom">
-        <div class="container footer-inner" style="margin-right:0; ">
+    <footer class="navbar-inverse collapse navbar-collapse" id="footer">
+        <div class="container">
             <div class="row">
-                <div class="site-info col-sm-6">
-                    <div class="copyright-text" style="line-height: 60px;">Copyright © 2017 - {{date("Y")}} <a href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia</a></div>
+                <div class="col-sm-6">
+                    <div>Copyright © 2017 - {{date("Y")}} <a href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia</a></div>
                 </div>
-                <div class="col-sm-6 text-right" style="width: 50%; float: left; line-height: 60px;">
-                    <nav id="social" class="social-icons">
-                        <ul class="list-inline social-list">
-                            <li><a href="https://www.instagram.com/khanifest" style="color: white"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a href="https://www.facebook.com/khanifest/" style="color: white"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a href="https://twitter.com/khanifest" style="color: white"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a href="http://www.youtube.com/channel/UCwLRUXwSQU_N_RJZRjOZJ9A" style="color: white"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a href="http://plus.google.com/u/0/117135632301135612843" style="color: white"><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a href="http://t.me/khanifest" style="color: white"></a></li>
-                            <li><a href="http://vk.com/khanifest" style="color: white"></a></li>
-                            <li><a class="btn btn-sm fade-half back-to-top inner-link" style="color: white; font-size: 18px;" href="#top"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
+                <div class="col-sm-6 text-right">
+                    <nav>
+                        <ul class="list-inline">
+                            <li><a class="li-footer-fa" href="https://www.instagram.com/khanifest"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="https://www.facebook.com/khanifest/"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="https://twitter.com/khanifest"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="http://plus.google.com/u/0/117135632301135612843"><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="http://t.me/khanifest"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="http://vk.com/khanifest"><i class="fa fa-vk fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="#top"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
                         </ul>
                     </nav>
                 </div>

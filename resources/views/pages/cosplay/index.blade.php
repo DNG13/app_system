@@ -23,10 +23,11 @@
                     <form action="{{ url('/cosplay')}}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Поиск(Город, Фендом, Название постановки)" >
-                            <span class="input-group-addon btn btn-info">
+                            <span class="input-group-addon btn btn-default">
                                 <button type="submit">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>
+                                <button type="submit">сбросить</button>
                             </span>
                         </div>
                     </form>
@@ -35,7 +36,7 @@
                     @foreach ($errors->all() as $error)
                         <p class="alert alert-danger">{{ $error }}</p>
                     @endforeach
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
                         <i class="fa fa-filter" aria-hidden="true"></i> Фильтр
                     </button>
                     <div id="filter-panel" class="collapse filter-panel">
@@ -88,7 +89,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-info">
                                             <i class="fa fa-filter" aria-hidden="true"></i>Фильтровать
                                         </button>
                                     </div>

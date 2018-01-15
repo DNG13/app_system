@@ -3,10 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="panel panel-default">
-                    <div class="panel-heading">Новая заявка волонтер</div>
+            <div class="panel panel-info">
+                <div class="panel-heading">Новая заявка волонтер</div>
 
-                    <div class="panel-body">
+                <div class="panel-body">
                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('volunteer.index') }}">
                             {{ csrf_field() }}
 
@@ -222,7 +222,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-info">
                                         Отправить
                                     </button>
                                     <p>Нажимая кнопку “Отправить” Вы подтверждаете, что ознакомились с <a href="http://khanifest.com/?page_id=346">правилами фестиваля</a></p>
@@ -230,7 +230,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+            </div>
         </div>
     </div>
 @endsection

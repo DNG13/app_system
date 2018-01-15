@@ -130,7 +130,7 @@
                         </div>
                         <div>
                             <div class="col-md-12">
-                                <a href="/cosplay/{{ $cosplay->id }}/edit" class="btn btn-primary" role="button">Редактировать</a>
+                                <a href="/cosplay/{{ $cosplay->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                                 </a>
                                 @if(Auth::user()->isAdmin())
                                     <a title="Удалить file" href="/file/delete?id={{ $file->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
-                                        <div class="btn btn-danger">
+                                        <div class="btn btn-default">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </div>
                                     </a>
@@ -213,16 +213,16 @@
                                            {{ $comment->profile->nickname }}
                                              <br>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small>
                                         </label>
-                                    <div class="col-md-8">
-                                        <p style="font-weight:bolder" id="comment">{{ $comment->text }}</p>
-                                    </div>
-                                    @if(Auth::user()->isAdmin())
-                                    <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
-                                        <div class="btn btn-default">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <div class="col-md-8">
+                                            <p style="font-weight:bolder" id="comment">{{ $comment->text }}</p>
                                         </div>
-                                    </a>
-                                    @endif
+                                        @if(Auth::user()->isAdmin())
+                                        <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
+                                            <div class="btn btn-default">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </div>
+                                        </a>
+                                        @endif
                                     </div>
                                 </li>
                             @endforeach
@@ -239,7 +239,7 @@
                             <input type="hidden" name="app_id" value="{{$cosplay->id}}">
                         </div>
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary">Отправить</button>
+                            <button type="submit" class="btn btn-info">Отправить</button>
                         </div>
                     </div>
                 </form>

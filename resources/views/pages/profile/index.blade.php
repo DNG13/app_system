@@ -130,7 +130,7 @@
 
                             <div>
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="{{ route('profile.edit')}}" class="btn btn-primary" role="button">Редактировать</a>
+                                    <a href="{{ route('profile.edit')}}" class="btn btn-info" role="button">Редактировать</a>
                                 </div>
                             </div>
                         </div>
