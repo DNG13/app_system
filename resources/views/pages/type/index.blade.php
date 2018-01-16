@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'All types')
+
+@section('title', 'Типы')
+
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Типи заявок <a class="btn btn-info btn pull-right"  href="{{url('/type/create')}}">Добавить тип</a></strong></h4>
+            <h4><strong>Типы заявок <a class="btn btn-info btn pull-right"  href="{{url('/type/create')}}">Добавить тип</a></strong></h4>
             @if(!count($types)==0)
                 <div style="display: inline-block; margin-top: 5px;">
                     <form action="{{url('/type')}}" method="GET">

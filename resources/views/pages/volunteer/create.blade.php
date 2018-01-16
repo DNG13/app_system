@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Волонтер(создать)')
+
 @section('content')
     <div class="container">
         <div class="row">

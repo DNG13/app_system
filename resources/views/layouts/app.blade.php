@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Khanifest</title>
+    <title>@yield('title')| Khanifest</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 </head>
 <body>
-    <div id="app" style="margin-bottom: 65px"  class="social-float-parent">
+    <div id="app" style="margin-bottom: 65px"  class="social-float-parent demo">
         <nav class="navbar navbar-default navbar-static-top social-float">
             <div class="container">
                 <div class="navbar-header">
@@ -120,13 +120,12 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/dropzone.js') }}"></script>
-    <script src="{{ asset('checkOffset/app.js') }}"></script>
 
-    <footer class="navbar-inverse collapse navbar-collapse" id="footer">
+    <footer class="collapse navbar-collapse footer" id="footer">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
-                    <div>Copyright © 2017 - {{date("Y")}} <a href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia</a></div>
+                <div class="col-sm-6 text-left">
+                    <div>Copyright © 2017 - {{date("Y")}} <a style="color: white" href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia</a></div>
                 </div>
                 <div class="col-sm-6 text-right">
                     <nav>
@@ -144,6 +143,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>

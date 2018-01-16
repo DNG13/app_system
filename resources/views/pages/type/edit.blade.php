@@ -1,4 +1,6 @@
- @extends('layouts.app')
+@extends('layouts.app')
+
+@section('title', 'Редактировать тип')
 
 @section('content')
     <div class="container">
