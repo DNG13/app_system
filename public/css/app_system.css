@@ -14,13 +14,13 @@ label{
     color: white;
 }
 div.panel-body>ul >li>a:link, p>a:link, div.panel-body>ul >li>a:hover, p>a:hover{
-    color: #ffc107;
+    color: #8eb4cb;
     font-weight: bold;
     text-decoration: none;
 }
 div.panel-body>ul >li>a:visited, p>a:visited{
     text-decoration: none;
-    color: darkblue;
+    color: #8eb4cb;
     font-weight: bold
 }
 
@@ -34,6 +34,7 @@ div.panel-body>ul >li>a:active, p>a:active {
     display: none;
 }
 #app {
+    color: #404040;
     background-color: #f5f5f5;
 }
 .col-sm-6.text-left {
@@ -73,7 +74,7 @@ body {
     margin: 0;
     padding-bottom: 6rem;
     min-height: 100%;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-family: sans-serif, Arial;
 }
 .demo {
     margin: 0 auto;
