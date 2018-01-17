@@ -140,7 +140,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Файли заявки( {{count($files)}} )
+                <div class="panel-heading">Файлы заявки( {{count($files)}} )
                     @if(Auth::user()->isAdmin())
                         <div>
                             <a href="/create-zip?download=zip&app_id={{$cosplay->id}}&app_kind=cosplay" class="btn btn-info" >Скачать <i class="fa fa-download" aria-hidden="true"></i></a>
@@ -203,7 +203,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Коментарии заявки( {{count($comments)}} )</div>
+                <div class="panel-heading">Комментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
                         <ul class="list-group col-md-12">

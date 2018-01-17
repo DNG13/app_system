@@ -233,7 +233,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Коментарии заявки( {{count($comments)}} )</div>
+                <div class="panel-heading">Комментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
                         <ul class="list-group col-md-12">
