@@ -171,7 +171,7 @@
 
                 <div class="panel-body">
                     <div>
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel" style="margin-bottom: 10px;">
                             <i class="fa fa-file" aria-hidden="true"></i> Добавить файлы
                         </button>
                         <div id="filter-panel" class="collapse filter-panel">

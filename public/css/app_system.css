@@ -43,7 +43,7 @@ div.panel-body>ul >li>a:active, p>a:active {
     display: none;
 }
 #app {
-    background-color: #f5f5f5;
+    background-color:  white;
 }
 .col-sm-6.text-left {
     float: left;
@@ -78,7 +78,7 @@ html {
     box-sizing: inherit;
 }
 body {
-    background-color: #f5f8fa;
+    background-color: white;
     position: relative;
     margin: 0;
     padding-bottom: 6rem;
@@ -86,10 +86,10 @@ body {
     font-family: sans-serif, Arial;
 }
 #app > div > div > div > div.panel-heading {
-    background-color: #dee9ef;
+    background-color:  white;
 }
 #app > div > div > div > div.panel-body {
-    background-color: #f5f8fa;
+    background-color:  white;
 }
 .demo {
     margin: 0 auto;

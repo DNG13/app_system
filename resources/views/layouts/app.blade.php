@@ -85,7 +85,7 @@
                         @guest
                             <li><a href="{{ url('auth/facebook')}}" title="Войти через facebook"><i class="fa fa-facebook-square fa-2x text-info" aria-hidden="true"></i></a></li>
                             <li><a href="{{ route('login') }}">ВОЙТИ</a></li>
-                            <li><a href="{{ route('register') }}">РЕРИСТРАЦИЯ</a></li>
+                            <li><a href="{{ route('register') }}">РЕГИСТРАЦИЯ</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" style="font-size: 10pt">
