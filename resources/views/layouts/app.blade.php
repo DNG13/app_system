@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app" style="margin-bottom: 65px"  class="social-float-parent demo">
-        <nav class="navbar navbar-default navbar-static-top social-float">
+        <nav class="navbar navbar-default navbar-static-top social-float" style="height: 54px">
             <div class="container">
                 <div class="navbar-header">
 
@@ -43,25 +43,25 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::user())
-                            <li class={{ Request::is('/')? "active" : ''}}><a href="/">Главная</a></li>
-                            <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">Читать правила</a></li>
-                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Мои заявки<span class="caret"></span></a>
+                            <li class={{ Request::is('/')? "active" : ''}}><a href="/">ГЛАВНАЯ</a></li>
+                            <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">ПРАВИЛА</a></li>
+                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОИ ЗАЯВКИ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/cosplay')}}">Косплей-шоу</a>
-                                        <a href="{{ url('/fair')}}">Ярмарка</a>
-                                        <a href="{{ url('/press')}}">Пресса</a>
-                                        <a href="{{ url('/volunteer')}}">Волонтер</a>
+                                        <a href="{{ url('/cosplay')}}">КОСПЛЕЙ-ШОУ</a>
+                                        <a href="{{ url('/fair')}}">ЯРМАРКА</a>
+                                        <a href="{{ url('/press')}}">ПЕРЕССА</a>
+                                        <a href="{{ url('/volunteer')}}">ВОЛОНТЕР</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Подать заявку<span class="caret"></span></a>
+                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">ПОДАТЬ ЗАЯВКУ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/cosplay/create')}}">Косплей-шоу</a>
-                                        <a href="{{ url('/fair/create')}}">Ярмарка</a>
-                                        <a href="{{ url('/press/create')}}">Пресса</a>
-                                        <a href="{{ url('/volunteer/create')}}">Волонтер</a>
+                                        <a href="{{ url('/cosplay/create')}}">КОСПЛЕЙ-ШОУ</a>
+                                        <a href="{{ url('/fair/create')}}">ЯРМАРКА</a>
+                                        <a href="{{ url('/press/create')}}">ПЕРЕССА</a>
+                                        <a href="{{ url('/volunteer/create')}}">ВОЛОНТЕР</a>
                                     </li>
                                 </ul>
                             </li>
@@ -69,9 +69,9 @@
                             <li class="dropdown"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/type')}}">Типы заявок</a>
-                                        <a href="{{ url('/role')}}">Роли</a>
-                                        <a href="{{ url('/user-role')}}">Добавить роль пользователю</a>
+                                        <a href="{{ url('/type')}}">ТИПЫ ЗАЯВОК</a>
+                                        <a href="{{ url('/role')}}">РОЛИ</a>
+                                        <a href="{{ url('/user-role')}}">ДОБАВИТЬ РОЛЬ ПОЛЬЗОВАТЕЛЮ</a>
                                     </li>
                                 </ul>
                             </li>
@@ -84,23 +84,23 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ url('auth/facebook')}}" title="Войти через facebook"><i class="fa fa-facebook-square fa-2x text-info" aria-hidden="true"></i></a></li>
-                            <li><a href="{{ route('login') }}">Войти</a></li>
-                            <li><a href="{{ route('register') }}">Регистрация</a></li>
+                            <li><a href="{{ route('login') }}">ВОЙТИ</a></li>
+                            <li><a href="{{ route('register') }}">РЕРИСТРАЦИЯ</a></li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    @if(Auth::user()->avatar)<img width="20" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>@endif
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" style="font-size: 10pt">
+                                    @if(Auth::user()->avatar)<img width="35" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>@endif
                                     {{ Auth::user()->profile->nickname }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> Профиль</a>
+                                        <a href="{{ url('/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> ПРОФИЛЬ</a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                            Выйти
+                                            ВЫЙТИ
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                             {{ csrf_field() }}

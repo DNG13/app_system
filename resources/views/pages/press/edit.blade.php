@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                     <div class="panel-heading">Редактирование  заявки персса</div>
 
                     <div class="panel-body">
@@ -325,7 +325,7 @@
                     </div>
                 </div>
 
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                 <div class="panel-heading">Прикрепить файлы</div>
                 <div class="panel-body">
                     <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">

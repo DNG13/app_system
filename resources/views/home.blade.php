@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="panel-heading">
-            <h1>Участникам</h1>
+            <h3>Участникам</h3>
         </div>
         <div class="panel-body">
             @if (session('status'))
