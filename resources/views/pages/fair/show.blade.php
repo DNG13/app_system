@@ -170,7 +170,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Файли заявки( {{count($files)}} )
+                <div class="panel-heading">Файлы заявки( {{count($files)}} )
                     @if(Auth::user()->isAdmin())
                         <div>
                             <a href="/create-zip?download=zip&app_id={{$fair->id}}&app_kind=fair" class="btn btn-info" >Скачать <i class="fa fa-download" aria-hidden="true"></i></a>
