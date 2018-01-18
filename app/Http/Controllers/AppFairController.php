@@ -79,6 +79,7 @@ class AppFairController extends Controller
         $fair = AppFair::where('id', $id)->first();
         $files = AppFile::where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
+        $block =  json_decode($fair->block);
         $equipment =  json_decode($fair->equipment);
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'fair')
@@ -86,7 +87,7 @@ class AppFairController extends Controller
         $members =  json_decode($fair->members);
         $count = 0;
 
-        return view('pages.fair.show', compact('fair', 'files', 'equipment', 'comments', 'members', 'count'));
+        return view('pages.fair.show', compact('fair', 'files', 'block', 'equipment', 'comments', 'members', 'count'));
     }
 
     /**
@@ -102,11 +103,12 @@ class AppFairController extends Controller
             return redirect('fair')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
+        $block =  json_decode($fair->block);
         $equipment =  json_decode($fair->equipment);
         $members =  json_decode($fair->members);
         $count = 0;
 
-        return view('pages.fair.edit', compact('types', 'fair', 'equipment', 'members', 'count'));
+        return view('pages.fair.edit', compact('types', 'fair', 'block', 'equipment', 'members', 'count'));
     }
 
     /**

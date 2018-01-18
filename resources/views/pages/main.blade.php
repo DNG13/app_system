@@ -11,8 +11,8 @@
             <div class="panel-body">
                 <p>Фендомные мероприятия в нашем городе проходят с 2006 года. Не станет исключением и 2018-й!</p>
                 <p>В этом году Ханифест открывает еще больше дверей и пройдет в формате экспо. Фестиваль мультифендомный: аниме, игры, кино и прочее - мы рады всем!</p>
-                <p>Тема этого года - <a href="https://www.youtube.com/watch?v=r5dNcKTcnPA" target="_blank">Городские легенды</a>
-                    и <a href="https://www.youtube.com/watch?v=m9We2XsVZfc" target="_blank">тайные общества</a>, а дата - 28 апреля 2018.</p>
+                <p>Тема этого года - <a href="https://www.youtube.com/watch?v=z70q6WY-9n8" target="_blank">Городские легенды</a>
+                    и <a href="https://www.youtube.com/watch?v=r5dNcKTcnPA" target="_blank">тайные общества</a>, а дата - 28 апреля 2018.</p>
                 <p>Ждем вас весной!</p>
                 <p>P.S.<a href="http://khanifest.com/?page_id=346" target="_blank">Правила подачи заявок</a></p>
             </div>

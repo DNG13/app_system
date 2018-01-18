@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Волонтеры все заявки')
+@section('title', 'Волонтерство все заявки')
 
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Заявка волонтер <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a></strong></h4>
+            <h4><strong>Заявка волонтерство <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a></strong></h4>
             @if(!count($applications )==0)
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Волонтер(редактировать)')
+@section('title', 'Волонтерство(редактировать)')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Редактирование  заявки волонтер</div>
+                <div class="panel-heading">Редактирование  заявки волонтерство</div>
 
                 <div class="panel-body">
                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('volunteer.update', $volunteer->id) }}">

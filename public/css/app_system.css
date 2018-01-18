@@ -2,8 +2,8 @@
     font-weight: bold;
     font-size: 8pt;
 }
-#app-navbar-collapse > ul > li > a {
-    padding-top: 16px;
+#app-navbar-collapse > ul > li.active > a {
+    padding-top: 15px;
     padding-bottom: 16px;
 }
 div, p {
@@ -85,10 +85,10 @@ body {
     min-height: 100%;
     font-family: sans-serif, Arial;
 }
-#app > div > div > div > div.panel-heading {
+#app > div > div > div > div.panel-heading, #app > div > div > div > div > div.panel-heading {
     background-color: #eeeeee;
 }
-#app > div > div > div > div.panel-body {
+#app > div > div > div > div.panel-body, #filter-panel > div > div {
     background-color:  #f5f5f5;
 }
 .demo {

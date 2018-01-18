@@ -91,7 +91,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-info">
+                                        <button type="submit" class="btn btn-info" style="margin-top: 5px;">
                                             <i class="fa fa-filter" aria-hidden="true"></i>Фильтровать
                                         </button>
                                     </div>

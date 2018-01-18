@@ -28,10 +28,9 @@ class UpdateAction extends Action
         $fair->phone = $request->get('phone');
         $fair->social_link = $request->get('social_link');
         $fair->group_link = $request->get('group_link');
-        $fair->square = $request->get('square');
-        $fair->payment_type= $request->get('payment_type');
-        $fair->description= $request->get('description');
-
+        $fair->payment_type = $request->get('payment_type');
+        $fair->description = $request->get('description');
+        $fair->electrics = $request->get('electrics');
 
         if($request->get('status') && Auth::user()->isAdmin()) {
             if($fair->status != $request->get('status')) {
@@ -57,6 +56,11 @@ class UpdateAction extends Action
             $equipment["{$key}"] = $value;
         }
         $fair->equipment = json_encode($equipment);
+        $block = [];
+        foreach($request->input('block') as  $key => $value) {
+            $block["{$key}"] = $value;
+        }
+        $fair->block = json_encode($block);
         $fair->save();
 
         if (!Auth::user()->isAdmin()) {

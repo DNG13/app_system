@@ -18,9 +18,10 @@ class AppFair extends Model
         'group_link',
         'group_nick',
         'equipment',
-        'square',
+        'block',
         'payment_type',
         'status',
+        'electrics',
     ];
 
     protected $table = 'app_fairs';

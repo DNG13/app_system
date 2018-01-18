@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app" style="margin-bottom: 65px"  class="social-float-parent demo">
-        <nav class="navbar navbar-default navbar-static-top social-float" style="height: 54px">
+        <nav class="navbar navbar-default navbar-static-top social-float">
             <div class="container">
                 <div class="navbar-header">
 
@@ -45,33 +45,35 @@
                         @if (Auth::user())
                             <li class={{ Request::is('/')? "active" : ''}}><a href="/">ГЛАВНАЯ</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">ПРАВИЛА</a></li>
-                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОИ ЗАЯВКИ<span class="caret"></span></a>
+                            <li class="dropdown
+                            {{ Request::is('cosplay')|| Request::is('fair')|| Request::is('press')|| Request::is('volunteer') || Request::is('*/edit')? "active" : ''}}"
+                            ><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОИ ЗАЯВКИ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/cosplay')}}">КОСПЛЕЙ-ШОУ</a>
                                         <a href="{{ url('/fair')}}">ЯРМАРКА</a>
-                                        <a href="{{ url('/press')}}">ПЕРЕССА</a>
-                                        <a href="{{ url('/volunteer')}}">ВОЛОНТЕР</a>
+                                        <a href="{{ url('/press')}}">ПРЕССА</a>
+                                        <a href="{{ url('/volunteer')}}">ВОЛОНТЕРСТВО</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">ПОДАТЬ ЗАЯВКУ<span class="caret"></span></a>
+                            <li class="dropdown {{ Request::is('*/create')? "active" : ''}}"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">ПОДАТЬ ЗАЯВКУ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/cosplay/create')}}">КОСПЛЕЙ-ШОУ</a>
                                         <a href="{{ url('/fair/create')}}">ЯРМАРКА</a>
-                                        <a href="{{ url('/press/create')}}">ПЕРЕССА</a>
-                                        <a href="{{ url('/volunteer/create')}}">ВОЛОНТЕР</a>
+                                        <a href="{{ url('/press/create')}}">ПРЕССА</a>
+                                        <a href="{{ url('/volunteer/create')}}">ВОЛОНТЕРСТВО</a>
                                     </li>
                                 </ul>
                             </li>
                             @if(Auth::user()->isAdmin())
-                            <li class="dropdown"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
+                            <li class="dropdown  {{ (Auth::user()->isAdmin()) ? "active" : ''}}"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/type')}}">ТИПЫ ЗАЯВОК</a>
-                                        <a href="{{ url('/role')}}">РОЛИ</a>
-                                        <a href="{{ url('/user-role')}}">ДОБАВИТЬ РОЛЬ ПОЛЬЗОВАТЕЛЮ</a>
+                                        <a href="{{ url('type')}}">ТИПЫ ЗАЯВОК</a>
+                                        <a href="{{ url('role')}}">РОЛИ</a>
+                                        <a href="{{ url('user-role')}}">ДОБАВИТЬ РОЛЬ ПОЛЬЗОВАТЕЛЮ</a>
                                     </li>
                                 </ul>
                             </li>
@@ -87,9 +89,9 @@
                             <li><a href="{{ route('login') }}">ВОЙТИ</a></li>
                             <li><a href="{{ route('register') }}">РЕГИСТРАЦИЯ</a></li>
                         @else
-                            <li class="dropdown">
+                            <li class="dropdown  {{ Request::is('profile/*')|| Request::is('profile')? "active" : ''}}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" style="font-size: 10pt">
-                                    @if(Auth::user()->avatar)<img width="35" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>@endif
+                                    @if(Auth::user()->avatar)<img width="30" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>@endif
                                     {{ Auth::user()->profile->nickname }} <span class="caret"></span>
                                 </a>
 
@@ -125,7 +127,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 text-left">
-                    <div>Copyright © 2017 - {{date("Y")}} <a style="color: white" href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia</a></div>
+                    <div>Made by <a style="color: white" href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia </a> © 2017 - {{date("Y")}} <a style="color: white" href="http://khanifest.com/"target="_blank">Khanifest</a></div>
                 </div>
                 <div class="col-sm-6 text-right">
                     <nav>

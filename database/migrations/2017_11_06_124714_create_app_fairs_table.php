@@ -34,8 +34,9 @@ class CreateAppFairsTable extends Migration
             $table->text('social_link');
             $table->text('group_link');
             $table->json('equipment');
+            $table->text('electrics')->nullable();
+            $table->json('block');
             $table->string('payment_type', 64);
-            $table->string('square')->nullable();
             $table->text('description');
         });
     }

@@ -67,19 +67,55 @@
                             </div>
                         </div>
 
-                        @if(!$fair->square==null)
+                        @if((!$block->universe==null))
                             <div>
-                                <label for="square" class="col-md-4">Размер торгово-развлекательной точки</label>
+                                <label for="block[universe]" class="col-md-4">Вселенная</label>
                                 <div class="col-md-6">
-                                    <p id="square">{{ $fair->square }}</p>
+                                    <p id="block[universe]">{{ $block->universe }}</p>
                                 </div>
                             </div>
                         @endif
 
+                        @if((!$block->description==null))
+                            <div>
+                                <label for="block[description]" class="col-md-4">Краткое описание декораций и интерактива</label>
+                                <div class="col-md-6">
+                                    <p id="block[description]">{{ $block->description }}</p>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if((!$block->stuff==null))
+                            <div>
+                                <label for="block[stuff]" class="col-md-4">Используемые материалы</label>
+                                <div class="col-md-6">
+                                    <p id="block[stuff]">{{ $block->stuff }}</p>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if((!$block->goods==null))
+                            <div>
+                                <label for="block[goods]" class="col-md-4">Перечень продукции</label>
+                                <div class="col-md-6">
+                                    <p id="block[goods]">{{ $block->goods }}</p>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(!$block->square==null)
+                            <div>
+                                <label for="block[square]" class="col-md-4">Размер торгово-развлекательной точки</label>
+                                <div class="col-md-6">
+                                    <p id="block[square]">{{ $block->square }}</p>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-md-12"><h4>Оборудование</h4></div>
                         <div>
                             @if(!$equipment->table==null)
                                 <div>
-                                    <label for="equipment[table]" class="col-md-4">Оборудование: Количество столов</label>
+                                    <label for="equipment[table]" class="col-md-4">Количество столов</label>
                                     <div class="col-md-6">
                                         <p id="equipment[table]">{{ $equipment->table }}</p>
                                     </div>
@@ -93,26 +129,33 @@
                                         <p id="equipment[chair]">{{ $equipment->chair }}</p>
                                     </div>
                                 </div>
-                                @endif
+                            @endif
 
-                                @if(!$equipment->extra==null)
-                                    <div>
-                                        <label for="equipment[extra]" class="col-md-4">Дополнительное оборудование с размерами</label>
-                                        <div class="col-md-6">
-                                            <p id="equipment[extra]">{{ $equipment->extra }}</p>
-                                        </div>
-                                    </div>
-                                @endif
-
-                                @if(!$equipment->electricity==null)
+                            @if(!$equipment->extra==null)
                                 <div>
-                                    <label for="equipment[electricity]" class="col-md-4">Надобность подведения электричества</label>
+                                    <label for="equipment[extra]" class="col-md-4">Дополнительное оборудование с размерами</label>
                                     <div class="col-md-6">
-                                        <p id="equipment[electricity]">{{ $equipment->electricity }}</p>
+                                        <p id="equipment[extra]">{{ $equipment->extra }}</p>
                                     </div>
                                 </div>
-                                @endif
+                            @endif
+
+                            <div>
+                                <label for="equipment[electricity]" class="col-md-4">Надобность подведения электричества</label>
+                                <div class="col-md-6">
+                                    <p id="equipment[electricity]">{{ $equipment->electricity }}</p>
+                                </div>
+                            </div>
                         </div>
+
+                        @if(!$fair->electrics==null)
+                        <div>
+                            <label for="description" class="col-md-4">Электрооборудование</label>
+                            <div class="col-md-6">
+                                <p id="description">{{ $fair->electrics }}</p>
+                            </div>
+                        </div>
+                        @endif
 
                         <div >
                             <label for="payment_type" class="col-md-4">Способ оплаты</label>
@@ -120,6 +163,7 @@
                                 <p id="square">{{ $fair->payment_type }}</p>
                             </div>
                         </div>
+
                         <div>
                             <label for="description" class="col-md-4">Описание</label>
                             <div class="col-md-6">

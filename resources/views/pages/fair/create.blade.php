@@ -114,22 +114,100 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('square') ? ' has-error' : '' }}">
-                                <label for="square" class="col-md-4 control-label">Размер торгово-развлекательной точки</label>
-                                <div class="col-md-6">
-                                    <textarea id="square" type="text"  placeholder="Обязательно для стендов, игровых зон и фудкорта(ширина, глубина и высота в сантиметрах)" class="form-control" name="square" autofocus>{{ old('square') }}</textarea>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel" >
+                                        Блок для стендов, игрозоны и фудкорта(нажмите для заполнения)
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="filter-panel" class="collapse filter-panel">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
 
-                                    @if ($errors->has('square'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('square') }}</strong>
-                                    </span>
-                                    @endif
+                                        <div class="form-group{{ $errors->has('block[universe]') ? ' has-error' : '' }}">
+                                            <label for="block[universe]" class="col-md-4 control-label">Вселенная</label>
+                                            <div class="col-md-6">
+                                                <textarea id="block[universe]" type="text"
+                                                          placeholder="Например: Фотостенд по «Гравити Фоллс» или игровая зона 'Вархаммер'. Обязательно к заполнению стендами и игрозонами."
+                                                          class="form-control" name="block[universe]" autofocus>{{ old('block[universe]') }}
+                                                </textarea>
+                                                @if ($errors->has('block[universe]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('block[universe]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('block[description]') ? ' has-error' : '' }}">
+                                            <label for="block[description]" class="col-md-4 control-label">Краткое описание декораций и интерактива</label>
+                                            <div class="col-md-6">
+                                                <textarea id="block[description]" type="text"
+                                                          placeholder="Опишите, что будет происходить на стенде, а также дизайн стенда. Фото и план следует прикрепить через редактирование заявки"
+                                                          class="form-control" name="block[description]" autofocus>{{ old('block[description]') }}
+                                                </textarea>
+                                                @if ($errors->has('block[description]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('block[description]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('block[stuff]') ? ' has-error' : '' }}">
+                                            <label for="block[stuff]" class="col-md-4 control-label">Используемые материалы</label>
+                                            <div class="col-md-6">
+                                                <textarea id="block[stuff]" type="text"
+                                                          placeholder="Обязательно к заполнению при наличии любых конструкций и декораций"
+                                                          class="form-control" name="block[stuff]" autofocus>{{ old('block[stuff]') }}
+                                                </textarea>
+                                                @if ($errors->has('block[stuff]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('block[stuff]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('block[goods]') ? ' has-error' : '' }}">
+                                            <label for="block[goods]" class="col-md-4 control-label">Перечень продукции</label>
+                                            <div class="col-md-6">
+                                                <textarea id="block[goods]" type="text"
+                                                          placeholder="Обязательно к заполнению для фудкорта. Для обширных игрозон - перечень игр"
+                                                          class="form-control" name="block[goods]" autofocus>{{ old('block[goods]') }}
+                                                </textarea>
+                                                @if ($errors->has('block[goods]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('block[goods]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('block[square]') ? ' has-error' : '' }}">
+                                            <label for="block[square]" class="col-md-4 control-label">Размер торгово-развлекательной точки</label>
+                                            <div class="col-md-6">
+                                                <textarea id="block[square]" type="text"
+                                                          placeholder="Ширина, глубина и высота в сантиметрах."
+                                                          class="form-control" name="block[square]" autofocus>{{ old('block[square]') }}
+                                                </textarea>
+                                                @if ($errors->has('block[square]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('block[square]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
 
+                            <div style="text-align:center"><strong>Оборудование</strong></div>
                             <div>
                                 <div class="form-group{{ $errors->has('equipment[table]') ? ' has-error' : '' }}">
-                                    <label for="equipment[table]" class="col-md-4 control-label">Оборудование: Количество столов</label>
+                                    <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
 
                                     <div class="col-md-6">
                                         <input id="equipment[table]" type="number" min="0" class="form-control" name="equipment[table]" value="{{ old('equipment[table]') }}" required autofocus>
@@ -161,7 +239,7 @@
                                     <div class="col-md-6">
                                         <textarea id="equipment[extra]" class="form-control"
                                                   placeholder="Например, баннер, этажерка, ширма и т.д."
-                                                  name="equipment[extra]" required autofocus>{{ old('equipment[extra]') }}</textarea>
+                                                  name="equipment[extra]" autofocus>{{ old('equipment[extra]') }}</textarea>
 
                                         @if ($errors->has('equipment[extra]'))
                                             <span class="help-block">
@@ -187,6 +265,21 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('electrics') ? ' has-error' : '' }}">
+                                <label for="electrics" class="col-md-4 control-label">Электрооборудование</label>
+                                <div class="col-md-6">
+                                    <textarea  id="electrics"
+                                               placeholder="список оборудования и информация из спецификации или паспорта оборудования в Вт и А"
+                                               class="form-control" name="electrics"  autofocus>{{ old('electrics') }}</textarea>
+
+                                    @if ($errors->has('electrics'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('electrics') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('payment_type') ? ' has-error' : '' }}">
                                 <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
 
@@ -207,7 +300,7 @@
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
                                 <div class="col-md-6">
-                                    <textarea  id="description" rows="5"
+                                    <textarea  id="description" rows="4"
                                                placeholder="Обратите внимание, что именно этот текст мы опубликуем в качестве рекламы. После отправки заявки не забудьте зайти в меню редактирования и прикрепить к заявке промо-фото вашей продукции/стенда, которые мы опубликуем. Также можете добавить свой логотип."
                                                class="form-control" name="description"  autofocus required>{{ old('description') }}</textarea>
 
