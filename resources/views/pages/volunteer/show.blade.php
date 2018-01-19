@@ -171,23 +171,21 @@
                             @endforeach
                         </ul>
                     @endif
-                    @if($volunteer->status == 'Отклонена')
-                        <form method="POST" action="{{ url('/comment/create')}}">
-                            {{ csrf_field() }}
-                            <div>
-                                <label for="comment" class="col-md-3">
-                                    Добавить комментарий</label>
-                                <div class="col-md-7 form-group">
-                                    <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
-                                    <input type="hidden" name="app_kind" value="volunteer">
-                                    <input type="hidden" name="app_id" value="{{$volunteer->id}}">
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-info">Отправить</button>
-                                </div>
+                    <form method="POST" action="{{ url('/comment/create')}}">
+                        {{ csrf_field() }}
+                        <div>
+                            <label for="comment" class="col-md-3">
+                                Добавить комментарий</label>
+                            <div class="col-md-7 form-group">
+                                <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
+                                <input type="hidden" name="app_kind" value="volunteer">
+                                <input type="hidden" name="app_id" value="{{$volunteer->id}}">
                             </div>
-                        </form>
-                    @endif
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-info">Отправить</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
