@@ -251,21 +251,23 @@
                             @endforeach
                         </ul>
                     @endif
-                    <form method="POST" action="{{ url('/comment/create')}}">
-                        {{ csrf_field() }}
-                        <div>
-                            <label for="comment" class="col-md-3">
-                                Добавить комментарий</label>
-                            <div class="col-md-7 form-group">
-                                <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
-                                <input type="hidden" name="app_kind" value="press">
-                                <input type="hidden" name="app_id" value="{{$press->id}}">
+                    @if($press->status == 'Отклонена')
+                        <form method="POST" action="{{ url('/comment/create')}}">
+                            {{ csrf_field() }}
+                            <div>
+                                <label for="comment" class="col-md-3">
+                                    Добавить комментарий</label>
+                                <div class="col-md-7 form-group">
+                                    <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
+                                    <input type="hidden" name="app_kind" value="press">
+                                    <input type="hidden" name="app_id" value="{{$press->id}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-info">Отправить</button>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-info">Отправить</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

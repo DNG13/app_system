@@ -78,6 +78,9 @@ class AppPressController extends Controller
     public function show($id)
     {
         $press = AppPress::where('id', $id)->first();
+        if($press->status == 'Отклонена' && !Auth::user()->isAdmin()){
+            return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
+        }
         $files = AppFile::where('app_kind', 'press')
             ->where('app_id', $press->id)->get();
         $social_links =  json_decode($press->social_links);

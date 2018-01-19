@@ -69,6 +69,9 @@ class AppVolunteerController extends Controller
     public function show($id)
     {
         $volunteer= AppVolunteer::where('id', $id)->first();
+        if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
+            return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
+        }
         $social_links =  json_decode( $volunteer->social_links);
         $comments = Comment::orderBy('created_at','desc')
             ->where('app_kind', 'volunteer')

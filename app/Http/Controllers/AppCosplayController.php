@@ -81,6 +81,9 @@ class AppCosplayController extends Controller
     {
         $roles = Role::get();
         $cosplay = AppCosplay::where('id', $id)->first();
+        if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
+            return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
+        }
         $files = AppFile::where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();
         $comments = Comment::orderBy('created_at','desc')

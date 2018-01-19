@@ -29,7 +29,7 @@ class Status extends Mailable
      */
     public function build()
     {
-        return $this->subject('Изменение статуса заявки')
+        return $this->subject('Изменение статуса заявки ' . $this->mail['title'])
             ->view('mails.status', [
                 'nickname' => $this->mail['nickname'],
                 'title' => $this->mail['title'],

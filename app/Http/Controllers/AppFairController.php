@@ -77,6 +77,9 @@ class AppFairController extends Controller
     public function show($id)
     {
         $fair = AppFair::where('id', $id)->first();
+        if($fair->status == 'Отклонена' && !Auth::user()->isAdmin()){
+            return redirect('fair')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
+        }
         $files = AppFile::where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
         $block =  json_decode($fair->block);

@@ -29,7 +29,7 @@ class Comment extends Mailable
      */
     public function build()
     {
-        return $this->subject('Добавлен комментарий к заяке')
+        return $this->subject('Добавлен комментарий к заяке '. $this->mail['title'] . ' ' .$this->mail['page'])
             ->from($this->mail['from'])
             ->view('mails.comment', [
                 'nickname' => $this->mail['nickname'],
