@@ -49,12 +49,14 @@ class CreateAction extends Action
         if (Auth::user()->isAdmin()) {
             $mail['nickname'] = $user->profile->nickname;
             $mail['email'] = $user->email;
+            $mail['from'] = 'khanifest@gmail.com';
         } else {
             $mailPluses = ['show', 'fair', 'photo', 'volunteers'];
             $appKinds = ['cosplay', 'fair', 'press', 'volunteer'];
             $mailPlus = $mailPluses[array_search($comment->app_kind, $appKinds)];
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest+' . $mailPlus .'@gmail.com';
+            $mail['from'] = Auth::user()->email;
         }
         SendCommentEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));

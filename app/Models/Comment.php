@@ -22,4 +22,8 @@ class Comment extends Model
     {
         return $this->hasOne(UserRole::class, 'user_id', 'user_id');
     }
+    public function avatar()
+    {
+        return $this->hasOne(Avatar::class, 'user_id', 'user_id');
+    }
 }

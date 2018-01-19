@@ -36,14 +36,14 @@
                                     {{$user->id }}
                                 </td>
                                 <td>
-                                    <a  class="btn btn-info btn-sm" title="Профиль" href="{{ url('/profile/' . $user->user_id) }}">
+                                    <a  class="btn btn-info btn-sm" title="Профиль" href="{{ url('/profile/' . $user->id) }}">
                                         {{ $user->nickname }}
                                     </a>
                                 </td>
                                 <td>@if($user->key) {{$user->key}}@endif</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-info btn-sm" href="/user-role/{{$user->user_id}}/edit" title="Редактировать">
+                                        <a class="btn btn-info btn-sm" href="/user-role/{{$user->id}}/edit" title="Редактировать">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                     </div>

@@ -5,6 +5,7 @@
 #app-navbar-collapse > ul > li.active > a {
     padding-top: 15px;
     padding-bottom: 16px;
+    background-color: #e0e0e0;
 }
 div, p {
     word-wrap: break-word;

@@ -50,6 +50,7 @@ class StoreAction extends Action
             ->delay(now()->addSeconds(2));
         $mail['email'] = 'khanifest+photo@gmail.com';
         $mail['nickname'] = 'Admin';
+        $mail['from'] = Auth::user()->email;
         SendForAdminNewAppEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
 
