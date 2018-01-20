@@ -68,7 +68,6 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+fair@gmail.com';
             $mail['title'] = $fair->group_nick;
             $mail['page'] = '/fair/'. $fair->id;
-            $mail['from'] = config('mail.username');
             SendEditEmailJob::dispatch($mail)
                 ->delay(now()->addSeconds(2));
         }

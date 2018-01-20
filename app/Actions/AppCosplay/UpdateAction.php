@@ -58,7 +58,6 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+show@gmail.com';
             $mail['title'] = $cosplays->title;
             $mail['page'] = '/cosplay/'. $cosplays->id;
-            $mail['from'] = config('mail.username');
             SendEditEmailJob::dispatch($mail)
                 ->delay(now()->addSeconds(2));
         }

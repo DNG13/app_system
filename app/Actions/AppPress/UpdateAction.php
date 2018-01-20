@@ -58,7 +58,6 @@ class UpdateAction extends Action
             $mail['email'] = 'khanifest+photo@gmail.com';
             $mail['title'] = $press->media_name;
             $mail['page'] = '/press/'. $press->id;
-            $mail['from'] = config('mail.username');
             SendEditEmailJob::dispatch($mail)
                 ->delay(now()->addSeconds(2));
         }

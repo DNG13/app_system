@@ -30,7 +30,6 @@ class Edit extends Mailable
     public function build()
     {
         return $this->subject('Заявка ' .$this->mail['page'])
-            ->from($this->mail['from'])
             ->view('mails.edit', [
                 'nickname' => $this->mail['nickname'],
                 'title' => $this->mail['title'],
