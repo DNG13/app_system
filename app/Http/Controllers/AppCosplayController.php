@@ -81,6 +81,9 @@ class AppCosplayController extends Controller
     {
         $roles = Role::get();
         $cosplay = AppCosplay::where('id', $id)->first();
+        if( is_null($cosplay) || ($cosplay->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
+            return redirect('cosplay');
+        }
         if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
         }
@@ -104,6 +107,9 @@ class AppCosplayController extends Controller
     public function edit($id)
     {
         $cosplay = AppCosplay::where('id', $id)->first();
+        if( is_null($cosplay) || ($cosplay->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
+            return redirect('cosplay');
+        }
         if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
            return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }

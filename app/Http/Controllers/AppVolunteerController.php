@@ -69,6 +69,9 @@ class AppVolunteerController extends Controller
     public function show($id)
     {
         $volunteer= AppVolunteer::where('id', $id)->first();
+        if( is_null($volunteer) || ($volunteer->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
+            return redirect('volunteer');
+        }
         if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
         }
@@ -89,6 +92,9 @@ class AppVolunteerController extends Controller
     public function edit($id)
     {
         $volunteer = AppVolunteer::where('id', $id)->first();
+        if( is_null($volunteer) || ($volunteer->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
+            return redirect('volunteer');
+        }
         if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }

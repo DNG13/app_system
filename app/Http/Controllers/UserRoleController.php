@@ -46,6 +46,10 @@ class UserRoleController extends Controller
      */
     public function edit($id)
     {
+        $user = User::find($id);
+        if(is_null($user)){
+            return redirect('user-role');
+        }
         $user_roles = UserRole::where('user_id', $id)->get()->pluck('key');
         $userRoles = [];
         if(!is_null($user_roles)) {

@@ -29,8 +29,7 @@ class ForAdminNewApp extends Mailable
      */
     public function build()
     {
-        return $this->subject('Заявка '. $this->mail['title'] .' успешно отправлена ' . $this->mail['page'])
-            ->from($this->mail['from'])
+        return $this->subject('Заявка ' .$this->mail['page'])
             ->view('mails.forAdminNewApp', [
                 'nickname' => $this->mail['nickname'],
                 'title' => $this->mail['title'],

@@ -74,6 +74,9 @@ class AddTypeController extends Controller
     public function edit($id)
     {
         $type = AppType::where('id', $id)->first();
+        if( is_null($type)){
+            return redirect('type');
+        }
         return view('pages.type.edit', compact('type'));
     }
 

@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 </head>
 <body>
-    <div id="app" style="margin-bottom: 65px"  class="social-float-parent demo">
+    <div id="app" style="margin-bottom: 65px"  class="social-float-parent">
         <nav class="navbar navbar-default navbar-static-top social-float">
             <div class="container">
                 <div class="navbar-header">
@@ -46,7 +46,7 @@
                             <li class={{ Request::is('/')? "active" : ''}}><a href="/">ГЛАВНАЯ</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">ПРАВИЛА</a></li>
                             <li class="dropdown
-                            {{ Request::is('cosplay')|| Request::is('fair')|| Request::is('press')|| Request::is('volunteer') || Request::is('*/edit')? "active" : ''}}"
+                            {{ Request::is('cosplay')|| Request::is('fair')|| Request::is('press')|| Request::is('volunteer') ? "active" : ''}}"
                             ><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОИ ЗАЯВКИ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -124,12 +124,12 @@
     <script src="{{ asset('js/dropzone.js') }}"></script>
 
     <footer class="collapse navbar-collapse footer" id="footer">
-        <div class="container">
+        <div>
             <div class="row">
                 <div class="col-sm-6 text-left">
                     <div>Made by <a style="color: white" href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia </a> © 2017 - {{date("Y")}} <a style="color: white" href="http://khanifest.com/"target="_blank">Khanifest</a></div>
                 </div>
-                <div class="col-sm-6 text-right">
+                <div class="col-sm-6 text-right" style="text-align: right;">
                     <nav>
                         <ul class="list-inline">
                             <li><a class="li-footer-fa" href="https://www.instagram.com/khanifest"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
@@ -138,7 +138,7 @@
                             <li><a class="li-footer-fa" href="http://plus.google.com/u/0/117135632301135612843"><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="http://t.me/khanifest"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="http://vk.com/khanifest"><i class="fa fa-vk fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a class="li-footer-fa" href="#top"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="#top" title="Вверх"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
                         </ul>
                     </nav>
                 </div>

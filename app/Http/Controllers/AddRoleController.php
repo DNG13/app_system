@@ -70,6 +70,9 @@ class AddRoleController extends Controller
     public function edit($key)
     {
         $role = Role::where('key', $key)->first();
+        if( is_null($role)){
+            return redirect('role');
+        }
         return view('pages.role.edit', compact('role'));
     }
 

@@ -78,6 +78,9 @@ class AppPressController extends Controller
     public function show($id)
     {
         $press = AppPress::where('id', $id)->first();
+        if( is_null($press) || ($press->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
+            return redirect('press');
+        }
         if($press->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
         }
@@ -102,6 +105,9 @@ class AppPressController extends Controller
     public function edit($id)
     {
         $press = AppPress::where('id', $id)->first();
+        if( is_null($press) || ($press->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
+            return redirect('press');
+        }
         if($press->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
