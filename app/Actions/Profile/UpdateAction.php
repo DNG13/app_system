@@ -29,8 +29,8 @@ class UpdateAction extends Action
             $imageFile = $data['avatar'];
             $extension = $imageFile->extension();
             $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
-            $imageFile->move(public_path('storage/uploads/avatars'), $imageName);
-            $imagePath = 'storage/uploads/avatars/'.$imageName;
+            $imageFile->move(storage_path('/uploads/avatars'), $imageName);
+            $imagePath = '/uploads/avatars/'.$imageName;
 
             // create Image from file
             $img = Image::make($imagePath);

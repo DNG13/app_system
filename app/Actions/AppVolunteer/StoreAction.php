@@ -36,7 +36,7 @@ class StoreAction extends Action
             $imageFile = $request['photo'];
             $extension = $imageFile->extension();
             $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
-            $imageFile->move(public_path('uploads/volunteers'), $imageName);
+            $imageFile->move(storage_path('uploads/volunteers'), $imageName);
             $imagePath = 'uploads/volunteers/'.$imageName;
 
             // create Image from file

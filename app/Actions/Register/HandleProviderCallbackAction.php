@@ -32,7 +32,7 @@ class HandleProviderCallbackAction extends Action
             $avatar->user_id = $user_id;
             $fileContents = file_get_contents($socialUser->getAvatar());
             $imageName = $user_id . '_' . uniqid() . '.' . ".jpg";
-            File::put(public_path() . '/uploads/avatars/' . $imageName, $fileContents);
+            File::put(storage_path() . '/uploads/avatars/' . $imageName, $fileContents);
             $avatar->link = 'uploads/avatars/' . $imageName;
             $avatar->name = $imageName;
             $img = Image::make($avatar->link);

@@ -26,7 +26,7 @@ class CreateAction extends Action
                 $imageFile = $data['avatar'];
                 $extension = $imageFile->extension();
                 $imageName = $user_id . '_'.uniqid() .'.'. $extension;
-                $imageFile->move(public_path('uploads/avatars'), $imageName);
+                $imageFile->move(storage_path('uploads/avatars'), $imageName);
                 $imagePath = 'uploads/avatars/'.$imageName;
 
                 // create Image from file
