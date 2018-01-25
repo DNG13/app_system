@@ -18,7 +18,7 @@ class LoadAction extends Action
     {
         $fileName =  preg_replace("/[^-._a-z0-9]/i","_", $this->rus2translit($file->getClientOriginalName()));
         $path = 'uploads/file/' . $app_kind . '/' . $app_id;
-        $filePath = public_path( $path ).'/' . $fileName;
+        $filePath = storage_path( $path ).'/' . $fileName;
         $mime = $file->getMimeType();
 
         //if file with the same name exists
@@ -27,7 +27,7 @@ class LoadAction extends Action
         $i = 1;
         while(file_exists($filePath)) {
             $name = $info['filename'] . '_' . $i++ . '.' . $extension;
-            $filePath = public_path($path) . '/' . $name;
+            $filePath = storage_path($path) . '/' . $name;
         }
         $fileName = $name ?? $fileName;
 
@@ -37,7 +37,7 @@ class LoadAction extends Action
         $appFile->app_kind = $app_kind;
         $appFile->link = $path . '/' . $fileName;
 
-        $file->move(public_path($path) . '/', $fileName);
+        $file->move(storage_path($path) . '/', $fileName);
         $thumbnailLink = null;
 
         if (strpos($mime, 'image')!== false) {

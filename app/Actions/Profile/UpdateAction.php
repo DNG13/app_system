@@ -34,7 +34,7 @@ class UpdateAction extends Action
 
             // create Image from file
             $img = Image::make($imagePath);
-            list($width, $height) = getimagesize($imagePath);
+            [$width, $height] = getimagesize($imagePath);
             if($width <= $height) {
                 $img->resize(null, 100, function ($constraint) {
                     $constraint->aspectRatio();
