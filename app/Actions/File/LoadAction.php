@@ -56,7 +56,7 @@ class LoadAction extends Action
             }
 
             $thumbnailLink = 'uploads/thumbnails/' . $app_kind . '/' . $app_id;
-            $thumbnailPath = public_path($thumbnailLink);
+            $thumbnailPath = storage_path($thumbnailLink);
 
             if (!file_exists($thumbnailPath)) {
                 mkdir($thumbnailPath, 0700, true);
