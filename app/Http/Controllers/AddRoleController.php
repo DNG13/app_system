@@ -33,7 +33,7 @@ class AddRoleController extends Controller
             });
         }
 
-        $roles = $query->paginate(10);
+        $roles = $query->paginate(20);
         return view('pages.role.index', ['roles'=>$roles, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 

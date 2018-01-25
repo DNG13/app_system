@@ -63,7 +63,7 @@ class StoreAction extends Action
         $mail['email'] = $user->email;
         $mail['nickname'] = $user->profile->nickname;
         $mail['title'] = $volunteer->nickname;
-        $mail['page'] = "/volunteer/ $volunteer->id";
+        $mail['page'] = "/volunteer/$volunteer->id";
         SendApplicationEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
         $mail['email'] = 'khanifest+volunteers@gmail.com';

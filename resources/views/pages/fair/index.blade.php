@@ -5,7 +5,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Заявка ярмарка <a class="btn btn-info btn pull-right"  href="{{ url('/fair/create')}}">Подать заявку</a></strong></h4>
+            <h4><strong>Заявка ярмарка</strong></h4>
+            @if(Auth::user()->isAdmin())
+                В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
+            @endif
+            <a class="btn btn-info btn pull-right"  href="{{ url('/fair/create')}}">Подать заявку</a>
             @if(!count($applications )==0)
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">

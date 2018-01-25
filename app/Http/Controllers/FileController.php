@@ -38,7 +38,7 @@ class FileController extends Controller
     public function zip(Request $request, ZipAction $action )
     {
         if($request->download == 'zip') {
-            $public_dir=public_path('/zip');
+            $public_dir = public_path('/zip');
             $zipFileName = $action->run($request);
             $filetopath = $public_dir.'/'.$zipFileName;
             // Set Header
@@ -48,7 +48,7 @@ class FileController extends Controller
 
             // Create Download Response
             if(file_exists($filetopath)){
-                return response()->download($filetopath,$zipFileName,$headers);
+                return response()->download($filetopath, $zipFileName, $headers);
             }
         }
 

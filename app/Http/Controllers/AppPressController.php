@@ -40,11 +40,26 @@ class AppPressController extends Controller
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
         $data = $request->all();
 
+        $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
+        $apps = AppPress::all()->pluck('status');
+        foreach ($apps as $app) {
+            if($app == 'Принята') {
+                $count['accepted']++;
+            }
+            if($app == 'Отклонена') {
+                $count['rejected']++;
+            }
+            if($app == 'В обработке') {
+                $count['processing']++;
+            }
+        }
+
         return view('pages.press.index', [
             'applications' => $action->run($request),
             'sort' => $this->prepareSort($request, $this->sortFields),
             'types' => $types,
-            'data' =>$data
+            'data' => $data,
+            'count' => $count
         ]);
     }
 
@@ -81,16 +96,13 @@ class AppPressController extends Controller
         if( is_null($press) || ($press->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('press');
         }
-        if($press->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
-        }
         $files = AppFile::where('app_kind', 'press')
             ->where('app_id', $press->id)->get();
-        $social_links =  json_decode($press->social_links);
-        $comments = Comment::orderBy('created_at','desc')
+        $social_links = json_decode($press->social_links);
+        $comments = Comment::orderBy('created_at','asc')
             ->where('app_kind', 'press')
             ->where('app_id', $press->id)->get();
-        $members =  json_decode($press->members);
+        $members = json_decode($press->members);
         $count = 0;
 
         return view('pages.press.show', compact('press', 'files', 'social_links', 'comments', 'members', 'count'));
@@ -112,8 +124,8 @@ class AppPressController extends Controller
             return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
-        $social_links =  json_decode($press->social_links);
-        $members =  json_decode($press->members);
+        $social_links = json_decode($press->social_links);
+        $members = json_decode($press->members);
         $count = 0;
 
         return view('pages.press.edit', compact('types', 'press', 'social_links', 'members', 'count'));

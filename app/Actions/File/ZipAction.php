@@ -18,7 +18,7 @@ class ZipAction extends Action
 
     public function run(Request $request)
     {
-        $public_dir=public_path('/zip');
+        $public_dir = public_path('/zip');
 
         //remove archive if exist
         if (file_exists($public_dir)) {

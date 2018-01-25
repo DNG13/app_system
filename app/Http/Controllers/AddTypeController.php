@@ -35,7 +35,7 @@ class AddTypeController extends Controller
             });
         }
 
-        $types = $query->paginate(10);
+        $types = $query->paginate(20);
         return view('pages.type.index', ['types'=>$types, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }
 

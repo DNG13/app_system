@@ -41,12 +41,27 @@ class AppCosplayController extends Controller
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $data = $request->all();
 
+        $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
+        $apps = AppCosplay::all()->pluck('status');
+        foreach ($apps as $app) {
+            if($app == 'Принята') {
+                $count['accepted']++;
+            }
+            if($app == 'Отклонена') {
+                $count['rejected']++;
+            }
+            if($app == 'В обработке') {
+                $count['processing']++;
+            }
+        }
+
         return view('pages.cosplay.index',
             [
                 'applications' => $action->run($request),
                 'sort' => $this->prepareSort($request, $this->sortFields),
                 'types' => $types,
-                'data' =>$data
+                'data' => $data,
+                'count' => $count
             ]);
     }
 
@@ -84,15 +99,12 @@ class AppCosplayController extends Controller
         if( is_null($cosplay) || ($cosplay->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('cosplay');
         }
-        if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
-        }
         $files = AppFile::where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();
-        $comments = Comment::orderBy('created_at','desc')
+        $comments = Comment::orderBy('created_at','asc')
             ->where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();
-        $members =  json_decode($cosplay->members);
+        $members = json_decode($cosplay->members);
         $count = 0;
 
         return view('pages.cosplay.show', compact('cosplay', 'members', 'count', 'comments', 'files', 'roles'));
@@ -114,7 +126,7 @@ class AppCosplayController extends Controller
            return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
-        $members =  json_decode($cosplay->members);
+        $members = json_decode($cosplay->members);
         $count = 0;
 
         return view('pages.cosplay.edit', compact('types', 'cosplay', 'members', 'count'));

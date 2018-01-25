@@ -35,7 +35,7 @@ class UserRoleController extends Controller
                 $q->where('nickname', 'LIKE', "%$keyword%");
             });
         }
-        $users = $query->paginate(10);
+        $users = $query->paginate(20);
 
         return view('pages.user-role.index', ['users'=>$users, 'sort' => $this->prepareSort($request, $this->sortFields)]);
     }

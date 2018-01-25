@@ -39,11 +39,26 @@ class AppFairController extends Controller
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $data = $request->all();
 
+        $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
+        $apps = AppFair::all()->pluck('status');
+        foreach ($apps as $app) {
+            if($app == 'Принята') {
+                $count['accepted']++;
+            }
+            if($app == 'Отклонена') {
+                $count['rejected']++;
+            }
+            if($app == 'В обработке') {
+                $count['processing']++;
+            }
+        }
+
         return view('pages.fair.index', [
             'applications' => $action->run($request),
             'sort' => $this->prepareSort($request, $this->sortFields),
             'types' => $types,
-            'data' =>$data
+            'data' => $data,
+            'count' => $count
         ]);
     }
 
@@ -80,17 +95,14 @@ class AppFairController extends Controller
         if( is_null($fair) || ($fair->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('fair');
         }
-        if($fair->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('fair')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
-        }
         $files = AppFile::where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
         $block =  json_decode($fair->block);
-        $equipment =  json_decode($fair->equipment);
-        $comments = Comment::orderBy('created_at','desc')
+        $equipment = json_decode($fair->equipment);
+        $comments = Comment::orderBy('created_at','asc')
             ->where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
-        $members =  json_decode($fair->members);
+        $members = json_decode($fair->members);
         $count = 0;
 
         return view('pages.fair.show', compact('fair', 'files', 'block', 'equipment', 'comments', 'members', 'count'));
@@ -112,9 +124,9 @@ class AppFairController extends Controller
             return redirect('fair')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
-        $block =  json_decode($fair->block);
-        $equipment =  json_decode($fair->equipment);
-        $members =  json_decode($fair->members);
+        $block = json_decode($fair->block);
+        $equipment = json_decode($fair->equipment);
+        $members = json_decode($fair->members);
         $count = 0;
 
         return view('pages.fair.edit', compact('types', 'fair', 'block', 'equipment', 'members', 'count'));

@@ -36,8 +36,25 @@ class AppVolunteerController extends Controller
      */
     public function index(Request $request, ListAction $action)
     {
-        return view('pages.volunteer.index',
-            ['applications' => $action->run($request), 'sort' => $this->prepareSort($request, $this->sortFields)]);
+        $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
+        $apps = AppVolunteer::all()->pluck('status');
+        foreach ($apps as $app) {
+            if($app == 'Принята') {
+                $count['accepted']++;
+            }
+            if($app == 'Отклонена') {
+                $count['rejected']++;
+            }
+            if($app == 'В обработке') {
+                $count['processing']++;
+            }
+        }
+
+        return view('pages.volunteer.index', [
+            'applications' => $action->run($request),
+            'sort' => $this->prepareSort($request, $this->sortFields),
+            'count' => $count
+        ]);
     }
 
     /**
@@ -72,11 +89,8 @@ class AppVolunteerController extends Controller
         if( is_null($volunteer) || ($volunteer->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('volunteer');
         }
-        if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её просматривать.');
-        }
-        $social_links =  json_decode( $volunteer->social_links);
-        $comments = Comment::orderBy('created_at','desc')
+        $social_links = json_decode( $volunteer->social_links);
+        $comments = Comment::orderBy('created_at','asc')
             ->where('app_kind', 'volunteer')
             ->where('app_id', $volunteer->id)->get();
 
@@ -98,7 +112,7 @@ class AppVolunteerController extends Controller
         if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
-        $social_links =  json_decode($volunteer->social_links);
+        $social_links = json_decode($volunteer->social_links);
         return view('pages.volunteer.edit', compact('volunteer', 'social_links'));
     }
 
