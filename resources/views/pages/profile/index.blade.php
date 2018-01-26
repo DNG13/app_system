@@ -16,7 +16,7 @@
                             <div>
                                 <label for="avatar" class="col-md-4">Аватар</label>
                                 <div class="col-md-6">
-                                    <img src="/{{ $avatar }}" id="avatar" name="avatar"/>
+                                    <img src="/storage/{{Auth::user()->id }}/avatar" id="avatar"/>
                                 </div>
                             </div>
                             @endif
@@ -125,7 +125,7 @@
                              <div>
                                 <label for="info" class="col-md-4">Дополнительные данные</label>
                                 <div class="col-md-6">
-                                    <p name="info">{{ $profile->info }}</p>
+                                    <p id="info">{{ $profile->info }}</p>
                                 </div>
                             </div>
                             @endif

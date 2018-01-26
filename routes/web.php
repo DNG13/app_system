@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +20,7 @@ Route::post('auth/reactivate/send', 'Auth\RegisterController@userReactivationSen
 Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
 Route::post('auth/profile', 'Auth\RegisterController@profileFacebook');
+Route::get('storage/{userId}/avatar', 'ProfileController@getAvatar');
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
@@ -39,8 +39,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('volunteer', 'AppVolunteerController', ['except' => 'destroy'])->middleware('check.profile');
     Route::post('/comment/create', 'CommentController@create');
     Route::post('/upload', 'FileController@upload');
-
+    Route::get('storage/{file_id}', 'FileController@getFile');
+    Route::get('storage/{file_id}/thumbnail', 'FileController@getThumbnail');
 });
+
 
 Route::group(['middleware' => ['role.admin']], function() {
     Route::get('create-zip', 'FileController@zip')->name('create-zip');

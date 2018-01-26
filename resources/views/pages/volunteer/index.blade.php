@@ -9,7 +9,9 @@
             @if(Auth::user()->isAdmin())
                 В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
             @endif
-            <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a>
+            <div>
+                <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a>
+            </div>
             @if(!count($applications )==0)
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">

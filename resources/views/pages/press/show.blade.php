@@ -196,9 +196,9 @@
                     @if(!count($files)==0)
                         @foreach($files as $file)
                             <div class="col-md-2" style="width: 225px; height:150px;">
-                                <a href="/{{$file->link}}">
+                                <a href="/storage/{{$file->id}}">
                                     @if($file->type == 'image')
-                                        <img src="/{{$file->thumbnail_link}}">
+                                        <img  src="/storage/{{$file->id}}/thumbnail">
                                     @elseif($file->type == 'audio')
                                         <i class="fa fa-file-audio-o fa-5x" aria-hidden="true"></i>
                                     @elseif($file->type == 'video')

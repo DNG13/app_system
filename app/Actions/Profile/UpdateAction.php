@@ -30,8 +30,8 @@ class UpdateAction extends Action
             $extension = $imageFile->extension();
             $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
             $imageFile->move(storage_path('/uploads/avatars'), $imageName);
-            $imagePath = '/uploads/avatars/'.$imageName;
-
+            $avatar->link = '/uploads/avatars/'.$imageName;
+            $imagePath = storage_path($avatar->link);
             // create Image from file
             $img = Image::make($imagePath);
             [$width, $height] = getimagesize($imagePath);
@@ -45,7 +45,6 @@ class UpdateAction extends Action
                 });
             }
             $img->save();
-            $avatar->link = $imagePath;
             $avatar->name = $imageName;
             $avatar->save();
         }

@@ -30,7 +30,7 @@ class CreateAction extends Action
                 $imagePath = 'uploads/avatars/'.$imageName;
 
                 // create Image from file
-                $img = Image::make($imagePath);
+                $img = Image::make(storage_path($imagePath));
                 $img->resize(null, 100, function ($constraint) {
                     $constraint->aspectRatio();
                 });

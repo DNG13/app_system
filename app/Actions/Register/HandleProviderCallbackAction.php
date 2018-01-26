@@ -31,11 +31,11 @@ class HandleProviderCallbackAction extends Action
             $avatar = new Avatar();
             $avatar->user_id = $user_id;
             $fileContents = file_get_contents($socialUser->getAvatar());
-            $imageName = $user_id . '_' . uniqid() . '.' . ".jpg";
+            $imageName = $user_id . '_' . uniqid()  . ".jpg";
             File::put(storage_path() . '/uploads/avatars/' . $imageName, $fileContents);
             $avatar->link = 'uploads/avatars/' . $imageName;
             $avatar->name = $imageName;
-            $img = Image::make($avatar->link);
+            $img = Image::make(storage_path($avatar->link));
             $img->resize(null, 100, function ($constraint) {
                 $constraint->aspectRatio();
             });

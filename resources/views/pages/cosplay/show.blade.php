@@ -175,9 +175,9 @@
                     @if(!count($files)==0)
                         @foreach($files as $file)
                             <div class="col-md-2" style="width: 225px; height:150px;">
-                                <a href="/{{$file->link}}">
+                                <a href="/storage/{{$file->id}}">
                                     @if($file->type == 'image')
-                                        <img src="/{{$file->thumbnail_link}}">
+                                        <img  src="/storage/{{$file->id}}/thumbnail">
                                     @elseif($file->type == 'audio')
                                         <i class="fa fa-file-audio-o fa-5x" aria-hidden="true"></i>
                                     @elseif($file->type == 'document')
@@ -189,7 +189,7 @@
                                     @endif
                                 </a>
                                 @if(Auth::user()->isAdmin())
-                                    <a title="Удалить file" href="/file/delete?id={{ $file->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
+                                    <a title="Удалить" href="/file/delete?id={{ $file->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
                                         <div class="btn btn-default">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </div>

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AppCosplay\StoreUpdateRequest;
-use App\Models\Role;
-use Illuminate\Support\Facades\Auth;
+use App\Abstracts\Controller;
+use App\Actions\File\GetFileAction;
 use App\Actions\AppCosplay\ListAction;
 use App\Actions\AppCosplay\StoreAction;
 use App\Actions\AppCosplay\UpdateAction;
+use App\Http\Requests\AppCosplay\StoreUpdateRequest;
+use App\Models\Role;
 use App\Models\AppType;
 use App\Models\AppCosplay;
 use App\Models\Comment;
 use App\Models\AppFile;
 use Illuminate\Http\Request;
-use App\Abstracts\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AppCosplayController extends Controller
 {
@@ -87,10 +88,8 @@ class AppCosplayController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
     public function show($id)
     {

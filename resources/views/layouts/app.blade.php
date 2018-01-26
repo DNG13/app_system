@@ -91,7 +91,7 @@
                         @else
                             <li class="dropdown  {{ Request::is('profile/*')|| Request::is('profile')? "active" : ''}}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" style="font-size: 10pt">
-                                    @if(Auth::user()->avatar)<img width="20" src="/{{ Auth::user()->avatar->link }}" id="avatar"/>@endif
+                                    @if(Auth::user()->avatar)<img width="20" src="/storage/{{ Auth::user()->id }}/avatar" id="avatar"/>@endif
                                     {{ Auth::user()->profile->nickname }} <span class="caret"></span>
                                 </a>
 

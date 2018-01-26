@@ -6,7 +6,9 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка пресса</strong></h4>
-            <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подать заявку</a>
+            <div>
+                <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подать заявку</a>
+            </div>
             @if(Auth::user()->isAdmin())
                 В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
             @endif

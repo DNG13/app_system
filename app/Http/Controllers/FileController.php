@@ -9,6 +9,8 @@ use App\Models\AppFile;
 use Illuminate\Http\Request;
 use App\Abstracts\Controller;
 use File;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\Exception\NotFoundException;
 
 class FileController extends Controller
 {
@@ -38,7 +40,7 @@ class FileController extends Controller
     public function zip(Request $request, ZipAction $action )
     {
         if($request->download == 'zip') {
-            $public_dir = public_path('/zip');
+            $public_dir = storage_path('/zip');
             $zipFileName = $action->run($request);
             $filetopath = $public_dir.'/'.$zipFileName;
             // Set Header
@@ -63,13 +65,58 @@ class FileController extends Controller
     {
         $id = $request->get('id');
         $file = AppFile::where('id', $id)->first();
-        unlink($file->link);
+        unlink(storage_path($file->link));
 
         if ($file->thumbnail_link) {
-            unlink($file->thumbnail_link);
+            unlink(storage_path($file->thumbnail_link));
         }
         $file->delete();
 
         return redirect($request->get('app_kind'). '/' . $request->get('app_id'));
+    }
+
+    /**
+     * @param $fileId
+     * @return mixed
+     */
+
+    public function getFile($fileId)
+    {
+        $file = AppFile::where('id', $fileId)->get()->first();
+
+        if (!$file) {
+            throw new NotFoundException();
+        }
+
+        $path = storage_path($file->link);
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
+    }
+
+    /**
+     * @param $fileId
+     * @return mixed
+     */
+    public function getThumbnail($fileId)
+    {
+        $file = AppFile::where('id', $fileId)->get()->first();
+
+        if (!$file) {
+            throw new NotFoundException();
+        }
+
+        $path = storage_path($file->thumbnail_link);
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
     }
 }

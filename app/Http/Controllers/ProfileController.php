@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Abstracts\Controller;
 use App\Actions\Profile\UpdateAction;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\Avatar;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
-use App\Abstracts\Controller;
+use File;
+use Illuminate\Support\Facades\Response;
 
 class ProfileController extends Controller
 {
@@ -42,10 +44,28 @@ class ProfileController extends Controller
 
     public function show($data)
     {
-        $avatar = Avatar::where('user_id', $data)->pluck('link')->first();
+        $avatar = Avatar::where('user_id', $data)->pluck('id')->first();
         $profile = Profile::where('user_id', $data)->first();
         $social_links =  json_decode($profile->social_links);
 
         return view('pages.profile.index', compact('profile', 'social_links', 'avatar'));
+    }
+
+    public function getAvatar($userId)
+    {
+        $file = Avatar::where('user_id', $userId)->get()->first();
+
+        if (!$file) {
+            throw new NotFoundException();
+        }
+
+        $path = storage_path($file->link);
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
     }
 }

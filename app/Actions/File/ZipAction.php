@@ -18,8 +18,7 @@ class ZipAction extends Action
 
     public function run(Request $request)
     {
-        $public_dir = storage_path('/zip');
-
+        $public_dir = storage_path('zip');
         //remove archive if exist
         if (file_exists($public_dir)) {
             $files = array_diff(scandir($public_dir), array('.','..'));
@@ -29,18 +28,16 @@ class ZipAction extends Action
             rmdir($public_dir);
         }
 
-        mkdir($public_dir, 0700, true);
+        mkdir($public_dir, 0777, true);
         $zipFileName = $request->app_kind.'_'. $request->app_id . '.zip';
         $zip = new ZipArchive;
-
         if ($zip->open($public_dir . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {
             $files = AppFile::where('app_kind', $request->app_kind)->where('app_id', $request->app_id)->get();
             foreach($files as $file) {
-                $zip->addFile($file->link, $file->name);
+                $zip->addFile( storage_path($file->link), $file->name);
             }
             $zip->close();
         }
-
         return $zipFileName;
     }
 }
