@@ -16,7 +16,7 @@
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <select id="type_id" class="form-control" name="type_id">
                                         @foreach($types as $key=>$type)
                                             @if($key == $fair->type_id)
@@ -39,7 +39,7 @@
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-md-4 control-label">Статус заявки</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <select class="form-control input-sm" id="status" name="status">
                                         @if(!empty($fair->status))
                                             <option selected value="{{$fair->status}}">{{$fair->status}}</option>
@@ -62,7 +62,7 @@
                             <div class="form-group{{ $errors->has('group_nick') ? ' has-error' : '' }}">
                                 <label for="group_nick" class="col-md-4 control-label">Hазвание группы/ник</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="title" type="text" class="form-control" name="group_nick" value="{{ $fair->group_nick }}" required autofocus>
 
                                     @if ($errors->has('group_nick'))
@@ -76,7 +76,7 @@
                             <div class="form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
                                 <label for="contact_name" class="col-md-4 control-label">Контактное лицо</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="title" type="text" class="form-control" name="contact_name" value="{{ $fair->contact_name }}" required autofocus>
 
                                     @if ($errors->has('contact_name'))
@@ -90,7 +90,7 @@
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-4 control-label"> Город</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="title" type="text" placeholder="Для иногородних - город и дата/время прибытия" class="form-control" name="city" value="{{ $fair->city }}" required autofocus>
 
                                     @if ($errors->has('city'))
@@ -104,7 +104,7 @@
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label for="phone" class="col-md-4 control-label">Телефон</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="phone" pattern='[\+]\d{3}[0-9]{9}'  placeholder="+380000000000" type="tel" class="form-control" name="phone" value="{{  $fair->phone }}" required autofocus>
 
                                     @if ($errors->has('phone'))
@@ -118,7 +118,7 @@
                             <div class="form-group{{ $errors->has('social_link') ? ' has-error' : '' }}">
                                 <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="social_link" type="text" class="form-control" name="social_link" value="{{$fair->social_link }}" required autofocus>
 
                                     @if ($errors->has('social_link'))
@@ -132,7 +132,7 @@
                             <div class="form-group{{ $errors->has('group_link') ? ' has-error' : '' }}">
                                 <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                      <input  id="group_link" type="text" class="form-control" name="group_link" value="{{  $fair->group_link }}" required autofocus>
 
                                     @if ($errors->has('group_link'))
@@ -144,7 +144,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+                                <div class="col-md-8 col-md-offset-4">
                                     <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel" >
                                         Блок для стендов, игрозоны и фудкорта(нажмите для заполнения)
                                     </button>
@@ -156,7 +156,7 @@
 
                                         <div class="form-group{{ $errors->has('block[universe]') ? ' has-error' : '' }}">
                                             <label for="block[universe]" class="col-md-4 control-label">Вселенная</label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <textarea id="block[universe]" type="text"
                                                           placeholder="Например: Фотостенд по «Гравити Фоллс» или игровая зона 'Вархаммер'. Обязательно к заполнению стендами и игрозонами."
                                                           class="form-control" name="block[universe]" autofocus>{{ $block->universe }}
@@ -171,7 +171,7 @@
 
                                         <div class="form-group{{ $errors->has('block[description]') ? ' has-error' : '' }}">
                                             <label for="block[description]" class="col-md-4 control-label">Краткое описание декораций и интерактива</label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <textarea id="block[description]" type="text"
                                                           placeholder="Опишите, что будет происходить на стенде, а также дизайн стенда. Фото и план следует прикрепить через редактирование заявки"
                                                           class="form-control" name="block[description]" autofocus>{{ $block->description }}
@@ -186,7 +186,7 @@
 
                                         <div class="form-group{{ $errors->has('block[stuff]') ? ' has-error' : '' }}">
                                             <label for="block[stuff]" class="col-md-4 control-label">Используемые материалы</label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <textarea id="block[stuff]" type="text"
                                                           placeholder="Обязательно к заполнению при наличии любых конструкций и декораций"
                                                           class="form-control" name="block[stuff]" autofocus>{{ $block->stuff }}
@@ -201,7 +201,7 @@
 
                                         <div class="form-group{{ $errors->has('block[goods]') ? ' has-error' : '' }}">
                                             <label for="block[goods]" class="col-md-4 control-label">Перечень продукции</label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <textarea id="block[goods]" type="text"
                                                           placeholder="Обязательно к заполнению для фудкорта. Для обширных игрозон - перечень игр"
                                                           class="form-control" name="block[goods]" autofocus>{{ $block->goods }}
@@ -216,7 +216,7 @@
 
                                         <div class="form-group{{ $errors->has('block[square]') ? ' has-error' : '' }}">
                                             <label for="block[square]" class="col-md-4 control-label">Размер торгово-развлекательной точки</label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <textarea id="block[square]" type="text"
                                                           placeholder="Ширина, глубина и высота в сантиметрах."
                                                           class="form-control" name="block[square]" autofocus>{{ $block->square}}
@@ -238,7 +238,7 @@
                                 <div class="form-group{{ $errors->has('equipment[table]') ? ' has-error' : '' }}">
                                     <label for="equipment[table]" class="col-md-4 control-label">Количество столов</label>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input id="equipment[table]" type="number" min="0" class="form-control" name="equipment[table]" value="{{  $equipment->table }}" required autofocus>
 
                                         @if ($errors->has('equipment[table]'))
@@ -251,7 +251,7 @@
 
                                 <div class="form-group{{ $errors->has('equipment[chair]') ? ' has-error' : '' }}">
                                     <label for="equipment[chair]" class="col-md-4 control-label">Количество стульев</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input id="equipment[chair]" type="number" min="0" class="form-control" name="equipment[chair]" value="{{ $equipment->chair }}"  required autofocus>
 
                                         @if ($errors->has('equipment[chair]'))
@@ -265,7 +265,7 @@
                                 <div class="form-group{{ $errors->has('equipment[extra]') ? ' has-error' : '' }}">
                                     <label for="equipment[extra]" class="col-md-4 control-label">Дополнительное оборудование с размерами</label>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <textarea id="equipment[extra]" rows="5"
                                                   class="form-control" placeholder="Например, баннер, этажерка, ширма и т.д."
                                                   name="equipment[extra]"  autofocus>{{ $equipment->extra }}</textarea>
@@ -280,7 +280,7 @@
 
                                 <div class="form-group{{ $errors->has('equipment[electricity]') ? ' has-error' : '' }}">
                                     <label for="equipment[electricity]" class="col-md-4 control-label">Надобность подведения электричества</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <select id="type_id" class="form-control" name="equipment[electricity]">
                                                 <option @if($equipment->electricity == 'Нет') selected @endif value="Нет">Нет</option>
                                                 <option @if($equipment->electricity == 'Да') selected @endif value="Да">Да</option>
@@ -296,7 +296,7 @@
 
                             <div class="form-group{{ $errors->has('electrics') ? ' has-error' : '' }}">
                                 <label for="electrics" class="col-md-4 control-label">Электрооборудование</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="electrics"
                                                placeholder="список оборудования и информация из спецификации или паспорта оборудования в Вт и А"
                                                class="form-control" name="electrics"  autofocus>{{  $fair->electrics }}</textarea>
@@ -312,7 +312,7 @@
                             <div class="form-group{{ $errors->has('payment_type') ? ' has-error' : '' }}">
                                 <label for="payment_type" class="col-md-4 control-label">Способ оплаты</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <select id="type_id" class="form-control" name="payment_type">
                                         <option @if( $fair->payment_type == 'наличный') selected @endif value="наличный">наличный (в день фестиваля)</option>
                                         <option @if( $fair->payment_type == 'безналичный') selected @endif value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
@@ -328,7 +328,7 @@
 
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="description"
                                                placeholder="Обратите внимание, что именно этот текст мы опубликуем в качестве рекламы. После отправки заявки не забудьте зайти в меню редактирования и прикрепить к заявке промо-фото вашей продукции/стенда, которые мы опубликуем. Также можете добавить свой логотип."
                                                class="form-control" name="description"  autofocus required>{{  $fair->description }}</textarea>
@@ -349,7 +349,7 @@
                                             @if($attribute=='surname')
                                                 <div class="form-group">
                                                     <label  class="col-md-4 control-label">Участник : Фамилия</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
                                                 </div>
@@ -381,13 +381,13 @@
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <button type="button" name="add" id="add" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+                                <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-info">
                                         Сохранить
                                     </button>
@@ -404,13 +404,13 @@
                                         '<div class="members" id="row'+i+'">' +
                                         '<div class="form-group">'+
                                         '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
-                                        '<div class="col-md-6">' +
+                                        '<div class="col-md-8">' +
                                         '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
                                         '<label class="col-md-4 control-label">Имя</label>' +
-                                        '<div class="col-md-6">' +
+                                        '<div class="col-md-8">' +
                                         '<input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/>' +
                                         '</div>' +
                                         '</div>'+

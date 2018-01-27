@@ -15,7 +15,7 @@
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <select id="type_id" class="form-control" name="type_id">
                                         @foreach($types as $key=>$type)
                                             <option value="{{$key}}">{{$type}}</option>
@@ -33,7 +33,7 @@
                             <div class="form-group{{ $errors->has('group_nick') ? ' has-error' : '' }}">
                                 <label for="group_nick" class="col-md-4 control-label">Название команды/ник выступающего</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="group_nick" type="text" class="form-control" name="group_nick" value="{{ old('group_nick') }}" required autofocus>
 
                                     @if ($errors->has('group_nick'))
@@ -47,7 +47,7 @@
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="col-md-4 control-label">Название постановки</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
 
                                     @if ($errors->has('title'))
@@ -60,7 +60,7 @@
 
                             <div class="form-group{{ $errors->has('fandom') ? ' has-error' : '' }}">
                                 <label for="fandom" class="col-md-4 control-label">Источник (фендом)</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="fandom" type="text" class="form-control" name="fandom" value="{{ old('fandom') }}" required autofocus>
 
                                     @if ($errors->has('fandom'))
@@ -73,7 +73,7 @@
 
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="length" type="number" min="0" step="0.5" class="form-control" name="length" value="{{ old('length') }}" required autofocus>
 
                                     @if ($errors->has('length'))
@@ -86,7 +86,7 @@
 
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-4 control-label">Город</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
 
                                     @if ($errors->has('city'))
@@ -99,7 +99,7 @@
 
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea id="prev_part" rows="5" class="form-control" placeholder="Участие костюма/постановки в других фестивалях(с указанием на каких именно со ссылками на фото/видео. Получали ли призовые места)" name="prev_part" autofocus> {{ old('prev_part') }}</textarea>
 
                                     @if ($errors->has('prev_part'))
@@ -112,7 +112,7 @@
 
                             <div class="form-group{{ $errors->has('props') ? ' has-error' : '' }}">
                                 <label for="props" class="col-md-4 control-label">Pеквизит</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="props" rows="5" class="form-control" name="props"  placeholder="Ширма, столы, стулья, микрофоны, волонтёры - всё то, что не везете с собой" autofocus>{{ old('props') }}</textarea>
 
                                     @if ($errors->has('props'))
@@ -125,7 +125,7 @@
 
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="description" rows="5" class="form-control" name="description"  autofocus required>{{ old('description') }}</textarea>
 
                                     @if ($errors->has('description'))
@@ -138,7 +138,7 @@
 
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                 <label for="comment" class="col-md-4 control-label">Коментарий</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="comment" rows="5" class="form-control" name="comment"  autofocus>{{ old('comment') }}</textarea>
 
                                     @if ($errors->has('comment'))
@@ -154,25 +154,25 @@
                                 <div class="members" id="row0">
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Участник : Фамилия</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input type="text" name="members[0][surname]" class="form-control name_list" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Имя</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input type="text" name="members[0][first_name]" class="form-control name_list" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Персонаж</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input type="text" name="members[0][character]" class="form-control name_list" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Дата рождения</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input type="date" min='1899-01-01' max="{{date("Y-d-m")}}" name="members[0][birthday]" class="form-control name_list" required/>
                                         </div>
                                     </div>
@@ -181,13 +181,13 @@
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <button type="button" name="add" id="add" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+                                <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-info">
                                         Отправить
                                     </button>

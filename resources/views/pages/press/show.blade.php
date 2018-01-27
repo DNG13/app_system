@@ -233,7 +233,7 @@
                                 <li class="list-group-item col-md-12"  @if($comment->role)@if($comment->role->key =='admin') style="background:beige;" @endif @endif>
                                     <div>
                                         <label for="comment" class="col-md-3" style="color:darkslategrey;">
-                                            <small> @if($comment->role)@if($comment->role->key =='admin')@if($comment->avatar->link)<img width="30" src="/{{$comment->avatar->link}}"/>@endif Координатор  @endif @endif
+                                            <small> @if($comment->role)@if($comment->role->key =='admin')@if($comment->avatar->link)<img width="30" src="/storage/{{$comment->avatar->user_id}}/avatar"/>@endif Координатор  @endif @endif
                                                 {{ $comment->profile->nickname }}
                                                 <br>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small>
                                         </label>

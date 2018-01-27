@@ -16,7 +16,7 @@
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <select id="type_id" class="form-control" name="type_id">
                                         @foreach($types as $key=>$type)
                                             @if($key == $cosplay->type_id)
@@ -39,7 +39,7 @@
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-md-4 control-label">Статус заявки</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <select class="form-control input-sm" id="status" name="status">
                                         @if(!empty($cosplay->status))
                                             <option selected value="{{$cosplay->status}}">{{$cosplay->status}}</option>
@@ -62,7 +62,7 @@
                             <div class="form-group{{ $errors->has('group_nick') ? ' has-error' : '' }}">
                                 <label for="group_nick" class="col-md-4 control-label">Название команды/ник выступающего</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="group_nick" type="text" class="form-control" name="group_nick" value="{{ $cosplay->group_nick }}" required autofocus>
 
                                     @if ($errors->has('group_nick'))
@@ -76,7 +76,7 @@
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="col-md-4 control-label">Название постановки</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="title" type="text" class="form-control" name="title" value="{{ $cosplay->title }}" required autofocus>
 
                                     @if ($errors->has('title'))
@@ -89,7 +89,7 @@
 
                             <div class="form-group{{ $errors->has('fandom') ? ' has-error' : '' }}">
                                 <label for="fandom" class="col-md-4 control-label">Источник (фендом)</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="fandom" type="text" class="form-control" name="fandom" value="{{ $cosplay->fandom }}" required autofocus>
 
                                     @if ($errors->has('fandom'))
@@ -102,7 +102,7 @@
 
                             <div class="form-group{{ $errors->has('length') ? ' has-error' : '' }}">
                                 <label for="length" class="col-md-4 control-label">Продолжительность(минут)</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="length" type="number" min="0" step="0.5" class="form-control" name="length" value="{{ $cosplay->length}}" required autofocus>
 
                                     @if ($errors->has('length'))
@@ -115,7 +115,7 @@
 
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                                 <label for="city" class="col-md-4 control-label">Город</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ $cosplay->city }}" required autofocus>
 
                                     @if ($errors->has('city'))
@@ -128,7 +128,7 @@
 
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
                                 <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea id="prev_part" placeholder="Участие костюма/постановки в других фестивалях(с указанием на каких именно со ссылками на фото/видео. Получали ли призовые места)" class="form-control" name="prev_part" autofocus>{{ $cosplay->prev_part }}</textarea>
 
                                     @if ($errors->has('prev_part'))
@@ -141,7 +141,7 @@
 
                             <div class="form-group{{ $errors->has('props') ? ' has-error' : '' }}">
                                 <label for="props" class="col-md-4 control-label">Реквизит</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="props" rows="5" class="form-control" name="props" placeholder="Ширма, столы, стулья, микрофоны, волонтёры - всё то, что не везете с собой" autofocus>{{ $cosplay->props }}</textarea>
 
                                     @if ($errors->has('props'))
@@ -154,7 +154,7 @@
 
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-4 control-label">Описание</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="description" rows="5" class="form-control" name="description">{{ $cosplay->description }}</textarea>
 
                                     @if ($errors->has('description'))
@@ -167,7 +167,7 @@
 
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                 <label for="comment" class="col-md-4 control-label">Коментарий</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <textarea  id="comment" rows="5" class="form-control" name="comment" autofocus>{{ $cosplay->comment }}</textarea>
 
                                     @if ($errors->has('comment'))
@@ -186,21 +186,21 @@
                                             @if($attribute=='surname')
                                                     <div class="form-group">
                                                         <label  class="col-md-4 control-label">Участник : Фамилия</label>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-8">
                                                             <input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/>
                                                         </div>
                                                     </div>
                                             @elseif($attribute=='first_name')
                                                 <div class="form-group">
                                                     <label  class="col-md-4 control-label">Имя</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
                                                 </div>
                                             @elseif($attribute=='character')
                                                 <div class="form-group">
                                                     <label  class="col-md-4 control-label">Персонаж</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <input type="text" name="members[{{$count}}][character]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
                                                 </div>
@@ -225,13 +225,13 @@
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <button type="button" name="add" id="add" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+                                <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-info">
                                         Сохранить
                                     </button>
@@ -248,19 +248,19 @@
                                         '<div class="members" id="row'+i+'">' +
                                             '<div class="form-group">'+
                                                 '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
-                                                '<div class="col-md-6">' +
+                                                '<div class="col-md-8">' +
                                                     '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                                 '</div>' +
                                             '</div>'+
                                             '<div class="form-group">' +
                                                 '<label class="col-md-4 control-label">Имя</label>' +
-                                                '<div class="col-md-6">' +
+                                                '<div class="col-md-8">' +
                                                     '<input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/> ' +
                                                 '</div>' +
                                             '</div>' +
                                             '<div class="form-group">' +
                                                 '<label class="col-md-4 control-label">Персонаж</label>' +
-                                                '<div class="col-md-6">' +
+                                                '<div class="col-md-8">' +
                                                     '<input type="text" name="members['+i+'][character]" class="form-control name_list" required/>' +
                                                 '</div>' +
                                             '</div>' +
@@ -322,7 +322,7 @@
 
                         {{--<input type=file name=file>--}}
                         {{--<div class="form-group">--}}
-                            {{--<div class="col-md-6 col-md-offset-4">--}}
+                            {{--<div class="col-md-8 col-md-offset-4">--}}
                                 {{--<button type="submit" class="btn btn-primary">--}}
                                     {{--Отправить--}}
                                 {{--</button>--}}
