@@ -1,8 +1,9 @@
 .alert.alert-success, .alert.alert-warning {
     margin-top: 25px;
 }
-#app > div > div > div:nth-child(2) {
-    padding-bottom: 25px;
+hr {
+    height: 2px;
+    background-color: #e0e0e0;
 }
 .social-float, .dropdown.open > ul > li > a {
     font-weight: bold;

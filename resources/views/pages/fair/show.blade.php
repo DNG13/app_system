@@ -13,56 +13,56 @@
 
                         <div>
                             <label for="type_id" class="col-md-4">Тип заявки</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="type_id">{{ $fair->type->title }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="group_nick" class="col-md-4">Hазвание группы/ник</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="group_nick">{{ $fair->group_nick }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="type_id" class="col-md-4">Статус заявки</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="type_id">{{ $fair->status}}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="contact_name" class="col-md-4">Контактное лицо</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="contact_name">{{ $fair->contact_name }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="city" class="col-md-4">Город</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="city">{{ $fair->city }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="phone" class="col-md-4">Телефон</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="phone">{{ $fair->phone }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="social_link" class="col-md-4">Ссылка на личную страницу в соцсети</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="social_link">{{ $fair->social_link }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="group_link" class="col-md-4">Ссылка на сайт или группу в соцсетях</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="group_link">{{ $fair->group_link }}</p>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         @if((!$block->universe==null))
                             <div>
                                 <label for="block[universe]" class="col-md-4">Вселенная</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="block[universe]">{{ $block->universe }}</p>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                         @if((!$block->description==null))
                             <div>
                                 <label for="block[description]" class="col-md-4">Краткое описание декораций и интерактива</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="block[description]">{{ $block->description }}</p>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                         @if((!$block->stuff==null))
                             <div>
                                 <label for="block[stuff]" class="col-md-4">Используемые материалы</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="block[stuff]">{{ $block->stuff }}</p>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                         @if((!$block->goods==null))
                             <div>
                                 <label for="block[goods]" class="col-md-4">Перечень продукции</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="block[goods]">{{ $block->goods }}</p>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                         @if(!$block->square==null)
                             <div>
                                 <label for="block[square]" class="col-md-4">Размер торгово-развлекательной точки</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="block[square]">{{ $block->square }}</p>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                             @if(!$equipment->table==null)
                                 <div>
                                     <label for="equipment[table]" class="col-md-4">Количество столов</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="equipment[table]">{{ $equipment->table }}</p>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                             @if(!$equipment->chair==null)
                                 <div>
                                     <label for="equipment[chair]" class="col-md-4">Количество стульев</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="equipment[chair]">{{ $equipment->chair }}</p>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                             @if(!$equipment->extra==null)
                                 <div>
                                     <label for="equipment[extra]" class="col-md-4">Дополнительное оборудование с размерами</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="equipment[extra]">{{ $equipment->extra }}</p>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
 
                             <div>
                                 <label for="equipment[electricity]" class="col-md-4">Надобность подведения электричества</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="equipment[electricity]">{{ $equipment->electricity }}</p>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                         @if(!$fair->electrics==null)
                         <div>
                             <label for="description" class="col-md-4">Электрооборудование</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="description">{{ $fair->electrics }}</p>
                             </div>
                         </div>
@@ -159,48 +159,49 @@
 
                         <div >
                             <label for="payment_type" class="col-md-4">Способ оплаты</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="square">{{ $fair->payment_type }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="description" class="col-md-4">Описание</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="description">{{ $fair->description }}</p>
                             </div>
                         </div>
 
                         <div class="col-md-12"><h4>Участники</h4></div>
                         <div id="dynamic_field">
-                            <div class="members" id="row0">
-                                @foreach($members as $member=>$attributes)
+                            @foreach($members as $member=>$attributes)
+                                <div class="members" id="row{{ ++$count}}">
+                                    <div class="col-md-12"><hr></div>
                                     @foreach($attributes as $attribute=>$data)
                                         @if($attribute=='surname')
                                             <div>
-                                                <label  class="col-md-4">Участник {{++$count}}: Фамилия</label>
-                                                <div class="col-md-6">
+                                                <label  class="col-md-4">Фамилия</label>
+                                                <div class="col-md-8">
                                                     <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='first_name')
                                             <div>
                                                 <label  class="col-md-4">Имя</label>
-                                                <div class="col-md-6">
+                                                <div class="col-md-8">
                                                     <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='duty')
                                             <div>
                                                 <label  class="col-md-4">Обязанности на фестивале</label>
-                                                <div class="col-md-6">
+                                                <div class="col-md-8">
                                                     <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @endif
                                     @endforeach
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
 
                         <div>

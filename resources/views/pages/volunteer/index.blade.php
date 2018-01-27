@@ -9,7 +9,7 @@
             @if(Auth::user()->isAdmin())
                 В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
             @endif
-            <div>
+            <div style="padding-bottom: 25px;">
                 <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a>
             </div>
             @if(!count($applications )==0)

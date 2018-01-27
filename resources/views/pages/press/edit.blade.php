@@ -130,7 +130,7 @@
                                 <label for="portfolio_link" class="col-md-4 control-label">Ссылка на портфолио</label>
 
                                 <div class="col-md-6">
-                                    <input id="portfolio_link" type="url" class="form-control" name="portfolio_link" value="{{ $press->portfolio_link }}" required autofocus>
+                                    <input id="portfolio_link" type="text" class="form-control" name="portfolio_link" value="{{ $press->portfolio_link }}" required autofocus>
 
                                     @if ($errors->has('portfolio_link'))
                                         <span class="help-block">
@@ -170,7 +170,7 @@
                                 <label for="social_links[vk]" class="col-md-4 control-label">Cоцсети: VK</label>
 
                                 <div class="col-md-6">
-                                    <input id="social_links[vk]" type="url" class="form-control" name="social_links[vk]" value="{{ $social_links->vk }}" autofocus>
+                                    <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ $social_links->vk }}" autofocus>
 
                                     @if ($errors->has('social_links->vk'))
                                         <span class="help-block">
@@ -184,7 +184,7 @@
                                 <label for="social_links[fb]" class="col-md-4 control-label">Facebook</label>
 
                                 <div class="col-md-6">
-                                    <input id="social_links[fb]" type="url" class="form-control" name="social_links[fb]" value="{{ $social_links->fb }}"  autofocus>
+                                    <input id="social_links[fb]" type="text" class="form-control" name="social_links[fb]" value="{{ $social_links->fb }}"  autofocus>
 
                                     @if ($errors->has('social_links->fb'))
                                         <span class="help-block">
@@ -198,7 +198,7 @@
                                 <label for="social_links[sk]" class="col-md-4 control-label">Skype</label>
 
                                 <div class="col-md-6">
-                                    <input id="social_links[sk]" type="url" class="form-control" name="social_links[sk]" value="{{ $social_links->sk }}" autofocus>
+                                    <input id="social_links[sk]" type="text" class="form-control" name="social_links[sk]" value="{{ $social_links->sk }}" autofocus>
 
                                     @if ($errors->has('social_links->sk'))
                                         <span class="help-block">
@@ -212,7 +212,7 @@
                                 <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
 
                                 <div class="col-md-6">
-                                    <input id="social_links[tg]" type="url" class="form-control" name="social_links[tg]" value="{{ $social_links->tg }}" autofocus>
+                                    <input id="social_links[tg]" type="text" class="form-control" name="social_links[tg]" value="{{ $social_links->tg }}" autofocus>
 
                                     @if ($errors->has('social_links->tg'))
                                         <span class="help-block">

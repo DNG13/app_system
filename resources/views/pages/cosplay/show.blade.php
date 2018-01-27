@@ -11,49 +11,49 @@
                     <div class="form-horizontal">
                         <div>
                             <label for="type_id" class="col-md-4">Тип заявки</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="type_id" >{{ $cosplay->type->title }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="group_nick" class="col-md-4">Название команды/ник выступающего</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="group_nick">{{ $cosplay->group_nick }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="title" class="col-md-4">Название постановки</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="title">{{ $cosplay->title }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="type_id" class="col-md-4">Статус заявки</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="type_id">{{ $cosplay->status}}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="fandom" class="col-md-4">Источник (фендом)</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="fandom">{{ $cosplay->fandom }}</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="length" class="col-md-4">Продолжительность(минут)</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="length">{{ $cosplay->length }}</p>
                             </div>
                         </div>
 
                         <div class="form-group{">
                             <label for="city" class="col-md-4">Город</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p id="city">{{ $cosplay->city }}</p>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                         @if(!$cosplay->prev_part==null)
                             <div>
                                 <label for="prev_part" class="col-md-4">Предыдущее участие</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="prev_part">{{ $cosplay->prev_part }}</p>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                         @if(!$cosplay->props==null)
                             <div>
                                 <label for="props" class="col-md-4">Реквизит</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p  id="props">{{ $cosplay->props }}</p>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
 
                         <div>
                             <label for="description" class="col-md-4">Описание</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <p  id="description">{{ $cosplay->description }}</p>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                         @if(!$cosplay->comment==null)
                             <div>
                                 <label for="comment" class="col-md-4">Коментарий</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p  id="comment">{{ $cosplay->comment }}</p>
                                 </div>
                             </div>
@@ -94,41 +94,42 @@
 
                         <div class="col-md-12"><h4>Участники</h4></div>
                         <div id="dynamic_field">
-                            <div class="members" id="row0">
-                                @foreach($members as $member=>$attributes)
+                            @foreach($members as $member=>$attributes)
+                                <div class="members" id="row{{ ++$count}}">
+                                    <div class="col-md-12"><hr></div>
                                     @foreach($attributes as $attribute=>$data)
                                         @if($attribute=='surname')
                                             <div>
-                                                <label  class="col-md-4">Участник {{++$count}}: Фамилия</label>
-                                                <div class="col-md-6">
+                                                <label  class="col-md-4">Фамилия</label>
+                                                <div class="col-md-8">
                                                     <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='first_name')
                                             <div>
                                                 <label  class="col-md-4">Имя</label>
-                                                <div class="col-md-6">
+                                                <div class="col-md-8">
                                                     <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='character')
                                             <div>
                                                 <label  class="col-md-4">Персонаж</label>
-                                                <div class="col-md-6">
+                                                <div class="col-md-8">
                                                     <p  id="members[{{$count}}][character]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='birthday')
                                             <div>
                                                 <label  class="col-md-4">Дата рождения</label>
-                                                <div class="col-md-6">
+                                                <div class="col-md-8">
                                                     <p  id="members[{{$count}}][birthday]" class="name_list">{{ date('j F, Y ', strtotime($data)) }}</p>
                                                 </div>
                                             </div>
                                         @endif
                                     @endforeach
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                         <div>
                             <div class="col-md-12">

@@ -119,7 +119,7 @@
                                 <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
 
                                 <div class="col-md-6">
-                                    <input id="social_link" type="url" class="form-control" name="social_link" value="{{$fair->social_link }}" required autofocus>
+                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{$fair->social_link }}" required autofocus>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">
@@ -133,7 +133,7 @@
                                 <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
 
                                 <div class="col-md-6">
-                                     <input  id="group_link" type="url" class="form-control" name="group_link" value="{{  $fair->group_link }}" required autofocus>
+                                     <input  id="group_link" type="text" class="form-control" name="group_link" value="{{  $fair->group_link }}" required autofocus>
 
                                     @if ($errors->has('group_link'))
                                         <span class="help-block">

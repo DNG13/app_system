@@ -13,42 +13,42 @@
 
                             <div>
                                 <label for="type_id" class="col-md-4">Тип заявки</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="type_id">{{ $press->type->title }}</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="media_name" class="col-md-4">Наименование СМИ/никнейм</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="media_name">{{ $press->media_name }}</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="type_id" class="col-md-4">Статус заявки</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="type_id">{{ $press->status}}</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="contact_name" class="col-md-4">Контактное лицо</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="contact_name">{{ $press->contact_name }}</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="city" class="col-md-4">Город</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="city">{{ $press->city }}</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="phone" class="col-md-4">Телефон</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="phone">{{ $press->phone }}</p>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                             @if(!$press->prev_part==null)
                                 <div>
                                     <label for="prev_part" class="col-md-4">Предыдущее участие</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="prev_part">{{ $press->prev_part }}</p>
                                     </div>
                                 </div>
@@ -64,21 +64,21 @@
 
                             <div>
                                 <label for="portfolio_link" class="col-md-4">Ссылка на портфолио</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="portfolio_link">{{ $press->portfolio_link }}</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="camera" class="col-md-4">Модель камеры</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="camera">{{ $press->camera }}</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="equipment" class="col-md-4">Доп. техника</label>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <p id="equipment">{{ $press->equipment }}</p>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             @if(!$social_links->vk==null)
                                 <div>
                                     <label for="social_links[vk]" class="col-md-4">VK</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="social_links[vk]"> {{ $social_links->vk}}</p>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                             @if(!$social_links->fb==null)
                                 <div>
                                     <label for="social_links[fb]" class="col-md-4">Facebook</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="social_links[fb]"> {{$social_links->fb }}</p>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                             @if(!$social_links->sk==null)
                                 <div>
                                     <label for="social_links[sk]" class="col-md-4">Skype</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="social_links[sk]"> {{ $social_links->fb }}</p>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                             @if(!($social_links->tg)==null)
                                 <div>
                                     <label for="social_links[tg]" class="col-md-4">Telegram</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <p id="social_links[tg]">{{ $social_links->tg }}</p>
                                     </div>
                                 </div>
@@ -121,34 +121,35 @@
 
                             <div class="col-md-12"><h4>Участники</h4></div>
                             <div id="dynamic_field">
-                                <div class="members" id="row0">
-                                    @foreach($members as $member=>$attributes)
+                                @foreach($members as $member=>$attributes)
+                                    <div class="members" id="row{{ ++$count}}">
+                                        <div class="col-md-12"><hr></div>
                                         @foreach($attributes as $attribute=>$data)
                                             @if($attribute=='surname')
                                                 <div>
-                                                    <label  class="col-md-4">Участник {{++$count}}: Фамилия</label>
-                                                    <div class="col-md-6">
+                                                    <label  class="col-md-4">Фамилия</label>
+                                                    <div class="col-md-8">
                                                         <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
                                                     </div>
                                                 </div>
                                             @elseif($attribute=='first_name')
                                                 <div>
                                                     <label  class="col-md-4">Имя</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
                                                     </div>
                                                 </div>
                                             @elseif($attribute=='duty')
                                                 <div>
                                                     <label  class="col-md-4">Обязанности на фестивале</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
                                                     </div>
                                                 </div>
                                             @endif
                                         @endforeach
-                                    @endforeach
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
 
                             <div>

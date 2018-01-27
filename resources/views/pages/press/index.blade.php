@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка пресса</strong></h4>
-            <div>
-                <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подать заявку</a>
-            </div>
             @if(Auth::user()->isAdmin())
                 В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
             @endif
+            <div style="padding-bottom: 25px;">
+                <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подать заявку</a>
+            </div>
             @if(!count($applications)==0)
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
