@@ -25,6 +25,8 @@ class UpdateAction extends Action
             if(!$avatar) {
                 $avatar = new Avatar();
                 $avatar->user_id = Auth::user()->id;
+            } else {
+                unlink(storage_path($avatar->link));
             }
             $imageFile = $data['avatar'];
             $extension = $imageFile->extension();
