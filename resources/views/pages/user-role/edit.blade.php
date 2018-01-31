@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('key') ? ' has-error' : '' }}">
-                                <label for="key" class="col-md-4 control-label">Вибрать роли</label>
+                                <label for="key" class="col-md-4 control-label">Выбрать роли</label>
 
                                 <div class="col-md-6">
                                     <input type="hidden"  name="key">

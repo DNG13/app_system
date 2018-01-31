@@ -197,7 +197,7 @@
                             <div id="dynamic_field">
                                 <div class="members" id="row0">
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Участник : Фамилия</label>
+                                        <label  class="col-md-4 control-label">Фамилия</label>
                                         <div class="col-md-8">
                                             <input type="text" name="members[0][surname]" class="form-control name_list" required/>
                                         </div>
@@ -241,9 +241,10 @@
 
                                 $('#add').click(function(){
                                     $('#dynamic_field').append(
+                                        '<div class="col-md-12"><hr></div>' +
                                         '<div class="members" id="row'+i+'">' +
                                         '<div class="form-group">'+
-                                        '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
+                                        '<label  class="col-md-4 control-label">Фамилия</label>'+
                                         '<div class="col-md-8">' +
                                         '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                         '</div>' +
@@ -256,7 +257,7 @@
                                         '</div>'+
                                         '<div class="form-group">' +
                                         '<label class="col-md-4 control-label">Обязанности</label>' +
-                                        '<div class="col-md-3">' +
+                                        '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +
                                         '<div class="col-md-1">'+

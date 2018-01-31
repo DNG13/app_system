@@ -9,7 +9,7 @@
                 <div class="panel-heading">Редактирование  заявки косплей-шоу</div>
 
                 <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('cosplay.update', $cosplay->id) }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('cosplay.update', $cosplay->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
@@ -180,47 +180,47 @@
 
                             <div style="text-align:center"><strong>Участники</strong></div>
                             <div id="dynamic_field">
-                                    @foreach($members as $member=>$attributes)
-                                    <div class="members" id="row{{$count}}">
-                                        @foreach($attributes as $attribute=>$data)
-                                            @if($attribute=='surname')
-                                                    <div class="form-group">
-                                                        <label  class="col-md-4 control-label">Участник : Фамилия</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/>
-                                                        </div>
-                                                    </div>
-                                            @elseif($attribute=='first_name')
-                                                <div class="form-group">
-                                                    <label  class="col-md-4 control-label">Имя</label>
-                                                    <div class="col-md-8">
-                                                        <input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/>
-                                                    </div>
+                                @foreach($members as $member=>$attributes)
+                                <div class="members" id="row{{$count}}">
+                                    @foreach($attributes as $attribute=>$data)
+                                        @if($attribute=='surname')
+                                            <div class="form-group">
+                                                <label  class="col-md-4 control-label">Фамилия</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/>
                                                 </div>
-                                            @elseif($attribute=='character')
-                                                <div class="form-group">
-                                                    <label  class="col-md-4 control-label">Персонаж</label>
-                                                    <div class="col-md-8">
-                                                        <input type="text" name="members[{{$count}}][character]" class="form-control name_list" required value="{{ $data }}"/>
-                                                    </div>
+                                            </div>
+                                        @elseif($attribute=='first_name')
+                                            <div class="form-group">
+                                                <label  class="col-md-4 control-label">Имя</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/>
                                                 </div>
-                                            @elseif($attribute=='birthday')
-                                                <div class="form-group">
-                                                    <label  class="col-md-4 control-label">Дата рождения</label>
-                                                     <div class="col-md-3">
-                                                        <input type="date" min='1899-01-01' max="{{date("Y-m-d")}}" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/>
-                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника">
-                                                            <i class="fa fa-user-times" aria-hidden="true"></i>
-                                                        </a>
-                                                    </div>
+                                            </div>
+                                        @elseif($attribute=='character')
+                                            <div class="form-group">
+                                                <label  class="col-md-4 control-label">Персонаж</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="members[{{$count}}][character]" class="form-control name_list" required value="{{ $data }}"/>
                                                 </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <input hidden {{$count++}}}>
+                                            </div>
+                                        @elseif($attribute=='birthday')
+                                            <div class="form-group">
+                                                <label  class="col-md-4 control-label">Дата рождения</label>
+                                                 <div class="col-md-3">
+                                                    <input type="date" min='1899-01-01' max="{{date("Y-m-d")}}" name="members[{{$count}}][birthday]" class="form-control name_list" required value="{{ $data }}"/>
+                                                 </div>
+                                                <div class="col-md-1">
+                                                    <a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника">
+                                                        <i class="fa fa-user-times" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @endforeach
+                                </div>
+                                <input hidden {{$count++}}>
+                                @endforeach
                             </div>
 
                             <div class="form-group">
@@ -239,15 +239,16 @@
                             </div>
                         </form>
 
-                        <script type="text/javascript">
-                            $(document).ready(function(){
-                                var postURL = "<?php echo url('cosplay/edite'); ?>";
-                                var i="<?php echo $count; ?>";
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            var postURL = "<?php echo url('cosplay/edite'); ?>";
+                            var i="<?php echo $count; ?>";
                                 $('#add').click(function(){
                                     $('#dynamic_field').append(
+                                        '<div class="col-md-12"><hr></div>' +
                                         '<div class="members" id="row'+i+'">' +
                                             '<div class="form-group">'+
-                                                '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
+                                                '<label  class="col-md-4 control-label">Фамилия</label>'+
                                                 '<div class="col-md-8">' +
                                                     '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                                 '</div>' +
@@ -275,14 +276,14 @@
                                             '</div>' +
                                         '</div>'
                                     );
-                                    i++;
-                                });
-                                $(document).on('click', '#btn_remove', function(){
+                                i++;
+                            });
+                            $(document).on('click', '#btn_remove', function(){
                                     $(this).closest('.members').remove();
                                     i--;
                                 });
 
-                                $('#submit').click(function(){
+                            $('#submit').click(function(){
                                     $.ajax({
                                         url:postURL,
                                         method:"POST",
@@ -290,24 +291,23 @@
                                         type:'json'
                                     });
                                 });
-                            });
-                        </script>
-                    </div>
+                        });
+                    </script>
+                </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">Прикрепить файлы</div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
+                    <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
                         <i class="fa fa-file" aria-hidden="true"></i> Технические ограничения
                     </button>
                     <div id="filter-panel" class="collapse filter-panel">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <ul>
-                                    <li>названия файлов должны быть выполнены латиницей и не содержать пробелов (scenraio_defile.doc)</li>
-                                    <li>размеры файлов не более 10 мегабайт</li>
-                                    <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
-                                    <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
+                                    <li>размеры файлов не более 20 мегабайт</li>
+                                    <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
+                                    <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
                                     <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
                                     <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
                                 </ul>

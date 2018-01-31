@@ -225,7 +225,7 @@ var Dropzone = function (_Emitter) {
          * the event `maxfilesexceeded` will be called. The dropzone element gets the
          * class `dz-max-files-reached` accordingly so you can provide visual feedback.
          */
-        maxFilesize: 10,
+        maxFilesize: 20,
 
         /**
          * The name of the file param that gets transferred.
@@ -299,7 +299,7 @@ var Dropzone = function (_Emitter) {
          * 1024 is technically incorrect, because `1024 bytes` are `1 kibibyte` not `1 kilobyte`.
          * You can change this to `1024` if you don't care about validity.
          */
-        filesizeBase: 1000,
+        filesizeBase: 1024,
 
         /**
          * Can be used to limit the maximum number of files that will be handled by this Dropzone

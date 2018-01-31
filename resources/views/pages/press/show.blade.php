@@ -172,7 +172,7 @@
 
                 <div class="panel-body">
                     <div>
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel" style="margin-bottom: 10px;">
+                        <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
                             <i class="fa fa-file" aria-hidden="true"></i> Добавить файлы
                         </button>
                         <div id="filter-panel" class="collapse filter-panel">
@@ -182,10 +182,9 @@
                                         <li>Добавить файлы можно при редактировании заявки</li>
                                         <li>Технические ограничения:</li>
                                         <ul>
-                                            <li>названия файлов должны быть выполнены латиницей и не содержать пробелов (scenraio_defile.doc)</li>
-                                            <li>размеры файлов не более 10 мегабайт</li>
-                                            <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
-                                            <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
+                                            <li>размеры файлов не более 20 мегабайт</li>
+                                            <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
+                                            <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
                                             <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
                                             <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
                                         </ul>

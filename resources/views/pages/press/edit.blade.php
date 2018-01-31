@@ -229,7 +229,7 @@
                                         @foreach($attributes as $attribute=>$data)
                                             @if($attribute=='surname')
                                                 <div class="form-group">
-                                                    <label  class="col-md-4 control-label">Участник : Фамилия</label>
+                                                    <label  class="col-md-4 control-label">Фамилия</label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="members[{{$count}}][surname]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
@@ -237,14 +237,14 @@
                                             @elseif($attribute=='first_name')
                                                 <div class="form-group">
                                                     <label  class="col-md-4 control-label">Имя</label>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-8">
                                                         <input type="text" name="members[{{$count}}][first_name]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
                                                 </div>
                                             @elseif($attribute=='duty')
                                                 <div class="form-group">
                                                     <label  class="col-md-4 control-label">Обязанности на фестивале</label>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-7">
                                                         <input type="text" name="members[{{$count}}][duty]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
                                                     <div class="col-md-1">
@@ -281,9 +281,10 @@
                                 var i="<?php echo $count; ?>";
                                 $('#add').click(function(){
                                     $('#dynamic_field').append(
+                                        '<div class="col-md-12"><hr></div>' +
                                         '<div class="members" id="row'+i+'">' +
                                         '<div class="form-group">'+
-                                        '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
+                                        '<label  class="col-md-4 control-label">Фамилия</label>'+
                                         '<div class="col-md-8">' +
                                         '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                         '</div>' +
@@ -296,7 +297,7 @@
                                         '</div>'+
                                         '<div class="form-group">' +
                                         '<label class="col-md-4 control-label">Обязанности</label>' +
-                                        '<div class="col-md-3">' +
+                                        '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +
                                         '<div class="col-md-1">'+
@@ -328,17 +329,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Прикрепить файлы</div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
+                    <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
                         <i class="fa fa-file" aria-hidden="true"></i> Технические ограничения
                     </button>
                     <div id="filter-panel" class="collapse filter-panel">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <ul>
-                                    <li>названия файлов должны быть выполнены латиницей и не содержать пробелов (scenraio_defile.doc)</li>
-                                    <li>размеры файлов не более 10 мегабайт</li>
-                                    <li>видео и большие файлы (>10 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
-                                    <li>файлы менее 10 мегабайт загружайте в систему заявок.</li>
+                                    <li>размеры файлов не более 20 мегабайт</li>
+                                    <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
+                                    <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
                                     <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
                                     <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
                                 </ul>

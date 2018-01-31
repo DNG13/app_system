@@ -44,7 +44,7 @@
                     @foreach ($errors->all() as $error)
                         <p class="alert alert-danger">{{ $error }}</p>
                     @endforeach
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel">
+                    <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
                         <i class="fa fa-filter" aria-hidden="true"></i> Фильтр
                     </button>
                     <div id="filter-panel" class="collapse filter-panel">

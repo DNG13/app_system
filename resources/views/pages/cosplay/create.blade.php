@@ -153,7 +153,7 @@
                             <div id="dynamic_field">
                                 <div class="members" id="row0">
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Участник : Фамилия</label>
+                                        <label  class="col-md-4 control-label">Фамилия</label>
                                         <div class="col-md-8">
                                             <input type="text" name="members[0][surname]" class="form-control name_list" required/>
                                         </div>
@@ -172,9 +172,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Дата рождения</label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-3">
                                             <input type="date" min='1899-01-01' max="{{date("Y-d-m")}}" name="members[0][birthday]" class="form-control name_list" required/>
                                         </div>
+                                        <div class="col-md-5"></div>
                                     </div>
                                 </div>
                             </div>
@@ -203,22 +204,23 @@
 
                                 $('#add').click(function(){
                                     $('#dynamic_field').append(
+                                    '<div class="col-md-12"><hr></div>' +
                                     '<div class="members" id="row'+i+'">' +
                                         '<div class="form-group">'+
-                                            '<label  class="col-md-4 control-label">Участник : Фамилия</label>'+
-                                            '<div class="col-md-6">' +
+                                            '<label  class="col-md-4 control-label">Фамилия</label>'+
+                                            '<div class="col-md-8">' +
                                                 '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                             '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
                                             '<label class="col-md-4 control-label">Имя</label>' +
-                                            '<div class="col-md-6">' +
+                                            '<div class="col-md-8">' +
                                                 '<input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/>' +
                                             '</div>' +
                                         '</div>' +
                                         '<div class="form-group">' +
                                             '<label class="col-md-4 control-label">Персонаж</label>' +
-                                            '<div class="col-md-6">' +
+                                            '<div class="col-md-8">' +
                                                 '<input type="text" name="members['+i+'][character]" class="form-control name_list" required/>' +
                                             '</div>' +
                                         '</div>' +
