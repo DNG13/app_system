@@ -4,6 +4,11 @@ namespace App\Actions\File;
 
 use App\Abstracts\Action;
 use App\Models\AppFile;
+use App\Models\AppFair;
+use App\Models\AppPress;
+use App\Models\AppVolunteer;
+use App\Models\AppCosplay;
+use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 
 class LoadAction extends Action
@@ -75,6 +80,18 @@ class LoadAction extends Action
         }
         $appFile->thumbnail_link = $thumbnailLink;
         $appFile->save();
+        if( $app_kind == 'cosplay' ) {
+            $app = AppCosplay::where('id',  $app_id)->first();
+        } elseif( $app_kind == 'fair' ) {
+            $app = AppFair::where('id',  $app_id)->first();
+        } elseif( $app_kind == 'press' ) {
+            $app = AppPress::where('id',  $app_id)->first();
+            $mail['title'] = $app->media_name;
+        } elseif( $app_kind == 'volunteer' ) {
+            $app = AppVolunteer::where('id',  $app_id)->first();
+        }
+        $app->updated_at = Carbon::now();
+        $app->save();
     }
 
     /**
