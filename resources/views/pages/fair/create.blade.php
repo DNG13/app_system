@@ -287,6 +287,7 @@
                                     <select id="type_id" class="form-control" name="payment_type">
                                         <option value="наличный">наличный (в день фестиваля)</option>
                                         <option value="безналичный">безналичный(закрывается за неделю до фестиваля)</option>
+                                        <option value="договорной">договорной (для коммерческих стендов, игрозон, фудкортов)</option>
                                         <option value="фанатский">на условиях участника фестиваля(для фанатских стендов)</option>
                                     </select>
                                     @if ($errors->has('payment_type'))
