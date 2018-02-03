@@ -12,6 +12,19 @@
             <div style="padding-bottom: 25px;">
                 <a class="btn btn-info btn pull-right"  href="{{ url('/fair/create')}}">Подать заявку</a>
             </div>
+            <div style="display: inline-block; margin-top: 5px;">
+                <form action="{{ url('/fair')}}" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Поиск(Город, Контактное лицо, Название(Ник))" >
+                        <span class="input-group-addon btn btn-default">
+                                <button type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="submit">сбросить</button>
+                            </span>
+                    </div>
+                </form>
+            </div>
             @if(!count($applications )==0)
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -27,19 +40,6 @@
                         </p>
                     </div>
                 @endif
-                <div style="display: inline-block; margin-top: 5px;">
-                    <form action="{{ url('/fair')}}" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Поиск(Контактное лицо, Название(Ник))" >
-                            <span class="input-group-addon btn btn-default">
-                                <button type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                                <button type="submit">сбросить</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
                 <div>
                     @foreach ($errors->all() as $error)
                         <p class="alert alert-danger">{{ $error }}</p>
@@ -118,6 +118,7 @@
                         <th><p>Название</p> <a href="{{ $sort['group_nick']['link'] }}"><i class="fa {{ $sort['group_nick']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Контактное лицо</p> <a href="{{ $sort['contact_name']['link'] }}"><i class="fa {{ $sort['contact_name']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Телефон</p> <a href="{{ $sort['phone']['link'] }}"><i class="fa {{ $sort['phone']['icon'] }}" aria-hidden="true"></i></a></th>
+                        <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p><i class="fa fa-users fa-2x" aria-hidden="true"></i>(человек)</p> <a href="{{ $sort['members_count']['link'] }}"><i class="fa {{ $sort['members_count']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th>Действие</th>
                     </tr>
@@ -142,6 +143,7 @@
                             <td>{{ $application->group_nick }}</td>
                             <td>{{ $application->contact_name }}</td>
                             <td>{{ $application->phone }}</td>
+                            <td>{{ $application->city }}</td>
                             <td>{{ $application->members_count }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/fair/{{$application->id }}" title="Подробнее" >

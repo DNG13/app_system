@@ -29,7 +29,8 @@ class ListAction extends Action
         if (!empty($keyword)) {
             $query->where(function($q) use ($keyword) {
                 $q->where('contact_name', 'LIKE', "%$keyword%")
-                    ->orWhere('group_nick', 'LIKE', "%$keyword%");
+                    ->orWhere('group_nick', 'LIKE', "%$keyword%")
+                    ->orWhere('city', 'LIKE', "%$keyword%");
             });
         }
 

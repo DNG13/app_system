@@ -12,6 +12,19 @@
             <div style="padding-bottom: 25px;">
                 <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a>
             </div>
+            <div style="display: inline-block; margin-top: 5px;">
+                <form action="{{url('/volunteer')}}" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Поиск(Ник, город,  статус, навыки)" >
+                        <span class="input-group-addon btn btn-default">
+                                <button type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="submit">сбросить</button>
+                            </span>
+                    </div>
+                </form>
+            </div>
             @if(!count($applications )==0)
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -27,19 +40,6 @@
                         </p>
                     </div>
                 @endif
-                <div style="display: inline-block; margin-top: 5px;">
-                    <form action="{{url('/volunteer')}}" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Поиск(Ник, город,  статус, навыки)" >
-                            <span class="input-group-addon btn btn-default">
-                                <button type="submit">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                                <button type="submit">сбросить</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
                 <table class="table table-striped" border="1" style="margin-top: 5px;">
                         <thead>
                         <tr>

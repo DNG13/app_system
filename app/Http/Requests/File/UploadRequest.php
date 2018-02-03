@@ -24,7 +24,7 @@ class UploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'nullable|max:102400',
+            'file' => 'nullable',
         ];
     }
 }
