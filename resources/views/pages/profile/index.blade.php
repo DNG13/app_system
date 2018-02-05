@@ -21,19 +21,23 @@
                             </div>
                             @endif
 
-                            <div>
-                                <label for="surname" class="col-md-4">Фамилия</label>
-                                <div class="col-md-6">
-                                    <p id="surname"> {{ $profile->surname}}</p>
+                            @if($profile->surname)
+                                <div>
+                                    <label for="surname" class="col-md-4">Фамилия</label>
+                                    <div class="col-md-6">
+                                        <p id="surname"> {{ $profile->surname}}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
 
-                            <div>
-                                <label for="first_name" class="col-md-4">Имя</label>
-                                <div class="col-md-6">
-                                    <p id="first_name">{{ $profile->first_name }}</p>
+                            @if($profile->first_name)
+                                <div>
+                                    <label for="first_name" class="col-md-4">Имя</label>
+                                    <div class="col-md-6">
+                                        <p id="first_name">{{ $profile->first_name }}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
 
                             <div>
                                 <label for="nickname" class="col-md-4">Никнейм</label>
@@ -42,7 +46,7 @@
                                 </div>
                             </div>
 
-                                @if($profile->birthday)
+                            @if($profile->birthday)
                                 <div>
                                     <label for="birthday" class="col-md-4">Дата рождения</label>
                                     <div class="col-md-6">
@@ -51,23 +55,23 @@
                                 </div>
                             @endif
 
-                                @if($profile->city)
-                            <div>
-                                <label for="city" class="col-md-4">Город</label>
-                                <div class="col-md-6">
-                                    <p id="city"> {{ $profile->city }}</p>
+                            @if($profile->city)
+                                <div>
+                                    <label for="city" class="col-md-4">Город</label>
+                                    <div class="col-md-6">
+                                        <p id="city"> {{ $profile->city }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                                @endif
+                            @endif
 
-                                @if($profile->phone)
-                            <div>
-                                <label for="phone" class="col-md-4">Телефон</label>
-                                <div class="col-md-6">
-                                    <p id="phone"> {{ $profile->phone }}</p>
+                            @if($profile->phone)
+                                <div>
+                                    <label for="phone" class="col-md-4">Телефон</label>
+                                    <div class="col-md-6">
+                                        <p id="phone"> {{ $profile->phone }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                                @endif
+                            @endif
 
                             <div>
                                 <label for="email" class="col-md-4">E-Mail</label>
@@ -96,38 +100,38 @@
 
                             @if(!$social_links->fb==null)
                                 <div>
-                                <label for="social_links[fb]" class="col-md-4">Facebook</label>
-                                <div class="col-md-6">
-                                    <p id="social_links[fb]"> {{$social_links->fb }}</p>
+                                    <label for="social_links[fb]" class="col-md-4">Facebook</label>
+                                    <div class="col-md-6">
+                                        <p id="social_links[fb]"> {{$social_links->fb }}</p>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
                             @if(!$social_links->sk==null)
                                 <div>
-                                <label for="social_links[sk]" class="col-md-4">Skype</label>
-                                <div class="col-md-6">
-                                    <p id="social_links[sk]"> {{ $social_links->sk }}</p>
+                                    <label for="social_links[sk]" class="col-md-4">Skype</label>
+                                    <div class="col-md-6">
+                                        <p id="social_links[sk]"> {{ $social_links->sk }}</p>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
                             @if(!($social_links->tg)==null)
-                             <div>
-                                <label for="social_links[tg]" class="col-md-4">Telegram</label>
-                                <div class="col-md-6">
-                                    <p id="social_links[tg]">{{ $social_links->tg }}</p>
+                                 <div>
+                                    <label for="social_links[tg]" class="col-md-4">Telegram</label>
+                                    <div class="col-md-6">
+                                        <p id="social_links[tg]">{{ $social_links->tg }}</p>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
                             @if(!($profile->info)==null)
-                             <div>
-                                <label for="info" class="col-md-4">Дополнительные данные</label>
-                                <div class="col-md-6">
-                                    <p id="info">{{ $profile->info }}</p>
+                                 <div>
+                                    <label for="info" class="col-md-4">Дополнительные данные</label>
+                                    <div class="col-md-6">
+                                        <p id="info">{{ $profile->info }}</p>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
                             <div>
