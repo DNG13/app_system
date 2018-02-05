@@ -175,7 +175,7 @@
                     @if(!count($files)==0)
                         @foreach($files as $file)
                             <div class="col-md-2" style="width: 225px; height:150px;">
-                                <a href="/storage/{{$file->id}}">
+                                <a href="/storage/{{$file->name}}">
                                     @if($file->type == 'image')
                                         <img  src="/storage/{{$file->id}}/thumbnail">
                                     @elseif($file->type == 'audio')
@@ -211,7 +211,7 @@
                                 <li class="list-group-item col-md-12"  @if($comment->role)@if($comment->role->key =='admin') style="background:beige;" @endif @endif>
                                     <div>
                                         <label for="comment" class="col-md-3" style="color:darkslategrey;">
-                                            <small> @if($comment->role)@if($comment->role->key =='admin')@if($comment->avatar)<img width="30" src="/storage/{{$comment->avatar->user_id}}/avatar"/>@endif Координатор  @endif @endif
+                                            <small style="white-space: pre-wrap;"> @if($comment->role)@if($comment->role->key =='admin')@if($comment->avatar)<img width="30" src="/storage/{{$comment->avatar->user_id}}/avatar"/>@endif Координатор  @endif @endif
                                            {{ $comment->profile->nickname }}
                                              <br>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small>
                                         </label>
