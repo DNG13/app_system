@@ -85,14 +85,14 @@
                                 </div>
                             @endif
 
-                                @if(!$social_links->in==null)
-                                    <div>
-                                        <label for="social_links[in]" class="col-md-4">Instagram</label>
-                                        <div class="col-md-6">
-                                            <p id="social_links[in]"> {{ $social_links->in}}</p>
-                                        </div>
+                            @if(!$social_links->in==null)
+                                <div>
+                                    <label for="social_links[in]" class="col-md-4">Instagram</label>
+                                    <div class="col-md-6">
+                                        <p id="social_links[in]"> {{ $social_links->in}}</p>
                                     </div>
-                                @endif
+                                </div>
+                            @endif
 
                             @if(!$social_links->fb==null)
                                 <div>
@@ -107,7 +107,7 @@
                                 <div>
                                 <label for="social_links[sk]" class="col-md-4">Skype</label>
                                 <div class="col-md-6">
-                                    <p id="social_links[sk]"> {{ $social_links->fb }}</p>
+                                    <p id="social_links[sk]"> {{ $social_links->sk }}</p>
                                 </div>
                             </div>
                             @endif
