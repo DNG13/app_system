@@ -14,7 +14,7 @@
                             <div>
                                 <label for="photo" class="col-md-4">Фото</label>
                                 <div class="col-md-8">
-                                    <img src="/{{ $volunteer->photo }}" id="photo" name="photo"/>
+                                    <img src="/storage/{{ $volunteer->id }}/volunteers" id="photo" name="photo"/>
                                 </div>
                             </div>
 

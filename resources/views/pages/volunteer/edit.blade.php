@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <label for="photo" class="col-md-4 control-label">Фото</label>
                                 <div class="col-md-8">
-                                    <img src="/{{  $volunteer->photo }}" id="photo"/>
+                                    <img src="/{{  $volunteer->id }}" id="photo"/>
                                 </div>
                             </div>
 

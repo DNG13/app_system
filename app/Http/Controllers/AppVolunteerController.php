@@ -12,6 +12,8 @@ use App\Models\AppVolunteer;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Abstracts\Controller;
+use File;
+use Illuminate\Support\Facades\Response;
 
 class AppVolunteerController extends Controller
 {
@@ -125,5 +127,26 @@ class AppVolunteerController extends Controller
     public function update(UpdateRequest $request, $id, UpdateAction $action)
     {
         return $action->run($request, $id);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getPhoto($id)
+    {
+        $file = AppVolunteer::where('id', $id)->get()->first();
+        if (!$file) {
+            throw new NotFoundException();
+        }
+
+        $path = storage_path($file->photo);
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
     }
 }

@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/upload', 'FileController@upload');
     Route::get('storage/{file_id}', 'FileController@getFile');
     Route::get('storage/{file_id}/thumbnail', 'FileController@getThumbnail');
+    Route::get('storage/{id}/volunteers', 'AppVolunteerController@getPhoto');
 });
 
 
