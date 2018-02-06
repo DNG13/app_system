@@ -1,9 +1,6 @@
 .alert.alert-success, .alert.alert-warning {
     margin-top: 25px;
 }
-#app > nav > div, .active > a{
-    height: 53px;
-}
 .filter {
     margin-bottom: 10px;
 }

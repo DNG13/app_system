@@ -68,7 +68,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = new User();
-        $user->email = $data['email'];
+        $user->email = strtolower($data['email']);
         $user->password = bcrypt($data['password']);
         $user->fb = $data['fb']?? null;
         $user->save();
@@ -200,6 +200,9 @@ class RegisterController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
+
+        //for lowercase
+        //$user = User::where('email', strtolower($request->email))->first();
 
         if (!$user) {
             return redirect()->to('auth\reactivate')->with('warning',"Email не найден");

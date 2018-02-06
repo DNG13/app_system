@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Кослей(редактировать)')
+@section('title', 'Косплей(редактировать)')
 
 @section('content')
     <div class="container">

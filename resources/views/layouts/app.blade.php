@@ -45,9 +45,8 @@
                         @if (Auth::user())
                             <li class={{ Request::is('/')? "active" : ''}}><a href="/">ГЛАВНАЯ</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">ПРАВИЛА</a></li>
-                            <li class="dropdown
-                            {{ Request::is('cosplay')|| Request::is('fair')|| Request::is('press')|| Request::is('volunteer') ? "active" : ''}}"
-                            ><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОИ ЗАЯВКИ<span class="caret"></span></a>
+                            <li class="dropdown {{ Request::is('cosplay')|| Request::is('fair')|| Request::is('press')|| Request::is('volunteer') ? "active" : ''}}">
+                                <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОИ ЗАЯВКИ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/cosplay')}}">КОСПЛЕЙ-ШОУ</a>
