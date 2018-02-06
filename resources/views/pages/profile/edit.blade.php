@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label for="avatar" class="col-md-4 control-label"></label>
                                 <div class="col-md-6">
-                                    <img src="/storage/{{Auth::user()->id }}/avatar" id="avatar"/>
+                                    <img src="/storage/{{ $profile->user_id }}/avatar" id="avatar"/>
                                 </div>
                             </div>
                             @endif
