@@ -46,10 +46,15 @@ class HandleProviderCallbackAction extends Action
         $profile = new Profile();
         $profile->user_id = $user_id;
         $profile->avatar_id = $avatar->id ?? null;
-        $profile->nickname = $socialUser->getName();
-        $fbName = explode(" ", $socialUser->getName());
-        $profile->surname =  $fbName [1];
-        $profile->first_name = $fbName [0];
+        $profile->nickname = $socialUser->getName()?? null;
+        if(is_null($profile->nickname)) {
+            $profile->surname =  null;
+            $profile->first_name =  null;
+        }else {
+            $fbName = explode(" ", $socialUser->getName());
+            $profile->surname = $fbName[1]?? null;
+            $profile->first_name = $fbName[0]?? null;
+        }
         $social_links = ['vk' => null, 'tg' => null, 'fb' => null, 'sk'=>null, 'in'=>null];
         $profile->social_links = json_encode($social_links);
         $profile->save();
