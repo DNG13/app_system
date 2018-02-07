@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <label for="photo" class="col-md-4 control-label">Фото</label>
                                 <div class="col-md-8">
-                                    <img src="/{{  $volunteer->id }}" id="photo"/>
+                                    <img src="/storage/{{ $volunteer->id }}/volunteers" id="photo"/>
                                 </div>
                             </div>
 
@@ -157,8 +157,50 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('skills') ? ' has-error' : '' }}">
+                                <label for="skills" class="col-md-4 control-label">Навыки</label>
+
+                                <div class="col-md-8">
+                                    <textarea id="skills" rows="5" class="form-control" name="skills" required autofocus>{{ $volunteer->skills }}</textarea>
+
+                                    @if ($errors->has('skills'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('skills') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <div class="form-group{{ $errors->has('experience') ? ' has-error' : '' }}">
+                                <label for="experience" class="col-md-4 control-label">Опыт работы волонтером</label>
+                                <div class="col-md-8">
+                                    <textarea  id="experience" rows="5" class="form-control" placeholder="Год, название фестиваля, должность" name="experience" autofocus>{{ $volunteer->experience }}</textarea>
+
+                                    @if ($errors->has('experience'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('experience') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('difficulties') ? ' has-error' : '' }}">
+                                <label for="difficulties" class="col-md-4 control-label">Возможные затруднения</label>
+                                <div class="col-md-8">
+                                    <textarea  id="difficulties" rows="5" class="form-control" placeholder="Например: маленький рост, плохое зрение, невозможность присутствия на каком-либо этапе подготовки/проведения фестиваля, участие в косплей-шоу и т.д." name="difficulties"  autofocus >{{ $volunteer->difficulties }}</textarea>
+
+                                    @if ($errors->has('difficulties'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('difficulties') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div style="text-align:center"><strong>Cоцсети</strong></div>
                             <div class="form-group{{ $errors->has('social_links->vk') ? ' has-error' : '' }}">
-                                <label for="social_links[vk]" class="col-md-4 control-label">Cоцсети: VK</label>
+                                <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
 
                                 <div class="col-md-8">
                                     <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ $social_links->vk }}" autofocus>
@@ -208,48 +250,6 @@
                                     @if ($errors->has('social_links->tg'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('social_links->tg') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-
-                            <div class="form-group{{ $errors->has('skills') ? ' has-error' : '' }}">
-                                <label for="skills" class="col-md-4 control-label">Навыки</label>
-
-                                <div class="col-md-8">
-                                    <textarea id="skills" rows="5" class="form-control" name="skills" required autofocus>{{ $volunteer->skills }}</textarea>
-
-                                    @if ($errors->has('skills'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('skills') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-
-                            <div class="form-group{{ $errors->has('experience') ? ' has-error' : '' }}">
-                                <label for="experience" class="col-md-4 control-label">Опыт работы волонтером</label>
-                                <div class="col-md-8">
-                                    <textarea  id="experience" rows="5" class="form-control" placeholder="Год, название фестиваля, должность" name="experience" autofocus>{{ $volunteer->experience }}</textarea>
-
-                                    @if ($errors->has('experience'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('experience') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('difficulties') ? ' has-error' : '' }}">
-                                <label for="difficulties" class="col-md-4 control-label">Возможные затруднения</label>
-                                <div class="col-md-8">
-                                    <textarea  id="difficulties" rows="5" class="form-control" placeholder="Например: маленький рост, плохое зрение, невозможность присутствия на каком-либо этапе подготовки/проведения фестиваля, участие в косплей-шоу и т.д." name="difficulties"  autofocus >{{ $volunteer->difficulties }}</textarea>
-
-                                    @if ($errors->has('difficulties'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('difficulties') }}</strong>
                                     </span>
                                     @endif
                                 </div>

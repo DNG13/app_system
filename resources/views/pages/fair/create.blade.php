@@ -376,7 +376,7 @@
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Обязанности</label>' +
+                                        '<label class="col-md-4 control-label">Обязанности на фестивале</label>' +
                                         '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +

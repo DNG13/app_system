@@ -40,9 +40,16 @@ class StoreAction extends Action
             $imagePath = '/uploads/volunteers/'.$imageName;
             // create Image from file
             $img = Image::make(storage_path($imagePath));
-            $img->resize(null, 100, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            [$width, $height] = getimagesize(storage_path($imagePath));
+            if($width <= $height) {
+                $img->resize(null, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            } else {
+                $img->resize(200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
             $img->save();
             $volunteer->photo= $imagePath;
         }

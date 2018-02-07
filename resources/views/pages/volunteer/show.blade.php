@@ -74,6 +74,34 @@
                                 </div>
                             </div>
 
+                            <div>
+                                <label for="skills" class="col-md-4">Навыки</label>
+                                <div class="col-md-8">
+                                    <p id="skills">{{ $volunteer->skills}}</p>
+                                </div>
+                            </div>
+
+                            @if(!($volunteer->experience)==null)
+                                <div>
+                                    <label for="experience" class="col-md-4">Опыт работы волонтером</label>
+                                    <div class="col-md-8">
+                                        <p id="experience">{{ $volunteer->experience }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if(!($volunteer->difficulties)==null)
+                                <div>
+                                    <label for="difficulties" class="col-md-4">Возможные затруднения</label>
+                                    <div class="col-md-8">
+                                        <p  id="difficulties">{{ $volunteer->difficulties }}</p>
+                                    </div>
+                                </div>
+                            @endif
+                            @if(!$social_links->vk==null||!$social_links->fb==null||!$social_links->fb==null||!$social_links->sk==null||!($social_links->tg)==null)
+                                <div class="col-md-12"><h4>Соцсети</h4></div>
+                                <div class="col-md-12"><hr></div>
+                            @endif
                             @if(!$social_links->vk==null)
                                 <div>
                                     <label for="social_links[vk]" class="col-md-4">VK</label>
@@ -110,30 +138,6 @@
                                 </div>
                             @endif
 
-                            <div>
-                                <label for="skills" class="col-md-4">Навыки</label>
-                                <div class="col-md-8">
-                                    <p id="skills">{{ $volunteer->skills}}</p>
-                                </div>
-                            </div>
-
-                            @if(!($volunteer->experience)==null)
-                            <div>
-                                <label for="experience" class="col-md-4">Опыт работы волонтером</label>
-                                <div class="col-md-8">
-                                    <p id="experience">{{ $volunteer->experience }}</p>
-                                </div>
-                            </div>
-                            @endif
-
-                            @if(!($volunteer->difficulties)==null)
-                            <div>
-                                <label for="difficulties" class="col-md-4">Возможные затруднения</label>
-                                <div class="col-md-8">
-                                    <p  id="difficulties">{{ $volunteer->difficulties }}</p>
-                                </div>
-                            </div>
-                            @endif
                             <div>
                                 <div class="col-md-12">
                                     <a href="/volunteer/{{ $volunteer->id }}/edit" class="btn btn-info" role="button">Редактировать</a>

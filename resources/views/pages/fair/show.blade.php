@@ -112,6 +112,7 @@
                             </div>
                         @endif
                         <div class="col-md-12"><h4>Оборудование</h4></div>
+                        <div class="col-md-12"><hr></div>
                         <div>
                             @if(!$equipment->table==null)
                                 <div>

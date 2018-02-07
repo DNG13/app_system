@@ -148,8 +148,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('info') ? ' has-error' : '' }}">
+                            <label for="info" class="col-md-4 control-label">Дополнительные данные</label>
+
+                            <div class="col-md-6">
+                                <textarea id="info" rows="5" class="form-control" name="info" autofocus>{{ old('info') }}</textarea>
+
+                                @if ($errors->has('info'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('info') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div style="text-align:center"><strong>Cоцсети</strong></div>
                         <div class="form-group{{ $errors->has('social_links[vk]') ? ' has-error' : '' }}">
-                            <label for="social_links[vk]" class="col-md-4 control-label">Cоцсети: VK</label>
+                            <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
 
                             <div class="col-md-6">
                                 <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ old('social_links[vk]') }}" autofocus>
@@ -213,20 +228,6 @@
                                 @if ($errors->has('social_links[tg]'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('social_links[tg]') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('info') ? ' has-error' : '' }}">
-                            <label for="info" class="col-md-4 control-label">Дополнительные данные</label>
-
-                            <div class="col-md-6">
-                                <textarea id="info" rows="5" class="form-control" name="info" autofocus>{{ old('info') }}</textarea>
-
-                                @if ($errors->has('info'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('info') }}</strong>
                                     </span>
                                 @endif
                             </div>

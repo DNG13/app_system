@@ -31,9 +31,16 @@ class CreateAction extends Action
 
                 // create Image from file
                 $img = Image::make(storage_path($imagePath));
-                $img->resize(null, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
+                [$width, $height] = getimagesize(storage_path($imagePath));
+                if($width <= $height) {
+                    $img->resize(null, 100, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                } else {
+                    $img->resize(100, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                }
                 $img->save();
                 $avatar->link = $imagePath;
                 $avatar->name = $imageName;

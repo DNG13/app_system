@@ -36,7 +36,7 @@ class UpdateAction extends Action
             $imagePath = storage_path($avatar->link);
             // create Image from file
             $img = Image::make($imagePath);
-            [$width, $height] = getimagesize($imagePath);
+            [$width, $height] = getimagesize(storage_path($imagePath));
             if($width <= $height) {
                 $img->resize(null, 100, function ($constraint) {
                     $constraint->aspectRatio();

@@ -165,9 +165,9 @@
                                     @endif
                                 </div>
                             </div>
-
+                            <div style="text-align:center"><strong>Cоцсети</strong></div>
                             <div class="form-group{{ $errors->has('social_links->vk') ? ' has-error' : '' }}">
-                                <label for="social_links[vk]" class="col-md-4 control-label">Cоцсети: VK</label>
+                                <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
 
                                 <div class="col-md-8">
                                     <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ $social_links->vk }}" autofocus>
@@ -296,7 +296,7 @@
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Обязанности</label>' +
+                                        '<label class="col-md-4 control-label">Обязанности на фестивале</label>' +
                                         '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +

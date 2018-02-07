@@ -80,6 +80,20 @@
                                 </div>
                             </div>
 
+                            @if(!($profile->info)==null)
+                                <div>
+                                    <label for="info" class="col-md-4">Дополнительные данные</label>
+                                    <div class="col-md-6">
+                                        <p id="info">{{ $profile->info }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if(!$social_links->vk==null||!$social_links->fb==null||!$social_links->fb==null||!$social_links->sk==null||!($social_links->tg)==null)
+                                <div class="col-md-12"><h4>Соцсети</h4></div>
+                                <div class="col-md-12"><hr></div>
+                            @endif
+
                             @if(!$social_links->vk==null)
                                 <div>
                                     <label for="social_links[vk]" class="col-md-4">VK</label>
@@ -121,15 +135,6 @@
                                     <label for="social_links[tg]" class="col-md-4">Telegram</label>
                                     <div class="col-md-6">
                                         <p id="social_links[tg]">{{ $social_links->tg }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(!($profile->info)==null)
-                                 <div>
-                                    <label for="info" class="col-md-4">Дополнительные данные</label>
-                                    <div class="col-md-6">
-                                        <p id="info">{{ $profile->info }}</p>
                                     </div>
                                 </div>
                             @endif

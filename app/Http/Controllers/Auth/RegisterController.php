@@ -199,10 +199,8 @@ class RegisterController extends Controller
             return redirect()->to('auth\reactivate')->with('warning',"Email не найден");
         }
 
-        $user = User::where('email', $request->email)->first();
-
         //for lowercase
-        //$user = User::where('email', strtolower($request->email))->first();
+        $user = User::where('email', strtolower($request->email))->first();
 
         if (!$user) {
             return redirect()->to('auth\reactivate')->with('warning',"Email не найден");
