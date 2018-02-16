@@ -124,7 +124,7 @@
                                 <div>
                                     <label for="social_links[sk]" class="col-md-4">Skype</label>
                                     <div class="col-md-8">
-                                        <p id="social_links[sk]"> {{ $social_links->fb }}</p>
+                                        <p id="social_links[sk]"> {{ $social_links->sk }}</p>
                                     </div>
                                 </div>
                             @endif
