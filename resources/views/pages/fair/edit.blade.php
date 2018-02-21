@@ -332,10 +332,7 @@
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-md-4 control-label">Описание</label>
                             <div class="col-md-8">
-                                <textarea  id="description"
-                                           placeholder="Обратите внимание, что именно этот текст мы опубликуем в качестве рекламы. После отправки заявки не забудьте зайти в меню редактирования и прикрепить к заявке промо-фото вашей продукции/стенда, которые мы опубликуем. Также можете добавить свой логотип."
-                                           class="form-control" name="description"  autofocus required>{{  $fair->description }}
-                                </textarea>
+                                <textarea  id="description" class="form-control" name="description"  autofocus required>{{  $fair->description }} </textarea>
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
