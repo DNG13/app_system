@@ -32,11 +32,12 @@ class UpdateAction extends Action
             $extension = $imageFile->extension();
             $imageName = Auth::user()->id . '_'.uniqid() .'.'. $extension;
             $imageFile->move(storage_path('/uploads/avatars'), $imageName);
-            $avatar->link = '/uploads/avatars/'.$imageName;
+            $avatar->link = 'uploads/avatars/'.$imageName;
             $imagePath = storage_path($avatar->link);
             // create Image from file
             $img = Image::make($imagePath);
-            [$width, $height] = getimagesize(storage_path($imagePath));
+//            dd($imagePath);
+            [$width, $height] = getimagesize($imagePath);
             if($width <= $height) {
                 $img->resize(null, 100, function ($constraint) {
                     $constraint->aspectRatio();
