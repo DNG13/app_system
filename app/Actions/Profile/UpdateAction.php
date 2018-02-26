@@ -25,8 +25,6 @@ class UpdateAction extends Action
             if(!$avatar) {
                 $avatar = new Avatar();
                 $avatar->user_id = Auth::user()->id;
-            } else {
-                unlink(storage_path($avatar->link));
             }
             $imageFile = $data['avatar'];
             $extension = $imageFile->extension();
@@ -36,7 +34,6 @@ class UpdateAction extends Action
             $imagePath = storage_path($avatar->link);
             // create Image from file
             $img = Image::make($imagePath);
-//            dd($imagePath);
             [$width, $height] = getimagesize($imagePath);
             if($width <= $height) {
                 $img->resize(null, 100, function ($constraint) {
