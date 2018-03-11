@@ -56,6 +56,6 @@ class ListAction extends Action
             $query->whereIn('id', $ids);
         }
 
-        return $query->paginate();
+        return $query->get();
     }
 }

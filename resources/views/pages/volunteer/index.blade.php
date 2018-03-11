@@ -90,9 +90,6 @@
                         </tbody>
                      @endforeach
                     </table>
-            <div class="text-center">
-                {!! $applications->links() !!}
-            </div>
             @else
                 <h4>У вас нет заявок.</h4>
             @endif

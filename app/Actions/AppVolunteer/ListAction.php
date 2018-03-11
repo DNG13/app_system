@@ -35,6 +35,6 @@ class ListAction extends Action
             });
         }
 
-        return $query->paginate();
+        return $query->get();
     }
 }
