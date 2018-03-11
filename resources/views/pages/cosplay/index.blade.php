@@ -116,6 +116,7 @@
                         <th><p>Дата подачи</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Дата обновления</p> <a href="{{ $sort['updated_at']['link'] }}"><i class="fa {{ $sort['updated_at']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Название постановки</p> <a href="{{ $sort['title']['link'] }}"><i class="fa {{ $sort['title']['icon'] }}" aria-hidden="true"></i></a></th>
+                        <th><p>Название команды/ник выступающего</p> <a href="{{ $sort['group_nick']['link'] }}"><i class="fa {{ $sort['group_nick']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Источник (фендом)</p> <a href="{{ $sort['fandom']['link'] }}"><i class="fa {{ $sort['fandom']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>(минут)</p> <a href="{{ $sort['length']['link'] }}"><i class="fa {{ $sort['length']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
@@ -141,6 +142,7 @@
                             <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>
                             <td>{{ date('j/n/Y H:i', strtotime($application->updated_at )) }}</td>
                             <td>{{ $application->title }}</td>
+                            <td>{{ $application->group_nick}}</td>
                             <td>{{ $application->fandom }}</td>
                             <td>{{ $application->length }}</td>
                             <td>{{ $application->city }}</td>

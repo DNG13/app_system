@@ -25,7 +25,7 @@ class AppVolunteerController extends Controller
         'created_at',
         'updated_at',
         'nickname',
-        'skills',
+        'difficulties',
         'birthday',
         'city',
         'phone',

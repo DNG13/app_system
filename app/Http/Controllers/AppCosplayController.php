@@ -29,7 +29,8 @@ class AppCosplayController extends Controller
         'fandom',
         'length',
         'city',
-        'members_count'
+        'members_count',
+        'group_nick'
     ];
 
     /**
