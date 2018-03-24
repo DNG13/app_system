@@ -98,11 +98,11 @@
                                     </div>
                                 </div>
                             @endif
-                            @if(!$social_links['vk']==null||!$social_links['fb']==null||!$social_links['sk']==null||!($social_links-['tg'])==null)
+                            @if(!is_null($social_links))
                                 <div class="col-md-12"><h4>Соцсети</h4></div>
                                 <div class="col-md-12"><hr></div>
                             @endif
-                            @if(!$social_links['vk']==null)
+                            @if(is_null($social_links['vk']))
                                 <div>
                                     <label for="social_links[vk]" class="col-md-4">VK</label>
                                     <div class="col-md-8">
@@ -111,7 +111,7 @@
                                 </div>
                             @endif
 
-                            @if(!$social_links['fb']==null)
+                            @if(!is_null($social_links['fb']))
                                 <div>
                                     <label for="social_links[fb]" class="col-md-4">Facebook</label>
                                     <div class="col-md-8">
@@ -120,7 +120,7 @@
                                 </div>
                             @endif
 
-                            @if(!$social_links['sk']==null)
+                            @if(!is_null($social_links['sk']))
                                 <div>
                                     <label for="social_links[sk]" class="col-md-4">Skype</label>
                                     <div class="col-md-8">
@@ -129,7 +129,7 @@
                                 </div>
                             @endif
 
-                            @if(!($social_links['tg'])==null)
+                            @if(!is_null($social_links['tg']))
                                 <div>
                                     <label for="social_links[tg]" class="col-md-4">Telegram</label>
                                     <div class="col-md-8">

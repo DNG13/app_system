@@ -91,10 +91,12 @@ class AppVolunteerController extends Controller
             return redirect('volunteer');
         }
         $social_links = $volunteer->social_links;
+        if(count(array_filter($social_links)) == 0) {
+            $social_links = null;
+        }
         $comments = Comment::orderBy('created_at','asc')
             ->where('app_kind', 'volunteer')
             ->where('app_id', $volunteer->id)->get();
-
         return view('pages.volunteer.show', compact('volunteer', 'social_links', 'comments'));
     }
 
