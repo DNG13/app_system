@@ -28,7 +28,6 @@ class AppVolunteerController extends Controller
         'difficulties',
         'birthday',
         'city',
-        'phone',
     ];
 
     /**
@@ -91,7 +90,7 @@ class AppVolunteerController extends Controller
         if( is_null($volunteer) || ($volunteer->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('volunteer');
         }
-        $social_links = json_decode( $volunteer->social_links);
+        $social_links = $volunteer->social_links;
         $comments = Comment::orderBy('created_at','asc')
             ->where('app_kind', 'volunteer')
             ->where('app_id', $volunteer->id)->get();
@@ -114,7 +113,7 @@ class AppVolunteerController extends Controller
         if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
             return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
-        $social_links = json_decode($volunteer->social_links);
+        $social_links = $volunteer->social_links;
         return view('pages.volunteer.edit', compact('volunteer', 'social_links'));
     }
 

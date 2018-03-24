@@ -18,7 +18,8 @@ class AppVolunteer extends Model
         'birthday',
         'city',
         'phone',
-        'photo'
+        'photo',
+        'social_links'
     ];
 
     protected $table = 'app_volunteers';
@@ -27,4 +28,8 @@ class AppVolunteer extends Model
     {
         return $this->hasOne(Profile::class, 'user_id', 'user_id');
     }
+
+    protected $casts = [
+        'social_links' => 'array',
+    ];
 }

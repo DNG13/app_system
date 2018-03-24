@@ -57,7 +57,7 @@ class StoreAction extends Action
         $volunteer->birthday = $request->get('birthday');
         $volunteer->phone = $request->get('phone');
         $volunteer->city = $request->get('city');
-        $volunteer->social_links = json_encode($request['social_links']);
+        $volunteer->social_links = $request['social_links'];
         $volunteer->skills = $request->get('skills');
         $volunteer->difficulties = $request->get('difficulties');
         $volunteer->experience = $request->get('experience');

@@ -49,7 +49,7 @@
                             <th><p>Дата подачи</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Дата обновления</p> <a href="{{ $sort['updated_at']['link'] }}"><i class="fa {{ $sort['updated_at']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Ник</p> <a href="{{ $sort['nickname']['link'] }}"><i class="fa {{ $sort['nickname']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Телефон</p> <a href="{{ $sort['phone']['link'] }}"><i class="fa {{ $sort['phone']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Telegram</p> <i class="fa fa-telegram fa-2x" aria-hidden="true"></i></th>
                             <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Возможные затруднения</p> <a href="{{ $sort['difficulties']['link'] }}"><i class="fa {{ $sort['difficulties']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Дата роджения</p> <a href="{{ $sort['birthday']['link'] }}"><i class="fa {{ $sort['birthday']['icon'] }}" aria-hidden="true"></i></a></th>
@@ -73,7 +73,7 @@
                                 <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>
                                 <td>{{ date('j/n/Y H:i', strtotime($application->updated_at )) }}</td>
                                 <td>{{ $application->nickname }}</td>
-                                <td>{{ $application->phone }}</td>
+                                <td>{{ $application->social_links['tg']}}</td>
                                 <td>{{ $application->city }}</td>
                                 <td>{{ $application->difficulties }}</td>
                                 <td>{{ date('j/n/Y', strtotime($application->birthday )) }}</td>
