@@ -137,7 +137,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                <label for="comment" class="col-md-4 control-label">Коментарий</label>
+                                <label for="comment" class="col-md-4 control-label">Примечания</label>
                                 <div class="col-md-8">
                                     <textarea  id="comment" rows="5" class="form-control" name="comment"  autofocus>{{ old('comment') }}</textarea>
 

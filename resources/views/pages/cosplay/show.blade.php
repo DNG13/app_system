@@ -85,7 +85,7 @@
 
                         @if(!$cosplay->comment==null)
                             <div>
-                                <label for="comment" class="col-md-4">Коментарий</label>
+                                <label for="comment" class="col-md-4">Примечания</label>
                                 <div class="col-md-8">
                                     <p  id="comment">{{ $cosplay->comment }}</p>
                                 </div>
