@@ -68,14 +68,14 @@ class AppCosplayController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
     public function create()
     {
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
-        return view('pages.cosplay.create', ['types' => $types]);
+        $tempId = 'temp_' . Auth::user()->id . '_' . gmdate('Y-m-d H:i:s') . '' . uniqid();
+        return view('pages.cosplay.create', ['types' => $types, 'tempId' => $tempId]);
     }
 
     /**
@@ -125,11 +125,13 @@ class AppCosplayController extends Controller
         if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
            return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
+        $files = AppFile::where('app_kind', 'cosplay')
+            ->where('app_id', $cosplay->id)->get();
         $types = AppType::where('app_type', 'cosplay')->get()->pluck('title', 'id');
         $members = json_decode($cosplay->members);
         $count = 0;
 
-        return view('pages.cosplay.edit', compact('types', 'cosplay', 'members', 'count'));
+        return view('pages.cosplay.edit', compact('types', 'cosplay', 'members', 'count', 'files'));
     }
 
     /**

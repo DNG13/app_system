@@ -55,9 +55,7 @@ class RegisterController extends Controller
             'birthday' => 'required|date',
             'phone' => 'required|string|max:64',
             'city' => 'required|string|max:100',
-            'social_links' => '',
-            'info' => '',
-            'fb'=>'',
+            'social_links' => ''
         ]);
     }
 

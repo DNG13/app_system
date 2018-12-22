@@ -9,9 +9,9 @@
                     <div class="panel-heading">Новая заявка косплей-шоу</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ url('/cosplay/store')}}">
+                        <form class="form-horizontal" method="POST" action="{{ url('/cosplay/store')}}" id="mainForm">
                             {{ csrf_field() }}
-
+                            <input type="hidden" name="temp_id" value="{{$tempId}}">
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                                 <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
@@ -61,7 +61,7 @@
                             <div class="form-group{{ $errors->has('fandom') ? ' has-error' : '' }}">
                                 <label for="fandom" class="col-md-4 control-label">Источник (фендом)</label>
                                 <div class="col-md-8">
-                                    <input id="fandom" type="text" class="form-control" name="fandom" value="{{ old('fandom') }}" required autofocus>
+                                    <input id="fandom" type="text" class="form-control" name="fandom" value="{{ old('fandom') }}" required autofocus placeholder="Используйте кириллицу только в том случае, если это оригинальное название источника">
 
                                     @if ($errors->has('fandom'))
                                         <span class="help-block">
@@ -171,9 +171,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Дата рождения</label>
+                                        <label  class="col-md-4 control-label">Возраст (полных лет)</label>
                                         <div class="col-md-3">
-                                            <input type="date" min='1899-01-01' max="{{date("Y-d-m")}}" name="members[0][birthday]" class="form-control name_list" required/>
+                                            <input type="number" step="1" min="0" max="150" name="members[0][age]" class="form-control name_list" required/>
                                         </div>
                                         <div class="col-md-5"></div>
                                     </div>
@@ -186,18 +186,50 @@
                                     <button type="button" name="add" id="add" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-info">
-                                        Отправить
-                                    </button>
-                                    <p>Нажимая кнопку “Отправить” Вы подтверждаете, что ознакомились с <a href="http://khanifest.com/?page_id=346">правилами фестиваля</a></p>
-                                </div>
-                            </div>
                         </form>
 
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Прикрепить файлы</div>
+                            <div class="panel-body">
+                                <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
+                                    <i class="fa fa-file" aria-hidden="true"></i> Технические ограничения
+                                </button>
+                                <div id="filter-panel" class="collapse filter-panel">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li>размеры файлов не более 20 мегабайт</li>
+                                                <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
+                                                <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
+                                                <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
+                                                <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form action="{{ url('/upload') }}" enctype="multipart/form-data" method="post" class="dropzone" id="my-awesome-dropzone">
+                                    {{ csrf_field() }}
+                                    <div class="dz-message" data-dz-message><span>Кликните здесь мышью или перенесите файлы, чтобы загрузить</span></div>
+                                    <input type="hidden" name="app_kind" value="cosplay">
+                                    <input type="hidden" name="temp_id" value="{{$tempId}}">
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-success" onclick="submitForm()">
+                                    Отправить
+                                </button>
+                                <p>Нажимая кнопку “Отправить” Вы подтверждаете, что ознакомились с <a href="http://khanifest.com/?page_id=346">правилами фестиваля</a> и даёте согласие на обработку данных оргкомитетом фестиваля.</p>
+                            </div>
+                        </div>
+
                         <script type="text/javascript">
+                            function submitForm() {
+                                $('#mainForm').submit();
+                            }
+
                             $(document).ready(function(){
                                 var postURL = "<?php echo url('cosplay/create'); ?>";
                                 var i=1;
@@ -225,9 +257,9 @@
                                             '</div>' +
                                         '</div>' +
                                         '<div class="form-group">' +
-                                            '<label  class="col-md-4 control-label">Дата рождения</label>' +
+                                            '<label  class="col-md-4 control-label">Возраст (полных лет)</label>' +
                                             '<div class="col-md-3">' +
-                                                '<input type="date"  min="1899-01-01" max="Date()" name="members['+i+'][birthday]" class="form-control name_list" required/>' +
+                                                '<input type="number" step="1" min="0" max="150" name="members['+i+'][age]" class="form-control name_list" required/>' +
                                             '</div>'+
                                             '<div class="col-md-1">'+
                                                 '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"><i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
@@ -240,15 +272,6 @@
                                 $(document).on('click', '#btn_remove', function(){
                                     $(this).closest('.members').remove();
                                     i--;
-                                });
-
-                                $('#submit').click(function(){
-                                    $.ajax({
-                                        url:postURL,
-                                        method:"POST",
-                                        data:$('#add_name').serialize(),
-                                        type:'json'
-                                    });
                                 });
                             });
                         </script>

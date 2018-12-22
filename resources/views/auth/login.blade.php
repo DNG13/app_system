@@ -28,23 +28,6 @@
                             </div>
                         @else
 
-                        <div class="form-group">
-                            <label for="email" class="col-md-4 control-label"></label>
-                            <div class="col-md-6">
-                                <a class="btn btn-info btn-sm form-control" href="{{ url('auth/facebook')}}" title="Войти через facebook" >
-                                    <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="position: absolute; left: 30px;">
-                                    </i> Войти через Facebook
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email" class="col-md-4 control-label"></label>
-                            <div class="col-md-6" style="text-align: center;">
-                                <label>ИЛИ</label>
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail </label>
 

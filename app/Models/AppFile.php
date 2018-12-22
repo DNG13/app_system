@@ -10,5 +10,5 @@ class AppFile extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['app_id',  'link', 'type', 'name'];
+    protected $fillable = ['app_id',  'link', 'type', 'name', 'temp_id'];
 }

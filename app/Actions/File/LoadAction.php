@@ -9,7 +9,9 @@ use App\Models\AppPress;
 use App\Models\AppVolunteer;
 use App\Models\AppCosplay;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 
 class LoadAction extends Action
 {
@@ -19,10 +21,31 @@ class LoadAction extends Action
 
     }
 
-    public function run($file, $app_kind, $app_id)
+    public function run(Request $request)
     {
+        $file = $request->file('file');
+
+        if(!$file) {
+            return false;
+        }
+
+        $app_kind = $request->get('app_kind');
+        $app_id = $request->get('app_id');
+        if (!$app_id) {
+            $temp_id = $request->get('temp_id', null);
+            if (!$temp_id) {
+                return false;
+            }
+            $user_id = Auth::user()->id;
+        }
         $fileName =  preg_replace("/[^-._a-z0-9]/i","_", $this->rus2translit($file->getClientOriginalName()));
-        $path = 'uploads/file/' . $app_kind . '/' . $app_id;
+
+        if ($app_id) {
+            $path = 'uploads/file/' . $app_kind . '/app_' . $app_id;
+        } else {
+            $path = 'uploads/file/' . $app_kind . '/user_' . $user_id;
+        }
+
         $filePath = storage_path( $path ).'/' . $fileName;
         $mime = $file->getMimeType();
 
@@ -39,6 +62,7 @@ class LoadAction extends Action
         $appFile = new AppFile;
         $appFile->name = $fileName;
         $appFile->app_id = $app_id;
+        $appFile->temp_id = $temp_id ?? null;
         $appFile->app_kind = $app_kind;
         $appFile->link = $path . '/' . $fileName;
 
@@ -60,7 +84,12 @@ class LoadAction extends Action
                 });
             }
 
-            $thumbnailLink = 'uploads/thumbnails/' . $app_kind . '/' . $app_id;
+            if ($app_id) {
+                $thumbnailLink = 'uploads/thumbnails/' . $app_kind . '/app_' . $app_id;
+            } else {
+                $thumbnailLink = 'uploads/thumbnails/' . $app_kind . '/user_' . $user_id;
+            }
+
             $thumbnailPath = storage_path($thumbnailLink);
 
             if (!file_exists($thumbnailPath)) {
@@ -80,18 +109,21 @@ class LoadAction extends Action
         }
         $appFile->thumbnail_link = $thumbnailLink;
         $appFile->save();
-        if( $app_kind == 'cosplay' ) {
-            $app = AppCosplay::where('id',  $app_id)->first();
-        } elseif( $app_kind == 'fair' ) {
-            $app = AppFair::where('id',  $app_id)->first();
-        } elseif( $app_kind == 'press' ) {
-            $app = AppPress::where('id',  $app_id)->first();
-            $mail['title'] = $app->media_name;
-        } elseif( $app_kind == 'volunteer' ) {
-            $app = AppVolunteer::where('id',  $app_id)->first();
+
+        if ($app_id) {
+            if( $app_kind == 'cosplay' ) {
+                $app = AppCosplay::where('id',  $app_id)->first();
+            } elseif( $app_kind == 'fair' ) {
+                $app = AppFair::where('id',  $app_id)->first();
+            } elseif( $app_kind == 'press' ) {
+                $app = AppPress::where('id',  $app_id)->first();
+                $mail['title'] = $app->media_name;
+            } elseif( $app_kind == 'volunteer' ) {
+                $app = AppVolunteer::where('id',  $app_id)->first();
+            }
+            $app->updated_at = Carbon::now();
+            $app->save();
         }
-        $app->updated_at = Carbon::now();
-        $app->save();
     }
 
     /**

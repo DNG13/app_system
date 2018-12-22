@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Косплей-шоу. Подробнее</div>
+                <div class="panel-heading">Заявка на Косплей-шоу.</div>
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <div>
@@ -97,42 +97,35 @@
                             @foreach($members as $member=>$attributes)
                                 <div class="members" id="row{{ ++$count}}">
                                     <div class="col-md-12"><hr></div>
-                                    @foreach($attributes as $attribute=>$data)
-                                        @if($attribute=='surname')
-                                            <div>
-                                                <label  class="col-md-4">Фамилия</label>
-                                                <div class="col-md-8">
-                                                    <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
-                                                </div>
-                                            </div>
-                                        @elseif($attribute=='first_name')
-                                            <div>
-                                                <label  class="col-md-4">Имя</label>
-                                                <div class="col-md-8">
-                                                    <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
-                                                </div>
-                                            </div>
-                                        @elseif($attribute=='character')
-                                            <div>
-                                                <label  class="col-md-4">Персонаж</label>
-                                                <div class="col-md-8">
-                                                    <p  id="members[{{$count}}][character]" class="name_list">{{ $data }}</p>
-                                                </div>
-                                            </div>
-                                        @elseif($attribute=='birthday')
-                                            <div>
-                                                <label  class="col-md-4">Дата рождения</label>
-                                                <div class="col-md-8">
-                                                    <p  id="members[{{$count}}][birthday]" class="name_list">{{ date('j F, Y ', strtotime($data)) }}</p>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                    <div>
+                                        <label  class="col-md-4">Фамилия</label>
+                                        <div class="col-md-8">
+                                            <p  id="members[{{$count}}][surname]" class="name_list">{{ $attributes->surname ?? '' }}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label  class="col-md-4">Имя</label>
+                                        <div class="col-md-8">
+                                            <p  id="members[{{$count}}][first_name]" class="name_list">{{ $attributes->first_name ?? ''}}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label  class="col-md-4">Персонаж</label>
+                                        <div class="col-md-8">
+                                            <p  id="members[{{$count}}][character]" class="name_list">{{ $attributes->character ?? ''}}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label  class="col-md-4">Возраст</label>
+                                        <div class="col-md-8">
+                                            <p id="members[{{$count}}][age]" class="name_list">{{ $attributes->age ?? ''}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
                         <div>
-                            <div class="col-md-12">
+                            <div style="margin-top:15px;" class="col-md-12">
                                 <a href="/cosplay/{{ $cosplay->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
                             </div>
                         </div>
@@ -150,28 +143,6 @@
                 </div>
 
                 <div class="panel-body">
-                    <div>
-                        <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
-                            <i class="fa fa-file" aria-hidden="true"></i> Добавить файлы
-                        </button>
-                        <div id="filter-panel" class="collapse filter-panel">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li>Добавить файлы можно при редактировании заявки</li>
-                                        <li>Технические ограничения:</li>
-                                        <ul>
-                                            <li>размеры файлов не более 20 мегабайт</li>
-                                            <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
-                                            <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
-                                            <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
-                                            <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
-                                        </ul>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     @if(!count($files)==0)
                         @foreach($files as $file)
                             <div class="col-md-2" style="width: 225px; height:150px;">
@@ -188,13 +159,6 @@
                                         <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
                                     @endif
                                 </a>
-                                @if(Auth::user()->isAdmin())
-                                    <a title="Удалить" href="/file/delete?id={{ $file->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
-                                        <div class="btn btn-default">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </div>
-                                    </a>
-                                @endif
                                 <div>{{$file->name}}</div>
                             </div>
                         @endforeach
@@ -205,13 +169,19 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Комментарии заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
-                    @if(!count($comments)==0)
+                    @if(count($comments))
                         <ul class="list-group col-md-12">
                             @foreach($comments as $comment)
-                                <li class="list-group-item col-md-12"  @if($comment->role)@if($comment->role->key =='admin') style="background:beige;" @endif @endif>
+                                <li class="list-group-item col-md-12"  @if($comment->role && $comment->role->key =='admin') style="background:beige;" @endif>
                                     <div>
                                         <label for="comment" class="col-md-3" style="color:darkslategrey;">
-                                            <small style="white-space: pre-line;"> @if($comment->role)@if($comment->role->key =='admin')@if($comment->avatar)<img width="30" src="/storage/{{$comment->avatar->user_id}}/avatar"/>@endif Координатор  @endif @endif
+                                            <small style="white-space: pre-line;">
+                                                @if($comment->role && $comment->role->key =='admin')
+                                                    @if($comment->avatar)
+                                                        <img width="30" src="/storage/{{$comment->avatar->user_id}}/avatar"/>
+                                                    @endif
+                                                    Координатор
+                                                @endif
                                            {{ $comment->profile->nickname }}
                                              <br>{{ date('j/n/Y H:i', strtotime($comment->created_at ))}}</small>
                                         </label>
