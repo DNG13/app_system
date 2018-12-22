@@ -28,7 +28,9 @@ class RoleAdmin
     public function handle($request, Closure $next)
     {
         $user = $this->auth->user();
-
+        if (!$user) {
+            return redirect('login');
+        }
         if (!array_intersect($user->roles->pluck('key')->toArray(), User::ADMIN_ROLES)) {
             return redirect('home');
         }

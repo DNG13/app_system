@@ -2,6 +2,7 @@
 
 namespace App\Actions\AppCosplay;
 
+use App\Models\AppFile;
 use App\User;
 use App\Abstracts\Action;
 use App\Jobs\SendApplicationEmailJob;
@@ -41,6 +42,15 @@ class StoreAction extends Action
         $cosplays->members_count = count($members);
         $cosplays->members = json_encode($members);
         $cosplays->save();
+
+        if ($tempId = $request->get('temp_id')) {
+            $files = AppFile::where('temp_id', $tempId)->get();
+            foreach ($files as $file) {
+                $file->app_id = $cosplays->id;
+                $file->temp_id = null;
+                $file->save();
+            }
+        }
 
         $user = User::find( Auth::user()->id);
         $mail['nickname'] = $user->profile->nickname;

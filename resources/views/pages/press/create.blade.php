@@ -226,10 +226,10 @@
 
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-info">
+                                    <button type="submit" class="btn btn-success">
                                         Отправить
                                     </button>
-                                    <p>Нажимая кнопку “Отправить” Вы подтверждаете, что ознакомились с <a href="http://khanifest.com/?page_id=346">правилами фестиваля</a></p>
+                                    <p>Нажимая кнопку “Отправить” Вы подтверждаете, что ознакомились с <a href="http://khanifest.com/?page_id=346">правилами фестиваля</a> и даёте согласие на обработку данных оргкомитетом фестиваля.</p>
                                 </div>
                             </div>
                         </form>

@@ -17,9 +17,9 @@ Route::get('/user/activation/{id}/{code}', 'Auth\RegisterController@userActivati
 Route::get('auth/reactivate', 'Auth\RegisterController@userReactivation')->name('reactivate');
 Route::post('auth/reactivate/send', 'Auth\RegisterController@userReactivationSend')->name('reactivate.send');
 
-Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
-Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
-Route::post('auth/profile', 'Auth\RegisterController@profileFacebook');
+//Route::get('auth/facebook', 'Auth\RegisterController@redirectToProvider');
+//Route::get('auth/facebook/callback', 'Auth\RegisterController@handleProviderCallback');
+//Route::post('auth/profile', 'Auth\RegisterController@profileFacebook');
 Route::get('storage/{userId}/avatar', 'ProfileController@getAvatar');
 
 Auth::routes();

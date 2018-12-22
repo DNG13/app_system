@@ -15,19 +15,14 @@ use Intervention\Image\Exception\NotFoundException;
 class FileController extends Controller
 {
     /**
-     * @param UploadRequest $request
-     * @param LoadAction $action
+     * @param \App\Http\Requests\File\UploadRequest $request
+     * @param \App\Actions\File\LoadAction          $action
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function upload(UploadRequest $request, LoadAction $action)
     {
-        $file = $request->file('file');
-
-        if($file) {
-            $app_kind = $request->get('app_kind');
-            $app_id = $request->get('app_id');
-            $action->run($file, $app_kind, $app_id);
-        }
+        $action->run($request);
 
         return back();
     }
@@ -72,7 +67,7 @@ class FileController extends Controller
         }
         $file->delete();
 
-        return redirect($request->get('app_kind'). '/' . $request->get('app_id'));
+        return redirect($request->get('app_kind') . '/' . $request->get('app_id') . '/edit');
     }
 
     /**

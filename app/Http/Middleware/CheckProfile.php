@@ -32,6 +32,9 @@ class CheckProfile
     public function handle($request, Closure $next)
     {
         $user = $this->auth->user();
+        if (!$user) {
+            return redirect('login');
+        }
         if(is_null($user->profile->birthday) || is_null($user->profile->phone) || is_null($user->profile->city)) {
             return redirect('profile/edit');
         }
