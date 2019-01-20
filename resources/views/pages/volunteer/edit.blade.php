@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <label for="photo" class="col-md-4 control-label">Фото</label>
                                 <div class="col-md-8">
-                                    <img src="/storage/{{ $volunteer->id }}/volunteers" id="photo"/>
+                                    <img src="/storage/{{ $volunteer->id }}/volunteers" style="width:100%;" id="photo"/>
                                 </div>
                             </div>
 
@@ -101,15 +101,15 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                <label for="birthday" class="col-md-4 control-label">Дата рождения</label>
+                            <div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
+                                <label for="age" class="col-md-4 control-label">Возраст (полных лет)</label>
 
                                 <div class="col-md-8">
-                                    <input id="birthday" type="date" min='1899-01-01' max="{{date("Y-m-d")}}" class="form-control" name="birthday" value="{{ $volunteer->birthday}}" required autofocus>
+                                    <input id="age" type="number" min="1" max="100" class="form-control" name="age" value="{{ $volunteer->age}}" required autofocus>
 
-                                    @if ($errors->has('birthday'))
+                                    @if ($errors->has('age'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('birthday') }}</strong>
+                                        <strong>{{ $errors->first('age') }}</strong>
                                     </span>
                                     @endif
                                 </div>

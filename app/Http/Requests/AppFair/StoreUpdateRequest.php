@@ -31,6 +31,7 @@ class StoreUpdateRequest extends FormRequest
             'city' => 'required|string',
             'social_link'=>'required|string',
             'group_link'=>'',
+            'social_links' => 'array',
             'electrics' => 'nullable|string',
             'payment_type'=>'required|string|max:64',
             'description' => 'required|string',

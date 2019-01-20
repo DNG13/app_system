@@ -51,7 +51,7 @@ class UpdateAction extends Action
         $volunteer->first_name = $request->get('first_name');
 
         $volunteer->nickname = $request->get('nickname');
-        $volunteer->birthday = $request->get('birthday');
+        $volunteer->age = $request->get('age');
         $volunteer->phone = $request->get('phone');
         $volunteer->telegram = $request->get('telegram');
         $volunteer->city = $request->get('city');

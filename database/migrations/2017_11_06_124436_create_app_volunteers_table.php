@@ -24,7 +24,7 @@ class CreateAppVolunteersTable extends Migration
             $table->string('surname', 64);
 
             $table->string('nickname', 100);
-            $table->date('birthday');
+            $table->integer('age');
             $table->string('city', 100);
             $table->string('phone', 64);
             $table->string('telegram', 255);

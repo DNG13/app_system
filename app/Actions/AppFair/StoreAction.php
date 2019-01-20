@@ -26,6 +26,7 @@ class StoreAction extends Action
         $fair->contact_name = $request->get('contact_name');
         $fair->phone = $request->get('phone');
         $fair->social_link = $request->get('social_link');
+        $fair->social_links = $request->get('social_links');
         $fair->group_link = $request->get('group_link');
         $fair->city = $request->get('city');
         $fair->payment_type = $request->get('payment_type');

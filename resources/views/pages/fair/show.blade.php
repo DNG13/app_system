@@ -67,6 +67,55 @@
                             </div>
                         </div>
 
+                        @if((!empty($fair->social_links)))
+                            <div class="col-md-12"><h4>Соцсети</h4></div>
+                            <div class="col-md-12"><hr></div>
+                            @if((!empty($fair->social_links['vk'])))
+                                <div>
+                                    <label for="social_links['vk']" class="col-md-4">VK</label>
+                                    <div class="col-md-8">
+                                        <p id="social_links['vk']">{{ $fair->social_links['vk'] }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if((!empty($fair->social_links['fb'])))
+                                <div>
+                                    <label for="social_links['fb']" class="col-md-4">Facebook</label>
+                                    <div class="col-md-8">
+                                        <p id="social_links['fb']">{{ $fair->social_links['fb'] }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if((!empty($fair->social_links['insta'])))
+                                <div>
+                                    <label for="social_links['insta']" class="col-md-4">Instagram</label>
+                                    <div class="col-md-8">
+                                        <p id="social_links['insta']">{{ $fair->social_links['insta'] }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if((!empty($fair->social_links['tg'])))
+                                <div>
+                                    <label for="social_links['tg']" class="col-md-4">Telegram</label>
+                                    <div class="col-md-8">
+                                        <p id="social_links['tg']">{{ $fair->social_links['tg'] }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if((!empty($fair->social_links['tumblr'])))
+                                <div>
+                                    <label for="social_links['tumblr']" class="col-md-4">Tumbler</label>
+                                    <div class="col-md-8">
+                                        <p id="social_links['tumblr']">{{ $fair->social_links['tumblr'] }}</p>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+
                         @if((!$block->universe==null))
                             <div>
                                 <label for="block[universe]" class="col-md-4">Вселенная</label>

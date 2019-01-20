@@ -52,7 +52,7 @@
                             <th><p>Telegram</p> <i class="fa fa-telegram fa-2x" aria-hidden="true"></i></th>
                             <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Возможные затруднения</p> <a href="{{ $sort['difficulties']['link'] }}"><i class="fa {{ $sort['difficulties']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Дата роджения</p> <a href="{{ $sort['birthday']['link'] }}"><i class="fa {{ $sort['birthday']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Возраст</p> <a href="{{ $sort['age']['link'] }}"><i class="fa {{ $sort['age']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th>Действие</th>
                         </tr>
                         </thead>
@@ -76,7 +76,7 @@
                                 <td>{{ $application->telegram }}</td>
                                 <td>{{ $application->city }}</td>
                                 <td>{{ $application->difficulties }}</td>
-                                <td>{{ date('j/n/Y', strtotime($application->birthday )) }}</td>
+                                <td>{{ $application->age }}</td>
                                 <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/volunteer/{{$application->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
