@@ -20,7 +20,6 @@ class Profile extends Model
         'avatar_id',
         'first_name',
         'surname',
-        'middle_name',
         'nickname',
         'birthday',
         'city',

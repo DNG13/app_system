@@ -87,20 +87,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                                <label for="middle_name" class="col-md-4 control-label">Отчество</label>
-
-                                <div class="col-md-8">
-                                    <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ $volunteer->middle_name }}" required autofocus>
-
-                                    @if ($errors->has('middle_name'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('middle_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
                                 <label for="nickname" class="col-md-4 control-label">Никнейм</label>
 
@@ -157,6 +143,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('telegram') ? ' has-error' : '' }}">
+                                <label for="telegram" class="col-md-4 control-label">Telegram</label>
+
+                                <div class="col-md-8">
+                                    <input id="telegram"  type="text" class="form-control" name="telegram" value="{{ $volunteer->telegram }}" required autofocus>
+
+                                    @if ($errors->has('telegram'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('telegram') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('skills') ? ' has-error' : '' }}">
                                 <label for="skills" class="col-md-4 control-label">Навыки</label>
 
@@ -188,7 +188,7 @@
                             <div class="form-group{{ $errors->has('difficulties') ? ' has-error' : '' }}">
                                 <label for="difficulties" class="col-md-4 control-label">Возможные затруднения</label>
                                 <div class="col-md-8">
-                                    <textarea  id="difficulties" rows="5" class="form-control" placeholder="Например: маленький рост, плохое зрение, невозможность присутствия на каком-либо этапе подготовки/проведения фестиваля, участие в косплей-шоу и т.д." name="difficulties"  autofocus >{{ $volunteer->difficulties }}</textarea>
+                                    <textarea  id="difficulties" rows="5" class="form-control" placeholder="Например: нестабильный график работы/учебы (может сорваться волонтерство), маленький рост, плохое зрение, участие в косплей-шоу и т.д." name="difficulties"  autofocus >{{ $volunteer->difficulties }}</textarea>
 
                                     @if ($errors->has('difficulties'))
                                         <span class="help-block">
@@ -236,20 +236,6 @@
                                     @if ($errors->has('social_links->sk'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('social_links->sk') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('social_links->tg') ? ' has-error' : '' }}">
-                                <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
-
-                                <div class="col-md-8">
-                                    <input id="social_links[tg]" type="text" class="form-control" name="social_links[tg]" value="{{ $social_links['tg'] }}" autofocus>
-
-                                    @if ($errors->has('social_links->tg'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('social_links->tg') }}</strong>
                                     </span>
                                     @endif
                                 </div>

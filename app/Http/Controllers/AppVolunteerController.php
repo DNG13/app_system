@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AppVolunteer\StoreRequest;
 use App\Http\Requests\AppVolunteer\UpdateRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\AppVolunteer\ListAction;
 use App\Actions\AppVolunteer\StoreAction;
@@ -138,7 +139,7 @@ class AppVolunteerController extends Controller
     {
         $file = AppVolunteer::where('id', $id)->get()->first();
         if (!$file) {
-            throw new NotFoundException();
+            throw new ModelNotFoundException();
         }
 
         $path = storage_path($file->photo);

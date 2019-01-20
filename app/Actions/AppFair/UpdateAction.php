@@ -38,7 +38,7 @@ class UpdateAction extends Action
                 $mail['email'] = $user->email;
                 $mail['nickname'] = $user->profile->nickname;
                 $mail['title'] = $fair->group_nick;
-                $mail['page'] = '/fair/'. $fair->id;
+                $mail['page'] = '/expo/'. $fair->id;
                 $mail['status'] = $request->get('status');
                 SendStatusEmailJob::dispatch($mail)
                     ->delay(now()->addSeconds(2));
@@ -67,11 +67,11 @@ class UpdateAction extends Action
             $mail['nickname'] = 'Admin';
             $mail['email'] = 'khanifest+fair@gmail.com';
             $mail['title'] = $fair->group_nick;
-            $mail['page'] = '/fair/'. $fair->id;
+            $mail['page'] = '/expo/'. $fair->id;
             SendEditEmailJob::dispatch($mail)
                 ->delay(now()->addSeconds(2));
         }
 
-        return redirect('fair')->with('success', "Ваша заявка успешно изменена.");
+        return redirect('expo')->with('success', "Ваша заявка успешно изменена.");
     }
 }

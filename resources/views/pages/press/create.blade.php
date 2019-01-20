@@ -209,7 +209,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Обязанности на фестивале</label>
+                                        <label  class="col-md-4 control-label">Деятельность на фестивале</label>
                                         <div class="col-md-8">
                                             <input type="text" name="members[0][duty]" class="form-control name_list" required/>
                                         </div>
@@ -236,7 +236,7 @@
 
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                var postURL = "<?php echo url('fair/create'); ?>";
+                                var postURL = "<?php echo url('expo/create'); ?>";
                                 var i=1;
 
                                 $('#add').click(function(){
@@ -256,7 +256,7 @@
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Обязанности на фестивале</label>' +
+                                        '<label class="col-md-4 control-label">Деятельность на фестивале</label>' +
                                         '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +

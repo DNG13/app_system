@@ -73,7 +73,7 @@
                                 <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>
                                 <td>{{ date('j/n/Y H:i', strtotime($application->updated_at )) }}</td>
                                 <td>{{ $application->nickname }}</td>
-                                <td>{{ $application->social_links['tg']}}</td>
+                                <td>{{ $application->telegram }}</td>
                                 <td>{{ $application->city }}</td>
                                 <td>{{ $application->difficulties }}</td>
                                 <td>{{ date('j/n/Y', strtotime($application->birthday )) }}</td>

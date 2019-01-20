@@ -30,10 +30,10 @@ class UpdateRequest extends FormRequest
             'experience' => 'nullable|string',
             'surname' => 'required|string|max:64',
             'first_name' => 'required|string|max:64',
-            'middle_name' => 'required|string|max:64',
             'nickname' => 'max:64',
             'birthday' => 'required|date',
             'phone' => 'required|string|max:64',
+            'telegram' => 'required|string',
             'city' => 'required|string|max:100',
             'social_links' => '',
         ];

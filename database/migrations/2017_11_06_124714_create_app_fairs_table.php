@@ -32,7 +32,7 @@ class CreateAppFairsTable extends Migration
             $table->string('phone', 64);
             $table->string('status', 100);
             $table->text('social_link');
-            $table->text('group_link');
+            $table->text('group_link')->nullable();
             $table->json('equipment');
             $table->text('electrics')->nullable();
             $table->json('block');

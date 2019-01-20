@@ -33,12 +33,14 @@ class UpdateAction extends Action
             $img = Image::make(storage_path($imagePath));
             [$width, $height] = getimagesize(storage_path($imagePath));
             if($width <= $height) {
-                $img->resize(null, 200, function ($constraint) {
+                $img->resize(null, 1920, function ($constraint) {
                     $constraint->aspectRatio();
+                    $constraint->upsize();
                 });
             } else {
-                $img->resize(200, null, function ($constraint) {
+                $img->resize(1920, null, function ($constraint) {
                     $constraint->aspectRatio();
+                    $constraint->upsize();
                 });
             }
             $img->save();
@@ -47,10 +49,11 @@ class UpdateAction extends Action
 
         $volunteer->surname= $request->get('surname');
         $volunteer->first_name = $request->get('first_name');
-        $volunteer->middle_name = $request->get('middle_name');
+
         $volunteer->nickname = $request->get('nickname');
         $volunteer->birthday = $request->get('birthday');
         $volunteer->phone = $request->get('phone');
+        $volunteer->telegram = $request->get('telegram');
         $volunteer->city = $request->get('city');
         $volunteer->social_links = $request['social_links'];
         $volunteer->skills= $request->get('skills');

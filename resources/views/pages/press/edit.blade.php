@@ -243,7 +243,7 @@
                                                 </div>
                                             @elseif($attribute=='duty')
                                                 <div class="form-group">
-                                                    <label  class="col-md-4 control-label">Обязанности на фестивале</label>
+                                                    <label  class="col-md-4 control-label">Деятельность на фестивале</label>
                                                     <div class="col-md-7">
                                                         <input type="text" name="members[{{$count}}][duty]" class="form-control name_list" required value="{{ $data }}"/>
                                                     </div>
@@ -277,7 +277,7 @@
                         </form>
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                var postURL = "<?php echo url('fair/edit'); ?>";
+                                var postURL = "<?php echo url('expo/edit'); ?>";
                                 var i="<?php echo $count; ?>";
                                 $('#add').click(function(){
                                     $('#dynamic_field').append(
@@ -296,7 +296,7 @@
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Обязанности на фестивале</label>' +
+                                        '<label class="col-md-4 control-label">Деятельность на фестивале</label>' +
                                         '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +
