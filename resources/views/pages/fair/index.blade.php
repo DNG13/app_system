@@ -10,10 +10,10 @@
                 В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
             @endif
             <div style="padding-bottom: 25px;">
-                <a class="btn btn-info btn pull-right"  href="{{ url('/fair/create')}}">Подать заявку</a>
+                <a class="btn btn-info btn pull-right"  href="{{ url('/expo/create')}}">Подать заявку</a>
             </div>
             <div style="display: inline-block; margin-top: 5px;">
-                <form action="{{ url('/fair')}}" method="GET">
+                <form action="{{ url('/expo')}}" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="Поиск(Город, Контактное лицо, Название(Ник))" >
                         <span class="input-group-addon btn btn-default">
@@ -50,7 +50,7 @@
                     <div id="filter-panel" class="collapse filter-panel">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <form class="form-inline" action="{{ url('/fair')}}" method="POST">
+                                <form class="form-inline" action="{{ url('/expo')}}" method="POST">
                                     {{csrf_field()}}
                                     <div class="form-group">
                                         <lable>По типу</lable>
@@ -146,10 +146,10 @@
                             <td>{{ $application->city }}</td>
                             <td>{{ $application->members_count }}</td>
                             <td><div class="btn-group">
-                                    <a class="btn btn-info btn-sm" href="/fair/{{$application->id }}" title="Подробнее" >
+                                    <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}" title="Подробнее" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/fair/{{$application->id }}/edit" title="Редактировать">
+                                    <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}/edit" title="Редактировать">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                                 </div>

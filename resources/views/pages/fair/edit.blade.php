@@ -9,10 +9,10 @@
                 <div class="panel-heading">Редактирование  заявки ярмарка</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('fair.update', $fair->id) }}">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('expo.update', $fair->id) }}">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-
+                        Деятельность на фестивале
                         <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
                             <label for="type_id" class="col-md-4 control-label">Тип заявки</label>
 
@@ -116,10 +116,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('social_link') ? ' has-error' : '' }}">
-                            <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
+                            <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу</label>
 
                             <div class="col-md-8">
-                                <input id="social_link" type="text" class="form-control" name="social_link" value="{{$fair->social_link }}" required autofocus>
+                                <input id="social_link" type="text" class="form-control" name="social_link" value="{{$fair->social_link }}" placeholder="vk, fb или tg для связи с ответственным по заявке" required autofocus>
 
                                 @if ($errors->has('social_link'))
                                     <span class="help-block">
@@ -130,10 +130,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('group_link') ? ' has-error' : '' }}">
-                            <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
+                            <label for="group_link" class="col-md-4 control-label">Ссылка на сайт</label>
 
                             <div class="col-md-8">
-                                 <input  id="group_link" type="text" class="form-control" name="group_link" value="{{  $fair->group_link }}" required autofocus>
+                                 <input  id="group_link" type="text" class="form-control" name="group_link" value="{{  $fair->group_link }}" autofocus>
 
                                 @if ($errors->has('group_link'))
                                     <span class="help-block">
@@ -363,7 +363,7 @@
                                             </div>
                                         @elseif($attribute=='duty')
                                             <div class="form-group">
-                                                <label  class="col-md-4 control-label">Обязанности на фестивале</label>
+                                                <label  class="col-md-4 control-label">Деятельность на фестивале</label>
                                                 <div class="col-md-7">
                                                     <input type="text" name="members[{{$count}}][duty]" class="form-control name_list" required value="{{ $data }}"/>
                                                 </div>
@@ -398,7 +398,7 @@
 
                     <script type="text/javascript">
                         $(document).ready(function(){
-                            var postURL = "<?php echo url('fair/edit'); ?>";
+                            var postURL = "<?php echo url('expo/edit'); ?>";
                             var i="<?php echo $count; ?>";
                             $('#add').click(function(){
                                 $('#dynamic_field').append(
@@ -417,7 +417,7 @@
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Обязанности на фестивале</label>' +
+                                        '<label class="col-md-4 control-label">Деятельность на фестивале</label>' +
                                         '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +

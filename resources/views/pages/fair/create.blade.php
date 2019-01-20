@@ -9,7 +9,7 @@
                     <div class="panel-heading">Новая заявка ярмарка</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST"  enctype="multipart/form-data" action="{{ url('/fair/store')}}">
+                        <form class="form-horizontal" method="POST"  enctype="multipart/form-data" action="{{ url('/expo/store')}}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('type_id') ? ' has-error' : '' }}">
@@ -87,10 +87,10 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('social_link') ? ' has-error' : '' }}">
-                                <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу в соцсети</label>
+                                <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу</label>
 
                                 <div class="col-md-8">
-                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{ old('social_link') }}" required autofocus>
+                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{ old('social_link') }}" placeholder="vk, fb или tg для связи с ответственным по заявке" required autofocus>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">
@@ -101,10 +101,10 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('group_link') ? ' has-error' : '' }}">
-                                <label for="group_link" class="col-md-4 control-label">Ссылка на сайт или группу в соцсетях</label>
+                                <label for="group_link" class="col-md-4 control-label">Ссылка на сайт</label>
 
                                 <div class="col-md-8">
-                                    <input id="group_link" type="text" class="form-control" name="group_link" value="{{ old('group_link') }}" required autofocus>
+                                    <input id="group_link" type="text" class="form-control" name="group_link" value="{{ old('group_link') }}" autofocus>
 
                                     @if ($errors->has('group_link'))
                                         <span class="help-block">
@@ -330,7 +330,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Обязанности на фестивале</label>
+                                        <label  class="col-md-4 control-label">Деятельность на фестивале</label>
                                         <div class="col-md-8">
                                             <input type="text" name="members[0][duty]" class="form-control name_list" required/>
                                         </div>
@@ -357,7 +357,7 @@
 
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                var postURL = "<?php echo url('fair/create'); ?>";
+                                var postURL = "<?php echo url('expo/create'); ?>";
                                 var i=1;
 
                                 $('#add').click(function(){
@@ -377,7 +377,7 @@
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Обязанности на фестивале</label>' +
+                                        '<label class="col-md-4 control-label">Деятельность на фестивале</label>' +
                                         '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +

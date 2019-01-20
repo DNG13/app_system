@@ -18,6 +18,7 @@ class AppVolunteer extends Model
         'birthday',
         'city',
         'phone',
+        'telegram',
         'photo',
         'social_links'
     ];

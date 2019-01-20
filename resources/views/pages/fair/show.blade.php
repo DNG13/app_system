@@ -54,14 +54,14 @@
                         </div>
 
                         <div>
-                            <label for="social_link" class="col-md-4">Ссылка на личную страницу в соцсети</label>
+                            <label for="social_link" class="col-md-4">Ссылка на личную страницу</label>
                             <div class="col-md-8">
                                 <p id="social_link">{{ $fair->social_link }}</p>
                             </div>
                         </div>
 
                         <div>
-                            <label for="group_link" class="col-md-4">Ссылка на сайт или группу в соцсетях</label>
+                            <label for="group_link" class="col-md-4">Ссылка на сайт</label>
                             <div class="col-md-8">
                                 <p id="group_link">{{ $fair->group_link }}</p>
                             </div>
@@ -194,7 +194,7 @@
                                             </div>
                                         @elseif($attribute=='duty')
                                             <div>
-                                                <label  class="col-md-4">Обязанности на фестивале</label>
+                                                <label  class="col-md-4">Деятельность на фестивале</label>
                                                 <div class="col-md-8">
                                                     <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
                                                 </div>
@@ -207,7 +207,7 @@
 
                         <div>
                             <div class="col-md-12">
-                                <a href="/fair/{{ $fair->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
+                                <a href="/expo/{{ $fair->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
                             </div>
                         </div>
 

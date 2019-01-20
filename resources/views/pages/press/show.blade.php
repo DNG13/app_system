@@ -146,7 +146,7 @@
                                                 </div>
                                             @elseif($attribute=='duty')
                                                 <div>
-                                                    <label  class="col-md-4">Обязанности на фестивале</label>
+                                                    <label  class="col-md-4">Деятельность на фестивале</label>
                                                     <div class="col-md-8">
                                                         <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
                                                     </div>

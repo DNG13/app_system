@@ -56,7 +56,7 @@ class StoreAction extends Action
         $mail['email'] = $user->email;
         $mail['nickname'] = $user->profile->nickname;
         $mail['title'] = $fair->group_nick;
-        $mail['page'] = '/fair/'. $fair->id;
+        $mail['page'] = '/expo/'. $fair->id;
         SendApplicationEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
         $mail['email'] = 'khanifest+fair@gmail.com';
@@ -64,6 +64,6 @@ class StoreAction extends Action
         SendForAdminNewAppEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
 
-        return redirect('fair')->with('success', "Ваша заявка успешно отправлена.");
+        return redirect('expo')->with('success', "Ваша заявка успешно отправлена.");
     }
 }

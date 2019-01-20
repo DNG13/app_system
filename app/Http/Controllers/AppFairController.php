@@ -94,7 +94,7 @@ class AppFairController extends Controller
     {
         $fair = AppFair::where('id', $id)->first();
         if( is_null($fair) || ($fair->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
-            return redirect('fair');
+            return redirect('expo');
         }
         $files = AppFile::where('app_kind', 'fair')
             ->where('app_id', $fair->id)->get();
@@ -119,10 +119,10 @@ class AppFairController extends Controller
     {
         $fair = AppFair::where('id', $id)->first();
         if( is_null($fair) || ($fair->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
-            return redirect('fair');
+            return redirect('expo');
         }
         if($fair->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('fair')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+            return redirect('expo')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $block = json_decode($fair->block);

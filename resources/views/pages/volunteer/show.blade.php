@@ -14,7 +14,7 @@
                             <div>
                                 <label for="photo" class="col-md-4">Фото</label>
                                 <div class="col-md-8">
-                                    <img src="/storage/{{ $volunteer->id }}/volunteers" id="photo" name="photo"/>
+                                    <img src="/storage/{{ $volunteer->id }}/volunteers" id="photo" name="photo" class="img-fluid" style="width:100%;" alt="Responsive image"/>
                                 </div>
                             </div>
 
@@ -29,13 +29,6 @@
                                 <label for="first_name" class="col-md-4">Имя</label>
                                 <div class="col-md-8">
                                     <p id="first_name">{{ $volunteer->first_name }}</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="middle_name" class="col-md-4">Отчество</label>
-                                <div class="col-md-8">
-                                    <p id="middle_name">{{ $volunteer->middle_name }}</p>
                                 </div>
                             </div>
 
@@ -75,6 +68,13 @@
                             </div>
 
                             <div>
+                                <label for="phone" class="col-md-4">Telegram</label>
+                                <div class="col-md-8">
+                                    <p id="phone"> {{ $volunteer->telegram }}</p>
+                                </div>
+                            </div>
+
+                            <div>
                                 <label for="skills" class="col-md-4">Навыки</label>
                                 <div class="col-md-8">
                                     <p id="skills">{{ $volunteer->skills}}</p>
@@ -98,11 +98,12 @@
                                     </div>
                                 </div>
                             @endif
-                            @if(!is_null($social_links))
+                            @if(!empty($social_links))
                                 <div class="col-md-12"><h4>Соцсети</h4></div>
                                 <div class="col-md-12"><hr></div>
                             @endif
-                            @if(is_null($social_links['vk']))
+
+                            @if(!empty($social_links['vk']))
                                 <div>
                                     <label for="social_links[vk]" class="col-md-4">VK</label>
                                     <div class="col-md-8">
@@ -111,7 +112,7 @@
                                 </div>
                             @endif
 
-                            @if(!is_null($social_links['fb']))
+                            @if(!empty($social_links['fb']))
                                 <div>
                                     <label for="social_links[fb]" class="col-md-4">Facebook</label>
                                     <div class="col-md-8">
@@ -120,20 +121,11 @@
                                 </div>
                             @endif
 
-                            @if(!is_null($social_links['sk']))
+                            @if(!empty($social_links['sk']))
                                 <div>
                                     <label for="social_links[sk]" class="col-md-4">Skype</label>
                                     <div class="col-md-8">
                                         <p id="social_links[sk]"> {{ $social_links['sk'] }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(!is_null($social_links['tg']))
-                                <div>
-                                    <label for="social_links[tg]" class="col-md-4">Telegram</label>
-                                    <div class="col-md-8">
-                                        <p id="social_links[tg]">{{ $social_links['tg'] }}</p>
                                     </div>
                                 </div>
                             @endif
