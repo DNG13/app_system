@@ -98,14 +98,13 @@ class AppPressController extends Controller
         }
         $files = AppFile::where('app_kind', 'press')
             ->where('app_id', $press->id)->get();
-        $social_links = json_decode($press->social_links);
         $comments = Comment::orderBy('created_at','asc')
             ->where('app_kind', 'press')
             ->where('app_id', $press->id)->get();
         $members = json_decode($press->members);
         $count = 0;
 
-        return view('pages.press.show', compact('press', 'files', 'social_links', 'comments', 'members', 'count'));
+        return view('pages.press.show', compact('press', 'files', 'comments', 'members', 'count'));
     }
 
     /**
@@ -124,11 +123,10 @@ class AppPressController extends Controller
             return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
         }
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
-        $social_links = json_decode($press->social_links);
         $members = json_decode($press->members);
         $count = 0;
 
-        return view('pages.press.edit', compact('types', 'press', 'social_links', 'members', 'count'));
+        return view('pages.press.edit', compact('types', 'press', 'members', 'count'));
     }
 
     /**

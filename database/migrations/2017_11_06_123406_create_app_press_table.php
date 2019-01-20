@@ -33,6 +33,7 @@ class CreateAppPressTable extends Migration
             $table->string('city', 100);
             $table->string('status', 100);
             $table->string('phone', 64);
+            $table->text('social_link');
             $table->json('social_links');
             $table->string('camera', 100);
             $table->text('equipment');

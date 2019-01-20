@@ -53,6 +53,63 @@
                                 </div>
                             </div>
 
+                            <div>
+                                <label for="social_link" class="col-md-4">Ссылка на личную страницу</label>
+                                <div class="col-md-8">
+                                    <p id="social_link">{{ $press->social_link }}</p>
+                                </div>
+                            </div>
+
+                            @if((!empty($press->social_links)))
+                                <div class="col-md-12"><h4>Соцсети</h4></div>
+                                <div class="col-md-12"><hr></div>
+                                @if((!empty($press->social_links['vk'])))
+                                    <div>
+                                        <label for="social_links['vk']" class="col-md-4">VK</label>
+                                        <div class="col-md-8">
+                                            <p id="social_links['vk']">{{ $press->social_links['vk'] }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if((!empty($press->social_links['fb'])))
+                                    <div>
+                                        <label for="social_links['fb']" class="col-md-4">Facebook</label>
+                                        <div class="col-md-8">
+                                            <p id="social_links['fb']">{{ $press->social_links['fb'] }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if((!empty($press->social_links['insta'])))
+                                    <div>
+                                        <label for="social_links['insta']" class="col-md-4">Instagram</label>
+                                        <div class="col-md-8">
+                                            <p id="social_links['insta']">{{ $press->social_links['insta'] }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if((!empty($press->social_links['tg'])))
+                                    <div>
+                                        <label for="social_links['tg']" class="col-md-4">Telegram</label>
+                                        <div class="col-md-8">
+                                            <p id="social_links['tg']">{{ $press->social_links['tg'] }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if((!empty($press->social_links['tumblr'])))
+                                    <div>
+                                        <label for="social_links['tumblr']" class="col-md-4">Tumbler</label>
+                                        <div class="col-md-8">
+                                            <p id="social_links['tumblr']">{{ $press->social_links['tumblr'] }}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-md-12"><hr></div>
+                            @endif
+
                             @if(!$press->prev_part==null)
                                 <div>
                                     <label for="prev_part" class="col-md-4">Предыдущее участие</label>
@@ -82,47 +139,6 @@
                                     <p id="equipment">{{ $press->equipment }}</p>
                                 </div>
                             </div>
-
-                            @if(!$social_links->vk==null||!$social_links->fb==null||!$social_links->fb==null||!$social_links->sk==null||!($social_links->tg)==null)
-                                <div class="col-md-12"><h4>Соцсети</h4></div>
-                                <div class="col-md-12"><hr></div>
-                            @endif
-
-                            @if(!$social_links->vk==null)
-                                <div>
-                                    <label for="social_links[vk]" class="col-md-4">VK</label>
-                                    <div class="col-md-8">
-                                        <p id="social_links[vk]"> {{ $social_links->vk}}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(!$social_links->fb==null)
-                                <div>
-                                    <label for="social_links[fb]" class="col-md-4">Facebook</label>
-                                    <div class="col-md-8">
-                                        <p id="social_links[fb]"> {{$social_links->fb }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(!$social_links->sk==null)
-                                <div>
-                                    <label for="social_links[sk]" class="col-md-4">Skype</label>
-                                    <div class="col-md-8">
-                                        <p id="social_links[sk]"> {{ $social_links->fb }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(!($social_links->tg)==null)
-                                <div>
-                                    <label for="social_links[tg]" class="col-md-4">Telegram</label>
-                                    <div class="col-md-8">
-                                        <p id="social_links[tg]">{{ $social_links->tg }}</p>
-                                    </div>
-                                </div>
-                            @endif
 
                             <div class="col-md-12"><h4>Участники</h4></div>
                             <div id="dynamic_field">
@@ -190,7 +206,7 @@
                                             <li>размеры файлов не более 20 мегабайт</li>
                                             <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
                                             <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
-                                            <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>30 Апреля 2018</b>!</li>
+                                            <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>21 Апреля 2019</b>!</li>
                                             <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
                                         </ul>
                                     </ul>

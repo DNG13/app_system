@@ -25,6 +25,7 @@ class StoreAction extends Action
         $press->media_name = $request->get('media_name');
         $press->contact_name = $request->get('contact_name');
         $press->phone = $request->get('phone');
+        $press->social_link = $request->get('social_link');
         $press->prev_part = $request->get('prev_part');
         $press->equipment = $request->get('equipment');
         $press->portfolio_link = $request->get('portfolio_link');
@@ -38,7 +39,7 @@ class StoreAction extends Action
         }
         $press->members_count = count($members);
         $press->members = json_encode($members);
-        $press->social_links = json_encode($request['social_links']);
+        $press->social_links = $request->get('social_links', []);
         $press->save();
 
         $user = User::find( Auth::user()->id);
