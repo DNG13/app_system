@@ -47,9 +47,9 @@
                             </div>
 
                             <div>
-                                <label for="birthday" class="col-md-4">Дата рождения</label>
+                                <label for="age" class="col-md-4">Возраст</label>
                                 <div class="col-md-8">
-                                    <p id="birthday"> {{ $volunteer->birthday }}</p>
+                                    <p id="age"> {{ $volunteer->age }}</p>
                                 </div>
                             </div>
 

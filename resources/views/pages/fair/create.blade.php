@@ -116,6 +116,86 @@
 
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#social-panel" >
+                                        Соцсети (нажмите для заполнения)
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="social-panel" class="collapse social-panel">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+
+                                        <div class="form-group{{ $errors->has('social_links[vk]') ? ' has-error' : '' }}">
+                                            <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
+                                            <div class="col-md-8">
+                                                <input id="social_links[vk]" type="text" value="{{ old('social_links[vk]') }}"
+                                                          class="form-control" name="social_links[vk]" autofocus>
+                                                @if ($errors->has('social_links[vk]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('social_links[vk]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('social_links[fb]') ? ' has-error' : '' }}">
+                                            <label for="social_links[fb]" class="col-md-4 control-label">Facebook</label>
+                                            <div class="col-md-8">
+                                                <input id="social_links[fb]" type="text" value="{{ old('social_links[fb]') }}"
+                                                          class="form-control" name="social_links[fb]" autofocus>{{ old('social_links[fb]') }}
+                                                @if ($errors->has('social_links[fb]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('social_links[fb]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('social_links[insta]') ? ' has-error' : '' }}">
+                                            <label for="social_links[insta]" class="col-md-4 control-label">Instagram</label>
+                                            <div class="col-md-8">
+                                                <input id="social_links[insta]" type="text" value="{{ old('social_links[insta]') }}"
+                                                          class="form-control" name="social_links[insta]" autofocus>{{ old('social_links[insta]') }}
+                                                @if ($errors->has('social_links[insta]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('social_links[insta]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('social_links[tg]') ? ' has-error' : '' }}">
+                                            <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
+                                            <div class="col-md-8">
+                                                <input id="social_links[tg]" type="text" value="{{ old('social_links[tg]') }}"
+                                                          class="form-control" name="social_links[tg]" autofocus>{{ old('social_links[tg]') }}
+                                                @if ($errors->has('social_links[tg]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('social_links[tg]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('social_links[tumblr]') ? ' has-error' : '' }}">
+                                            <label for="social_links[tumblr]" class="col-md-4 control-label">Tumbler</label>
+                                            <div class="col-md-8">
+                                                <input id="social_links[tumblr]" type="text" value="{{ old('social_links[tumblr]') }}"
+                                                          class="form-control" name="social_links[tumblr]" autofocus>{{ old('social_links[tumblr]') }}
+                                                @if ($errors->has('social_links[tumblr]'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('social_links[tumblr]') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
                                     <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter-panel" >
                                         Блок для стендов, игрозоны и фудкорта(нажмите для заполнения)
                                     </button>

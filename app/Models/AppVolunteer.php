@@ -15,7 +15,7 @@ class AppVolunteer extends Model
         'first_name',
         'surname',
         'nickname',
-        'birthday',
+        'age',
         'city',
         'phone',
         'telegram',

@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
             'surname' => 'required|string|max:64',
             'first_name' => 'required|string|max:64',
             'nickname' => 'max:64',
-            'birthday' => 'required|date',
+            'age' => 'required|integer',
             'phone' => 'required|string|max:64',
             'telegram' => 'required|string',
             'city' => 'required|string|max:100',

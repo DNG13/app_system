@@ -17,11 +17,16 @@ class AppFair extends Model
         'social_link',
         'group_link',
         'group_nick',
+        'social_links',
         'equipment',
         'block',
         'payment_type',
         'status',
         'electrics',
+    ];
+
+    protected $casts = [
+        'social_links' => 'array'
     ];
 
     protected $table = 'app_fairs';

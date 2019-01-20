@@ -27,6 +27,7 @@ class UpdateAction extends Action
         $fair->city = $request->get('city');
         $fair->phone = $request->get('phone');
         $fair->social_link = $request->get('social_link');
+        $fair->social_links = $request->get('social_links');
         $fair->group_link = $request->get('group_link');
         $fair->payment_type = $request->get('payment_type');
         $fair->description = $request->get('description');

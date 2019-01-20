@@ -55,7 +55,7 @@ class StoreAction extends Action
             $volunteer->photo= $imagePath;
         }
 
-        $volunteer->birthday = $request->get('birthday');
+        $volunteer->age = $request->get('age');
         $volunteer->phone = $request->get('phone');
         $volunteer->telegram = $request->get('telegram');
         $volunteer->city = $request->get('city');
