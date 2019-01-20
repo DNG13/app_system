@@ -11,6 +11,7 @@ class AppPress extends Model
         'type_id',
         'phone',
         'contact_name',
+        'social_link',
         'social_links',
         'group_link',
         'members_count',
@@ -22,6 +23,10 @@ class AppPress extends Model
         'portfolio_link',
         'status',
 
+    ];
+
+    protected $casts = [
+        'social_links' => 'array'
     ];
 
     protected $table = 'app_press';
