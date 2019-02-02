@@ -65,6 +65,6 @@ class CreateAction extends Action
         $kind = $comment->app_kind;
         $kind = ($kind == 'fair') ? 'expo' : $kind;
 
-        return redirect($kind .'/'. $comment->app_id);
+        return redirect($kind .'/'. $comment->app_id . '#footer');
     }
 }

@@ -32,6 +32,6 @@ class CommentController extends Controller
         $kind = $request->get('app_kind');
         $kind = ($kind == 'fair') ? 'expo' : $kind;
 
-        return redirect($kind. '/' . $request->get('app_id'));
+        return redirect($kind. '/' . $request->get('app_id') . '#footer');
     }
 }
