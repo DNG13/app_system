@@ -28,7 +28,7 @@ class CommentController extends Controller
     {
         $id = $request->get('id');
         Comment::where('id', $id)->delete();
-        
+
         $kind = $request->get('app_kind');
         $kind = ($kind == 'fair') ? 'expo' : $kind;
 
