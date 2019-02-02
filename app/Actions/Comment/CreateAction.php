@@ -61,6 +61,10 @@ class CreateAction extends Action
         SendCommentEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
 
-        return redirect($comment->app_kind .'/'. $comment->app_id);
+
+        $kind = $comment->app_kind;
+        $kind = ($kind == 'fair') ? 'expo' : $kind;
+
+        return redirect($kind .'/'. $comment->app_id);
     }
 }
