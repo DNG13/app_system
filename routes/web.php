@@ -35,6 +35,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('press', 'AppPressController', ['except' => ['index',  'store', 'destroy']])->middleware('check.profile');
     Route::match(['get', 'post'],'expo', 'AppFairController@index')->name('expo.index');
     Route::post('expo/store', 'AppFairController@store');
+    Route::get('fair/{id}', function ($id) {
+        return redirect('expo/'.$id);
+    });
+    Route::get('fair', function () {
+        return redirect('expo');
+    });
     Route::resource('expo', 'AppFairController', ['except' => ['index', 'store', 'destroy']])->middleware('check.profile');
     Route::resource('volunteer', 'AppVolunteerController', ['except' => 'destroy'])->middleware('check.profile');
     Route::post('/comment/create', 'CommentController@create');
