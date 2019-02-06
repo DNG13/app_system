@@ -7,7 +7,9 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка волонтерство</strong></h4>
             @if(Auth::user()->isAdmin())
-                В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
+                В обработке: {{$count['processing']}} <br>
+                Принято: {{$count['accepted']}} <br>
+                Отклонено: {{$count['rejected']}}
             @endif
             <div style="padding-bottom: 25px;">
                 <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a>
