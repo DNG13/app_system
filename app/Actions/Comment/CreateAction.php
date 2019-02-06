@@ -44,7 +44,9 @@ class CreateAction extends Action
             $mail['title'] = $app->nickname;
         }
         $user = User::find($app->user_id);
-        $mail['page'] = '/' . $comment->app_kind. '/'. $comment->app_id;
+        $kind = $comment->app_kind;
+        $kind = ($kind == 'fair') ? 'expo' : $kind;
+        $mail['page'] = '/' . $kind. '/'. $comment->app_id;
         $mail['text'] = $comment->text;
         if (Auth::user()->isAdmin()) {
             $mail['nickname'] = $user->profile->nickname;
