@@ -129,10 +129,10 @@
                     <tbody>
                     @foreach($applications as $application)
                         <tr class="odd" style="{{
-                        $application->status == "Отклонена" ? 'background-color: #e6d0d8' :
-                        ($application->status == "Принята" ? 'background-color: #d4e6d0' :
-                        ($application->status == "Ожидает ответа пользователя" ? 'background-color: #f8f9c5' :
-                        ($application->status == "Внесены изменения" ? 'background-color: #b2e7fb' : '')))
+                        $application->status == "Отклонена" ? 'background-color: #f5ebee' :
+                        ($application->status == "Принята" ? 'background-color: #dcedc8' :
+                        ($application->status == "Ожидает ответа пользователя" ? 'background-color: #f5f5c4' :
+                        ($application->status == "Внесены изменения" ? 'background-color: #e1f5f5' : '')))
                         }}">
                             <td>{{ $application->id }}</td>
                             <td>
