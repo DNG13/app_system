@@ -126,7 +126,12 @@
                     </thead>
                     <tbody>
                     @foreach($applications as $application)
-                        <tr class="odd">
+                        <tr class="odd" style="{{
+                        $application->status == "Отклонена" ? 'background-color: #e6d0d8' :
+                        ($application->status == "Принята" ? 'background-color: #d4e6d0' :
+                        ($application->status == "Ожидает ответа пользователя" ? 'background-color: #f8f9c5' :
+                        ($application->status == "Внесены изменения" ? 'background-color: #b2e7fb' : '')))
+                        }}">
                             <td>{{ $application->id }}</td>
                             <td>
                                 @if(Auth::user()->isAdmin())
