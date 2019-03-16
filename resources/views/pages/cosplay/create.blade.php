@@ -48,7 +48,7 @@
                                 <label for="title" class="col-md-4 control-label">Название постановки</label>
 
                                 <div class="col-md-8">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="для одиночного и парного дефиле - имена персонажей, а для k-pop, танца и караоке - название трека" required autofocus>
 
                                     @if ($errors->has('title'))
                                         <span class="help-block">
