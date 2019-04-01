@@ -121,6 +121,7 @@
                         <th><p>Контактное лицо</p> <a href="{{ $sort['contact_name']['link'] }}"><i class="fa {{ $sort['contact_name']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Телефон</p> <a href="{{ $sort['phone']['link'] }}"><i class="fa {{ $sort['phone']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
+                        <th><p>Столов</p></th>
                         <th><p><i class="fa fa-users fa-2x" aria-hidden="true"></i>(человек)</p> <a href="{{ $sort['members_count']['link'] }}"><i class="fa {{ $sort['members_count']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th>Действие</th>
                     </tr>
@@ -151,6 +152,7 @@
                             <td>{{ $application->contact_name }}</td>
                             <td>{{ $application->phone }}</td>
                             <td>{{ $application->city }}</td>
+                            <td>{{ json_decode($application->equipment, true)['table'] ?? 'неизв.' }}</td>
                             <td>{{ $application->members_count }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}" title="Подробнее" >
