@@ -54,7 +54,7 @@ class CreateAction extends Action
         $profile->surname = $data['surname'];
         $profile->first_name = $data['first_name'];
 
-        if(is_null($data['nickname'])) {
+        if(empty($data['nickname'])) {
             $data['nickname'] = $data['surname'] .' '. $data['first_name'];
         }
 
@@ -63,7 +63,7 @@ class CreateAction extends Action
         $profile->phone = $data['phone'];
         $profile->city = $data['city'];
         $profile->social_links = json_encode($data['social_links']);
-        $profile->info = $data['info'];
+        $profile->info = $data['info'] ?? '';
         $profile->save();
 
         $confirmation = ['code' => str_random(30), 'created' => gmdate('Y-m-d H:i:s'), 'type' => 'confirm'];

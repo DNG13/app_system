@@ -354,6 +354,7 @@
                             @endforeach
                         </ul>
                     @endif
+                    @if ($fair->status != 'Отклонена')
                     <form method="POST" action="{{ url('/comment/create')}}">
                             {{ csrf_field() }}
                             <div>
@@ -369,6 +370,7 @@
                                 </div>
                             </div>
                         </form>
+                        @endif
                 </div>
             </div>
         </div>

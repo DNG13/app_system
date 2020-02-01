@@ -7,7 +7,9 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка косплей-шоу</strong></h4>
             @if(Auth::user()->isAdmin())
-                В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
+                В обработке: {{$count['processing']}} <br>
+                Принято: {{$count['accepted']}} <br>
+                Отклонено: {{$count['rejected']}}
             @endif
             <div style="padding-bottom: 25px;">
                 <a class="btn btn-info btn pull-right"  href="{{ url('/cosplay/create')}}">Подать заявку</a>
@@ -126,7 +128,12 @@
                     </thead>
                     <tbody>
                     @foreach($applications as $application)
-                        <tr class="odd">
+                        <tr class="odd" style="{{
+                        $application->status == "Отклонена" ? 'background-color: #f5ebee' :
+                        ($application->status == "Принята" ? 'background-color: #dcedc8' :
+                        ($application->status == "Ожидает ответа пользователя" ? 'background-color: #f5f5c4' :
+                        ($application->status == "Внесены изменения" ? 'background-color: #e1f5f5' : '')))
+                        }}">
                             <td>{{ $application->id }}</td>
                             <td>
                                 @if(Auth::user()->isAdmin())

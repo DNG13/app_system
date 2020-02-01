@@ -28,6 +28,10 @@ class CommentController extends Controller
     {
         $id = $request->get('id');
         Comment::where('id', $id)->delete();
-        return redirect($request->get('app_kind'). '/' . $request->get('app_id'));
+
+        $kind = $request->get('app_kind');
+        $kind = ($kind == 'fair') ? 'expo' : $kind;
+
+        return redirect($kind. '/' . $request->get('app_id') . '#footer');
     }
 }
