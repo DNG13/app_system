@@ -133,7 +133,6 @@
                             <li><a class="li-footer-fa" href="https://www.instagram.com/khanifest"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="https://www.facebook.com/khanifest/"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="https://twitter.com/khanifest"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a class="li-footer-fa" href="http://plus.google.com/u/0/117135632301135612843"><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="http://t.me/khanifest"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="http://vk.com/khanifest"><i class="fa fa-vk fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="#top" title="Вверх"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
