@@ -6,6 +6,7 @@ use App\Actions\Register\CreateAction;
 use App\Actions\Register\HandleProviderCallbackAction;
 use App\Actions\Register\ProfileFacebookAction;
 use App\Actions\Register\UserReactivationSendAction;
+use App\Exceptions\User\EmailUsedException;
 use App\Http\Requests\Register\ProfileFacebookRequest;
 use App\User;
 use App\Models\Profile;
@@ -16,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 use Laravel\Socialite\Facades\Socialite;
 
 class RegisterController extends Controller
@@ -47,7 +49,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'avatar'=>'nullable|image|mimes:jpeg,jpg,png|max:4096',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
             'surname' => 'required|string|max:64',
             'first_name' => 'required|string|max:64',
@@ -126,9 +128,11 @@ class RegisterController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param CreateAction $action
+     * @param \Illuminate\Http\Request           $request
+     * @param \App\Actions\Register\CreateAction $action
+     *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \App\Exceptions\User\EmailUsedException
      */
     public function register(Request $request, CreateAction $action)
     {
@@ -136,6 +140,11 @@ class RegisterController extends Controller
         $validator = $this->validator($input);
 
         if ($validator->passes()){
+            $input['email'] = strtolower($input['email']);
+            $existingUser = User::where('email', $input['email'])->first();
+            if ($existingUser) {
+                return back()->with('errors', new MessageBag(['email' => 'Email уже зарегистрирован в системе']));
+            }
             $user = $this->create($input)->toArray();
             $action->run( $input, $user['id']);
 
@@ -144,7 +153,8 @@ class RegisterController extends Controller
             по которому Вы можете подтвердить свою регистрацию. 
             Пожалуйста проверьте почту.");
         }
-        return back()->with('errors',$validator->errors());
+
+        return back()->with('errors', $validator->errors());
     }
 
     /**

@@ -7,7 +7,9 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка ярмарка</strong></h4>
             @if(Auth::user()->isAdmin())
-                В обработке:{{$count['processing']}} Принято:{{$count['accepted']}} Отклонено:{{$count['rejected']}}
+                В обработке: {{$count['processing']}} <br>
+                Принято: {{$count['accepted']}} <br>
+                Отклонено: {{$count['rejected']}}
             @endif
             <div style="padding-bottom: 25px;">
                 <a class="btn btn-info btn pull-right"  href="{{ url('/expo/create')}}">Подать заявку</a>
@@ -119,13 +121,19 @@
                         <th><p>Контактное лицо</p> <a href="{{ $sort['contact_name']['link'] }}"><i class="fa {{ $sort['contact_name']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Телефон</p> <a href="{{ $sort['phone']['link'] }}"><i class="fa {{ $sort['phone']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
+                        <th><p>Столов</p></th>
                         <th><p><i class="fa fa-users fa-2x" aria-hidden="true"></i>(человек)</p> <a href="{{ $sort['members_count']['link'] }}"><i class="fa {{ $sort['members_count']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th>Действие</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($applications as $application)
-                        <tr class="odd">
+                        <tr class="odd" style="{{
+                        $application->status == "Отклонена" ? 'background-color: #f5ebee' :
+                        ($application->status == "Принята" ? 'background-color: #dcedc8' :
+                        ($application->status == "Ожидает ответа пользователя" ? 'background-color: #f5f5c4' :
+                        ($application->status == "Внесены изменения" ? 'background-color: #e1f5f5' : '')))
+                        }}">
                             <td>{{ $application->id }}</td>
                             <td>
                                 @if(Auth::user()->isAdmin())
@@ -144,6 +152,7 @@
                             <td>{{ $application->contact_name }}</td>
                             <td>{{ $application->phone }}</td>
                             <td>{{ $application->city }}</td>
+                            <td>{{ json_decode($application->equipment, true)['table'] ?? 'неизв.' }}</td>
                             <td>{{ $application->members_count }}</td>
                             <td><div class="btn-group">
                                     <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}" title="Подробнее" >
