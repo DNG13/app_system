@@ -68,7 +68,7 @@
                         </div>
 
                         @if((!empty($fair->social_links)))
-                            <div class="col-md-12"><h4>Соц мережі</h4></div>
+                            <div class="col-md-12"><h4>Соцмережі</h4></div>
                             <div class="col-md-12"><hr></div>
 
                             @if((!empty($fair->social_links['tg'])))

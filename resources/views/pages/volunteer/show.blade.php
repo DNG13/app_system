@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Волонтерство(посмотреть)')
+@section('title', 'Волонтерство(переглянути)')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                    <div class="panel-heading">Волонтерство. Подробнее</div>
+                    <div class="panel-heading">Волонтерство. Детальніше</div>
 
                     <div class="panel-body">
                         <div class="form-horizontal">
@@ -19,21 +19,21 @@
                             </div>
 
                             <div>
-                                <label for="surname" class="col-md-4">Фамилия</label>
+                                <label for="surname" class="col-md-4">Прізвище</label>
                                 <div class="col-md-8">
                                     <p id="surname"> {{ $volunteer->surname}}</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="first_name" class="col-md-4">Имя</label>
+                                <label for="first_name" class="col-md-4">Ім'я</label>
                                 <div class="col-md-8">
                                     <p id="first_name">{{ $volunteer->first_name }}</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="nickname" class="col-md-4">Никнейм</label>
+                                <label for="nickname" class="col-md-4">Нікнейм</label>
                                 <div class="col-md-8">
                                     <p id="nickname"> {{ $volunteer->nickname }}</p>
                                 </div>
@@ -47,14 +47,14 @@
                             </div>
 
                             <div>
-                                <label for="age" class="col-md-4">Возраст</label>
+                                <label for="age" class="col-md-4">Вік</label>
                                 <div class="col-md-8">
                                     <p id="age"> {{ $volunteer->age }}</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="city" class="col-md-4">Город</label>
+                                <label for="city" class="col-md-4">Місто</label>
                                 <div class="col-md-8">
                                     <p id="city"> {{ $volunteer->city }}</p>
                                 </div>
@@ -75,7 +75,7 @@
                             </div>
 
                             <div>
-                                <label for="skills" class="col-md-4">Навыки</label>
+                                <label for="skills" class="col-md-4">Навички</label>
                                 <div class="col-md-8">
                                     <p id="skills">{{ $volunteer->skills}}</p>
                                 </div>
@@ -83,7 +83,7 @@
 
                             @if(!($volunteer->experience)==null)
                                 <div>
-                                    <label for="experience" class="col-md-4">Опыт работы волонтером</label>
+                                    <label for="experience" class="col-md-4">Досвід роботи волонтером</label>
                                     <div class="col-md-8">
                                         <p id="experience">{{ $volunteer->experience }}</p>
                                     </div>
@@ -92,14 +92,14 @@
 
                             @if(!($volunteer->difficulties)==null)
                                 <div>
-                                    <label for="difficulties" class="col-md-4">Возможные затруднения</label>
+                                    <label for="difficulties" class="col-md-4">Можливі труднощі</label>
                                     <div class="col-md-8">
                                         <p  id="difficulties">{{ $volunteer->difficulties }}</p>
                                     </div>
                                 </div>
                             @endif
                             @if(!empty($social_links))
-                                <div class="col-md-12"><h4>Соцсети</h4></div>
+                                <div class="col-md-12"><h4>Соцмережі</h4></div>
                                 <div class="col-md-12"><hr></div>
                             @endif
 
@@ -132,7 +132,7 @@
 
                             <div>
                                 <div class="col-md-12">
-                                    <a href="/volunteer/{{ $volunteer->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
+                                    <a href="/volunteer/{{ $volunteer->id }}/edit" class="btn btn-info" role="button">Редагувати</a>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                 </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Комментарии заявки( {{count($comments)}} )</div>
+                <div class="panel-heading">Коментарі заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
                         <ul class="list-group col-md-12">
@@ -156,7 +156,7 @@
                                             <p style="font-weight:bolder" id="comment">{{ $comment->text }}</p>
                                         </div>
                                         @if(Auth::user()->isAdmin())
-                                            <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$volunteer->id}}&app_kind=volunteer">
+                                            <a class="col-md-1" title="Видалити коментар" href="/comment/delete?id={{ $comment->id }}&app_id={{$volunteer->id}}&app_kind=volunteer">
                                                 <div class="btn btn-default">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </div>
@@ -172,14 +172,14 @@
                         {{ csrf_field() }}
                         <div>
                             <label for="comment" class="col-md-3">
-                                Добавить комментарий</label>
+                                Додати коментар</label>
                             <div class="col-md-7 form-group">
                                 <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
                                 <input type="hidden" name="app_kind" value="volunteer">
                                 <input type="hidden" name="app_id" value="{{$volunteer->id}}">
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-info">Отправить</button>
+                                <button type="submit" class="btn btn-info">Відправити</button>
                             </div>
                         </div>
                     </form>

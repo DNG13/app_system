@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Пресса(посмотреть)')
+@section('title', 'Преса(переглянути)')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Пресса. Подробнее</div>
+                <div class="panel-heading">Преса. Детальніше</div>
 
                 <div class="panel-body">
                         <div class="form-horizontal">
@@ -19,7 +19,7 @@
                             </div>
 
                             <div>
-                                <label for="media_name" class="col-md-4">Наименование СМИ/никнейм</label>
+                                <label for="media_name" class="col-md-4">Найменування ЗМІ/нікнейм</label>
                                 <div class="col-md-8">
                                     <p id="media_name">{{ $press->media_name }}</p>
                                 </div>
@@ -33,14 +33,14 @@
                             </div>
 
                             <div>
-                                <label for="contact_name" class="col-md-4">Контактное лицо</label>
+                                <label for="contact_name" class="col-md-4">Контактна особа</label>
                                 <div class="col-md-8">
                                     <p id="contact_name">{{ $press->contact_name }}</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="city" class="col-md-4">Город</label>
+                                <label for="city" class="col-md-4">Місто</label>
                                 <div class="col-md-8">
                                     <p id="city">{{ $press->city }}</p>
                                 </div>
@@ -54,20 +54,21 @@
                             </div>
 
                             <div>
-                                <label for="social_link" class="col-md-4">Ссылка на личную страницу</label>
+                                <label for="social_link" class="col-md-4">Посилання на особисту сторінку</label>
                                 <div class="col-md-8">
                                     <p id="social_link">{{ $press->social_link }}</p>
                                 </div>
                             </div>
 
                             @if((!empty($press->social_links)))
-                                <div class="col-md-12"><h4>Соцсети</h4></div>
+                                <div class="col-md-12"><h4>Соцмережі</h4></div>
                                 <div class="col-md-12"><hr></div>
-                                @if((!empty($press->social_links['vk'])))
+
+                                @if((!empty($press->social_links['tg'])))
                                     <div>
-                                        <label for="social_links['vk']" class="col-md-4">VK</label>
+                                        <label for="social_links['tg']" class="col-md-4">Telegram</label>
                                         <div class="col-md-8">
-                                            <p id="social_links['vk']">{{ $press->social_links['vk'] }}</p>
+                                            <p id="social_links['tg']">{{ $press->social_links['tg'] }}</p>
                                         </div>
                                     </div>
                                 @endif
@@ -90,11 +91,11 @@
                                     </div>
                                 @endif
 
-                                @if((!empty($press->social_links['tg'])))
+                                @if((!empty($press->social_links['vk'])))
                                     <div>
-                                        <label for="social_links['tg']" class="col-md-4">Telegram</label>
+                                        <label for="social_links['vk']" class="col-md-4">VK</label>
                                         <div class="col-md-8">
-                                            <p id="social_links['tg']">{{ $press->social_links['tg'] }}</p>
+                                            <p id="social_links['vk']">{{ $press->social_links['vk'] }}</p>
                                         </div>
                                     </div>
                                 @endif
@@ -112,7 +113,7 @@
 
                             @if(!$press->prev_part==null)
                                 <div>
-                                    <label for="prev_part" class="col-md-4">Предыдущее участие</label>
+                                    <label for="prev_part" class="col-md-4">Попередня участь</label>
                                     <div class="col-md-8">
                                         <p id="prev_part">{{ $press->prev_part }}</p>
                                     </div>
@@ -120,27 +121,27 @@
                             @endif
 
                             <div>
-                                <label for="portfolio_link" class="col-md-4">Ссылка на портфолио</label>
+                                <label for="portfolio_link" class="col-md-4">Посилання на портфоліо</label>
                                 <div class="col-md-8">
                                     <p id="portfolio_link">{{ $press->portfolio_link }}</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="camera" class="col-md-4">Модель камеры</label>
+                                <label for="camera" class="col-md-4">Модель камери</label>
                                 <div class="col-md-8">
                                     <p id="camera">{{ $press->camera }}</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="equipment" class="col-md-4">Доп. техника</label>
+                                <label for="equipment" class="col-md-4">Дод. техника</label>
                                 <div class="col-md-8">
                                     <p id="equipment">{{ $press->equipment }}</p>
                                 </div>
                             </div>
 
-                            <div class="col-md-12"><h4>Участники</h4></div>
+                            <div class="col-md-12"><h4>Учасники</h4></div>
                             <div id="dynamic_field">
                                 @foreach($members as $member=>$attributes)
                                     <div class="members" id="row{{ ++$count}}">
@@ -148,21 +149,21 @@
                                         @foreach($attributes as $attribute=>$data)
                                             @if($attribute=='surname')
                                                 <div>
-                                                    <label  class="col-md-4">Фамилия</label>
+                                                    <label  class="col-md-4">Прізвище</label>
                                                     <div class="col-md-8">
                                                         <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
                                                     </div>
                                                 </div>
                                             @elseif($attribute=='first_name')
                                                 <div>
-                                                    <label  class="col-md-4">Имя</label>
+                                                    <label  class="col-md-4">Ім'я</label>
                                                     <div class="col-md-8">
                                                         <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
                                                     </div>
                                                 </div>
                                             @elseif($attribute=='duty')
                                                 <div>
-                                                    <label  class="col-md-4">Деятельность на фестивале</label>
+                                                    <label  class="col-md-4">Діяльність на фестивалі</label>
                                                     <div class="col-md-8">
                                                         <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
                                                     </div>
@@ -175,7 +176,7 @@
 
                             <div>
                                 <div class="col-md-12">
-                                    <a href="/press/{{ $press->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
+                                    <a href="/press/{{ $press->id }}/edit" class="btn btn-info" role="button">Редагувати</a>
                                 </div>
                             </div>
                         </div>
@@ -183,10 +184,10 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Файлы заявки( {{count($files)}} )
+                <div class="panel-heading">Файли заявки( {{count($files)}} )
                     @if(Auth::user()->isAdmin())
                         <div>
-                            <a href="/create-zip?download=zip&app_id={{$press->id}}&app_kind=press" class="btn btn-info" >Скачать <i class="fa fa-download" aria-hidden="true"></i></a>
+                            <a href="/create-zip?download=zip&app_id={{$press->id}}&app_kind=press" class="btn btn-info" >Завантажити <i class="fa fa-download" aria-hidden="true"></i></a>
                         </div>
                     @endif
                 </div>
@@ -194,20 +195,20 @@
                 <div class="panel-body">
                     <div>
                         <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
-                            <i class="fa fa-file" aria-hidden="true"></i> Добавить файлы
+                            <i class="fa fa-file" aria-hidden="true"></i> Додати файли
                         </button>
                         <div id="filter-panel" class="collapse filter-panel">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <ul>
-                                        <li>Добавить файлы можно при редактировании заявки</li>
-                                        <li>Технические ограничения:</li>
+                                        <li>Додати файли можна під час редагування заявки</li>
+                                        <li>Технічні обмеження:</li>
                                         <ul>
-                                            <li>размеры файлов не более 20 мегабайт</li>
-                                            <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
-                                            <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
-                                            <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>дня фестиваля (включительно)</b>!</li>
-                                            <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
+                                            <li>розміри файлів не більше 20 мегабайт</li>
+                                            <li>відео та великі файли (>20 мегабайт) рекомендуємо завантажувати на інші хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) та залишати посилання в коментарях</li>
+                                            <li>файли менше 20 мегабайт завантажуйте в систему заявок.</li>
+                                            <li>завантажуючи файли на сторонні хостинги, зверніть увагу на термін зберігання файлів. Файли повинні зберігатися до дня фестивалю (включно)!</b>!</li>
+                                            <li>якщо вам потрібно видалити файл, зверніться до Організаторів, ми все зробимо!</li>
                                         </ul>
                                     </ul>
                                 </div>
@@ -245,7 +246,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Комментарии заявки( {{count($comments)}} )</div>
+                <div class="panel-heading">Коментарі заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
                         <ul class="list-group col-md-12">
@@ -261,7 +262,7 @@
                                             <p style="font-weight:bolder" id="comment">{{ $comment->text }}</p>
                                         </div>
                                         @if(Auth::user()->isAdmin())
-                                            <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$press->id}}&app_kind=press">
+                                            <a class="col-md-1" title="Видалити коментар" href="/comment/delete?id={{ $comment->id }}&app_id={{$press->id}}&app_kind=press">
                                                 <div class="btn btn-default">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </div>
@@ -277,14 +278,14 @@
                             {{ csrf_field() }}
                             <div>
                                 <label for="comment" class="col-md-3">
-                                    Добавить комментарий</label>
+                                    Додати коментар</label>
                                 <div class="col-md-7 form-group">
                                     <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
                                     <input type="hidden" name="app_kind" value="press">
                                     <input type="hidden" name="app_id" value="{{$press->id}}">
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-info">Отправить</button>
+                                    <button type="submit" class="btn btn-info">Відправити</button>
                                 </div>
                             </div>
                         </form>

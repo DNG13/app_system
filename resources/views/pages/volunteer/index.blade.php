@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Волонтерство все заявки')
+@section('title', 'Волонтерство всі заявки')
 
 @section('content')
     <div class="row">
@@ -12,17 +12,17 @@
                 Отклонено: {{$count['rejected']}}
             @endif
             <div style="padding-bottom: 25px;">
-                <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подать заявку</a>
+                <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подати заявку</a>
             </div>
             <div style="display: inline-block; margin-top: 5px;">
                 <form action="{{url('/volunteer')}}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Поиск(Ник, город,  статус, навыки)" >
+                        <input type="text" class="form-control" name="search" placeholder="Пошук(Нік, місто, статус, навички)" >
                         <span class="input-group-addon btn btn-default">
                                 <button type="submit">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>
-                                <button type="submit">сбросить</button>
+                                <button type="submit">скинути</button>
                             </span>
                     </div>
                 </form>
@@ -46,16 +46,16 @@
                         <thead>
                         <tr>
                             <th><p>Номер заявки</p> <a href="{{ $sort['id']['link'] }}"><i class="fa {{ $sort['id']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Податель заявки</p> <a href="{{ $sort['user_id']['link'] }}"><i class="fa {{ $sort['user_id']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Подавець заявки</p> <a href="{{ $sort['user_id']['link'] }}"><i class="fa {{ $sort['user_id']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Статус</p> <a href="{{ $sort['status']['link'] }}"><i class="fa {{ $sort['status']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Дата подачи</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Дата обновления</p> <a href="{{ $sort['updated_at']['link'] }}"><i class="fa {{ $sort['updated_at']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Ник</p> <a href="{{ $sort['nickname']['link'] }}"><i class="fa {{ $sort['nickname']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Дата подання</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Дата оновлення</p> <a href="{{ $sort['updated_at']['link'] }}"><i class="fa {{ $sort['updated_at']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Нік</p> <a href="{{ $sort['nickname']['link'] }}"><i class="fa {{ $sort['nickname']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Telegram</p> <i class="fa fa-telegram fa-2x" aria-hidden="true"></i></th>
-                            <th><p>Город</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Возможные затруднения</p> <a href="{{ $sort['difficulties']['link'] }}"><i class="fa {{ $sort['difficulties']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Возраст</p> <a href="{{ $sort['age']['link'] }}"><i class="fa {{ $sort['age']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th>Действие</th>
+                            <th><p>Місто</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Можливі труднощі</p> <a href="{{ $sort['difficulties']['link'] }}"><i class="fa {{ $sort['difficulties']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Вік</p> <a href="{{ $sort['age']['link'] }}"><i class="fa {{ $sort['age']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th>Дея</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -85,10 +85,10 @@
                                 <td>{{ $application->difficulties }}</td>
                                 <td>{{ $application->age }}</td>
                                 <td><div class="btn-group">
-                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$application->id }}" title="Подробнее" >
+                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$application->id }}" title="Детальніше" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$application->id }}/edit" title="Редактировать">
+                                    <a class="btn btn-info btn-sm" href="/volunteer/{{$application->id }}/edit" title="Редагувати">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -98,7 +98,7 @@
                      @endforeach
                     </table>
             @else
-                <h4>У вас нет заявок.</h4>
+                <h4>Ви не маєте заявок.</h4>
             @endif
         </div>
     </div>

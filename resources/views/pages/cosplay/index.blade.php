@@ -137,7 +137,7 @@
                             <td>{{ $application->id }}</td>
                             <td>
                                 @if(Auth::user()->isAdmin())
-                                    <a  class="btn btn-info btn-sm" title="Профиль" href="{{ url('/profile/' . $application->user_id) }}">
+                                    <a  class="btn btn-info btn-sm" title="Профіль" href="{{ url('/profile/' . $application->user_id) }}">
                                         {{ $application->profile->nickname }}
                                     </a>
                                 @else

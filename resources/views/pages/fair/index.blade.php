@@ -68,7 +68,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <lable >За статусом</lable>
+                                        <lable>За статусом</lable>
                                         <select class="form-control input-sm" id="status" name="status">
                                             @if(!empty($data['status']))
                                                 <option selected value="{{($data['status'])}}">{{($data['status'])}}</option>
@@ -83,7 +83,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <lable >За номером</lable>
+                                        <lable>За номером</lable>
                                         @if(!empty($data['ids']))
                                             <input class="form-control input-sm" type="text"  name="ids" value="{{$data['ids']}}">
                                         @else
@@ -137,7 +137,7 @@
                             <td>{{ $application->id }}</td>
                             <td>
                                 @if(Auth::user()->isAdmin())
-                                    <a  class="btn btn-info btn-sm" title="Профиль" href="{{ url('/profile/' . $application->user_id) }}">
+                                    <a  class="btn btn-info btn-sm" title="Профіль" href="{{ url('/profile/' . $application->user_id) }}">
                                         {{ $application->profile->nickname }}
                                     </a>
                                 @else
@@ -155,10 +155,10 @@
                             <td>{{ json_decode($application->equipment, true)['table'] ?? 'неизв.' }}</td>
                             <td>{{ $application->members_count }}</td>
                             <td><div class="btn-group">
-                                    <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}" title="Подробнее" >
+                                    <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}" title="Детальніше" >
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}/edit" title="Редактировать">
+                                    <a class="btn btn-info btn-sm" href="/expo/{{$application->id }}/edit" title="Редагувати">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                                 </div>
