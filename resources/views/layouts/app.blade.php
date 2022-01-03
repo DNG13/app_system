@@ -43,25 +43,25 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::user())
-                            <li class={{ Request::is('/')? "active" : ''}}><a href="/">ГЛАВНАЯ</a></li>
+                            <li class={{ Request::is('/')? "active" : ''}}><a href="/">ГОЛОВНА</a></li>
                             <li class={{ Request::is('home')? "active" : ''}}><a href="{{url('/home')}}">ПРАВИЛА</a></li>
                             <li class="dropdown {{ Request::is('cosplay')|| Request::is('expo')|| Request::is('press')|| Request::is('volunteer') ? "active" : ''}}">
-                                <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОИ ЗАЯВКИ<span class="caret"></span></a>
+                                <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">МОЇ ЗАЯВКИ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/cosplay')}}">КОСПЛЕЙ-ШОУ</a>
-                                        <a href="{{ url('/expo')}}">ЯРМАРКА</a>
-                                        <a href="{{ url('/press')}}">ПРЕССА</a>
+                                        <a href="{{ url('/expo')}}">ЯРМАРОК</a>
+                                        <a href="{{ url('/press')}}">ПРЕСА</a>
                                         <a href="{{ url('/volunteer')}}">ВОЛОНТЕРСТВО</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown {{ Request::is('*/create')? "active" : ''}}"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">ПОДАТЬ ЗАЯВКУ<span class="caret"></span></a>
+                            <li class="dropdown {{ Request::is('*/create')? "active" : ''}}"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">ПОДАТИ ЗАЯВУ<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ url('/cosplay/create')}}">КОСПЛЕЙ-ШОУ</a>
-                                        <a href="{{ url('/expo/create')}}">ЯРМАРКА</a>
-                                        <a href="{{ url('/press/create')}}">ПРЕССА</a>
+                                        <a href="{{ url('/expo/create')}}">ЯРМАРОК</a>
+                                        <a href="{{ url('/press/create')}}">ПРЕСА</a>
                                         <a href="{{ url('/volunteer/create')}}">ВОЛОНТЕРСТВО</a>
                                     </li>
                                 </ul>
@@ -70,9 +70,9 @@
                             <li class="dropdown  {{ (Auth::user()->isAdmin()) ? "active" : ''}}"><a  class="dropdown-toggle" title="Настройки" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true"><i class="fa fa-cog" aria-hidden="true"></i><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('type')}}">ТИПЫ ЗАЯВОК</a>
-                                        <a href="{{ url('role')}}">РОЛИ</a>
-                                        <a href="{{ url('user-role')}}">ДОБАВИТЬ РОЛЬ ПОЛЬЗОВАТЕЛЮ</a>
+                                        <a href="{{ url('type')}}">ТИПИ ЗАЯВОК</a>
+                                        <a href="{{ url('role')}}">РОЛІ</a>
+                                        <a href="{{ url('user-role')}}">ДОДАТИ РОЛЬ КОРИСТУВАЧУ</a>
                                     </li>
                                 </ul>
                             </li>
@@ -84,8 +84,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">ВОЙТИ</a></li>
-                            <li><a href="{{ route('register') }}">РЕГИСТРАЦИЯ</a></li>
+                            <li><a href="{{ route('login') }}">УВІЙТИ</a></li>
+                            <li><a href="{{ route('register') }}">РЕЄСТРАЦІЯ</a></li>
                         @else
                             <li class="dropdown  {{ Request::is('profile/*')|| Request::is('profile')? "active" : ''}}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" style="font-size: 10pt">
@@ -95,12 +95,12 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> ПРОФИЛЬ</a>
+                                        <a href="{{ url('/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> ПРОФІЛЬ</a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                            ВЫЙТИ
+                                            ВИЙТИ
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                             {{ csrf_field() }}
@@ -125,7 +125,9 @@
         <div>
             <div class="row">
                 <div class="col-sm-6 text-left">
-                    <div>Made by <a style="color: white" href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia </a> © 2017 - {{date("Y")}} <a style="color: white" href="http://khanifest.com/"target="_blank">Khanifest</a></div>
+                    <div>
+{{--                        Made by <a style="color: white" href="https://www.linkedin.com/in/nataliia-duka-7262b2a8/" target="_blank">Duka Nataliia </a> --}}
+                        © 2017 - {{date("Y")}} <a style="color: white" href="http://khanifest.com/"target="_blank">Khanifest</a></div>
                 </div>
                 <div class="col-sm-6 text-right" style="text-align: right;">
                     <nav>
@@ -135,7 +137,7 @@
                             <li><a class="li-footer-fa" href="https://twitter.com/khanifest"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="http://t.me/khanifest"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a></li>
                             <li><a class="li-footer-fa" href="http://vk.com/khanifest"><i class="fa fa-vk fa-2x" aria-hidden="true"></i></a></li>
-                            <li><a class="li-footer-fa" href="#top" title="Вверх"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
+                            <li><a class="li-footer-fa" href="#top" title="Вгору"><i class="fa fa-caret-square-o-up fa-2x" aria-hidden="true"></i></a></li>
                         </ul>
                     </nav>
                 </div>

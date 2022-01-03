@@ -29,7 +29,7 @@ class Activation extends Mailable
      */
     public function build()
     {
-        return $this->subject('Код активации сайта Khanifest')
+        return $this->subject('Код активації сайту Khanifest')
             ->view('mails.activation', [
                 'nickname' => $this->mail['nickname'],
                 'id' => $this->mail['id'],

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Косплей(посмотреть)')
+@section('title', 'Косплей(переглянути)')
 
 @section('content')
     <div class="container">
@@ -17,14 +17,14 @@
                         </div>
 
                         <div>
-                            <label for="group_nick" class="col-md-4">Название команды/ник выступающего</label>
+                            <label for="group_nick" class="col-md-4">Назва команди/нік виступаючого</label>
                             <div class="col-md-8">
                                 <p id="group_nick">{{ $cosplay->group_nick }}</p>
                             </div>
                         </div>
 
                         <div>
-                            <label for="title" class="col-md-4">Название постановки</label>
+                            <label for="title" class="col-md-4">Назва постановки</label>
                             <div class="col-md-8">
                                 <p id="title">{{ $cosplay->title }}</p>
                             </div>
@@ -38,21 +38,21 @@
                         </div>
 
                         <div>
-                            <label for="fandom" class="col-md-4">Источник (фендом)</label>
+                            <label for="fandom" class="col-md-4">Джерело (фендом)</label>
                             <div class="col-md-8">
                                 <p id="fandom">{{ $cosplay->fandom }}</p>
                             </div>
                         </div>
 
                         <div>
-                            <label for="length" class="col-md-4">Продолжительность(минут)</label>
+                            <label for="length" class="col-md-4">Тривалість(хвилин)</label>
                             <div class="col-md-8">
                                 <p id="length">{{ $cosplay->length }}</p>
                             </div>
                         </div>
 
                         <div class="form-group{">
-                            <label for="city" class="col-md-4">Город</label>
+                            <label for="city" class="col-md-4">Місто</label>
                             <div class="col-md-8">
                                 <p id="city">{{ $cosplay->city }}</p>
                             </div>
@@ -60,7 +60,7 @@
 
                         @if(!$cosplay->prev_part==null)
                             <div>
-                                <label for="prev_part" class="col-md-4">Предыдущее участие</label>
+                                <label for="prev_part" class="col-md-4">Попередня участь</label>
                                 <div class="col-md-8">
                                     <p id="prev_part">{{ $cosplay->prev_part }}</p>
                                 </div>
@@ -69,7 +69,7 @@
 
                         @if(!$cosplay->props==null)
                             <div>
-                                <label for="props" class="col-md-4">Реквизит</label>
+                                <label for="props" class="col-md-4">Реквізит</label>
                                 <div class="col-md-8">
                                     <p  id="props">{{ $cosplay->props }}</p>
                                 </div>
@@ -77,7 +77,7 @@
                         @endif
 
                         <div>
-                            <label for="description" class="col-md-4">Описание</label>
+                            <label for="description" class="col-md-4">Опис</label>
                             <div class="col-md-8">
                                 <p  id="description">{{ $cosplay->description }}</p>
                             </div>
@@ -85,26 +85,26 @@
 
                         @if(!$cosplay->comment==null)
                             <div>
-                                <label for="comment" class="col-md-4">Примечания</label>
+                                <label for="comment" class="col-md-4">Примітки</label>
                                 <div class="col-md-8">
                                     <p  id="comment">{{ $cosplay->comment }}</p>
                                 </div>
                             </div>
                         @endif
 
-                        <div class="col-md-12"><h4>Участники</h4></div>
+                        <div class="col-md-12"><h4>Учасники</h4></div>
                         <div id="dynamic_field">
                             @foreach($members as $member=>$attributes)
                                 <div class="members" id="row{{ ++$count}}">
                                     <div class="col-md-12"><hr></div>
                                     <div>
-                                        <label  class="col-md-4">Фамилия</label>
+                                        <label  class="col-md-4">Прізвище</label>
                                         <div class="col-md-8">
                                             <p  id="members[{{$count}}][surname]" class="name_list">{{ $attributes->surname ?? '' }}</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <label  class="col-md-4">Имя</label>
+                                        <label  class="col-md-4">Ім'я</label>
                                         <div class="col-md-8">
                                             <p  id="members[{{$count}}][first_name]" class="name_list">{{ $attributes->first_name ?? ''}}</p>
                                         </div>
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <label  class="col-md-4">Возраст</label>
+                                        <label  class="col-md-4">Вік</label>
                                         <div class="col-md-8">
                                             <p id="members[{{$count}}][age]" class="name_list">{{ $attributes->age ?? ''}}</p>
                                         </div>
@@ -126,7 +126,7 @@
                         </div>
                         <div>
                             <div style="margin-top:15px;" class="col-md-12">
-                                <a href="/cosplay/{{ $cosplay->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
+                                <a href="/cosplay/{{ $cosplay->id }}/edit" class="btn btn-info" role="button">Редагувати</a>
                             </div>
                         </div>
                     </div>
@@ -134,10 +134,10 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Файлы заявки( {{count($files)}} )
+                <div class="panel-heading">Файли заявки( {{count($files)}} )
                     @if(Auth::user()->isAdmin())
                         <div>
-                            <a href="/create-zip?download=zip&app_id={{$cosplay->id}}&app_kind=cosplay" class="btn btn-info" >Скачать <i class="fa fa-download" aria-hidden="true"></i></a>
+                            <a href="/create-zip?download=zip&app_id={{$cosplay->id}}&app_kind=cosplay" class="btn btn-info" >Завантажити <i class="fa fa-download" aria-hidden="true"></i></a>
                         </div>
                     @endif
                 </div>
@@ -167,7 +167,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Комментарии заявки( {{count($comments)}} )</div>
+                <div class="panel-heading">Коментарі заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(count($comments))
                         <ul class="list-group col-md-12">
@@ -189,7 +189,7 @@
                                             <p style="font-weight:bolder" id="comment">{{ $comment->text }}</p>
                                         </div>
                                         @if(Auth::user()->isAdmin())
-                                        <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
+                                        <a class="col-md-1" title="Видалити коментар" href="/comment/delete?id={{ $comment->id }}&app_id={{$cosplay->id}}&app_kind=cosplay">
                                             <div class="btn btn-default">
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </div>
@@ -200,23 +200,23 @@
                             @endforeach
                         </ul>
                     @endif
-                        @if ($cosplay->status != 'Отклонена')
-                    <form method="POST" action="{{ url('/comment/create')}}">
-                        {{ csrf_field() }}
-                        <div>
-                            <label for="comment" class="col-md-3">
-                                Добавить комментарий</label>
-                            <div class="col-md-7 form-group">
-                                <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
-                                <input type="hidden" name="app_kind" value="cosplay">
-                                <input type="hidden" name="app_id" value="{{$cosplay->id}}">
+                    @if ($cosplay->status != 'Отклонена')
+                        <form method="POST" action="{{ url('/comment/create')}}">
+                            {{ csrf_field() }}
+                            <div>
+                                <label for="comment" class="col-md-3">
+                                    Додати коментар</label>
+                                <div class="col-md-7 form-group">
+                                    <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
+                                    <input type="hidden" name="app_kind" value="cosplay">
+                                    <input type="hidden" name="app_id" value="{{$cosplay->id}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-info">Відправити</button>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-info">Отправить</button>
-                            </div>
-                        </div>
-                    </form>
-                        @endif
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

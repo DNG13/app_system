@@ -54,6 +54,6 @@ class StoreAction extends Action
         SendForAdminNewAppEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
 
-        return redirect('press')->with('success', "Ваша заявка успешно отправлена.");
+        return redirect('press')->with('success', "Вашу заявку успішно відправлено.");
     }
 }

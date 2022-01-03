@@ -74,10 +74,10 @@ class CustomResetPassword extends ResetPassword
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Сброс пароля')
-            ->line('Вы получили это письмо, потому что мы получили запрос о сбросе пароля.')
-            ->line('Нажмите на кнопку ниже для смены пароля.')
-            ->action('Сброс пароля', url(config('app.url') . route('password.reset', $this->token, false)))
-            ->line('Если вы не делали запрос о сбросе пароля, проигнорируйте это сообщение.');
+            ->subject('Скидання пароля')
+            ->line('Ви отримали цей лист, тому що ми отримали запит на скидання пароля.')
+            ->line('Натисніть кнопку нижче для зміни пароля.')
+            ->action('Скидання пароля', url(config('app.url') . route('password.reset', $this->token, false)))
+            ->line('Якщо ви не робили запит про скидання пароля, проігноруйте це повідомлення.');
     }
 }

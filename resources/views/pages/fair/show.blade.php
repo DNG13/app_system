@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Ярмарка(посмотреть)')
+@section('title', 'Ярмарок(переглянути)')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Ярмарка. Подробнее</div>
+                <div class="panel-heading">Ярмарок. Детальніше</div>
 
                 <div class="panel-body">
                     <div class="form-horizontal">
@@ -19,7 +19,7 @@
                         </div>
 
                         <div>
-                            <label for="group_nick" class="col-md-4">Hазвание группы/ник</label>
+                            <label for="group_nick" class="col-md-4">Назва групи/нік</label>
                             <div class="col-md-8">
                                 <p id="group_nick">{{ $fair->group_nick }}</p>
                             </div>
@@ -33,14 +33,14 @@
                         </div>
 
                         <div>
-                            <label for="contact_name" class="col-md-4">Контактное лицо</label>
+                            <label for="contact_name" class="col-md-4">Контактна особа</label>
                             <div class="col-md-8">
                                 <p id="contact_name">{{ $fair->contact_name }}</p>
                             </div>
                         </div>
 
                         <div>
-                            <label for="city" class="col-md-4">Город</label>
+                            <label for="city" class="col-md-4">МІсто</label>
                             <div class="col-md-8">
                                 <p id="city">{{ $fair->city }}</p>
                             </div>
@@ -54,27 +54,28 @@
                         </div>
 
                         <div>
-                            <label for="social_link" class="col-md-4">Ссылка на личную страницу</label>
+                            <label for="social_link" class="col-md-4">Посилання на особисту сторінку</label>
                             <div class="col-md-8">
                                 <p id="social_link">{{ $fair->social_link }}</p>
                             </div>
                         </div>
 
                         <div>
-                            <label for="group_link" class="col-md-4">Ссылка на сайт</label>
+                            <label for="group_link" class="col-md-4">Посилання на сайт</label>
                             <div class="col-md-8">
                                 <p id="group_link">{{ $fair->group_link }}</p>
                             </div>
                         </div>
 
                         @if((!empty($fair->social_links)))
-                            <div class="col-md-12"><h4>Соцсети</h4></div>
+                            <div class="col-md-12"><h4>Соц мережі</h4></div>
                             <div class="col-md-12"><hr></div>
-                            @if((!empty($fair->social_links['vk'])))
+
+                            @if((!empty($fair->social_links['tg'])))
                                 <div>
-                                    <label for="social_links['vk']" class="col-md-4">VK</label>
+                                    <label for="social_links['tg']" class="col-md-4">Telegram</label>
                                     <div class="col-md-8">
-                                        <p id="social_links['vk']">{{ $fair->social_links['vk'] }}</p>
+                                        <p id="social_links['tg']">{{ $fair->social_links['tg'] }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -97,11 +98,11 @@
                                 </div>
                             @endif
 
-                            @if((!empty($fair->social_links['tg'])))
+                            @if((!empty($fair->social_links['vk'])))
                                 <div>
-                                    <label for="social_links['tg']" class="col-md-4">Telegram</label>
+                                    <label for="social_links['vk']" class="col-md-4">VK</label>
                                     <div class="col-md-8">
-                                        <p id="social_links['tg']">{{ $fair->social_links['tg'] }}</p>
+                                        <p id="social_links['vk']">{{ $fair->social_links['vk'] }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -118,7 +119,7 @@
 
                         @if((!$block->universe==null))
                             <div>
-                                <label for="block[universe]" class="col-md-4">Вселенная</label>
+                                <label for="block[universe]" class="col-md-4">Всесвіт</label>
                                 <div class="col-md-8">
                                     <p id="block[universe]">{{ $block->universe }}</p>
                                 </div>
@@ -127,7 +128,7 @@
 
                         @if((!$block->description==null))
                             <div>
-                                <label for="block[description]" class="col-md-4">Краткое описание декораций и интерактива</label>
+                                <label for="block[description]" class="col-md-4">Короткий опис декорацій та інтерактиву</label>
                                 <div class="col-md-8">
                                     <p id="block[description]">{{ $block->description }}</p>
                                 </div>
@@ -136,7 +137,7 @@
 
                         @if((!$block->stuff==null))
                             <div>
-                                <label for="block[stuff]" class="col-md-4">Используемые материалы</label>
+                                <label for="block[stuff]" class="col-md-4">Матеріали, що використовуються</label>
                                 <div class="col-md-8">
                                     <p id="block[stuff]">{{ $block->stuff }}</p>
                                 </div>
@@ -145,7 +146,7 @@
 
                         @if((!$block->goods==null))
                             <div>
-                                <label for="block[goods]" class="col-md-4">Перечень продукции</label>
+                                <label for="block[goods]" class="col-md-4">Перелік продукції</label>
                                 <div class="col-md-8">
                                     <p id="block[goods]">{{ $block->goods }}</p>
                                 </div>
@@ -154,18 +155,18 @@
 
                         @if(!$block->square==null)
                             <div>
-                                <label for="block[square]" class="col-md-4">Размер торгово-развлекательной точки</label>
+                                <label for="block[square]" class="col-md-4">Розмір торгово-розважальної точки</label>
                                 <div class="col-md-8">
                                     <p id="block[square]">{{ $block->square }}</p>
                                 </div>
                             </div>
                         @endif
-                        <div class="col-md-12"><h4>Оборудование</h4></div>
+                        <div class="col-md-12"><h4>Обладнання</h4></div>
                         <div class="col-md-12"><hr></div>
                         <div>
                             @if(!$equipment->table==null)
                                 <div>
-                                    <label for="equipment[table]" class="col-md-4">Количество столов</label>
+                                    <label for="equipment[table]" class="col-md-4">Кількість столів</label>
                                     <div class="col-md-8">
                                         <p id="equipment[table]">{{ $equipment->table }}</p>
                                     </div>
@@ -174,7 +175,7 @@
 
                             @if(!$equipment->chair==null)
                                 <div>
-                                    <label for="equipment[chair]" class="col-md-4">Количество стульев</label>
+                                    <label for="equipment[chair]" class="col-md-4">Кількість стільців</label>
                                     <div class="col-md-8">
                                         <p id="equipment[chair]">{{ $equipment->chair }}</p>
                                     </div>
@@ -183,7 +184,7 @@
 
                             @if(!$equipment->extra==null)
                                 <div>
-                                    <label for="equipment[extra]" class="col-md-4">Дополнительное оборудование с размерами</label>
+                                    <label for="equipment[extra]" class="col-md-4">Додаткове обладнання з розмірами</label>
                                     <div class="col-md-8">
                                         <p id="equipment[extra]">{{ $equipment->extra }}</p>
                                     </div>
@@ -191,7 +192,7 @@
                             @endif
 
                             <div>
-                                <label for="equipment[electricity]" class="col-md-4">Надобность подведения электричества</label>
+                                <label for="equipment[electricity]" class="col-md-4">Необхідність підведення електрики</label>
                                 <div class="col-md-8">
                                     <p id="equipment[electricity]">{{ $equipment->electricity }}</p>
                                 </div>
@@ -200,7 +201,7 @@
 
                         @if(!$fair->electrics==null)
                         <div>
-                            <label for="description" class="col-md-4">Электрооборудование</label>
+                            <label for="description" class="col-md-4">Електроустаткування</label>
                             <div class="col-md-8">
                                 <p id="description">{{ $fair->electrics }}</p>
                             </div>
@@ -208,20 +209,20 @@
                         @endif
 
                         <div >
-                            <label for="payment_type" class="col-md-4">Способ оплаты</label>
+                            <label for="payment_type" class="col-md-4">Спосіб оплати</label>
                             <div class="col-md-8">
                                 <p id="square">{{ $fair->payment_type }}</p>
                             </div>
                         </div>
 
                         <div>
-                            <label for="description" class="col-md-4">Описание</label>
+                            <label for="description" class="col-md-4">Опис</label>
                             <div class="col-md-8">
                                 <p id="description">{{ $fair->description }}</p>
                             </div>
                         </div>
 
-                        <div class="col-md-12"><h4>Участники</h4></div>
+                        <div class="col-md-12"><h4>Учасники</h4></div>
                         <div id="dynamic_field">
                             @foreach($members as $member=>$attributes)
                                 <div class="members" id="row{{ ++$count}}">
@@ -229,21 +230,21 @@
                                     @foreach($attributes as $attribute=>$data)
                                         @if($attribute=='surname')
                                             <div>
-                                                <label  class="col-md-4">Фамилия</label>
+                                                <label  class="col-md-4">Прізвище</label>
                                                 <div class="col-md-8">
                                                     <p  id="members[{{$count}}][surname]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='first_name')
                                             <div>
-                                                <label  class="col-md-4">Имя</label>
+                                                <label  class="col-md-4">Ім'я</label>
                                                 <div class="col-md-8">
                                                     <p  id="members[{{$count}}][first_name]" class="name_list">{{ $data }}</p>
                                                 </div>
                                             </div>
                                         @elseif($attribute=='duty')
                                             <div>
-                                                <label  class="col-md-4">Деятельность на фестивале</label>
+                                                <label  class="col-md-4">Діяльність на фестивалі</label>
                                                 <div class="col-md-8">
                                                     <p  id="members[{{$count}}][duty]" class="name_list">{{ $data }}</p>
                                                 </div>
@@ -256,7 +257,7 @@
 
                         <div>
                             <div class="col-md-12">
-                                <a href="/expo/{{ $fair->id }}/edit" class="btn btn-info" role="button">Редактировать</a>
+                                <a href="/expo/{{ $fair->id }}/edit" class="btn btn-info" role="button">Редагувати</a>
                             </div>
                         </div>
 
@@ -265,10 +266,10 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Файлы заявки( {{count($files)}} )
+                <div class="panel-heading">Файли заявки( {{count($files)}} )
                     @if(Auth::user()->isAdmin())
                         <div>
-                            <a href="/create-zip?download=zip&app_id={{$fair->id}}&app_kind=fair" class="btn btn-info" >Скачать <i class="fa fa-download" aria-hidden="true"></i></a>
+                            <a href="/create-zip?download=zip&app_id={{$fair->id}}&app_kind=fair" class="btn btn-info" >Завантажити <i class="fa fa-download" aria-hidden="true"></i></a>
                         </div>
                     @endif
                 </div>
@@ -276,20 +277,20 @@
                 <div class="panel-body">
                     <div>
                         <button type="button" class="btn btn-info filter" data-toggle="collapse" data-target="#filter-panel">
-                            <i class="fa fa-file" aria-hidden="true"></i> Добавить файлы
+                            <i class="fa fa-file" aria-hidden="true"></i> Додати файли
                         </button>
                         <div id="filter-panel" class="collapse filter-panel">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <ul>
-                                        <li>Добавить файлы можно при редактировании заявки</li>
-                                        <li>Технические ограничения:</li>
+                                        <li>Додати файли можна під час редагування заявки</li>
+                                        <li>Технічні обмеження:</li>
                                         <ul>
-                                            <li>размеры файлов не более 20 мегабайт</li>
-                                            <li>видео и большие файлы (>20 мегабайт) рекомендуем загружать на другие хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) и оставлять ссылку в комментариях</li>
-                                            <li>файлы менее 20 мегабайт загружайте в систему заявок.</li>
-                                            <li>при загрузке файлов на сторонние хостинги обратите внимание на срок хранения файлов. Файлы должны храниться до <b>дня фестиваля (включительно)</b>!</li>
-                                            <li>eсли вам необходимо удалить файл, обратитесь к Организаторам, мы все сделаем!</li>
+                                            <li>розміри файлів не більше 20 мегабайт</li>
+                                            <li>відео та великі файли (>20 мегабайт) рекомендуємо завантажувати на інші хостинги <i class="fa fa-cloud-download" aria-hidden="true"></i> (Youtube, dropbox) та залишати посилання в коментарях</li>
+                                            <li>файли менше 20 мегабайт завантажуйте в систему заявок.</li>
+                                            <li>завантажуючи файли на сторонні хостинги, зверніть увагу на термін зберігання файлів. Файли повинні зберігатися до дня фестивалю (включно)!</b>!</li>
+                                            <li>якщо вам потрібно видалити файл, зверніться до Організаторів, ми все зробимо!</li>
                                         </ul>
                                     </ul>
                                 </div>
@@ -327,7 +328,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Комментарии заявки( {{count($comments)}} )</div>
+                <div class="panel-heading">Коментарі заявки( {{count($comments)}} )</div>
                 <div class="panel-body">
                     @if(!count($comments)==0)
                         <ul class="list-group col-md-12">
@@ -343,7 +344,7 @@
                                             <p style="font-weight:bolder" id="comment">{{ $comment->text }}</p>
                                         </div>
                                         @if(Auth::user()->isAdmin())
-                                            <a class="col-md-1" title="Удалить комментарий" href="/comment/delete?id={{ $comment->id }}&app_id={{$fair->id}}&app_kind=fair">
+                                            <a class="col-md-1" title="Видалити коментар" href="/comment/delete?id={{ $comment->id }}&app_id={{$fair->id}}&app_kind=fair">
                                                 <div class="btn btn-default">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </div>
@@ -359,14 +360,14 @@
                             {{ csrf_field() }}
                             <div>
                                 <label for="comment" class="col-md-3">
-                                    Добавить комментарий</label>
+                                    Додати коментар</label>
                                 <div class="col-md-7 form-group">
                                     <textarea  class="form-control" style="overflow:hidden" id="comment" name="text" required></textarea>
                                     <input type="hidden" name="app_kind" value="fair">
                                     <input type="hidden" name="app_id" value="{{$fair->id}}">
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-info">Отправить</button>
+                                    <button type="submit" class="btn btn-info">Відправити</button>
                                 </div>
                             </div>
                         </form>

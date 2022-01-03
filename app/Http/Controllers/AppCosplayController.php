@@ -123,7 +123,7 @@ class AppCosplayController extends Controller
             return redirect('cosplay');
         }
         if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
-           return redirect('cosplay')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+           return redirect('cosplay')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагувати.');
         }
         $files = AppFile::where('app_kind', 'cosplay')
             ->where('app_id', $cosplay->id)->get();

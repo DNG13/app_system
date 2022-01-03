@@ -6,7 +6,7 @@
 @if ($level == 'error')
 # Упс!
 @else
-# Здравствуйте!
+# Вітання!
 @endif
 @endif
 
@@ -51,7 +51,7 @@
 {{-- Subcopy --}}
 @isset($actionText)
 @component('mail::subcopy')
-Если у вас возникли трудности с кнопкой "{{ $actionText }}" , скопируйте ссылку в адресную строку вашего браузера : [{{ $actionUrl }}]({{ $actionUrl }})
+    Якщо у вас виникли проблеми з кнопкою "{{ $actionText }}" , скопіюйте посилання в адресний рядок вашого браузера : [{{ $actionUrl }}]({{ $actionUrl }})
 @endcomponent
 @endisset
 @endcomponent

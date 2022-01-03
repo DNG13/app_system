@@ -84,6 +84,6 @@ class UpdateAction extends Action
                 ->delay(now()->addSeconds(2));
         }
 
-        return redirect('volunteer')->with('success', "Ваша заявка успешно изменена.");
+        return redirect('volunteer')->with('success', "Вашу заявку успішно змінено.");
     }
 }

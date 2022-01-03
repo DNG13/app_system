@@ -2,7 +2,7 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            Ханифест
+            Ханіфест
         @endcomponent
     @endslot
 
@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            &copy; {{ date('Y') }} Ханифест.
+            &copy; {{ date('Y') }} Ханіфест.
         @endcomponent
     @endslot
 @endcomponent
