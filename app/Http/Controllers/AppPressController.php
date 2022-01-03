@@ -120,7 +120,7 @@ class AppPressController extends Controller
             return redirect('press');
         }
         if($press->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('press')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+            return redirect('press')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагувати.');
         }
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');
         $members = json_decode($press->members);

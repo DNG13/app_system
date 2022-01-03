@@ -122,7 +122,7 @@ class AppFairController extends Controller
             return redirect('expo');
         }
         if($fair->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('expo')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+            return redirect('expo')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагувати.');
         }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');
         $block = json_decode($fair->block);

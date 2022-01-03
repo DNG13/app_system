@@ -73,6 +73,6 @@ class UpdateAction extends Action
                 ->delay(now()->addSeconds(2));
         }
 
-        return redirect('expo')->with('success', "Ваша заявка успешно изменена.");
+        return redirect('expo')->with('success', "Вашу заявку успішно змінено.");
     }
 }

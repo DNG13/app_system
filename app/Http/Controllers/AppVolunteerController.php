@@ -114,7 +114,7 @@ class AppVolunteerController extends Controller
             return redirect('volunteer');
         }
         if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
-            return redirect('volunteer')->with('warning', 'Ваша заявка отклонена. Вы больше не можете её редактировать.');
+            return redirect('volunteer')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагуватить.');
         }
         $social_links = $volunteer->social_links;
         return view('pages.volunteer.edit', compact('volunteer', 'social_links'));

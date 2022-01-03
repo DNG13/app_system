@@ -68,7 +68,7 @@ class LoginController extends Controller
         if (!$user || !$user->confirmed_at) {
 
             throw ValidationException::withMessages([
-                $this->username() => 'Пользователь не подтвердил адрес электронной почты',
+                $this->username() => 'Користувач не підтвердив адресу електронної пошти',
             ]);
         }
 

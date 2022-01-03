@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Регистрация')
+@section('title', 'Реєстрація')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Регистрация<br><p style="color: red"><strong>* Поля обязательные для заполнения</strong></p></div>
+                <div class="panel-heading">Реєстрація<br><p style="color: red"><strong>* Поля обов'язкові для заповнення</strong></p></div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('register') }}">
@@ -17,7 +17,7 @@
 
                             <label for="image_uploads" class="col-md-4 control-label">Аватар</label>
 
-                            <div class="col-md-6">Выберите файл для загрузки(PNG, JPG, JPEG)
+                            <div class="col-md-6">Виберіть файл для завантаження(PNG, JPG, JPEG)
                                 <input name="avatar" type="file"  value="" accept=".jpeg, .jpg, .png"/>
 
                                 @if ($errors->has('avatar'))
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
-                            <label for="surname" class="col-md-4 control-label">Фамилия<span style="color: red"><strong>*</strong></span></label>
+                            <label for="surname" class="col-md-4 control-label">Прізвище<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}" required autofocus>
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="first_name" class="col-md-4 control-label">Имя<span style="color: red"><strong>*</strong></span></label>
+                            <label for="first_name" class="col-md-4 control-label">Ім'я<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
-                            <label for="nickname" class="col-md-4 control-label">Никнейм</label>
+                            <label for="nickname" class="col-md-4 control-label">Нікнейм</label>
 
                             <div class="col-md-6">
                                 <input id="nickname" type="text" class="form-control" name="nickname" value="{{ old('nickname') }}" autofocus>
@@ -85,7 +85,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                            <label for="birthday" class="col-md-4 control-label">Дата рождения<span style="color: red"><strong>*</strong></span></label>
+                            <label for="birthday" class="col-md-4 control-label">Дата народження<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="birthday" type="date" min='1899-01-01' max="{{date("Y-m-d")}}" class="form-control" name="birthday" value="{{ old('birthday') }}" required autofocus>
@@ -99,10 +99,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                            <label for="city" class="col-md-4 control-label">Город<span style="color: red"><strong>*</strong></span></label>
+                            <label for="city" class="col-md-4 control-label">Місто<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
-                                <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
+                                <input id="city" placeholder="Населений пункт" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
 
                                 @if ($errors->has('city'))
                                     <span class="help-block">
@@ -141,23 +141,24 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Подтверждение пароля<span style="color: red"><strong>*</strong></span></label>
+                            <label for="password-confirm" class="col-md-4 control-label">Підтвердження пароля<span style="color: red"><strong>*</strong></span></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
-                        <div style="text-align:center"><strong>Cоцсети</strong></div>
-                        <div class="form-group{{ $errors->has('social_links[vk]') ? ' has-error' : '' }}">
-                            <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
+                        <div style="text-align:center"><strong>Соцмережі</strong></div>
+
+                        <div class="form-group{{ $errors->has('social_links[tg]') ? ' has-error' : '' }}">
+                            <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
 
                             <div class="col-md-6">
-                                <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ old('social_links[vk]') }}" autofocus>
+                                <input id="social_links[tg]" type="text" class="form-control" name="social_links[tg]" value="{{ old('social_links[tg]') }}" autofocus>
 
-                                @if ($errors->has('social_links[vk]'))
+                                @if ($errors->has('social_links[tg]'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('social_links[vk]') }}</strong>
+                                        <strong>{{ $errors->first('social_links[tg]') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -205,15 +206,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('social_links[tg]') ? ' has-error' : '' }}">
-                            <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
+                        <div class="form-group{{ $errors->has('social_links[vk]') ? ' has-error' : '' }}">
+                            <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
 
                             <div class="col-md-6">
-                                <input id="social_links[tg]" type="text" class="form-control" name="social_links[tg]" value="{{ old('social_links[tg]') }}" autofocus>
+                                <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ old('social_links[vk]') }}" autofocus>
 
-                                @if ($errors->has('social_links[tg]'))
+                                @if ($errors->has('social_links[vk]'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('social_links[tg]') }}</strong>
+                                        <strong>{{ $errors->first('social_links[vk]') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -222,7 +223,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-info">
-                                    Зарегистрироваться
+                                    Зареєструватись
                                 </button>
                             </div>
                         </div>

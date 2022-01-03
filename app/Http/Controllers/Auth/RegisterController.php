@@ -104,7 +104,7 @@ class RegisterController extends Controller
         }
         if(!$user) {
             if(is_null($socialUser->getEmail())) {
-                return redirect()->to('login')->with('warning',"Сохратить настройки аккаунта без email невозможно.");
+                return redirect()->to('login')->with('warning',"Зберегти налаштування облікового запису без email неможливо.");
             }
             $user_id = $action->run($socialUser);
             $avatar = Avatar::where('user_id', $user_id )->pluck('link')->first();
@@ -143,15 +143,15 @@ class RegisterController extends Controller
             $input['email'] = strtolower($input['email']);
             $existingUser = User::where('email', $input['email'])->first();
             if ($existingUser) {
-                return back()->with('errors', new MessageBag(['email' => 'Email уже зарегистрирован в системе']));
+                return back()->with('errors', new MessageBag(['email' => 'Email вже зареєстровано у системі']));
             }
             $user = $this->create($input)->toArray();
             $action->run( $input, $user['id']);
 
-            return redirect()->to('login')->with('success', "Пользователь успешно создан. 
-            Вам отправлен код активации, 
-            по которому Вы можете подтвердить свою регистрацию. 
-            Пожалуйста проверьте почту.");
+            return redirect()->to('login')->with('success', "Користувач успішно створено.
+             Вам надіслано код активації,
+             за яким Ви можете підтвердити свою реєстрацію.
+             Будь ласка, перевірте пошту.");
         }
 
         return back()->with('errors', $validator->errors());
@@ -170,7 +170,7 @@ class RegisterController extends Controller
                 if(!Auth::user()){
                     auth()->login($user);
                 }
-                return redirect()->to('home')->with('success', "Профиль уже подтвержден.");
+                return redirect()->to('home')->with('success', "Профіль вже підтверджений.");
             }
 
             if ($user->confirmation_code['code'] == $code
@@ -182,10 +182,10 @@ class RegisterController extends Controller
                 $user->save();
                 auth()->login($user);
 
-                return redirect()->to('home')->with('success', "Поздравляем, ваш аккаунт подтвержден.");
+                return redirect()->to('home')->with('success', "Вітаємо, ваш обліковий запис підтверджений.");
             }
         }
-        return redirect()->to('auth\reactivate')->with('warning', "Ваша ссылка не валидна.");
+        return redirect()->to('auth\reactivate')->with('warning', "Ваше посилання не валідне.");
     }
 
     /**
@@ -204,25 +204,25 @@ class RegisterController extends Controller
     public function userReactivationSend(Request $request, UserReactivationSendAction $action)
     {
         if (empty($request->get('email'))) {
-            return redirect()->to('auth\reactivate')->with('warning',"Email не найден");
+            return redirect()->to('auth\reactivate')->with('warning',"Email не знайдено");
         }
 
         //for lowercase
         $user = User::where('email', strtolower($request->email))->first();
 
         if (!$user) {
-            return redirect()->to('auth\reactivate')->with('warning',"Email не найден");
+            return redirect()->to('auth\reactivate')->with('warning',"Email не знайдено");
         }
 
         if (!is_null($user->confirmed_at)){
             if(!Auth::user()){
                 auth()->login($user);
             }
-            return redirect()->to('home')->with('success',"Профиль уже подтвержден.");
+            return redirect()->to('home')->with('success',"Профіль вже підтверджений.");
         }
         $action->run($user);
-        return redirect()->to('login')->with('success', "Вам повторно отправлен код активации, 
-            по которому Вы можете подтвердить свою регистрацию. 
-            Пожалуйста проверьте почту.");
+        return redirect()->to('login')->with('success', "Вам повторно надіслано код активації,
+             за яким Ви можете підтвердити свою реєстрацію.
+             Будь ласка, перевірте пошту.");
     }
 }

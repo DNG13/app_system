@@ -62,6 +62,6 @@ class UpdateAction extends Action
                 ->delay(now()->addSeconds(2));
         }
 
-        return redirect('cosplay')->with('success', "Ваша заявка успешно изменена.");
+        return redirect('cosplay')->with('success', "Вашу заявку успішно змінено.");
     }
 }

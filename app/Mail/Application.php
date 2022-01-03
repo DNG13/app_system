@@ -29,7 +29,7 @@ class Application extends Mailable
      */
     public function build()
     {
-        return $this->subject('Ваша заявка ' . $this->mail['title'] . ' успешно отправлена')
+        return $this->subject('Ваша заявка ' . $this->mail['title'] . ' успішно відправлено')
             ->view('mails.application', [
                 'nickname' => $this->mail['nickname'],
                 'title' => $this->mail['title'],
