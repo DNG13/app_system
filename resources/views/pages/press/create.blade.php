@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Пресса(создать)')
+@section('title', 'Преса(створити)')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Новая заявка пресса</div>
+                <div class="panel-heading">Нова заявка преса</div>
 
                 <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{url('/press/store')}}">
@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('media_name') ? ' has-error' : '' }}">
-                                <label for="media_name" class="col-md-4 control-label">Наименование СМИ/никнейм</label>
+                                <label for="media_name" class="col-md-4 control-label">Найменування ЗМІ/нікнейм</label>
 
                                 <div class="col-md-8">
                                     <input id="media_name" type="text" class="form-control" name="media_name" value="{{ old('media_name') }}" required autofocus>
@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
-                                <label for="contact_name" class="col-md-4 control-label">Контактное лицо</label>
+                                <label for="contact_name" class="col-md-4 control-label">Контактна особа</label>
                                 <div class="col-md-8">
                                     <input id="contact_name" type="text" class="form-control" name="contact_name" value="{{ old('contact_name') }}" required autofocus>
 
@@ -58,9 +58,9 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city" class="col-md-4 control-label">Город</label>
+                                <label for="city" class="col-md-4 control-label">Місто</label>
                                 <div class="col-md-8">
-                                    <input id="city" placeholder="Населенный пункт" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
+                                    <input id="city" placeholder="Населений пункт" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
 
                                     @if ($errors->has('city'))
                                         <span class="help-block">
@@ -85,10 +85,10 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('social_link') ? ' has-error' : '' }}">
-                                <label for="social_link" class="col-md-4 control-label">Ссылка на личную страницу</label>
+                                <label for="social_link" class="col-md-4 control-label">Посилання на особисту сторінку</label>
 
                                 <div class="col-md-8">
-                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{ old('social_link') }}" placeholder="vk, fb или tg для связи с ответственным по заявке" required autofocus>
+                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{ old('social_link') }}" placeholder="tg, fb або vk для зв'язку з відповідальним за заявкою" required autofocus>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">
@@ -101,7 +101,7 @@
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
                                     <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#social-panel" >
-                                        Соцсети (нажмите для заполнения)
+                                        Соцмережі (натисніть для заповнення)
                                     </button>
                                 </div>
                             </div>
@@ -109,14 +109,14 @@
                                 <div class="panel panel-default">
                                     <div class="panel-body">
 
-                                        <div class="form-group{{ $errors->has('social_links[vk]') ? ' has-error' : '' }}">
-                                            <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
+                                        <div class="form-group{{ $errors->has('social_links[tg]') ? ' has-error' : '' }}">
+                                            <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
                                             <div class="col-md-8">
-                                                <input id="social_links[vk]" type="text" value="{{ old('social_links[vk]') }}"
-                                                       class="form-control" name="social_links[vk]" autofocus>
-                                                @if ($errors->has('social_links[vk]'))
+                                                <input id="social_links[tg]" type="text" value="{{ old('social_links[tg]') }}"
+                                                       class="form-control" name="social_links[tg]" autofocus>{{ old('social_links[tg]') }}
+                                                @if ($errors->has('social_links[tg]'))
                                                     <span class="help-block">
-                                                    <strong>{{ $errors->first('social_links[vk]') }}</strong>
+                                                    <strong>{{ $errors->first('social_links[tg]') }}</strong>
                                                 </span>
                                                 @endif
                                             </div>
@@ -148,14 +148,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group{{ $errors->has('social_links[tg]') ? ' has-error' : '' }}">
-                                            <label for="social_links[tg]" class="col-md-4 control-label">Telegram</label>
+                                        <div class="form-group{{ $errors->has('social_links[vk]') ? ' has-error' : '' }}">
+                                            <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
                                             <div class="col-md-8">
-                                                <input id="social_links[tg]" type="text" value="{{ old('social_links[tg]') }}"
-                                                       class="form-control" name="social_links[tg]" autofocus>{{ old('social_links[tg]') }}
-                                                @if ($errors->has('social_links[tg]'))
+                                                <input id="social_links[vk]" type="text" value="{{ old('social_links[vk]') }}"
+                                                       class="form-control" name="social_links[vk]" autofocus>
+                                                @if ($errors->has('social_links[vk]'))
                                                     <span class="help-block">
-                                                    <strong>{{ $errors->first('social_links[tg]') }}</strong>
+                                                    <strong>{{ $errors->first('social_links[vk]') }}</strong>
                                                 </span>
                                                 @endif
                                             </div>
@@ -179,9 +179,9 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('prev_part') ? ' has-error' : '' }}">
-                                <label for="prev_part" class="col-md-4 control-label">Предыдущее участие</label>
+                                <label for="prev_part" class="col-md-4 control-label">Попередня участь</label>
                                 <div class="col-md-8">
-                                    <textarea id="prev_part" rows="5" class="form-control" placeholder="Ваше участие в качестве СМИ в фестивалях. Желательно со ссылками на фото/видео/статьи" name="prev_part" autofocus> {{ old('prev_part') }}</textarea>
+                                    <textarea id="prev_part" rows="5" class="form-control" placeholder="Ваша участь як ЗМІ у фестивалях. Бажано з посиланнями на фото/відео/статті" name="prev_part" autofocus> {{ old('prev_part') }}</textarea>
 
                                     @if ($errors->has('prev_part'))
                                         <span class="help-block">
@@ -192,7 +192,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('portfolio_link') ? ' has-error' : '' }}">
-                                <label for="portfolio_link" class="col-md-4 control-label">Ссылка на портфолио</label>
+                                <label for="portfolio_link" class="col-md-4 control-label">Посилання на портфоліо</label>
 
                                 <div class="col-md-8">
                                     <input id="portfolio_link" type="text" class="form-control" name="portfolio_link" value="{{ old('portfolio_link') }}" required autofocus>
@@ -206,7 +206,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('camera') ? ' has-error' : '' }}">
-                                <label for="camera" class="col-md-4 control-label">Модель камеры</label>
+                                <label for="camera" class="col-md-4 control-label">Модель камери</label>
                                 <div class="col-md-8">
                                     <input id="camera" type="text" class="form-control" name="camera" value="{{ old('camera') }}" autofocus>
 
@@ -219,7 +219,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('equipment') ? ' has-error' : '' }}">
-                                <label for="equipment" class="col-md-4 control-label">Доп. техника</label>
+                                <label for="equipment" class="col-md-4 control-label">Дод. техніка</label>
                                 <div class="col-md-8">
                                     <textarea  id="equipment" rows="5" class="form-control" name="equipment"  autofocus required>{{ old('equipment') }}</textarea>
 
@@ -231,23 +231,23 @@
                                 </div>
                             </div>
 
-                            <div style="text-align:center"><strong>Участники</strong></div>
+                            <div style="text-align:center"><strong>Учасники</strong></div>
                             <div id="dynamic_field">
                                 <div class="members" id="row0">
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Фамилия</label>
+                                        <label  class="col-md-4 control-label">Прізвище</label>
                                         <div class="col-md-8">
                                             <input type="text" name="members[0][surname]" class="form-control name_list" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Имя</label>
+                                        <label  class="col-md-4 control-label">Ім'я</label>
                                         <div class="col-md-8">
                                             <input type="text" name="members[0][first_name]" class="form-control name_list" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label  class="col-md-4 control-label">Деятельность на фестивале</label>
+                                        <label  class="col-md-4 control-label">Діяльність на фестивалі</label>
                                         <div class="col-md-8">
                                             <input type="text" name="members[0][duty]" class="form-control name_list" required/>
                                         </div>
@@ -258,16 +258,16 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-8">
-                                    <button type="button" name="add" id="add" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i>Добавить участника</button>
+                                    <button type="button" name="add" id="add" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i>Додати учасника</button>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-success">
-                                        Отправить
+                                        Відправити
                                     </button>
-                                    <p>Нажимая кнопку “Отправить” Вы подтверждаете, что ознакомились с <a href="http://khanifest.com/?page_id=346">правилами фестиваля</a> и даёте согласие на обработку данных оргкомитетом фестиваля.</p>
+                                    <p>Натискаючи кнопку “Надіслати” Ви підтверджуєте, що ознайомилися з <a href="http://khanifest.com/?page_id=346">правилами фестивалю</a> та даєте згоду на обробку даних оргкомітетом фестивалю.</p>
                                 </div>
                             </div>
                         </form>
@@ -282,24 +282,24 @@
                                         '<div class="col-md-12"><hr></div>' +
                                         '<div class="members" id="row'+i+'">' +
                                         '<div class="form-group">'+
-                                        '<label  class="col-md-4 control-label">Фамилия</label>'+
+                                        '<label  class="col-md-4 control-label">Прізвище</label>'+
                                         '<div class="col-md-8">' +
                                         '<input type="text" name="members['+i+'][surname]" class="form-control name_list" required/>' +
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Имя</label>' +
+                                        '<label class="col-md-4 control-label">Ім`\я</label>' +
                                         '<div class="col-md-8">' +
                                         '<input type="text" name="members['+i+'][first_name]" class="form-control name_list" required/>' +
                                         '</div>' +
                                         '</div>'+
                                         '<div class="form-group">' +
-                                        '<label class="col-md-4 control-label">Деятельность на фестивале</label>' +
+                                        '<label class="col-md-4 control-label">Діяльність на фестивалі</label>' +
                                         '<div class="col-md-7">' +
                                         '<input type="text" name="members['+i+'][duty]" class="form-control name_list" required/>' +
                                         '</div>' +
                                         '<div class="col-md-1">'+
-                                        '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Удалить участника"> <i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
+                                        '<a class="btn btn-info btn-sm" name="remove" id="btn_remove" title="Видалити користувача"> <i class="fa fa-user-times" aria-hidden="true"></i> </a>' +
                                         '</div>' +
                                         '</div>' +
                                         '</div>'

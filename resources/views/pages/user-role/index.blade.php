@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Роли пользователей')
+@section('title', 'Ролі користувачів')
 
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h4><strong>Роли пользователей</strong></h4>
+            <h4><strong>Ролі користувачів</strong></h4>
             <div style="display: inline-block; margin-top: 5px;">
                 <form action="{{url('/user-role')}}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Поиск по пользователю" >
+                        <input type="text" class="form-control" name="search" placeholder="Пошук за користувачем" >
                         <span class="input-group-addon btn btn-default">
                             <button type="submit">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
-                            <button type="submit">сбросить</button>
+                            <button type="submit">скинути</button>
                         </span>
                     </div>
                 </form>
@@ -43,7 +43,7 @@
                                 <td>@if($user->key) {{$user->key}}@endif</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-info btn-sm" href="/user-role/{{$user->id}}/edit" title="Редактировать">
+                                        <a class="btn btn-info btn-sm" href="/user-role/{{$user->id}}/edit" title="Редагувати">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                     </div>

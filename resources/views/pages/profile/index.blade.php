@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Профиль')
+@section('title', 'Профіль')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Профиль</div>
+                    <div class="panel-heading">Профіль</div>
 
                     <div class="panel-body">
                         <div class="form-horizontal">
@@ -23,7 +23,7 @@
 
                             @if($profile->surname)
                                 <div>
-                                    <label for="surname" class="col-md-4">Фамилия</label>
+                                    <label for="surname" class="col-md-4">Прізвище</label>
                                     <div class="col-md-6">
                                         <p id="surname"> {{ $profile->surname }}</p>
                                     </div>
@@ -32,7 +32,7 @@
 
                             @if($profile->first_name)
                                 <div>
-                                    <label for="first_name" class="col-md-4">Имя</label>
+                                    <label for="first_name" class="col-md-4">Ім'я</label>
                                     <div class="col-md-6">
                                         <p id="first_name">{{ $profile->first_name }}</p>
                                     </div>
@@ -40,7 +40,7 @@
                             @endif
 
                             <div>
-                                <label for="nickname" class="col-md-4">Никнейм</label>
+                                <label for="nickname" class="col-md-4">Нікнейм</label>
                                 <div class="col-md-6">
                                     <p id="nickname"> {{ $profile->nickname }}</p>
                                 </div>
@@ -48,7 +48,7 @@
 
                             @if($profile->birthday)
                                 <div>
-                                    <label for="birthday" class="col-md-4">Дата рождения</label>
+                                    <label for="birthday" class="col-md-4">Дата народження</label>
                                     <div class="col-md-6">
                                         <p id="birthday"> {{ $profile->birthday }}</p>
                                     </div>
@@ -57,7 +57,7 @@
 
                             @if($profile->city)
                                 <div>
-                                    <label for="city" class="col-md-4">Город</label>
+                                    <label for="city" class="col-md-4">Місто</label>
                                     <div class="col-md-6">
                                         <p id="city"> {{ $profile->city }}</p>
                                     </div>
@@ -81,15 +81,15 @@
                             </div>
 
                             @if(!$social_links->vk==null||!$social_links->fb==null||!$social_links->fb==null||!$social_links->sk==null||!($social_links->tg)==null)
-                                <div class="col-md-12"><h4>Соцсети</h4></div>
+                                <div class="col-md-12"><h4>Соцмережі</h4></div>
                                 <div class="col-md-12"><hr></div>
                             @endif
 
-                            @if(!$social_links->vk==null)
+                            @if(!($social_links->tg)==null)
                                 <div>
-                                    <label for="social_links[vk]" class="col-md-4">VK</label>
+                                    <label for="social_links[tg]" class="col-md-4">Telegram</label>
                                     <div class="col-md-6">
-                                        <p id="social_links[vk]"> {{ $social_links->vk}}</p>
+                                        <p id="social_links[tg]">{{ $social_links->tg }}</p>
                                     </div>
                                 </div>
                             @endif
@@ -121,18 +121,18 @@
                                 </div>
                             @endif
 
-                            @if(!($social_links->tg)==null)
-                                 <div>
-                                    <label for="social_links[tg]" class="col-md-4">Telegram</label>
+                            @if(!$social_links->vk==null)
+                                <div>
+                                    <label for="social_links[vk]" class="col-md-4">VK</label>
                                     <div class="col-md-6">
-                                        <p id="social_links[tg]">{{ $social_links->tg }}</p>
+                                        <p id="social_links[vk]"> {{ $social_links->vk}}</p>
                                     </div>
                                 </div>
                             @endif
 
                             <div>
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="{{ route('profile.edit')}}" class="btn btn-info" role="button">Редактировать</a>
+                                    <a href="{{ route('profile.edit')}}" class="btn btn-info" role="button">Редагувати</a>
                                 </div>
                             </div>
                         </div>
