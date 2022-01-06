@@ -64,6 +64,6 @@ class StoreAction extends Action
         SendForAdminNewAppEmailJob::dispatch($mail)
             ->delay(now()->addSeconds(2));
 
-        return redirect('cosplay')->with('success', "Вашу заявку успішно відправленоа.");
+        return redirect('cosplay')->with('success', "Вашу заявку успішно відправлено.");
     }
 }

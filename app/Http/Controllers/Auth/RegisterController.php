@@ -148,7 +148,7 @@ class RegisterController extends Controller
             $user = $this->create($input)->toArray();
             $action->run( $input, $user['id']);
 
-            return redirect()->to('login')->with('success', "Користувач успішно створено.
+            return redirect()->to('login')->with('success', "Користувача успішно створено.
              Вам надіслано код активації,
              за яким Ви можете підтвердити свою реєстрацію.
              Будь ласка, перевірте пошту.");

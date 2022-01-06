@@ -63,6 +63,6 @@ class UpdateAction extends Action
                 ->delay(now()->addSeconds(2));
         }
 
-        return redirect('press')->with('success', "Вашу заявку успішно зміненоа.");
+        return redirect('press')->with('success', "Вашу заявку успішно змінено.");
     }
 }

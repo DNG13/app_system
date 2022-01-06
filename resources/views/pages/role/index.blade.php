@@ -28,7 +28,7 @@
                             <th><p>Назва</p> <a href="{{ $sort['title']['link'] }}"><i class="fa {{ $sort['title']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Активна</p> <a href="{{ $sort['active']['link'] }}"><i class="fa {{ $sort['active']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Дата створенняя</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th>Дея</th>
+                            <th>Дія</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,7 @@
                                 <td>{{ date('j/n/Y H:i', strtotime($role->created_at )) }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-info btn-sm" href="/role/{{$role->key }}/edit" title="Редагуватиь">
+                                        <a class="btn btn-info btn-sm" href="/role/{{$role->key }}/edit" title="Редагувати">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                         <a class="btn btn-info btn-sm" href="/role/delete?key={{ $role->key }}" title="Видалити">
