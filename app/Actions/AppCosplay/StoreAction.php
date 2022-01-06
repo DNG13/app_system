@@ -33,7 +33,7 @@ class StoreAction extends Action
         $cosplays->props = $request->get('props');
         $cosplays->comment = $request->get('comment');
         $cosplays->user_id = Auth::user()->id;
-        $cosplays->status = 'В обработке';
+        $cosplays->status = AppCosplay::APP_STATUS_IN_PROCESSING;
 
         $members = [];
         foreach($request->input('members') as  $key => $value) {

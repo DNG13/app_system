@@ -33,7 +33,7 @@ class StoreAction extends Action
         $fair->description = $request->get('description');
         $fair->electrics = $request->get('electrics');
         $fair->user_id = Auth::user()->id;
-        $fair->status = 'В обработке';
+        $fair->status = AppFair::APP_STATUS_IN_PROCESSING;
         $members = [];
         foreach($request->input('members') as  $key => $value) {
             $members["member{$key}"] = $value;

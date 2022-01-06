@@ -2,12 +2,14 @@
 
 namespace App\Actions\AppVolunteer;
 
+use App\Models\AppType;
 use App\User;
 use App\Abstracts\Action;
 use App\Jobs\SendApplicationEmailJob;
 use App\Jobs\SendForAdminNewAppEmailJob;
 use App\Models\AppVolunteer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -64,7 +66,8 @@ class StoreAction extends Action
         $volunteer->difficulties = $request->get('difficulties');
         $volunteer->experience = $request->get('experience');
         $volunteer->user_id = Auth::user()->id;
-        $volunteer->status = 'В обработке';
+        $volunteer->status = AppVolunteer::APP_STATUS_IN_PROCESSING;
+        $volunteer->type_id = AppType::where('slug', 'volunteer_general')->first()->id;
         $volunteer->save();
 
         $user = User::find( Auth::user()->id);

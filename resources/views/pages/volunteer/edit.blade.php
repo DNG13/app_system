@@ -27,13 +27,13 @@
                                 <div class="col-md-8">
                                     <select class="form-control input-sm" id="status" name="status">
                                         @if(!empty($volunteer->status))
-                                            <option selected value="{{$volunteer->status}}">{{$volunteer->status}}</option>
+                                            <option selected value="{{$volunteer->status}}">{{$volunteer->getStatusText()}}</option>
                                         @endif
-                                        <option value="В обработке">В обробці</option>
-                                        <option value="Ожидает ответа пользователя">Чекає на відповідь користувача</option>
-                                        <option value="Принята">Прийнята</option>
-                                        <option value="Отклонена">Відхилено</option>
-                                        <option value="Внесены изменения">Внесені зміни</option>
+                                            <option value="{{\App\Models\AppVolunteer::APP_STATUS_IN_PROCESSING}}">В обробці</option>
+                                            <option value="{{\App\Models\AppVolunteer::APP_STATUS_WAIT_USER}}">Чекає на відповідь користувача</option>
+                                            <option value="{{\App\Models\AppVolunteer::APP_STATUS_ACCEPTED}}">Прийнята</option>
+                                            <option value="{{\App\Models\AppVolunteer::APP_STATUS_REJECTED}}">Відхилено</option>
+                                            <option value="{{\App\Models\AppVolunteer::APP_STATUS_CHANGED}}">Внесені зміни</option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <span class="help-block">

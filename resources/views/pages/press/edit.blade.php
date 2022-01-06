@@ -42,13 +42,13 @@
                                 <div class="col-md-8">
                                     <select class="form-control input-sm" id="status" name="status">
                                         @if(!empty($press->status))
-                                            <option selected value="{{$press->status}}">{{$press->status}}</option>
+                                            <option selected value="{{$press->status}}">{{$press->getStatusText()}}</option>
                                         @endif
-                                        <option value="В обработке">В обробці</option>
-                                        <option value="Ожидает ответа пользователя">Чекає на відповідь користувача</option>
-                                        <option value="Принята">Прийнята</option>
-                                        <option value="Отклонена">Відхилено</option>
-                                        <option value="Внесены изменения">Внесені зміни</option>
+                                            <option value="{{\App\Models\AppPress::APP_STATUS_IN_PROCESSING}}">В обробці</option>
+                                            <option value="{{\App\Models\AppPress::APP_STATUS_WAIT_USER}}">Чекає на відповідь користувача</option>
+                                            <option value="{{\App\Models\AppPress::APP_STATUS_ACCEPTED}}">Прийнята</option>
+                                            <option value="{{\App\Models\AppPress::APP_STATUS_REJECTED}}">Відхилено</option>
+                                            <option value="{{\App\Models\AppPress::APP_STATUS_CHANGED}}">Внесені зміни</option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <span class="help-block">

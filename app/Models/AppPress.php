@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class AppPress extends Model
+class AppPress extends Application
 {
     protected $fillable = [
         'user_id',
@@ -30,14 +28,4 @@ class AppPress extends Model
     ];
 
     protected $table = 'app_press';
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class, 'user_id', 'user_id');
-    }
-
-    public function type()
-    {
-        return $this->hasOne(AppType::class, 'id', 'type_id');
-    }
 }

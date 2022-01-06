@@ -43,13 +43,13 @@ class AppPressController extends Controller
         $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
         $apps = AppPress::all()->pluck('status');
         foreach ($apps as $app) {
-            if($app == 'Принята') {
+            if($app == AppPress::APP_STATUS_ACCEPTED) {
                 $count['accepted']++;
             }
-            if($app == 'Отклонена') {
+            if($app == AppPress::APP_STATUS_REJECTED) {
                 $count['rejected']++;
             }
-            if($app == 'В обработке') {
+            if($app == AppPress::APP_STATUS_IN_PROCESSING) {
                 $count['processing']++;
             }
         }
@@ -119,7 +119,7 @@ class AppPressController extends Controller
         if( is_null($press) || ($press->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('press');
         }
-        if($press->status == 'Отклонена' && !Auth::user()->isAdmin()){
+        if($press->status == AppPress::APP_STATUS_REJECTED && !Auth::user()->isAdmin()){
             return redirect('press')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагувати.');
         }
         $types = AppType::where('app_type', 'press')->get()->pluck('title', 'id');

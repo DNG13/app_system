@@ -75,11 +75,11 @@
                                             @else
                                                 <option selected></option>
                                             @endif
-                                            <option value="В обработке">В обробці</option>
-                                            <option value="Ожидает ответа пользователя">Чекає на відповідь кор-ча</option>
-                                            <option value="Принята">Прийнята</option>
-                                            <option value="Отклонена">Відхилено</option>
-                                            <option value="Внесены изменения">Внесені зміни</option>
+                                                <option value="{{\App\Models\AppCosplay::APP_STATUS_IN_PROCESSING}}">В обробці</option>
+                                                <option value="{{\App\Models\AppCosplay::APP_STATUS_WAIT_USER}}">Чекає на відповідь користувача</option>
+                                                <option value="{{\App\Models\AppCosplay::APP_STATUS_ACCEPTED}}">Прийнята</option>
+                                                <option value="{{\App\Models\AppCosplay::APP_STATUS_REJECTED}}">Відхилено</option>
+                                                <option value="{{\App\Models\AppCosplay::APP_STATUS_CHANGED}}">Внесені зміни</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -129,10 +129,10 @@
                     <tbody>
                     @foreach($applications as $application)
                         <tr class="odd" style="{{
-                        $application->status == "Отклонена" ? 'background-color: #f5ebee' :
-                        ($application->status == "Принята" ? 'background-color: #dcedc8' :
-                        ($application->status == "Ожидает ответа пользователя" ? 'background-color: #f5f5c4' :
-                        ($application->status == "Внесены изменения" ? 'background-color: #e1f5f5' : '')))
+                        $application->status == \App\Models\AppCosplay::APP_STATUS_REJECTED ? 'background-color: #f5ebee' :
+                        ($application->status == \App\Models\AppCosplay::APP_STATUS_ACCEPTED ? 'background-color: #dcedc8' :
+                        ($application->status == \App\Models\AppCosplay::APP_STATUS_WAIT_USER ? 'background-color: #f5f5c4' :
+                        ($application->status == \App\Models\AppCosplay::APP_STATUS_CHANGED ? 'background-color: #e1f5f5' : '')))
                         }}">
                             <td>{{ $application->id }}</td>
                             <td>
@@ -145,7 +145,7 @@
                                 @endif
                             </td>
                             <td>{{ $application->type->title }}</td>
-                            <td>{{ $application->status }}</td>
+                            <td>{{ $application->getStatusText() }}</td>
                             <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>
                             <td>{{ date('j/n/Y H:i', strtotime($application->updated_at )) }}</td>
                             <td>{{ $application->title }}</td>

@@ -41,13 +41,13 @@ class AppVolunteerController extends Controller
         $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
         $apps = AppVolunteer::all()->pluck('status');
         foreach ($apps as $app) {
-            if($app == 'Принята') {
+            if($app == AppVolunteer::APP_STATUS_ACCEPTED) {
                 $count['accepted']++;
             }
-            if($app == 'Отклонена') {
+            if($app == AppVolunteer::APP_STATUS_REJECTED) {
                 $count['rejected']++;
             }
-            if($app == 'В обработке') {
+            if($app == AppVolunteer::APP_STATUS_IN_PROCESSING) {
                 $count['processing']++;
             }
         }
@@ -113,7 +113,7 @@ class AppVolunteerController extends Controller
         if( is_null($volunteer) || ($volunteer->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('volunteer');
         }
-        if($volunteer->status == 'Отклонена' && !Auth::user()->isAdmin()){
+        if($volunteer->status == AppVolunteer::APP_STATUS_REJECTED && !Auth::user()->isAdmin()){
             return redirect('volunteer')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагуватить.');
         }
         $social_links = $volunteer->social_links;

@@ -20,6 +20,7 @@
                                         <option value="cosplay" @if($type->app_type == 'cosplay') selected @endif >Косплей</option>
                                         <option value="fair" @if($type->app_type == 'fair' ) selected @endif >Ярмарок</option>
                                         <option value="press" @if($type->app_type == 'press') selected @endif >Преса</option>
+                                        <option value="volunteer" @if($type->app_type == 'volunteer') selected @endif >Волонтери</option>
                                     </select>
                                     @if ($errors->has('type'))
                                         <span class="help-block">
@@ -28,6 +29,20 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                                <label for="title" class="col-md-4 control-label">Ідентифікатор</label>
+                                <div class="col-md-6">
+                                    <input id="slug" type="text" class="form-control" name="slug" value="{{ $type->slug }}" required >
+
+                                    @if ($errors->has('slug'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('slug') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="col-md-4 control-label">Назвае</label>
                                 <div class="col-md-6">

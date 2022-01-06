@@ -43,13 +43,13 @@ class AppFairController extends Controller
         $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
         $apps = AppFair::all()->pluck('status');
         foreach ($apps as $app) {
-            if($app == 'Принята') {
+            if($app == AppFair::APP_STATUS_ACCEPTED) {
                 $count['accepted']++;
             }
-            if($app == 'Отклонена') {
+            if($app == AppFair::APP_STATUS_REJECTED) {
                 $count['rejected']++;
             }
-            if($app == 'В обработке') {
+            if($app == AppFair::APP_STATUS_IN_PROCESSING) {
                 $count['processing']++;
             }
         }
@@ -121,7 +121,7 @@ class AppFairController extends Controller
         if( is_null($fair) || ($fair->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('expo');
         }
-        if($fair->status == 'Отклонена' && !Auth::user()->isAdmin()){
+        if($fair->status == AppFair::APP_STATUS_REJECTED && !Auth::user()->isAdmin()){
             return redirect('expo')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагувати.');
         }
         $types = AppType::where('app_type', 'fair')->get()->pluck('title', 'id');

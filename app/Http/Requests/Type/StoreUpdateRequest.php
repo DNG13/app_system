@@ -26,6 +26,7 @@ class StoreUpdateRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'type' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
         ];
     }
 }

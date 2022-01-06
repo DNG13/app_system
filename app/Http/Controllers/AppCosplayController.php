@@ -46,13 +46,13 @@ class AppCosplayController extends Controller
         $count = ['accepted'=>0, 'rejected'=>0, 'processing'=>0];
         $apps = AppCosplay::all()->pluck('status');
         foreach ($apps as $app) {
-            if($app == 'Принята') {
+            if($app == AppCosplay::APP_STATUS_ACCEPTED) {
                 $count['accepted']++;
             }
-            if($app == 'Отклонена') {
+            if($app == AppCosplay::APP_STATUS_REJECTED) {
                 $count['rejected']++;
             }
-            if($app == 'В обработке') {
+            if($app == AppCosplay::APP_STATUS_IN_PROCESSING) {
                 $count['processing']++;
             }
         }
@@ -122,7 +122,7 @@ class AppCosplayController extends Controller
         if( is_null($cosplay) || ($cosplay->user_id !== Auth::user()->id && !Auth::user()->isAdmin())) {
             return redirect('cosplay');
         }
-        if($cosplay->status == 'Отклонена' && !Auth::user()->isAdmin()){
+        if($cosplay->status == AppCosplay::APP_STATUS_REJECTED && !Auth::user()->isAdmin()) {
            return redirect('cosplay')->with('warning', 'Вашу заявку відхилено. Ви більше не можете її редагувати.');
         }
         $files = AppFile::where('app_kind', 'cosplay')

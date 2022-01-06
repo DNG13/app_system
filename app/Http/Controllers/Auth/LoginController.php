@@ -59,14 +59,12 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-//         for lowercase
         $request_array = $request->all();
         $request_array['email'] = strtolower($request->email);
         $request->replace($request_array);
         $user = User::where('email', $request_array['email'])->first();
 
         if (!$user || !$user->confirmed_at) {
-
             throw ValidationException::withMessages([
                 $this->username() => 'Користувач не підтвердив адресу електронної пошти',
             ]);

@@ -33,7 +33,7 @@
                         <div>
                             <label for="type_id" class="col-md-4">Статус заявки</label>
                             <div class="col-md-8">
-                                <p id="type_id">{{ $cosplay->status}}</p>
+                                <p id="type_id">{{ $cosplay->getStatusText()}}</p>
                             </div>
                         </div>
 
@@ -200,7 +200,7 @@
                             @endforeach
                         </ul>
                     @endif
-                    @if ($cosplay->status != 'Отклонена')
+                    @if ($cosplay->status != \App\Models\AppCosplay::APP_STATUS_REJECTED)
                         <form method="POST" action="{{ url('/comment/create')}}">
                             {{ csrf_field() }}
                             <div>
