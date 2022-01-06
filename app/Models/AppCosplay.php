@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class AppCosplay extends Model
+class AppCosplay extends Application
 {
     protected $fillable = [
         'user_id',
@@ -24,14 +22,4 @@ class AppCosplay extends Model
     ];
 
     protected $table = 'app_cosplays';
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class, 'user_id', 'user_id');
-    }
-
-    public function type()
-    {
-        return $this->hasOne(AppType::class, 'id', 'type_id');
-    }
 }

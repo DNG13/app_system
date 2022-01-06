@@ -10,7 +10,7 @@ class AppType extends Model
 
     protected $table = 'app_types';
 
-    protected $fillable = ['user_id',  'title', 'app_type'];
+    protected $fillable = ['user_id',  'title', 'app_type', 'slug'];
 
     public function profile()
     {

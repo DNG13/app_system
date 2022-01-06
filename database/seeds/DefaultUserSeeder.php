@@ -14,26 +14,47 @@ class DefaultUserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'id' => '1',
+        $user = User::create([
             'email' => 'nataljasimple@gmail.com',
             'password' => '$2y$10$5.voPgq.H5kmBO7dsHN5mu4yl/EaClGt.g7WISOfGhaGTGIGJtIF6',
-            'created_at' => '2018-01-08 12:37:30',
-            'confirmed_at' => '2018-01-08 12:37:31',
+            'created_at' => gmdate('Y-m-d H:i:s'),
+            'confirmed_at' => gmdate('Y-m-d H:i:s'),
             'confirmation_code'=> [],
         ]);
         Profile::create([
-            'user_id' => '1',
+            'user_id' => $user->id,
             'first_name' => 'Admin',
             'surname' => 'Main',
             'nickname' => 'Main Admin',
-            'birthday' => '2018-01-08 12:37:00',
-            'created_at' => '2018-01-08 12:37:31',
+            'birthday' => gmdate('Y-m-d H:i:s'),
+            'created_at' => gmdate('Y-m-d H:i:s'),
             'social_links' => '{"vk":null,"in":null,"fb":null,"sk":null,"tg":null}'
 
         ]);
         UserRole::create([
-            'user_id' => '1',
+            'user_id' => $user->id,
+            'key' => 'admin',
+        ]);
+
+        $user = User::create([
+            'email' => 'iigkey@gmail.com',
+            'password' => '$2y$10$Q0XwYp23CD.KDCSc9J.KqufCFwHB/gFHyTkAjXDAeoju7lt9HW3vO',
+            'created_at' => gmdate('Y-m-d H:i:s'),
+            'confirmed_at' => gmdate('Y-m-d H:i:s'),
+            'confirmation_code'=> [],
+        ]);
+        Profile::create([
+            'user_id' => $user->id,
+            'first_name' => 'Sky',
+            'surname' => 'Wind',
+            'nickname' => 'SkyWind',
+            'birthday' => gmdate('Y-m-d H:i:s'),
+            'created_at' => gmdate('Y-m-d H:i:s'),
+            'social_links' => '{"vk":null,"in":null,"fb":null,"sk":null,"tg":null}'
+
+        ]);
+        UserRole::create([
+            'user_id' => $user->id,
             'key' => 'admin',
         ]);
 

@@ -25,17 +25,19 @@
                         <thead>
                         <tr>
                             <th><p>ID</p> <a href="{{ $sort['id']['link'] }}"><i class="fa {{ $sort['id']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Ідентифікатор</p> <a href="{{ $sort['slug']['link'] }}"><i class="fa {{ $sort['slug']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Автор</p> <a href="{{ $sort['user_id']['link'] }}"><i class="fa {{ $sort['user_id']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Тип заявки</p> <a href="{{ $sort['app_type']['link'] }}"><i class="fa {{ $sort['app_type']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Назва</p> <a href="{{ $sort['title']['link'] }}"><i class="fa {{ $sort['title']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Дата створення</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th>Дея</th>
+                            <th>Дія</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($types as $type)
                             <tr class="odd">
                                 <td>{{ $type->id }}</td>
+                                <td>{{ $type->slug }}</td>
                                 @if(!$type->user_id==null)
                                     <td>{{ $type->profile->nickname }}</td>
                                 @else

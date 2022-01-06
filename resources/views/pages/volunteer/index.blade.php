@@ -7,9 +7,9 @@
         <div class="col-md-10 col-md-offset-1">
             <h4><strong>Заявка волонтерство</strong></h4>
             @if(Auth::user()->isAdmin())
-                В обработке: {{$count['processing']}} <br>
-                Принято: {{$count['accepted']}} <br>
-                Отклонено: {{$count['rejected']}}
+                В обробці: {{$count['processing']}} <br>
+                Прийнято: {{$count['accepted']}} <br>
+                Відхилено: {{$count['rejected']}}
             @endif
             <div style="padding-bottom: 25px;">
                 <a class="btn btn-info btn pull-right"  href="{{url('/volunteer/create')}}">Подати заявку</a>
@@ -61,10 +61,10 @@
                         <tbody>
                         @foreach($applications as $application)
                             <tr class="odd"  style="{{
-                        $application->status == "Отклонена" ? 'background-color: #f5ebee' :
-                        ($application->status == "Принята" ? 'background-color: #dcedc8' :
-                        ($application->status == "Ожидает ответа пользователя" ? 'background-color: #f5f5c4' :
-                        ($application->status == "Внесены изменения" ? 'background-color: #e1f5f5' : '')))
+                        $application->status == \App\Models\AppVolunteer::APP_STATUS_REJECTED ? 'background-color: #f5ebee' :
+                        ($application->status == \App\Models\AppVolunteer::APP_STATUS_ACCEPTED ? 'background-color: #dcedc8' :
+                        ($application->status == \App\Models\AppVolunteer::APP_STATUS_WAIT_USER ? 'background-color: #f5f5c4' :
+                        ($application->status == \App\Models\AppVolunteer::APP_STATUS_CHANGED ? 'background-color: #e1f5f5' : '')))
                         }}">
                                 <td>{{ $application->id }}</td>
                                 <td>
@@ -76,7 +76,7 @@
                                         {{ $application->profile->nickname }}
                                     @endif
                                 </td>
-                                <td>{{ $application->status }}</td>
+                                <td>{{ $application->getStatusText() }}</td>
                                 <td>{{ date('j/n/Y H:i', strtotime($application->created_at )) }}</td>
                                 <td>{{ date('j/n/Y H:i', strtotime($application->updated_at )) }}</td>
                                 <td>{{ $application->nickname }}</td>

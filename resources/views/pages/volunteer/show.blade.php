@@ -42,7 +42,7 @@
                             <div>
                                 <label for="type_id" class="col-md-4">Статус заявки</label>
                                 <div class="col-md-8">
-                                    <p id="type_id">{{ $volunteer->status}}</p>
+                                    <p id="type_id">{{ $volunteer->getStatusText()}}</p>
                                 </div>
                             </div>
 
@@ -167,7 +167,7 @@
                             @endforeach
                         </ul>
                     @endif
-                        @if ($volunteer->status != 'Отклонена')
+                        @if ($volunteer->status != \App\Models\AppVolunteer::APP_STATUS_REJECTED)
                     <form method="POST" action="{{ url('/comment/create')}}">
                         {{ csrf_field() }}
                         <div>

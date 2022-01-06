@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class AppFair extends Model
+class AppFair extends Application
 {
     protected $fillable = [
         'user_id',
@@ -30,14 +28,4 @@ class AppFair extends Model
     ];
 
     protected $table = 'app_fairs';
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class, 'user_id', 'user_id');
-    }
-
-    public function type()
-    {
-        return $this->hasOne(AppType::class, 'id', 'type_id');
-    }
 }

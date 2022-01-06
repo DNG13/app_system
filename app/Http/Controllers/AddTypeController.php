@@ -16,7 +16,8 @@ class AddTypeController extends Controller
         'user_id',
         'app_type',
         'created_at',
-        'title'
+        'title',
+        'slug'
     ];
     /**
      * @param Request $request
@@ -58,6 +59,7 @@ class AddTypeController extends Controller
         $type = new AppType();
         $type->title = $request->get('title');
         $type->app_type = $request->get('type');
+        $type->slug = $request->get('slug');
         $type->user_id = Auth::user()->id;
         $type->created_at = Carbon::now();
         $type->save();
@@ -90,8 +92,8 @@ class AddTypeController extends Controller
         $type = AppType::where('id', $id)->first();
         $type->title = $request->get('title');
         $type->app_type = $request->get('type');
+        $type->slug = $request->get('slug');
         $type->user_id = Auth::user()->id;
-        $type->created_at = Carbon::now();
         $type->save();
 
         return redirect('type');

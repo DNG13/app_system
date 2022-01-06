@@ -28,7 +28,7 @@
                             <div>
                                 <label for="type_id" class="col-md-4">Статус заявки</label>
                                 <div class="col-md-8">
-                                    <p id="type_id">{{ $press->status}}</p>
+                                    <p id="type_id">{{ $press->getStatusText()}}</p>
                                 </div>
                             </div>
 
@@ -273,7 +273,7 @@
                             @endforeach
                         </ul>
                     @endif
-                        @if ($press->status != 'Отклонена')
+                        @if ($press->status != \App\Models\AppPress::APP_STATUS_REJECTED)
                     <form method="POST" action="{{ url('/comment/create')}}">
                             {{ csrf_field() }}
                             <div>

@@ -32,7 +32,7 @@ class StoreAction extends Action
         $press->city = $request->get('city');
         $press->camera = $request->get('camera');
         $press->user_id = Auth::user()->id;
-        $press->status = 'В обработке';
+        $press->status = AppPress::APP_STATUS_IN_PROCESSING;
         $members = [];
         foreach($request->input('members') as  $key => $value) {
             $members["member{$key}"] = $value;
