@@ -12,7 +12,7 @@
                 Відхилено: {{$count['rejected']}}
             @endif
             <div style="padding-bottom: 25px;">
-                <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подати заяву</a>
+                <a class="btn btn-info btn pull-right"  href="{{url('/press/create')}}">Подати заявку</a>
             </div>
             <div style="display: inline-block; margin-top: 5px;">
                 <form action="{{url('/press')}}" method="GET">
@@ -115,14 +115,14 @@
                         <th><p>Подавець заявки</p> <a href="{{ $sort['user_id']['link'] }}"><i class="fa {{ $sort['user_id']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Тип заявки</p> <a href="{{ $sort['type_id']['link'] }}"><i class="fa {{ $sort['type_id']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Статус</p> <a href="{{ $sort['status']['link'] }}"><i class="fa {{ $sort['status']['icon'] }}" aria-hidden="true"></i></a></th>
-                        <th><p>Дата подачи</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
+                        <th><p>Дата подачі</p> <a href="{{ $sort['created_at']['link'] }}"><i class="fa {{ $sort['created_at']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Дата оновлення</p> <a href="{{ $sort['updated_at']['link'] }}"><i class="fa {{ $sort['updated_at']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Назва ЗМІ</p> <a href="{{ $sort['media_name']['link'] }}"><i class="fa {{ $sort['media_name']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Контактна особа</p> <a href="{{ $sort['contact_name']['link'] }}"><i class="fa {{ $sort['contact_name']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Телефон</p> <a href="{{ $sort['phone']['link'] }}"><i class="fa {{ $sort['phone']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p>Місто</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
                         <th><p><i class="fa fa-users fa-2x" aria-hidden="true"></i>(человек)</p> <a href="{{ $sort['members_count']['link'] }}"><i class="fa {{ $sort['members_count']['icon'] }}" aria-hidden="true"></i></a></th>
-                        <th>Дея</th>
+                        <th>Дія</th>
                     </tr>
                     </thead>
                     <tbody>

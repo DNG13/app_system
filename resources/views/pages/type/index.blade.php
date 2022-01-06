@@ -48,7 +48,7 @@
                                 <td>{{ date('j/n/Y H:i', strtotime($type->created_at )) }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-info btn-sm" href="/type/{{$type->id }}/edit" title="Редагуватиь">
+                                        <a class="btn btn-info btn-sm" href="/type/{{$type->id }}/edit" title="Редагувати">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                         <a class="btn btn-info btn-sm" href="/type/delete?id={{ $type->id }}" title="Видалити">

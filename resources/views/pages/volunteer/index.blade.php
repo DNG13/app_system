@@ -55,7 +55,7 @@
                             <th><p>Місто</p> <a href="{{ $sort['city']['link'] }}"><i class="fa {{ $sort['city']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Можливі труднощі</p> <a href="{{ $sort['difficulties']['link'] }}"><i class="fa {{ $sort['difficulties']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Вік</p> <a href="{{ $sort['age']['link'] }}"><i class="fa {{ $sort['age']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th>Дея</th>
+                            <th>Дія</th>
                         </tr>
                         </thead>
                         <tbody>
