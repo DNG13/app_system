@@ -14,7 +14,7 @@
                             <button type="submit">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
-                            <button type="submit">скинути</button>
+                            <button type="submit">зкинути</button>
                         </span>
                     </div>
                 </form>
@@ -24,9 +24,9 @@
                         <thead>
                         <tr>
                             <th><p>ID</p> <a href="{{ $sort['id']['link'] }}"><i class="fa {{ $sort['id']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th><p>Пользователь</p><a href="{{ $sort['nickname']['link'] }}"><i class="fa {{ $sort['nickname']['icon'] }}" aria-hidden="true"></i></a></th>
+                            <th><p>Користувач</p><a href="{{ $sort['nickname']['link'] }}"><i class="fa {{ $sort['nickname']['icon'] }}" aria-hidden="true"></i></a></th>
                             <th><p>Роль</p><a href="{{ $sort['key']['link'] }}"><i class="fa {{ $sort['key']['icon'] }}" aria-hidden="true"></i></a></th>
-                            <th>Действие</th>
+                            <th>Дія</th>
                         </tr>
                         </thead>
                         <tbody>

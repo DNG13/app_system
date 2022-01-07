@@ -15,7 +15,7 @@
                                 <button type="submit">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>
-                                <button type="submit">скинути</button>
+                                <button type="submit">зкинути</button>
                             </span>
                         </div>
                     </form>
