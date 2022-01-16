@@ -45,7 +45,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-С уважением, оргкомитет.
+З повагою,<br>Оргкомітет фестивалю Ханіфест
 @endif
 
 {{-- Subcopy --}}
