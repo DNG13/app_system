@@ -162,20 +162,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('social_links->vk') ? ' has-error' : '' }}">
-                                <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
-
-                                <div class="col-md-6">
-                                    <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ $social_links->vk }}" autofocus>
-
-                                    @if ($errors->has('social_links->vk'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('social_links->vk') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-info">

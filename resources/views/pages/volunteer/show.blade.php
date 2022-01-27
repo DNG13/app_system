@@ -103,15 +103,6 @@
                                 <div class="col-md-12"><hr></div>
                             @endif
 
-                            @if(!empty($social_links['vk']))
-                                <div>
-                                    <label for="social_links[vk]" class="col-md-4">VK</label>
-                                    <div class="col-md-8">
-                                        <p id="social_links[vk]"> {{ $social_links['vk']}}</p>
-                                    </div>
-                                </div>
-                            @endif
-
                             @if(!empty($social_links['fb']))
                                 <div>
                                     <label for="social_links[fb]" class="col-md-4">Facebook</label>

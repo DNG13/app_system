@@ -28,7 +28,7 @@ class DefaultUserSeeder extends Seeder
             'nickname' => 'Main Admin',
             'birthday' => gmdate('Y-m-d H:i:s'),
             'created_at' => gmdate('Y-m-d H:i:s'),
-            'social_links' => '{"vk":null,"in":null,"fb":null,"sk":null,"tg":null}'
+            'social_links' => '{"in":null,"fb":null,"sk":null,"tg":null}'
 
         ]);
         UserRole::create([
@@ -50,7 +50,7 @@ class DefaultUserSeeder extends Seeder
             'nickname' => 'SkyWind',
             'birthday' => gmdate('Y-m-d H:i:s'),
             'created_at' => gmdate('Y-m-d H:i:s'),
-            'social_links' => '{"vk":null,"in":null,"fb":null,"sk":null,"tg":null}'
+            'social_links' => '{"in":null,"fb":null,"sk":null,"tg":null}'
 
         ]);
         UserRole::create([

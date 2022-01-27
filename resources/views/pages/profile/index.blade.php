@@ -80,7 +80,7 @@
                                 </div>
                             </div>
 
-                            @if(!$social_links->vk==null||!$social_links->fb==null||!$social_links->fb==null||!$social_links->sk==null||!($social_links->tg)==null)
+                            @if($social_links->fb||$social_links->fb||$social_links->sk||$social_links->tg)
                                 <div class="col-md-12"><h4>Соцмережі</h4></div>
                                 <div class="col-md-12"><hr></div>
                             @endif
@@ -117,15 +117,6 @@
                                     <label for="social_links[sk]" class="col-md-4">Skype</label>
                                     <div class="col-md-6">
                                         <p id="social_links[sk]"> {{ $social_links->sk }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(!$social_links->vk==null)
-                                <div>
-                                    <label for="social_links[vk]" class="col-md-4">VK</label>
-                                    <div class="col-md-6">
-                                        <p id="social_links[vk]"> {{ $social_links->vk}}</p>
                                     </div>
                                 </div>
                             @endif

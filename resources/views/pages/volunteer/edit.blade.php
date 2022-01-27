@@ -199,19 +199,6 @@
                             </div>
 
                             <div style="text-align:center"><strong>Cоцмережі</strong></div>
-                            <div class="form-group{{ $errors->has('social_links->vk') ? ' has-error' : '' }}">
-                                <label for="social_links[vk]" class="col-md-4 control-label">VK</label>
-
-                                <div class="col-md-8">
-                                    <input id="social_links[vk]" type="text" class="form-control" name="social_links[vk]" value="{{ $social_links['vk'] }}" autofocus>
-
-                                    @if ($errors->has('social_links->vk'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('social_links->vk') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="form-group{{ $errors->has('social_links->fb') ? ' has-error' : '' }}">
                                 <label for="social_links[fb]" class="col-md-4 control-label">Facebook</label>

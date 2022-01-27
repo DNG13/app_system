@@ -98,15 +98,6 @@
                                 </div>
                             @endif
 
-                            @if((!empty($fair->social_links['vk'])))
-                                <div>
-                                    <label for="social_links['vk']" class="col-md-4">VK</label>
-                                    <div class="col-md-8">
-                                        <p id="social_links['vk']">{{ $fair->social_links['vk'] }}</p>
-                                    </div>
-                                </div>
-                            @endif
-
                             @if((!empty($fair->social_links['tumblr'])))
                                 <div>
                                     <label for="social_links['tumblr']" class="col-md-4">Tumbler</label>

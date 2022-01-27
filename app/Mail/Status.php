@@ -2,16 +2,24 @@
 
 namespace App\Mail;
 
+use App\Models\AppCosplay;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class Status extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $mail;
+
+    private $statusTranslated = [
+        AppCosplay::APP_STATUS_CHANGED => 'Змінена',
+        AppCosplay::APP_STATUS_WAIT_USER => 'Очікує на відповідь користувача',
+        AppCosplay::APP_STATUS_IN_PROCESSING => 'В обробці',
+        AppCosplay::APP_STATUS_REJECTED => 'Відхилена',
+        AppCosplay::APP_STATUS_ACCEPTED => 'Прийнята',
+    ];
 
     /**
      * Edit constructor.
@@ -34,7 +42,16 @@ class Status extends Mailable
                 'nickname' => $this->mail['nickname'],
                 'title' => $this->mail['title'],
                 'page' => $this->mail['page'],
-                'status' => $this->mail['status'],
+                'status' => $this->getStatusTranslated($this->mail['status']),
             ]);
+    }
+
+    /**
+     * @param string $status
+     * @return string
+     */
+    private function getStatusTranslated(string $status): string
+    {
+        return $this->statusTranslated[$status] ?? 'Невідомо';
     }
 }

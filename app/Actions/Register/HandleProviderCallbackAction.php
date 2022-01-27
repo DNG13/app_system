@@ -55,7 +55,7 @@ class HandleProviderCallbackAction extends Action
             $profile->surname = $fbName[1]?? null;
             $profile->first_name = $fbName[0]?? null;
         }
-        $social_links = ['vk' => null, 'tg' => null, 'fb' => null, 'sk'=>null, 'in'=>null];
+        $social_links = ['tg' => null, 'fb' => null, 'sk'=>null, 'in'=>null];
         $profile->social_links = json_encode($social_links);
         $profile->save();
 
