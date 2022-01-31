@@ -204,21 +204,18 @@ class RegisterController extends Controller
     public function userReactivationSend(Request $request, UserReactivationSendAction $action)
     {
         if (empty($request->get('email'))) {
-            return redirect()->to('auth\reactivate')->with('warning',"Email не знайдено");
+            return redirect()->to('auth\reactivate')->with('warning', "Email не знайдено");
         }
 
         //for lowercase
         $user = User::where('email', strtolower($request->email))->first();
 
         if (!$user) {
-            return redirect()->to('auth\reactivate')->with('warning',"Email не знайдено");
+            return redirect()->to('auth\reactivate')->with('warning', "Email не знайдено");
         }
 
         if (!is_null($user->confirmed_at)){
-            if(!Auth::user()){
-                auth()->login($user);
-            }
-            return redirect()->to('home')->with('success',"Профіль вже підтверджений.");
+            return redirect()->to('login')->with('success', "Профіль вже підтверджений.");
         }
         $action->run($user);
         return redirect()->to('login')->with('success', "Вам повторно надіслано код активації,
