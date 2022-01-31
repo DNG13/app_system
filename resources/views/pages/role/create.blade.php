@@ -42,8 +42,8 @@
 
                                 <div class="col-md-6">
                                     <select id="active" class="form-control" name="active">
-                                        <option value="false">Так/option>
-                                        <option value="true">Ні</option>
+                                        <option value="true">Так</option>
+                                        <option value="false">Ні</option>
                                     </select>
                                     @if ($errors->has('active'))
                                         <span class="help-block">
