@@ -320,8 +320,8 @@
                                     <label for="equipment[electricity]" class="col-md-4 control-label">Необхідність підведення електрики</label>
                                     <div class="col-md-8">
                                         <select id="type_id" class="form-control" name="equipment[electricity]">
-                                            <option value="Нет">Так</option>
-                                            <option value="Да">Ні</option>
+                                            <option value="Ні">Ні</option>
+                                            <option value="Так">Так</option>
                                         </select>
                                         @if ($errors->has('equipment[electricity]'))
                                             <span class="help-block">

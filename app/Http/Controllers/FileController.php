@@ -77,7 +77,7 @@ class FileController extends Controller
 
     public function getFile($fileId)
     {
-        $file = AppFile::where('name', $fileId)->get()->first();
+        $file = AppFile::where('id', $fileId)->first();
 
         if (!$file) {
             throw new NotFoundException();
