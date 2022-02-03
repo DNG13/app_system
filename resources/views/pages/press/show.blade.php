@@ -209,7 +209,7 @@
                     @if(!count($files)==0)
                         @foreach($files as $file)
                             <div class="col-md-2" style="width: 225px; height:150px;">
-                                <a href="/storage/{{$file->name}}">
+                                <a href="/storage/{{$file->id}}">
                                     @if($file->type == 'image')
                                         <img  src="/storage/{{$file->id}}/thumbnail">
                                     @elseif($file->type == 'audio')

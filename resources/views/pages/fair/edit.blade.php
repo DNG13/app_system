@@ -535,7 +535,7 @@
                     </div>
                     <form action="{{ url('/upload') }}" enctype="multipart/form-data" method="post" class="dropzone" id="my-awesome-dropzone">
                         {{ csrf_field() }}
-                        <div class="dz-message" data-dz-message><span>Клікніть тут мишею або перенесіть файли, щоб завантажити</span></div>>
+                        <div class="dz-message" data-dz-message><span>Клікніть тут мишею або перенесіть файли, щоб завантажити</span></div>
                         <input type="hidden" name="app_kind" value="fair">
                         <input type="hidden" name="app_id" value="{{$fair->id}}">
                     </form>
