@@ -38,6 +38,7 @@ class CreateAppFairsTable extends Migration
             $table->json('block');
             $table->string('payment_type', 64);
             $table->text('description');
+            $table->json('social_links')->nullable();
         });
     }
 

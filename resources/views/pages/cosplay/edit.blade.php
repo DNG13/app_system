@@ -40,15 +40,10 @@
                                 <label for="status" class="col-md-4 control-label">Статус заявки</label>
 
                                 <div class="col-md-8">
-                                    <select class="form-control input-sm" id="status" name="status">
-                                        @if(!empty($cosplay->status))
-                                            <option selected value="{{$cosplay->status}}">{{$cosplay->getStatusText()}}</option>
-                                        @endif
-                                        <option value="{{\App\Models\AppCosplay::APP_STATUS_IN_PROCESSING}}">В обробці</option>
-                                        <option value="{{\App\Models\AppCosplay::APP_STATUS_WAIT_USER}}">Чекає на відповідь користувача</option>
-                                        <option value="{{\App\Models\AppCosplay::APP_STATUS_ACCEPTED}}">Прийнята</option>
-                                        <option value="{{\App\Models\AppCosplay::APP_STATUS_REJECTED}}">Відхилено</option>
-                                        <option value="{{\App\Models\AppCosplay::APP_STATUS_CHANGED}}">Внесені зміни</option>
+                                    <select class="form-control" id="status" name="status">
+                                        @foreach (\App\Models\AppCosplay::getAvailableStatuses() as $key => $value)
+                                            <option {{$cosplay->status === $key ? 'selected' : ''}} value="{{$key}}">{{$value}}</option>
+                                        @endforeach
                                     </select>
                                     @if ($errors->has('status'))
                                         <span class="help-block">

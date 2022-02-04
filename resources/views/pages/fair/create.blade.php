@@ -90,7 +90,7 @@
                                 <label for="social_link" class="col-md-4 control-label">Посилання на особисту сторінку</label>
 
                                 <div class="col-md-8">
-                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{ old('social_link') }}" placeholder="tg, fb або vk для зв'язку з відповідальним за заявкою" required autofocus>
+                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{ old('social_link') }}" placeholder="tg, fb для зв'язку з відповідальним за заявкою" required autofocus>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">

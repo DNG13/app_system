@@ -12,7 +12,7 @@ abstract class Application extends Model
     const APP_STATUS_REJECTED = 'rejected';
     const APP_STATUS_CHANGED = 'changed';
 
-    protected $statusText = [
+    const STATUS_TEXT = [
         self::APP_STATUS_IN_PROCESSING => 'В обробці',
         self::APP_STATUS_WAIT_USER => 'Очікує на відповідь користувача',
         self::APP_STATUS_ACCEPTED => 'Прийнята',
@@ -32,6 +32,11 @@ abstract class Application extends Model
 
     public function getStatusText()
     {
-        return $this->statusText[$this->status] ?? 'unknown';
+        return self::STATUS_TEXT[$this->status] ?? 'unknown';
+    }
+
+    static public function getAvailableStatuses()
+    {
+        return self::STATUS_TEXT;
     }
 }

@@ -40,15 +40,10 @@
                                 <label for="status" class="col-md-4 control-label">Статус заявки</label>
 
                                 <div class="col-md-8">
-                                    <select class="form-control input-sm" id="status" name="status">
-                                        @if(!empty($press->status))
-                                            <option selected value="{{$press->status}}">{{$press->getStatusText()}}</option>
-                                        @endif
-                                            <option value="{{\App\Models\AppPress::APP_STATUS_IN_PROCESSING}}">В обробці</option>
-                                            <option value="{{\App\Models\AppPress::APP_STATUS_WAIT_USER}}">Чекає на відповідь користувача</option>
-                                            <option value="{{\App\Models\AppPress::APP_STATUS_ACCEPTED}}">Прийнята</option>
-                                            <option value="{{\App\Models\AppPress::APP_STATUS_REJECTED}}">Відхилено</option>
-                                            <option value="{{\App\Models\AppPress::APP_STATUS_CHANGED}}">Внесені зміни</option>
+                                    <select class="form-control" id="status" name="status">
+                                        @foreach (\App\Models\AppPress::getAvailableStatuses() as $key => $value)
+                                            <option {{$press->status === $key ? 'selected' : ''}} value="{{$key}}">{{$value}}</option>
+                                        @endforeach
                                     </select>
                                     @if ($errors->has('status'))
                                         <span class="help-block">
@@ -117,7 +112,7 @@
                                 <label for="social_link" class="col-md-4 control-label">Посилання на особисту сторінку</label>
 
                                 <div class="col-md-8">
-                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{$press->social_link }}" placeholder="tg, fb або vk для зв'язку з відповідальним за заявкою" required autofocus>
+                                    <input id="social_link" type="text" class="form-control" name="social_link" value="{{$press->social_link }}" placeholder="tg, fb для зв'язку з відповідальним за заявкою" required autofocus>
 
                                     @if ($errors->has('social_link'))
                                         <span class="help-block">
